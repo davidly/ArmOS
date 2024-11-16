@@ -2,7 +2,7 @@
 
 _armoscmd="armos"
 if [ "$1" != "" ]; then
-    _armoscmd="armos -h:200 armos"
+    _armoscmd="armos -h:200 bin/armos"
 fi    
 
 outputfile="linux_test.txt"
