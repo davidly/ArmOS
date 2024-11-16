@@ -4,7 +4,7 @@ Runs Linux Arm64 binaries on other platforms including Windows on AMD64/ARM64, L
 ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on other platforms. It emulates the Arm64 ISA and Linux syscalls sufficiently for many apps to work.
 
 ## Caveats
-* Only a subset (perhaps 30%) of Base and SIMD&FP instructions are implemented. Specifically, those instructions the g++ and Rust compiles emit for the test apps in this repo along with their language runtimes. It's not too hard to find new C++ or Rust programs that won't run because the instructions they require aren't implemented.
+* Only a subset (perhaps 30%) of Base and SIMD&FP instructions are implemented. Specifically, those instructions the g++ and Rust compilers emit for the test apps in this repo along with their language runtimes. It's not too hard to find new C++ or Rust programs that won't run because the instructions they require aren't implemented.
 * Linux emulation is limited to one core with one thread. Syscalls for time, file system, and other basic services exist, but there is no support for threads, child process creation, networking, and a long list of other basic system services.
 
 ## Usage
@@ -30,28 +30,18 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     djl_con.hxx     Console keyboard and terminal abstractions and utilities
     djl_mmap.hxx    Simplistic helper class for Linux mmap calls
     djl_128.hxx     Helper class for 128-bit integer multiply and divide (Microsoft C doesn't support int128)
+    m.bat           builds a debug version of ArmOS on Windows
+    mr.bat          builds a release version of ArmOS on Windows
+    ms.sh           builds a debug version of ArmOS on Linux
+    msr.sh          builds a release version of ArmOS on Linux
+    runall.bat      runs all the tests on Windows
+    runall.sh       runs all the tests on Linux
 
 ## Validation
 * I've tested on AMD64 and Arm64 machines running Windows along with AMD64, Arm64, and RISC-V machines running Linux. I've not yet tried to compile or run on MacOS.
 * The c_tests folder has a number of C and C++ apps that can be built with mall.sh (make all) on an Arm64 Linux machine. I'm sure cross-compilation will work too, though I haven't tested it. These apps are built with various optimization flags: -O0, -O1, -O2, -O3, and -Ofast. Each variation utilizes different Arm64 instructions, which improves test coverage.
-* The rust_tests folder has a number of Rust apps that can be built with mall.sh on an Arm64 Linux machine. 
-
-## NoClib
-The noclib folder has some source files for creating C apps that don't link with clib. This was useful when bootstrapping the emulator because it couldn't yet run the tens of thousands of instructions clib has between _start() and main().
-
-    djlclib.h      declares C constants found in standard C headers
-    djlclib.c      implements a subset of the C runtime
-    noclib.s       implements _start() and a subset of the C runtime
-
-Apps can be built using noclib with a shell script like this:
-~~~~
-cc -fno-builtin -fsigned-char -Og -S -I . $1.c
-cc -fsigned-char -Og -S -I . djlclib.c
-as -o noclib.o noclib.s
-as -o $1.o $1.s
-as -o djlclib.o djlclib.s
-ld -static -o $1 $1.o noclib.o djlclib.o
-~~~~
+* The rust_tests folder has a number of Rust apps that can be built with mall.sh on an Arm64 Linux machine.
+* I've also tested with emulators found in my sister repos: NTVAO (Apple 1 + 6502), NTVCM (CP/M 2.2 + 8080/Z80), NTVDM (MS-DOS 3.x + 8086), RVOS (Linux + RISC-V64). ArmOS runs all of these emulators when they are compiled for Arm64 (tested with g++ optimization flags -O2 and -O3). ArmOS also runs itself recursively an arbitrary number of times. RVOS runs ArmOS when it's compiled for RISC-V64. I've validated ArmOS running RVOS running NTVDM running NTVCM running Turbo Pascal for CP/M 2.2; performance isn't great.
 
 ## C/C++ Tests
     tcmp        tests comparisons
@@ -82,6 +72,7 @@ ld -static -o $1 $1.o noclib.o djlclib.o
     an          finds anagrams
     words.txt   list of English words used by various test programs including an
     ba          simplistic BASIC interpreter and compiler (targets 6502, 8080, 8086, x32, x64, arm32, arm64, RISC-V64)
+    mall.sh     builds the C/C++ test apps
     
 ## Rust Tests
     e           computes digits of the irrational number e
@@ -92,6 +83,25 @@ ld -static -o $1 $1.o noclib.o djlclib.o
     real        tests floating point operations
     tphi        finds digits of the irrational number ap
     mysort      sorts strings in a text file
+    mall.sh     builds the Rust test apps
+
+## NoClib
+The noclib folder has some source files for creating C apps that don't link with clib. This was useful when bootstrapping the emulator because it couldn't yet run the tens of thousands of instructions clib has between _start() and main(). There really isn't much utility in this anymore since ArmOS runs clib fine.
+
+    djlclib.h      declares C constants found in standard C headers
+    djlclib.c      implements a subset of the C runtime
+    noclib.s       implements _start() and a subset of the C runtime
+    m.sh           the shell script below to build an app with noclib.
+
+Apps can be built using noclib with a shell script like this:
+~~~~
+cc -fno-builtin -fsigned-char -Og -S -I . $1.c
+cc -fsigned-char -Og -S -I . djlclib.c
+as -o noclib.o noclib.s
+as -o $1.o $1.s
+as -o djlclib.o djlclib.s
+ld -static -o $1 $1.o noclib.o djlclib.o
+~~~~
     
 ## FAQ
 * Why did you build this? I wanted to learn about Arm64.
