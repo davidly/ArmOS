@@ -894,7 +894,7 @@ void Arm64::trace_state()
             // BIC <Vd>.<T>, #<imm8>{, LSL #<amount>}    ;    MOVI <Vd>.<T>, #<imm8>{, LSL #0}    ;    MVNI <Vd>.<T>, #<imm8>, MSL #<amount>
             // USHR <Vd>.<T>, <Vn>.<T>, #<shift>         ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
             // FMOV <Vd>.<T>, #<imm>                     ;    FMOV <Vd>.<T>, #<imm>               ;    FMOV <Vd>.2D, #<imm>
-            // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>   ;    SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>
+            // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>   ;    SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>  ;   SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
         {
             uint64_t cmode = opbits( 12, 4 );
             uint64_t abc = opbits( 16, 3 );
@@ -1044,7 +1044,23 @@ void Arm64::trace_state()
             {
                 uint64_t opcode = opbits( 12, 4 );
 
-                if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 8 == opcode && !bit11 && bit10 ) // SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>
+                if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 0xa == opcode && !bit11 && bit10 ) // SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
+                {
+                    uint64_t n = opbits( 5, 5 );
+                    uint64_t immh = opbits( 19, 4 );
+                    uint64_t immb = opbits( 16, 3 );
+                    uint64_t esize = 8 << highest_set_bit_nz( immh & 0x7 );
+                    uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
+                    const char * pTA = ( 1 == immh ) ? "8H" : ( 2 == ( 0xe & immh ) ) ? "4S" : "2D";
+                    uint64_t sizeb = immh >> 1;
+                    if ( 4 & sizeb )
+                        sizeb = 4;
+                    else if ( 2 & sizeb )
+                        sizeb = 2;
+                    const char * pTB = get_ld1_vector_T( sizeb, Q );
+                    tracer.Trace( "sshll%s v%llu.%s, v%llu.%s, #%llu\n", Q ? "2" : "", d, pTA, n, pTB, shift );
+                }
+                else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 8 == opcode && !bit11 && bit10 ) // SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>
                 {
                     uint64_t n = opbits( 5, 5 );
                     uint64_t immh = opbits( 19, 4 );
@@ -1053,7 +1069,9 @@ void Arm64::trace_state()
                     uint64_t shift = ( 2 * esize ) - ( ( immh << 3 ) | immb );
                     const char * pTA = ( 1 == immh ) ? "8H" : ( 2 == ( 0xe & immh ) ) ? "4S" : "2D";
                     uint64_t sizeb = immh >> 1;
-                    if ( 2 & sizeb )
+                    if ( 4 & sizeb )
+                        sizeb = 4;
+                    else if ( 2 & sizeb )
                         sizeb = 2;
                     const char * pTB = get_ld1_vector_T( sizeb, Q );
                     tracer.Trace( "shrn%s v%llu.%s, v%llu.%s, #%llu\n", Q ? "2" : "", d, pTB, n, pTA, shift );
@@ -3290,7 +3308,38 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t opcode = opbits( 12, 4 );
 
-                    if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 8 == opcode && !bit11 && bit10 ) // SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>
+                    if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 0xa == opcode && !bit11 && bit10 ) // SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
+                    {
+                        uint64_t n = opbits( 5, 5 );
+                        uint64_t immh = opbits( 19, 4 );
+                        uint64_t immb = opbits( 16, 3 );
+                        uint64_t esize = 8 << highest_set_bit_nz( immh & 0x7 );
+                        uint64_t esize_bytes = esize / 8;
+                        uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
+                        uint64_t datasize = 64;
+                        uint64_t part = Q;
+                        uint64_t elements = datasize / esize;
+                        vec16_t target = { 0 };
+                        uint8_t * ptarget = (uint8_t *) &target;
+
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            uint64_t v = 0;
+                            memcpy( &v, vreg_ptr( n, 2 * e * esize_bytes ), 2 * esize_bytes );
+                            v <<= shift;
+                            assert( ( ( 1 + e ) * esize_bytes ) <= sizeof( target ) );
+                            memcpy( ptarget + e * esize_bytes, &v, esize_bytes );
+                        }
+
+                        if ( part )
+                            memcpy( vreg_ptr( d, 8 ), ptarget, sizeof( target ) );
+                        else
+                        {
+                            memcpy( vreg_ptr( d, 0 ), ptarget, sizeof( target ) );
+                            vreg_setui64( d, 8, 0 );
+                        }
+                    }
+                    else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 8 == opcode && !bit11 && bit10 ) // SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>
                     {
                         uint64_t n = opbits( 5, 5 );
                         uint64_t immh = opbits( 19, 4 );
