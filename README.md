@@ -1,11 +1,11 @@
 # ArmOS
-Runs Linux Arm64 binaries on other platforms including Windows on AMD64/ARM64, Linux on RISC-V, etc.
+Runs Linux Arm64 binaries on other platforms including Windows on x32/AMD64/ARM64, Linux on RISC-V, Linux on Arm32, etc.
 
 ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on other platforms. It emulates the Arm64 ISA and Linux syscalls sufficiently for many apps to work.
 
 ## Caveats
 * Only a subset (perhaps 30%) of Base and SIMD&FP instructions are implemented. Specifically, those instructions the g++ and Rust compilers emit for the test apps in this repo along with their language runtimes. It's not too hard to find new C++ or Rust programs that won't run because the instructions they require aren't implemented.
-* Linux emulation is limited to one core with one thread. Syscalls for time, file system, and other basic services exist, but there is no support for threads, child process creation, networking, and a long list of other basic system services.
+* Linux emulation is limited to one core with one thread. Syscalls for time, file system, mmap, brk, and other basic services exist, but there is no support for threads, child process creation, networking, and a long list of other basic system services.
 * Apps must be linked static; ArmOS doesn't load dependent libraries at runtime. Use -static with ld or g++. Use -C target-feature=+crt-static for Rust apps.
 
 ## Usage
@@ -36,10 +36,12 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     ms.sh           builds a debug version of ArmOS on Linux
     msr.sh          builds a release version of ArmOS on Linux
     runall.bat      runs all the tests on Windows. First copy test binaries from a Linux machine.
-    runall.sh       runs all the tests on Linux
+    runall.sh       runs all the tests on Linux. If not on Arm64, first copy test binaries.
+    words.txt       used by test apps
+    tp.bas          used by the BA test app
 
 ## Validation
-* I've tested on AMD64 and Arm64 machines running Windows along with AMD64, Arm64, and RISC-V machines running Linux. I've not yet tried to compile or run on MacOS.
+* I've tested on AMD64 and Arm64 machines running Windows along with AMD64, Arm32, Arm64, and RISC-V64 machines running Linux. I've not yet tried to compile or run on MacOS.
 * The c_tests folder has a number of C and C++ apps that can be built with mall.sh (make all) on an Arm64 Linux machine. I'm sure cross-compilation will work too, though I haven't tested it. These apps are built with various optimization flags: -O0, -O1, -O2, -O3, and -Ofast. Each variation utilizes different Arm64 instructions, which improves test coverage.
 * The rust_tests folder has a number of Rust apps that can be built with mall.sh on an Arm64 Linux machine. The apps are built with optimization levels 0, 1, 2, and 3 using -C opt-level=.
 * I've also tested with emulators found in my sister repos: NTVAO (Apple 1 + 6502), NTVCM (CP/M 2.2 + 8080/Z80), NTVDM (MS-DOS 3.x + 8086), RVOS (Linux + RISC-V64). ArmOS runs all of these emulators when they are compiled for Arm64 (tested with g++ optimization flags -O2 and -O3). ArmOS also runs itself recursively an arbitrary number of times. RVOS runs ArmOS when it's compiled for RISC-V64. I've validated ArmOS running RVOS running NTVDM running NTVCM running Turbo Pascal for CP/M 2.2; performance isn't great.
@@ -59,6 +61,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     trw         tests file I/O using open/read/write/close
     fileops     tests file I/O using fopen/fread/fwrite/fclose
     tmmap       tests mmap, mremap, munmap Linux syscalls
+    tsimplef    simple test for floats
     tstr        tests various string functions: strlen, strchr, strrchr, memcpy, memcmp, printf
     ttime       tests localtime() and timezones
     tm          tests malloc and free
@@ -74,6 +77,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     an          finds anagrams
     words.txt   list of English words used by various test programs including an
     ba          simplistic BASIC interpreter and compiler (targets 6502, 8080, 8086, x32, x64, arm32, arm64, RISC-V64)
+    tp.bas      BASIC test program for BA
     mall.sh     builds the C/C++ test apps
     
 ## Rust Tests
@@ -88,7 +92,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     mall.sh     builds the Rust test apps
 
 ## NoClib
-The noclib folder has some source files for creating C apps that don't link with clib. This was useful when bootstrapping the emulator because it couldn't yet run the tens of thousands of instructions clib has between _start() and main(). There really isn't much utility in this anymore since ArmOS runs clib fine.
+The noclib folder has some source files for creating C apps that don't link with clib. This was useful when bootstrapping the emulator because it couldn't yet run the many of instructions clib uses between _start() and main(). There really isn't much utility in this anymore since ArmOS runs clib fine.
 
     djlclib.h      declares C constants found in standard C headers
     djlclib.c      implements a subset of the C runtime
@@ -107,8 +111,8 @@ ld -static -o $1 $1.o noclib.o djlclib.o
     
 ## FAQ
 * Why did you build this? I wanted to learn about Arm64.
-* What use is this emulator? Not much beyond a learning tool.
+* What use is this emulator? Not much beyond a learning tool. Oh, and it's kind of neat to run Arm64 apps on non-Arm64 CPUs.
 * Wow, the emulator looks really slow. Why? I strived for clarity rather than performance. This is espcially true for SIMD instructions.
 * Will you implement the full instruction set? I currently plan to, if I can find a reasonable way to test it. To date all testing is with actual apps, not with assembly code.
-* This is very silly but I'd like to help. I would appreciate pull requests to complete the full instruction set.
+* This is very silly but/so I'd like to help. I would appreciate pull requests to complete the full instruction set, reuse more code, and improve performance.
     
