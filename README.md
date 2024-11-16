@@ -6,6 +6,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
 ## Caveats
 * Only a subset (perhaps 30%) of Base and SIMD&FP instructions are implemented. Specifically, those instructions the g++ and Rust compilers emit for the test apps in this repo along with their language runtimes. It's not too hard to find new C++ or Rust programs that won't run because the instructions they require aren't implemented.
 * Linux emulation is limited to one core with one thread. Syscalls for time, file system, and other basic services exist, but there is no support for threads, child process creation, networking, and a long list of other basic system services.
+* Apps must be linked static; ArmOS doesn't load dependent libraries at runtime. Use -static with ld or g++. Use -C target-feature=+crt-static for Rust apps.
 
 ## Usage
 
