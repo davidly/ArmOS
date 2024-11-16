@@ -29,7 +29,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     djltrace.hxx    Tracing to a log file
     djl_con.hxx     Console keyboard and terminal abstractions and utilities
     djl_mmap.hxx    Simplistic helper class for Linux mmap calls
-    djl_128.hxx     Helper class for 128-bit integer multiply and divide (Microsoft C doesn't support int128)
+    djl_128.hxx     Helper class for 128-bit integer multiply and divide
     m.bat           builds a debug version of ArmOS on Windows
     mr.bat          builds a release version of ArmOS on Windows
     ms.sh           builds a debug version of ArmOS on Linux
@@ -42,6 +42,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
 * The c_tests folder has a number of C and C++ apps that can be built with mall.sh (make all) on an Arm64 Linux machine. I'm sure cross-compilation will work too, though I haven't tested it. These apps are built with various optimization flags: -O0, -O1, -O2, -O3, and -Ofast. Each variation utilizes different Arm64 instructions, which improves test coverage.
 * The rust_tests folder has a number of Rust apps that can be built with mall.sh on an Arm64 Linux machine.
 * I've also tested with emulators found in my sister repos: NTVAO (Apple 1 + 6502), NTVCM (CP/M 2.2 + 8080/Z80), NTVDM (MS-DOS 3.x + 8086), RVOS (Linux + RISC-V64). ArmOS runs all of these emulators when they are compiled for Arm64 (tested with g++ optimization flags -O2 and -O3). ArmOS also runs itself recursively an arbitrary number of times. RVOS runs ArmOS when it's compiled for RISC-V64. I've validated ArmOS running RVOS running NTVDM running NTVCM running Turbo Pascal for CP/M 2.2; performance isn't great.
+* Testing of ArmOS on Windows is done with the Microsoft C++ compiler. On Linux I use g++. All test apps are built on Arm64 Linux using g++ and Rust.
 
 ## C/C++ Tests
     tcmp        tests comparisons
