@@ -35,7 +35,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     mr.bat          builds a release version of ArmOS on Windows
     ms.sh           builds a debug version of ArmOS on Linux
     msr.sh          builds a release version of ArmOS on Linux
-    runall.bat      runs all the tests on Windows. First copy test binaries from an Linux machine.
+    runall.bat      runs all the tests on Windows. First copy test binaries from a Linux machine.
     runall.sh       runs all the tests on Linux
 
 ## Validation
