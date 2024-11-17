@@ -498,7 +498,7 @@ template <typename T, std::size_t SizeOfT> struct LeadingZerosCounter
 
 template <typename T> [[nodiscard]] int countl_zero( T Val )
 {
-    static_assert(std::is_unsigned_v<T>, "Only unsigned integral types are allowed.");
+// assert doesn't compile on Rasperry PI4    static_assert(std::is_unsigned_v<T>, "Only unsigned integral types are allowed.");
     return LeadingZerosCounter<T, sizeof(T)>::count( Val );
 }
                  
