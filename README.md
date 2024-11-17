@@ -38,7 +38,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     mmac.sh         builds a debug release on macOS
     mrmac.sh        builds a release version on macOS
     runall.bat      runs all the tests on Windows. First copy test binaries from a Linux machine.
-    runall.sh       runs all the tests on Linux. If not on Arm64, first copy test binaries.
+    runall.sh       runs all the tests on Linux and macOS. If not on Arm64, first copy test binaries.
     words.txt       used by test apps
     tp.bas          used by the BA test app
 
