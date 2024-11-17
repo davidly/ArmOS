@@ -395,7 +395,7 @@ uint64_t Arm64::replicate_bytes( uint64_t val, uint64_t byte_len )
 {
     uint64_t mask = one_bits( byte_len * 8 );
     uint64_t pattern = ( val & mask );
-    uint64_t repeat = 64 / byte_len;
+    uint64_t repeat = 8 / byte_len;
     uint64_t result = 0;
     for ( uint64_t x = 0; x < repeat; x++ )
         result |= ( pattern << ( x * byte_len * 8) );
