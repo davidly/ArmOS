@@ -1905,7 +1905,7 @@ void Arm64::trace_state()
             else if ( 0 == bit21 && 0 == bit15 && ( 7 == bits14_11 || 5 == bits14_11 ) && 1 == bit10 )
             {
                 // UMOV <Wd>, <Vn>.<Ts>[<index>]    ;    UMOV <Xd>, <Vn>.D[<index>]    ;     SMOV <Wd>, <Vn>.<Ts>[<index>]    ;    SMOV <Xd>, <Vn>.<Ts>[<index>]
-                uint64_t size = lowest_set_bit_nz( imm5 & ( 7 == bits14_11 ) ? 0xf : 7 );
+                uint64_t size = lowest_set_bit_nz( imm5 & ( ( 7 == bits14_11 ) ? 0xf : 7 ) );
                 uint64_t bits_to_copy = 4 - size;
                 uint64_t index = get_bits( imm5, 4 + 1 - bits_to_copy, bits_to_copy );
 
