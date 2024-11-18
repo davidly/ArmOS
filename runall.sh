@@ -44,5 +44,6 @@ do
     done
 done
 
+date_time=$(date)
 echo "$date_time" >>$outputfile
 diff baseline_$outputfile $outputfile
