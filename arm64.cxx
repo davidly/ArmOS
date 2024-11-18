@@ -1601,8 +1601,10 @@ void Arm64::trace_state()
         }
         case 0x1a: // CSEL <Wd>, <Wn>, <Wm>, <cond>    ;    SDIV <Wd>, <Wn>, <Wm>    ;    UDIV <Wd>, <Wn>, <Wm>    ;    CSINC <Wd>, <Wn>, <Wm>, <cond>
                    // LSRV <Wd>, <Wn>, <Wm>            ;    LSLV <Wd>, <Wn>, <Wm>    ;    ADC <Wd>, <Wn>, <Wm>     ;    ASRV <Wd>, <Wn>, <Wm>
+                   // RORV <Wd>, <Wn>, <Wm>
         case 0x9a: // CSEL <Xd>, <Xn>, <Xm>, <cond>    ;    SDIV <Xd>, <Xn>, <Xm>    ;    UDIV <Xd>, <Xn>, <Xm>    ;    CSINC <Xd>, <Xn>, <Xm>, <cond>
                    // LSRV <Xd>, <Xn>, <Xm>            ;    LSLV <Xd>, <Xn>, <Xm>    ;    ADC <Xd>, <Xn>, <Xm>     ;    ASRV <Xd>, <Xn>, <Xm>
+                   // RORV <Xd>, <Xn>, <Xm>
         {
             bool xregs = ( 0 != ( hi8 & 0x80 ) );
             uint64_t bits11_10 = opbits( 10, 2 );
@@ -1634,6 +1636,8 @@ void Arm64::trace_state()
                 tracer.Trace( "lslv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
             else if ( 0 == bits11_10 && 0 == bits23_21 && 0 == bits15_12 && 0 == bits11_10 ) // addc
                 tracer.Trace( "addc %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+            else if ( 3 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // RORV <Xd>, <Xn>, <Xm>
+                tracer.Trace( "rorv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
             else
                 unhandled();
             break;
@@ -2599,6 +2603,8 @@ uint64_t Arm64::shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount 
     }
     else if ( 3 == shift_type ) // ror.
         val = ( ( val >> amount ) | ( val << ( 64 - amount ) ) );
+    else
+        unhandled();
 
     return val;
 } //shift_reg64
@@ -3506,8 +3512,10 @@ uint64_t Arm64::run( uint64_t max_cycles )
             }
             case 0x1a: // CSEL <Wd>, <Wn>, <Wm>, <cond>    ;    SDIV <Wd>, <Wn>, <Wm>    ;    UDIV <Wd>, <Wn>, <Wm>    ;    CSINC <Wd>, <Wn>, <Wm>, <cond>
                        // LSRV <Wd>, <Wn>, <Wm>            ;    LSLV <Wd>, <Wn>, <Wm>    ;    ADC <Wd>, <Wn>, <Wm>     ;    ASRV <Wd>, <Wn>, <Wm>
+                       // RORV <Wd>, <Wn>, <Wm>
             case 0x9a: // CSEL <Xd>, <Xn>, <Xm>, <cond>    ;    SDIV <Xd>, <Xn>, <Xm>    ;    UDIV <Xd>, <Xn>, <Xm>    ;    CSINC <Xd>, <Xn>, <Xm>, <cond>
                        // LSRV <Xd>, <Xn>, <Xm>            ;    LSLV <Xd>, <Xn>, <Xm>    ;    ADC <Xd>, <Xn>, <Xm>     ;    ASRV <Xd>, <Xn>, <Xm>
+                       // RORV <Xd>, <Xn>, <Xm>
             {
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
                 uint64_t bits11_10 = opbits( 10, 2 );
@@ -3607,6 +3615,13 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         regs[ d ] = add_with_carry64( nval, mval, fC, false );
                     else
                         regs[ d ] = add_with_carry32( nval & 0xffffffff, mval & 0xffffffff, fC, false );
+                }
+                else if ( 3 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // RORV <Xd>, <Xn>, <Xm>
+                {
+                    if ( xregs )
+                        regs[ d ] = shift_reg64( n, 3, mval );
+                    else
+                        regs[ d ] = shift_reg32( n, 3, mval );
                 }
                 else
                     unhandled();
