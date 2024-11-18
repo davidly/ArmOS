@@ -4989,7 +4989,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         total += v;
                     }
                     zero_vreg( d );
-                    vreg_setui64( d, 0, total );
+                    memcpy( vreg_ptr( d, 0 ), &total, esize_bytes );
                 }
                 else if ( 1 == bit21 && 1 == bits20_16 && 0 == bit15 && 5 == bits14_11 && 0 == bit10 ) // xtn, xtn2 XTN{2} <Vd>.<Tb>, <Vn>.<Ta>
                 {
