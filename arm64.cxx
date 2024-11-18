@@ -468,64 +468,40 @@ uint64_t Arm64::adv_simd_expand_imm( uint64_t operand, uint64_t cmode, uint64_t 
     return imm64;
 } //adv_simd_expand_imm
 
-// the following 4 functions are lifted from llvm
-
-static inline uint64_t ror( uint64_t elt, unsigned size )
+static inline uint64_t ror( uint64_t elt, uint64_t size )
 {
-    return ( (elt & 1) << ( size - 1 ) ) | ( elt >> 1 );
+    return ( ( elt & 1 ) << ( size - 1 ) ) | ( elt >> 1 );
 } //ror
 
-template <typename T, std::size_t SizeOfT> struct LeadingZerosCounter
+uint64_t count_leading_zeroes( uint64_t x, uint64_t bit_width )
 {
-    static unsigned count( T Val )
+    uint64_t count = 0;
+    while ( x )
     {
-        if ( !Val )
-            return std::numeric_limits<T>::digits;
-    
-        // Bisection method.
-        unsigned ZeroBits = 0;
-        for ( T Shift = std::numeric_limits<T>::digits >> 1; Shift; Shift >>= 1 )
-        {
-            T Tmp = Val >> Shift;
-            if ( Tmp )
-                Val = Tmp;
-            else
-                ZeroBits |= Shift;
-        }
-        return ZeroBits;
-    } //count
-};
+        count++;
+        x >>= 1;
+    }
 
-template <typename T> [[nodiscard]] int countl_zero( T Val )
+    return bit_width - count;
+} //count_leading_zeroes
+
+uint64_t decode_logical_immediate( uint64_t val, uint64_t bit_width )
 {
-// assert doesn't compile on Rasperry PI4    static_assert(std::is_unsigned_v<T>, "Only unsigned integral types are allowed.");
-    return LeadingZerosCounter<T, sizeof(T)>::count( Val );
-}
-                 
-/// decode_logical_immediate - Decode a logical immediate value in the form
-/// "N:immr:imms" (where the immr and imms fields are each 6 bits) into the
-/// integer value it represents with regSize bits.
+    uint64_t N = get_bits( val, 12, 1 );
+    uint64_t immr = get_bits( val, 6, 6 );
+    uint64_t imms = get_bits( val, 0, 6 );
 
-static inline uint64_t decode_logical_immediate( uint64_t val, unsigned regSize )
-{
-    // Extract the N, imms, and immr fields.
-    unsigned N = ( val >> 12 ) & 1;
-    unsigned immr = ( val >> 6 ) & 0x3f;
-    unsigned imms = val & 0x3f;
+    uint64_t lzero_count = count_leading_zeroes( ( N << 6 ) | ( ~imms & 0x3f ), 32 );
+    uint64_t len = 31 - lzero_count;
+    uint64_t size = ( 1ull << len );
+    uint64_t R = ( immr & ( size - 1 ) );
+    uint64_t S = ( imms & ( size - 1 ) );
+    uint64_t pattern = ( 1ull << ( S + 1 ) ) - 1;
 
-    assert((regSize == 64 || N == 0) && "undefined logical immediate encoding");
-    int len = 31 - countl_zero(( N << 6) | ( ~imms & 0x3f ) );
-    assert( len >= 0 && "undefined logical immediate encoding" );
-    unsigned size = ( 1 << len );
-    unsigned R = immr & ( size - 1 );
-    unsigned S = imms & ( size - 1 );
-    assert( S != size - 1 && "undefined logical immediate encoding" );
-    uint64_t pattern = ( 1ULL << ( S + 1 ) ) - 1;
-    for ( unsigned i = 0; i < R; ++i )
+    for ( uint64_t i = 0; i < R; i++ )
         pattern = ror( pattern, size );
 
-    // Replicate the pattern to fill the regSize.
-    while ( size != regSize )
+    while ( size != bit_width )
     {
         pattern |= ( pattern << size );
         size *= 2;
@@ -2543,13 +2519,6 @@ void Arm64::trace_state()
         if ( 0 != regs[ r ] )
             tracer.Trace( "%u:%llx ", r, regs[ r ] );
     tracer.Trace( "sp:%llx\n", regs[ 31 ] );
-
-#if 0
-    tracer.Trace( "                0:%llx 1:%llx 2:%llx 3:%llx 4:%llx 5:%llx 6:%llx 8:%llx 9:%llx 16:%llx 17:%llx 19:%llx 20:%llx 21:%llx 22:%llx 23:%llx 24:%llx 25:%llx 26:%llx 27:%llx 28:%llx 29:%llx 30:%llx sp:%llx\n",
-                  regs[0], regs[1], regs[2], regs[3], regs[4],
-                  regs[ 5 ], regs[ 6 ], regs[8], regs[9], regs[16], regs[17], regs[19], regs[20], regs[21], regs[22],
-                  regs[23], regs[24], regs[25], regs[26], regs[27], regs[28], regs[29], regs[30], regs[ 31 ] );
-#endif
 } //trace_state
 
 // N (negative): Set if the result is negative
@@ -2755,47 +2724,6 @@ void Arm64::trace_vregs()
         }
     }
 } //trace_vregs
-
-// openai created this half-float code. it's untested.
-
-typedef struct {
-    uint16_t value; // 16 bits for the floating point
-} half_float;
-
-// Function to convert float to half-precision
-half_float float_to_half(float f) {
-    half_float h;
-    uint32_t fbits = *(uint32_t*)&f; // Reinterpret float bits
-
-    // Extract sign, exponent, and mantissa
-    uint32_t sign = (fbits >> 31) & 0x1;
-    uint32_t exponent = (fbits >> 23) & 0xFF;
-    uint32_t mantissa = fbits & 0x7FFFFF;
-
-    if (exponent == 0xFF) { // Inf or NaN
-        if (mantissa != 0) {
-            h.value = 0x7E00; // NaN
-        } else {
-            h.value = (uint16_t) ( (sign << 15) | 0x7C00 ); // Inf
-        }
-    } else if (exponent > 112) { // Normalized
-        if (exponent >= 143) {
-            h.value = (uint16_t) ( (sign << 15) | 0x7BFF ); // Overflow to infinity
-        } else {
-            uint32_t new_exponent = exponent - 112;
-            mantissa >>= 13; // Adjust mantissa
-            h.value = (uint16_t) ( (sign << 15) | (new_exponent << 10) | mantissa );
-        }
-    } else if (exponent >= 104) { // Denormalized
-        uint32_t new_exponent = 0; // Set exponent to 0
-        mantissa >>= 13; // Adjust mantissa
-        h.value = (uint16_t) ( (sign << 15) | (new_exponent << 10) | mantissa );
-    } else {
-        h.value = (uint16_t) ( (sign << 15) ); // Zero or subnormal
-    }
-
-    return h;
-}
 
 #ifdef _WIN32
 __declspec(noinline)
