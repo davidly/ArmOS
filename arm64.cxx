@@ -3105,17 +3105,19 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     {
                         if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
                         {
-                            //uint64_t amount = ( cmode & 2 ) ? 8 : 0;
-                            unhandled();
+                            uint64_t amount = get_bits( cmode, 1, 1 ) * 8;
+                            val <<= amount;
+                            uint16_t invval = (uint16_t) ~val;
+                            for ( uint64_t o = 0; o < ( Q ? 16 : 8 ); o+= 2 )
+                                vreg_setui16( d, o, invval );
                         }
                         else if ( 0 == ( cmode & 9 ) ) // 32-bit shifted immediate
                         {
                             uint64_t amount = get_bits( cmode, 1, 2 ) * 8;
                             val <<= amount;
-                            uint64_t invval = ~val;
-                            vreg_setui64( d, 0, invval );
-                            if ( Q )
-                                vreg_setui64( d, 8, invval );
+                            uint32_t invval = (uint32_t) ~val;
+                            for ( uint64_t o = 0; o < ( Q ? 16 : 8 ); o+= 4 )
+                                vreg_setui32( d, o, invval );
                         }
                         else if ( 0xc == ( cmode & 0xf ) ) // 32-bit shifting ones
                         {
@@ -4821,7 +4823,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     }
                     memcpy( vreg_ptr( d, 0 ), ptarget, sizeof( target ) );
                 }
-                else if ( 5 == bits23_21 && 0 == bit15 && 3 == bits14_11 && 1 == bit10 ) // ORR <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                else if ( 5 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // ORR <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = imm5;
                     uint64_t lo = vreg_getui64( n, 0 ) | vreg_getui64( m, 0 );
@@ -4941,7 +4943,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t elements = datasize / esize;
                     vec16_t target = { 0 };
                     uint8_t * ptarget = (uint8_t *) &target;
-                    // tracer.Trace( "elements: %llu, bytesize %llu, size %llu, esize %llu\n", elements, bytesize, size, esize );
+                    //tracer.Trace( "elements: %llu, bytesize %llu, size %llu, esize %llu\n", elements, bytesize, size, esize );
 
                     uint8_t * pn = vregs[ n ].b16;
                     uint8_t * pm = vregs[ m ].b16;
