@@ -541,7 +541,7 @@ uint64_t vfp_expand_imm( uint64_t imm8, uint64_t N )
     uint64_t E = ( 16 == N ) ? 5 : ( 32 == N ) ? 8 : 11;
     uint64_t F = N - E - 1;
     uint64_t sign = ( 0 != ( imm8 & 0x80 ) );
-    uint64_t exp_part_1 = ! ( get_bits( imm8, 6, 1 ) );
+    uint64_t exp_part_1 = ( get_bits( imm8, 6, 1 ) ? 0 : 1 );
     uint64_t exp_part_2 = replicate_bits( get_bits( imm8, 6, 1 ), E - 3 );
     uint64_t exp_part_3 = get_bits( imm8, 4, 2 );
     uint64_t exp = ( exp_part_1 << ( E - 3 + 2 ) ) | ( exp_part_2 << 2 ) | exp_part_3;
@@ -1025,7 +1025,7 @@ void Arm64::trace_state()
                     uint64_t n = opbits( 5, 5 );
                     uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
-                    uint64_t esize = 8 << highest_set_bit_nz( immh & 0x7 );
+                    uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                     uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                     const char * pTA = ( 1 == immh ) ? "8H" : ( 2 == ( 0xe & immh ) ) ? "4S" : "2D";
                     uint64_t sizeb = immh >> 1;
@@ -1041,7 +1041,7 @@ void Arm64::trace_state()
                     uint64_t n = opbits( 5, 5 );
                     uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
-                    uint64_t esize = 8 << highest_set_bit_nz( immh & 0x7 );
+                    uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                     uint64_t shift = ( 2 * esize ) - ( ( immh << 3 ) | immb );
                     const char * pTA = ( 1 == immh ) ? "8H" : ( 2 == ( 0xe & immh ) ) ? "4S" : "2D";
                     uint64_t sizeb = immh >> 1;
@@ -1057,7 +1057,7 @@ void Arm64::trace_state()
                     uint64_t n = opbits( 5, 5 );
                     uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
-                    uint64_t esize = 8 << highest_set_bit_nz( immh & 0x7 );
+                    uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                     if ( 0x7f == hi8 )
                         esize = 8 << 3;
                     uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
@@ -1073,7 +1073,7 @@ void Arm64::trace_state()
                     uint64_t n = opbits( 5, 5 );
                     uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
-                    uint64_t esize = 8 << highest_set_bit_nz( immh );
+                    uint64_t esize = 8ull << highest_set_bit_nz( immh );
                     if ( 0x7f == hi8 )
                         esize = 8 << 3;
                     uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
@@ -1943,9 +1943,9 @@ void Arm64::trace_state()
             {
                 uint64_t size = lowest_set_bit_nz( imm5 & 0xf );
                 uint64_t index = get_bits( imm5, size + 1, 4 - ( size + 1 ) + 1 );
-                uint64_t indsize = 64 << get_bits( imm5, 4, 1 );
-                uint64_t esize = 8 << size;
-                uint64_t datasize = 64 << Q;
+                uint64_t indsize = 64ull << get_bits( imm5, 4, 1 );
+                uint64_t esize = 8ull << size;
+                uint64_t datasize = 64ull << Q;
                 uint64_t elements = datasize / esize;
                 tracer.Trace( "size %llu, index %llu, indsize %llu, esize %llu, datasize %llu, elements %llu\n", size, index, indsize, esize, datasize, elements );
                 char byte_len = ( imm5 & 1 ) ? 'B' : ( 2 == ( imm5 & 3 ) ) ? 'H' : ( 4 == ( imm5 & 7 ) ) ? 'S' : ( 8 == ( imm5 & 0xf ) ) ? 'D' : '?';
@@ -2585,6 +2585,7 @@ uint32_t Arm64::sub32( uint32_t x, uint32_t y, bool setflags )
 uint64_t Arm64::shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount )
 {
     uint64_t val = ( 31 == reg ) ? 0 : regs[ reg ];
+    amount &= 0x7f;
 
     if ( 0 == shift_type ) // lsl
         val <<= amount;
@@ -2596,8 +2597,8 @@ uint64_t Arm64::shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount 
         uint64_t result = val >> i;
         val = ( 0x3f & (uint64_t) result );
     }
-    else if ( 3 == shift_type ) // ror. low bit copied to high bit with each bit rotation
-        val = ( ( val >> amount ) | ( val << amount ) );
+    else if ( 3 == shift_type ) // ror.
+        val = ( ( val >> amount ) | ( val << ( 64 - amount ) ) );
 
     return val;
 } //shift_reg64
@@ -2605,6 +2606,7 @@ uint64_t Arm64::shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount 
 uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount )
 {
     uint32_t val = ( 31 == reg ) ? 0 : ( regs[ reg ] & 0xffffffff );
+    amount &= 0x3f;
 
     if ( 0 == shift_type ) // lsl
         val <<= amount;
@@ -2616,8 +2618,8 @@ uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount 
         uint32_t result = val >> i;
         val = ( 0x1f & (uint32_t) result );
     }
-    else if ( 3 == shift_type ) // ror. low bit copied to high bit with each bit rotation
-        val = ( ( val >> amount ) | ( val << amount ) );
+    else if ( 3 == shift_type ) // ror.
+        val = ( ( val >> amount ) | ( val << ( 32 - amount ) ) );
 
     return val;
 } //shift_reg32
@@ -3040,7 +3042,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t scale = 2 + opc;
                 int64_t offset = sign_extend( imm7, 6 ) << scale;
                 uint64_t address = regs[ n ];
-                uint64_t byte_len = 4 << opc;
+                uint64_t byte_len = 4ull << opc;
     
                 if ( preIndex || signedOffset )
                     address += offset;
@@ -3241,7 +3243,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t n = opbits( 5, 5 );
                         uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
-                        uint64_t esize = 8 << highest_set_bit_nz( immh & 0x7 );
+                        uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t esize_bytes = esize / 8;
                         uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                         uint64_t datasize = 64;
@@ -3272,7 +3274,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t n = opbits( 5, 5 );
                         uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
-                        uint64_t esize = 8 << highest_set_bit_nz( immh & 0x7 );
+                        uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t esize_bytes = esize / 8;
                         uint64_t datasize = 64;
                         uint64_t part = Q;
@@ -3303,7 +3305,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t n = opbits( 5, 5 );
                         uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
-                        uint64_t esize = 8 << highest_set_bit_nz( immh & 0x7 );
+                        uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t esize_bytes = esize / 8;
                         uint64_t datasize = 64;
                         uint64_t part = Q;
@@ -3328,11 +3330,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t n = opbits( 5, 5 );
                         uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
-                        uint64_t esize = 8 << highest_set_bit_nz( immh );
+                        uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         if ( 0x7f == hi8 )
                             esize = 8 << 3;
                         uint64_t esize_bytes = esize / 8;
-                        uint64_t datasize = 64 << Q;
+                        uint64_t datasize = 64ull << Q;
                         if ( 0x7f == hi8 )
                             datasize = esize;
                         uint64_t elements = datasize / esize;
@@ -3409,8 +3411,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
             {
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
                 uint64_t opc = opbits( 10, 2 ); // 2 or 3 for container size
-                uint64_t data_size = ( 32 << opbits( 31, 1 ) );
-                uint64_t container_size = ( 8 << opc );
+                uint64_t data_size = ( 32ull << opbits( 31, 1 ) );
+                uint64_t container_size = ( 8ull << opc );
                 uint64_t containers = data_size / container_size;
                 uint64_t bits23_21 = opbits( 21, 3 );
                 uint64_t bits15_10 = opbits( 10, 6 );
@@ -4473,7 +4475,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( bit21 && 0x37 == opcode ) // FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t sz = opbits( 22, 1 );
-                    esize = 32 << sz;
+                    esize = 32ull << sz;
                     uint64_t esize_bytes = esize / 8;
                     elements = datasize / esize;
                     // tracer.Trace( "fmul sz %llu esize %llu, esize_bytes %llu, elements %llu\n", sz, esize, esize_bytes, elements );
@@ -4662,7 +4664,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t imm5 = opbits( 16, 5 );
                     uint64_t size = lowest_set_bit_nz( imm5 & 0xf );
                     uint64_t index = get_bits( imm5, size + 1, size + 2 ); // imm5:<4:size+1>
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t esize_bytes = esize / 8;
                     uint64_t val = 0;
                     memcpy( &val, vreg_ptr( n, index * esize_bytes ), esize_bytes );
@@ -4720,7 +4722,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bits23_21 = opbits( 21, 3 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
-                uint64_t datasize = 64 << Q;
+                uint64_t datasize = 64ull << Q;
                 uint64_t bits20_16 = opbits( 16, 5 );
     
                 if ( 0x4e == hi8 && 0 == bits23_21 && 0 == bit15 && 3 == bits14_11 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
@@ -4759,9 +4761,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     // UMOV <Wd>, <Vn>.<Ts>[<index>]    ;    UMOV <Xd>, <Vn>.D[<index>]    ;     SMOV <Wd>, <Vn>.<Ts>[<index>]    ;   
                     uint64_t size = lowest_set_bit_nz( imm5 & ( ( 7 == bits14_11 ) ? 0xf : 7 ) );
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t esize_bytes = esize / 8;
-                    datasize = 32 << Q;
+                    datasize = 32ull << Q;
                     uint64_t bits_to_copy = 4 - size;
                     uint64_t index = get_bits( imm5, 4 + 1 - bits_to_copy, bits_to_copy );
                     // tracer.Trace( "mov, size %llu, esize %llu, esize_bytes %llu, datasize %llu, index %llu\n", size, esize, esize_bytes, datasize, index );
@@ -4787,7 +4789,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t size = opbits( 22, 2 );
                     uint64_t m = imm5;
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t esize_bytes = esize / 8;
                     uint64_t elements = datasize / esize;
                     uint64_t part = opbits( 14, 1 ); // UZP2 is 1, UZP1 is 0
@@ -4817,7 +4819,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( 0 == bits23_21 && 0 == bit15 && 1 == bits14_11 && 1 == bit10 ) // DUP <Vd>.<T>, <R><n>
                 {
                     uint64_t size = lowest_set_bit_nz( imm5 & 0xf );
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t elements = datasize / esize;
                     uint64_t val = val_reg_or_zr( n );
                     uint8_t * pmem = vregs[ d ].b16;
@@ -4831,8 +4833,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t size = lowest_set_bit_nz( imm5 & 0xf );
                     uint64_t index = get_bits( imm5, size + 1, 4 - ( size + 1 ) + 1 );
-                    uint64_t indsize = 64 << get_bits( imm5, 4, 1 );
-                    uint64_t esize = 8 << size;
+                    uint64_t indsize = 64ull << get_bits( imm5, 4, 1 );
+                    uint64_t esize = 8ull << size;
                     uint64_t esize_bytes = esize / 8;
                     uint64_t elements = datasize / esize;
                     uint64_t element = 0;
@@ -4843,7 +4845,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( 1 == bit21 && 1 == bit15 && 3 == bits14_11 && 0 == bit10 && 0 == bits20_16 )  // CMEQ <Vd>.<T>, <Vn>.<T>, #
                 {
                     uint64_t size = opbits( 22, 2 );
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t bytesize = esize / 8;
                     uint64_t elements = datasize / esize;
 
@@ -4861,7 +4863,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t bytesize = esize / 8;
                     uint64_t elements = datasize / esize;
                     uint64_t zeroes = 0;
@@ -4884,7 +4886,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( 1 == bit21 && 1 == bit15 && 7 == bits14_11 && 1 == bit10 ) // ADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t size = opbits( 22, 2 );
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t m = opbits( 16, 5 );
                     uint64_t bytesize = esize / 8;
                     uint64_t elements = datasize / esize;
@@ -4918,7 +4920,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( ( 0x4e == hi8 || 0x0e == hi8 ) && 1 == bit21 && 1 == bit15 && 0 == bits14_11 && 1 == bit10 ) // ADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>.   add vector
                 {
                     uint64_t size = opbits( 22, 2 );
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t m = opbits( 16, 5 );
                     uint64_t bytesize = esize / 8;
                     uint64_t elements = datasize / esize;
@@ -4961,7 +4963,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         unhandled();
 
                     // even though arm64 doc says types can include S, always use integer math
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t esize_bytes = esize / 8;
                     uint64_t elements = ( Q ? 16 : 8 ) / esize_bytes;
                     uint64_t total = 0;
@@ -4980,7 +4982,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( 3 == size )
                         unhandled();
 
-                    uint64_t target_esize = 8 << size;
+                    uint64_t target_esize = 8ull << size;
                     uint64_t source_esize_bytes = target_esize * 2 / 8;
                     uint64_t target_esize_bytes = target_esize / 8;
                     uint64_t elements = 64 / target_esize;
@@ -5368,8 +5370,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                 if ( ( 2 & opcode ) || ( 8 == opcode ) ) // LD1 / LD2 / ST1 / ST2
                 {
-                    uint64_t datasize = 64 << Q;
-                    uint64_t esize = 8 << size;
+                    uint64_t datasize = 64ull << Q;
+                    uint64_t esize = 8ull << size;
                     uint64_t elements = datasize / esize;
                     uint64_t selem = 1;
                     uint64_t ebytes = esize / 8;
