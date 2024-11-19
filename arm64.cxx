@@ -1698,6 +1698,7 @@ void Arm64::trace_state()
                               // EOR <Vd>.<T>, <Vn>.<T>, <Vm>.<T>     ;    SUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>     ;    UMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                               // MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ;  BSL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                               // EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index> ;  INS <Vd>.<Ts>[<index1>], <Vn>.<Ts>[<index2>]  ;    UADDLV <V><d>, <Vn>.<T>
+                              // USHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
         {
             uint64_t Q = opbits( 30, 1 );
             uint64_t m = opbits( 16, 5 );
@@ -1713,7 +1714,9 @@ void Arm64::trace_state()
             uint64_t opcode7 = opbits( 10, 7 );
             uint64_t bits20_17 = opbits( 17, 4 );
 
-            if ( bit21 && 8 == bits20_17 && 0xe == opcode7 ) // UADDLV <V><d>, <Vn>.<T>
+            if ( bit21 && 0x11 == opcode ) // USHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                tracer.Trace( "ushl, v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
+            else if ( bit21 && 8 == bits20_17 && 0xe == opcode7 ) // UADDLV <V><d>, <Vn>.<T>
                 tracer.Trace( "uaddlv v%llu, v%llu.%s\n", d, n, pT );
             else if ( 0x6e == hi8 && 0 == bits23_21 && 0 == bit15 && 1 == bit10 )
             {
@@ -4368,6 +4371,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                   // EOR <Vd>.<T>, <Vn>.<T>, <Vm>.<T>     ;    SUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>     ;    UMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                                   // MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ;  BSL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                                   // EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index> ;  INS <Vd>.<Ts>[<index1>], <Vn>.<Ts>[<index2>]  ;    UADDLV <V><d>, <Vn>.<T>
+                                  // USHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t Q = opbits( 30, 1 );
                 uint64_t m = opbits( 16, 5 );
@@ -4388,7 +4392,26 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bits20_17 = opbits( 17, 4 );
                 //tracer.Trace( "elements: %llu, size %llu, esize %llu, datasize %llu, byte_len %llu, opcode %llu\n", elements, size, esize, datasize, byte_len, opcode );
 
-                if ( bit21 && 8 == bits20_17 && 0xe == opcode7 ) // UADDLV <V><d>, <Vn>.<T>
+                if ( bit21 && 0x11 == opcode ) // USHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                {
+                    uint64_t esize_bytes = esize / 8;
+                    vec16_t target = { 0 };
+                    uint8_t * ptarget = (uint8_t *) &target;
+                    uint8_t * pn = vreg_ptr( n, 0 );
+                    for ( uint64_t e = 0; e < elements; e++ )
+                    {
+                        uint64_t a = 0;
+                        memcpy( &a, pn + ( e * esize_bytes ), esize_bytes );
+                        int8_t shift = vreg_getui8( m, e * esize_bytes );
+                        if ( shift < 0 )
+                            a >>= -shift;
+                        else
+                            a <<= shift;
+                        memcpy( ptarget + ( e * esize_bytes ), &a, esize_bytes );
+                    }
+                    memcpy( vreg_ptr( d, 0 ), ptarget, sizeof( target ) );
+                }
+                else if ( bit21 && 8 == bits20_17 && 0xe == opcode7 ) // UADDLV <V><d>, <Vn>.<T>
                 {
                     uint64_t esize_bytes = esize / 8;
                     uint64_t sum = 0;
