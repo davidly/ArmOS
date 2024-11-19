@@ -63,7 +63,7 @@ uint64_t get_bits( uint64_t x, uint64_t lowbit, uint64_t len )
     uint64_t val = ( x >> lowbit );
     if ( 64 == len )
         return val;
-    return ( val & ( ( (uint64_t) 1 << len ) - 1 ) );
+    return ( val & ( ( 1ull << len ) - 1 ) );
 } //get_bits
 
 uint64_t one_bits( uint64_t bits )
@@ -71,7 +71,7 @@ uint64_t one_bits( uint64_t bits )
     if ( 64 == bits )
         return ~ (uint64_t) 0;
 
-    return ( ( (uint64_t) 1 << bits ) - 1 );
+    return ( ( 1ull << bits ) - 1 );
 } //one_bits
 
 uint64_t zero_extend( uint64_t x, uint64_t bits )
@@ -2679,15 +2679,17 @@ void Arm64::set_flags_from_double( double result )
     }
 } //set_flags_from_double
 
-uint64_t getbit( uint64_t x, uint64_t bit )
+uint64_t get_bit( uint64_t x, uint64_t bit_number )
 {
-    return ( ( x >> bit ) & 1 );
-} //getbit
+    return ( ( x >> bit_number ) & 1 );
+} //get_bit
 
-uint64_t setbit( uint64_t bitoffset, uint64_t bitval )
+uint64_t plaster_bit( uint64_t x, uint64_t bit_number, uint64_t bit_val )
 {
-    return ( bitval << bitoffset );
-} //setbit
+    uint64_t mask = ~ ( 1ull << bit_number );
+    uint64_t plastered_bit = ( bit_val << bit_number );
+    return ( ( x & mask ) | plastered_bit );
+} //plaster_bit
 
 uint64_t gen_bitmask( uint64_t n )
 {
@@ -3454,18 +3456,18 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         {
                             for ( uint64_t bit = 0; bit < 64; bit++ )
                             {
-                                uint64_t thebit = ( nval & ( (uint64_t) 1 << bit ) );
+                                uint64_t thebit = ( nval & ( 1ull << bit ) );
                                 thebit >>= bit;
-                                result |= ( thebit << ( (uint64_t) 63 - bit ) );
+                                result |= ( thebit << ( 63ull - bit ) );
                             }
                         }
                         else
                         {
                             for ( uint64_t bit = 0; bit < 32; bit++ )
                             {
-                                uint64_t thebit = ( nval & ( (uint64_t) 1 << bit ) );
+                                uint64_t thebit = ( nval & ( 1ull << bit ) );
                                 thebit >>= bit;
-                                result |= ( thebit << ( (uint64_t) 31 - bit ) );
+                                result |= ( thebit << ( 31ull - bit ) );
                             }
                         }
                     }
@@ -3484,7 +3486,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         int64_t cur = ( xregs ? 63 : 31 );
                         while ( cur >= 0 )
                         {
-                            if ( ! ( val & ( (uint64_t) 1 << cur ) ) )
+                            if ( ! ( val & ( 1ull << cur ) ) )
                             {
                                 result++;
                                 cur--;
@@ -4076,9 +4078,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t len = imms - immr + 1;
                         for ( uint64_t x = immr; x < ( immr + len ); x++ )
                         {
-                            uint64_t bit = getbit( s, x );
-                            result = clear_bit( result, dpos );
-                            result |= setbit( dpos, bit );
+                            uint64_t bit_val = get_bit( s, x );
+                            result = plaster_bit( result, dpos, bit_val );
                             dpos++;
                         }
                     }
@@ -4088,16 +4089,13 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         dpos = regsize - immr;
                         for ( uint64_t x = 0; x < len; x++ )
                         {
-                            uint64_t bit = getbit( s, x );
-                            if ( bit )
-                                result |= setbit( dpos, bit );
-                            else
-                                result = clear_bit( result, dpos );
+                            uint64_t bit_val = get_bit( s, x );
+                            result = plaster_bit( result, dpos, bit_val );
                             dpos++;
                         }
                     }
     
-                    if ( ( dpos > 0 ) && ( 1 == getbit( result, dpos - 1 ) ) && ( 0x13 == hi8 || 0x93 == hi8 ) ) // SBFM
+                    if ( ( dpos > 0 ) && ( 1 == get_bit( result, dpos - 1 ) ) && ( 0x13 == hi8 || 0x93 == hi8 ) ) // SBFM
                     {
                         //tracer.Trace( "  dpos %llu, most significant bit set, sbfm, extending %llx\n", dpos, result );
                         result = sign_extend( result, dpos - 1 );
@@ -4213,7 +4211,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 if ( 0 != ( 0x80 & hi8 ) )
                     b40 |= 0x20;
                 uint64_t t = opbits( 0, 5 );
-                uint64_t mask = ( (uint64_t) 1 << b40 );
+                uint64_t mask = ( 1ull << b40 );
                 bool isset = ( 0 != ( regs[ t ] & mask ) );
                 bool zerocheck = ( 0 == ( hi8 & 1 ) );
                 if ( isset != zerocheck )
@@ -4506,7 +4504,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         for ( uint64_t b = 0; b < 64; b++ )
                         {
                             uint64_t bbit = ( get_bits( dval, b, 1 ) ) ? get_bits( nval, b, 1 ) : get_bits( mval, b, 1 );
-                            result = bbit ? set_bit( result, b ) : clear_bit( result, b );
+                            result = plaster_bit( result, b, bbit );
                         }
                         //tracer.Trace( "  bsl writing %#llx at offset %llu\n", result, 8 * x );
                         vreg_setui64( d, 8 * x, result );

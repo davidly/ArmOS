@@ -155,21 +155,9 @@ struct Arm64
     __inline_perf uint64_t opbits( uint64_t lowbit, uint64_t len )
     {
         uint64_t val = ( op >> lowbit );
-        if ( 64 == len )
-            return val;
-        return ( val & ( ( (uint64_t) 1 << len ) - 1 ) );
+        assert( 64 != len ); // the next line of code wouldn't work but there are no callers that do this
+        return ( val & ( ( 1ull << len ) - 1 ) );
     } //opbits
-
-    static uint64_t clear_bit( uint64_t x, uint64_t bit )
-    {
-        uint64_t mask = ~( (uint64_t) 1 << bit );
-        return ( x & mask );
-    } //clear_bit
-
-    static uint64_t set_bit( uint64_t x, uint64_t bit )
-    {
-        return ( x | ( 1ull << bit ) );
-    } //set_bit
 
     // when inlined, the compiler uses btc for bits. when non-inlined it does the slow thing
     // bits is the 0-based high bit that will be extended to the left.
