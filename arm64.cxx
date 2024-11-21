@@ -579,15 +579,7 @@ void Arm64::trace_state()
     }
 
     //tracer.TraceBinaryData( getmem( 0x2cb9b90 ), 256, 10 );
-
     tracer.Trace( "pc %8llx %s%s op %08llx %s ==> ", pc, symbol_name, symbol_offset_str, op, render_flags() );
-
-#if 0
-    tracer.Trace( "pc %8llx %s%s op %08llx %s 0:%llx 1:%llx 2:%llx 3:%llx 4:%llx 5:%llx 6:%llx 8:%llx 9:%llx 16:%llx 17:%llx 19:%llx 20:%llx 21:%llx 22:%llx 23:%llx 24:%llx 25:%llx 26:%llx 27:%llx 28:%llx 29:%llx 30:%llx sp:%llx\n    ",
-                  pc, symbol_name, symbol_offset_str, op, render_flags(), regs[0], regs[1], regs[2], regs[3], regs[4],
-                  regs[ 5 ], regs[ 6 ], regs[8], regs[9], regs[16], regs[17], regs[19], regs[20], regs[21], regs[22],
-                  regs[23], regs[24], regs[25], regs[26], regs[27], regs[28], regs[29], regs[30], regs[ 31 ] );
-#endif
 
     uint8_t hi8 = (uint8_t) ( op >> 24 );
     switch ( hi8 )
@@ -2521,11 +2513,14 @@ void Arm64::trace_state()
             unhandled();
     }
 
-    tracer.Trace( "               " );
+    static char acregs[ 32 * 32 + 10 ]; // way too much.
+    acregs[ 0 ] = 0;
+    int len = 0;
     for ( int r = 0; r < 31; r++ )
         if ( 0 != regs[ r ] )
-            tracer.Trace( "%u:%llx ", r, regs[ r ] );
-    tracer.Trace( "sp:%llx\n", regs[ 31 ] );
+            len += snprintf( & acregs[ len ], 32, "%u:%llx ", r, regs[ r ] );
+    len += snprintf( &acregs[ len ], 32, "sp:%llx", regs[ 31 ] );
+    tracer.Trace( "               %s\n", acregs );
 } //trace_state
 
 // N (negative): Set if the result is negative
@@ -2574,12 +2569,11 @@ uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setfl
     if ( setflags )
     {
         // this method of setting flags is as the Arm documentation suggests
-        int64_t signed_sum = (int64_t) (int32_t) x + (int64_t) (int32_t) y + (uint64_t) carry;
         fN = ( (int32_t) result < 0 );
         fZ = ( 0 == result );
         fC = ( (uint64_t) result != unsigned_sum );
+        int64_t signed_sum = (int64_t) (int32_t) x + (int64_t) (int32_t) y + (uint64_t) carry;
         fV = ( (int64_t) (int32_t) result != signed_sum );
-        //tracer.Trace( "  addwithcarry32 %#x with %#x, fN %d, fZ %d, fC %d, fV: %d\n", x, y, fN, fZ, fC, fV );
     }
     return result;
 } //add_with_carry32
@@ -2629,6 +2623,8 @@ uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount 
     }
     else if ( 3 == shift_type ) // ror.
         val = ( ( val >> amount ) | ( val << ( 32 - amount ) ) );
+    else
+        unhandled();
 
     return val;
 } //shift_reg32
@@ -2636,7 +2632,7 @@ uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount 
 bool Arm64::check_conditional( uint64_t cond )
 {
     bool met = false;
-    uint64_t chk = ( ( cond >> 1 ) & 0x7 ); // switch on bits 4..1
+    uint64_t chk = ( ( cond >> 1 ) & 7 ); // switch on bits 4..1
 
     switch ( chk )
     {
@@ -2696,15 +2692,14 @@ uint64_t gen_bitmask( uint64_t n )
   if ( 0 == n )
       return 0;
 
-  uint64_t full = ~ (uint64_t) 0;
-  return full >> ( (uint64_t) 64 - n );
+  uint64_t full = ~ 0ull;
+  return full >> ( 64ull - n );
 } //gen_bitmask
 
 uint64_t get_elem_bits( uint64_t val, uint64_t c, uint64_t container_size )
 {
     uint64_t mask = gen_bitmask( container_size );
-    uint64_t result = ( val & ( mask << ( c * 8 ) ) );
-    return result;
+    return ( val & ( mask << ( c * 8 ) ) );
 } //get_elem_bits
 
 uint64_t reverse_bytes( uint64_t val, uint64_t n )
@@ -2812,7 +2807,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t t = opbits( 0, 5 );
                 uint64_t S = opbits( 12, 1 );
                 uint64_t Q = opbits( 30, 1 );
-    
                 uint64_t index = 0;
                 bool replicate = false;
                 uint64_t scale = get_bits( opcode, 1, 2 );
@@ -2837,9 +2831,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 }
     
                 if ( post_index )
-                {
                     unhandled();
-                }
                 else // no offset
                 {
                     uint64_t byte_width = ( 0 == opcode ) ? 1 : ( 2 == opcode && ( 0 == ( size & 1 ) ) ) ? 2 : ( 4 == opcode && 0 == size ) ? 4 : 8;
