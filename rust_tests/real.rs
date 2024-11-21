@@ -37,6 +37,27 @@ fn main()
     let r64atan : f64 = r64.atan();
     println!( "r64 atan: {}", r64atan );
 
+    let mut _r32x : f32 = 1.6666666666667;
+    for x in 0..=800
+    {
+        _r32x += x as f32 / 200f32;
+        _r32x *= 1.002020202;
+    }
+
+    let mut _r64x : f64 = 1.6666666666667;
+    for x in 0..=800
+    {
+        _r64x += x as f64 / 200f64;
+        _r64x *= 1.002020202;
+    }
+
+
+    println!( "_r32x = {_r32x}" );
+    println!( "_r64x = {_r64x}" );
+
+    _r64x += _r32x as f64;
+    println!( "sum: = {_r64x}" );
+
     println!( "exiting real number testing with great success" );
 } //main
 
