@@ -1,4 +1,4 @@
-Thu 11/21/2024 15:22:56.34 
+Fri 11/22/2024  8:02:18.45 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 21, hour 15, min 22, sec 58
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 21, hour 18, min 22, sec 58
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 15, min 22, sec 58
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 21, hour 23, min 22, sec 58
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 20
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -686,6 +686,55 @@ allocation 34 succeeded 0x604f2a0
 allocation 35 succeeded 0x641fbb0
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\bin0\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
+test c_tests\bin0\ba 
+parsing input file tp.bas
+827 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
 test c_tests\bin1\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -1242,10 +1291,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 21, hour 15, min 23, sec 0
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 21, hour 18, min 23, sec 0
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 15, min 23, sec 0
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 21, hour 23, min 23, sec 0
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 26
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1373,6 +1422,55 @@ allocation 34 succeeded 0x604e280
 allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\bin1\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
+test c_tests\bin1\ba 
+parsing input file tp.bas
+186 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
 test c_tests\bin2\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -1929,10 +2027,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 21, hour 15, min 23, sec 2
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 21, hour 18, min 23, sec 2
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 15, min 23, sec 2
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 21, hour 23, min 23, sec 2
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 29
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 29
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 29
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 29
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2060,6 +2158,55 @@ allocation 34 succeeded 0x604e280
 allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\bin2\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
+test c_tests\bin2\ba 
+parsing input file tp.bas
+172 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
 test c_tests\bin3\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -2561,7 +2708,7 @@ testing printf
 45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 tstr completed with great success
 test c_tests\bin3\fileops 
-fp: 4836688
+fp: 4832592
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -2574,7 +2721,7 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4836688
+fp: 4832592
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -2616,10 +2763,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 21, hour 15, min 23, sec 5
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 21, hour 18, min 23, sec 5
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 15, min 23, sec 5
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 21, hour 23, min 23, sec 5
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 33
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 33
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 33
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 33
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -2747,6 +2894,55 @@ allocation 34 succeeded 0x604e280
 allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\bin3\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
+test c_tests\bin3\ba 
+parsing input file tp.bas
+190 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
 test c_tests\binfast\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -3248,7 +3444,7 @@ testing printf
 45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 tstr completed with great success
 test c_tests\binfast\fileops 
-fp: 4836688
+fp: 4832592
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -3261,7 +3457,7 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4836688
+fp: 4832592
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -3303,10 +3499,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 21, hour 15, min 23, sec 7
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 21, hour 18, min 23, sec 7
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 15, min 23, sec 7
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 21, hour 23, min 23, sec 7
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 36
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 36
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 36
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 36
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -3406,40 +3602,89 @@ allocation 6 succeeded 0x7fb0010
 allocation 7 succeeded 0x8381010
 allocation 8 succeeded 0x8752010
 allocation 9 succeeded 0x8b23010
-allocation 10 succeeded 0x4c0900
-allocation 11 succeeded 0x891210
-allocation 12 succeeded 0xc61b20
-allocation 13 succeeded 0x1032430
-allocation 14 succeeded 0x1402d40
-allocation 15 succeeded 0x17d3650
-allocation 16 succeeded 0x1ba3f60
-allocation 17 succeeded 0x1f74870
-allocation 18 succeeded 0x2345180
-allocation 19 succeeded 0x2715a90
-allocation 20 succeeded 0x2ae63a0
-allocation 21 succeeded 0x2eb6cb0
-allocation 22 succeeded 0x32875c0
-allocation 23 succeeded 0x3657ed0
-allocation 24 succeeded 0x3a287e0
-allocation 25 succeeded 0x3df90f0
-allocation 26 succeeded 0x41c9a00
-allocation 27 succeeded 0x459a310
-allocation 28 succeeded 0x496ac20
-allocation 29 succeeded 0x4d3b530
-allocation 30 succeeded 0x510be40
-allocation 31 succeeded 0x54dc750
-allocation 32 succeeded 0x58ad060
-allocation 33 succeeded 0x5c7d970
-allocation 34 succeeded 0x604e280
-allocation 35 succeeded 0x641eb90
+allocation 10 succeeded 0x4c0910
+allocation 11 succeeded 0x891220
+allocation 12 succeeded 0xc61b30
+allocation 13 succeeded 0x1032440
+allocation 14 succeeded 0x1402d50
+allocation 15 succeeded 0x17d3660
+allocation 16 succeeded 0x1ba3f70
+allocation 17 succeeded 0x1f74880
+allocation 18 succeeded 0x2345190
+allocation 19 succeeded 0x2715aa0
+allocation 20 succeeded 0x2ae63b0
+allocation 21 succeeded 0x2eb6cc0
+allocation 22 succeeded 0x32875d0
+allocation 23 succeeded 0x3657ee0
+allocation 24 succeeded 0x3a287f0
+allocation 25 succeeded 0x3df9100
+allocation 26 succeeded 0x41c9a10
+allocation 27 succeeded 0x459a320
+allocation 28 succeeded 0x496ac30
+allocation 29 succeeded 0x4d3b540
+allocation 30 succeeded 0x510be50
+allocation 31 succeeded 0x54dc760
+allocation 32 succeeded 0x58ad070
+allocation 33 succeeded 0x5c7d980
+allocation 34 succeeded 0x604e290
+allocation 35 succeeded 0x641eba0
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\binfast\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
+test c_tests\binfast\ba 
+parsing input file tp.bas
+185 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
 test rust_tests\bin0\e 
 testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   8.6885ms
+serial runtime:   16.8968ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -3511,7 +3756,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   2.7013ms
+serial runtime:   4.2899ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -3583,7 +3828,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   1.7941ms
+serial runtime:   2.9974ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -3655,7 +3900,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   1.3189ms
+serial runtime:   2.3713ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -3722,204 +3967,6 @@ exiting finding phi with great success
 test rust_tests\bin3\mysort 
 element count in vector: 58175
 element count after dedup: 58175
-test an 
-a delve id
-a delved i
-a die veld
-a dive led
-a dived le
-a led vied
-add ive le
-add le vie
-addle ive
-addle vie
-aid delve
-aide veld
-ale dived
-ave did le
-ave id led
-ave idled
-dad ive le
-dad le vie
-dale dive
-dale vied
-david eel
-david lee
-dead evil
-dead levi
-dead live
-dead veil
-dead vile
-deal dive
-deal vied
-dee valid
-deed vial
-did leave
-died vale
-died veal
-dive lade
-dive lead
-dived lea
-evade lid
-eve id lad
-id leaved
-idea veld
-lade vied
-lead vied
-a delve id
-a delved i
-a die veld
-a dive led
-a dived le
-a led vied
-add ive le
-add le vie
-addle ive
-addle vie
-aid delve
-aide veld
-ale dived
-ave did le
-ave id led
-ave idled
-dad ive le
-dad le vie
-dale dive
-dale vied
-david eel
-david lee
-dead evil
-dead levi
-dead live
-dead veil
-dead vile
-deal dive
-deal vied
-dee valid
-deed vial
-did leave
-died vale
-died veal
-dive lade
-dive lead
-dived lea
-evade lid
-eve id lad
-id leaved
-idea veld
-lade vied
-lead vied
-a delve id
-a delved i
-a die veld
-a dive led
-a dived le
-a led vied
-add ive le
-add le vie
-addle ive
-addle vie
-aid delve
-aide veld
-ale dived
-ave did le
-ave id led
-ave idled
-dad ive le
-dad le vie
-dale dive
-dale vied
-david eel
-david lee
-dead evil
-dead levi
-dead live
-dead veil
-dead vile
-deal dive
-deal vied
-dee valid
-deed vial
-did leave
-died vale
-died veal
-dive lade
-dive lead
-dived lea
-evade lid
-eve id lad
-id leaved
-idea veld
-lade vied
-lead vied
-a delve id
-a delved i
-a die veld
-a dive led
-a dived le
-a led vied
-add ive le
-add le vie
-addle ive
-addle vie
-aid delve
-aide veld
-ale dived
-ave did le
-ave id led
-ave idled
-dad ive le
-dad le vie
-dale dive
-dale vied
-david eel
-david lee
-dead evil
-dead levi
-dead live
-dead veil
-dead vile
-deal dive
-deal vied
-dee valid
-deed vial
-did leave
-died vale
-died veal
-dive lade
-dive lead
-dived lea
-evade lid
-eve id lad
-id leaved
-idea veld
-lade vied
-lead vied
-test ba 
-parsing input file tp.bas
-start time: 15:23:14.857
-692 ms for 1 iterations
-end time: 15:23:15.548
-final move count 6493
-exiting the basic interpreter
-parsing input file tp.bas
-start time: 15:23:15.609
-145 ms for 1 iterations
-end time: 15:23:15.754
-final move count 6493
-exiting the basic interpreter
-parsing input file tp.bas
-start time: 15:23:15.815
-124 ms for 1 iterations
-end time: 15:23:15.939
-final move count 6493
-exiting the basic interpreter
-parsing input file tp.bas
-start time: 15:23:16.000
-126 ms for 1 iterations
-end time: 15:23:16.126
-final move count 6493
-exiting the basic interpreter
 test ntvao 
 
 195D 0001$
@@ -3933,10 +3980,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-178.958008 milliseconds
+253.576019 milliseconds
 test armos 
 starting
-176914 microseconds (-6)
+257659 microseconds (-6)
 1 iterations
 6493 moves
-Thu 11/21/2024 15:23:17.21 
+Fri 11/22/2024  8:02:47.52 

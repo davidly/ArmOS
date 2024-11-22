@@ -2356,7 +2356,7 @@ void Arm64::trace_state()
             // STR <Xt>, [<Xn|SP>, #<simm>]!
             // W, H and B variants use <Wt> as the first argument
             // H and B variants use LDRH, STRH, LDRB, STRB instructions. W and X variants use STR and LDR
-            // LDR has sign-extend LDRSx variants
+            // LDR has sign-extend LDRSx and LDURSW variants
 
             uint64_t opc = opbits( 21, 3 );
             uint64_t n = opbits( 5, 5 );
@@ -5794,32 +5794,21 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t bits11_10 = opbits( 10, 2 );
                     if ( 0 == bits11_10 ) // LDURSB <Wt>, [<Xn|SP>{, #<simm>}]    ;    LDURSB <Xt>, [<Xn|SP>{, #<simm>}]
                     {
-                        if ( 0x38 == hi8 ) // ldursb
+                        int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
+                        if ( 31 != t )
                         {
-                            bool isx = ( 0 != opbits( 22, 1 ) );
-                            int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
-                            if ( 31 != t )
-                            {
-                                if ( isx )
-                                    regs[ t ] = sign_extend( getui8( regs[ n ] + imm9 ), 7 );
-                                else
-                                    regs[ t ] = 0xffffffff & sign_extend( getui8( regs[ n ] + imm9 ), 7 );
-                            }
-                        }
-                        else if ( 0x78 == hi8 ) // ldursh
-                        {
-                            bool isx = ( 0 != opbits( 22, 1 ) );
-                            int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
-                            if ( 31 != t )
-                            {
-                                if ( isx )
+                            if ( 0x38 == hi8 ) // ldursb
+                                regs[ t ] = sign_extend( getui8( regs[ n ] + imm9 ), 7 );
+                            else if ( 0x78 == hi8 ) // ldursh
                                     regs[ t ] = sign_extend( getui16( regs[ n ] + imm9 ), 15 );
-                                else
-                                    regs[ t ] = 0xffffffff & sign_extend( getui16( regs[ n ] + imm9 ), 15 );
-                            }
+                            else if ( 0xb8 == hi8 ) // ldursw
+                                regs[ t ] = sign_extend( getui32( regs[ n ] + imm9 ), 31 );
+                            else
+                                unhandled();
+                            bool isx = ( 0 != opbits( 22, 1 ) );
+                            if ( !isx )
+                                regs[ t ] &= 0xffffffff;
                         }
-                        else
-                            unhandled();
                     }
                     else
                     {

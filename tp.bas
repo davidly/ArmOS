@@ -21,7 +21,7 @@
 28 dim sa%(10)
 29 dim sb%(10)
 30 mc% = 0
-31 print "start time: "; time$
+31 rem print "start time: "; time$
 32 if 0 <> av% then lo% = av% else lo% = 1
 40 for l% = 1 to lo%
 41 mc% = 0
@@ -43,7 +43,7 @@
 74 rem print "mc: "; mc%; "  l is "; l%
 80 next l%
 85 print elap$ ; " for "; lo%; " iterations"
-86 print "end time: "; time$
+86 rem print "end time: "; time$
 87 print "final move count "; mc%
 100 end
 
