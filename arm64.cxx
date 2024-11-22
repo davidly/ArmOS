@@ -4683,11 +4683,12 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         vregs[ d ].f = (float) val;
                     }
                 }
-                else if ( 0x3c6e == bits23_10 )
+                else if ( 0x3c6e == bits23_10 ) // ADDP D<d>, <Vn>.2D
                 {
-                    double result = vreg_getdouble( n, 0 ) + vreg_getdouble( n, 8 );
+                    // addp is an integer addition, not floating point addition.
+                    uint64_t result = vreg_getui64( n, 0 ) + vreg_getui64( n, 8 );
                     vreg_setui64( d, 8, 0ull );
-                    vreg_setdouble( d, 0, result );
+                    vreg_setui64( d, 0, result );
                 }
                 else if ( 1 == ( bits23_10 & 0x383f ) ) // DUP <V><d>, <Vn>.<T>[<index>]   -- scalar
                 {
