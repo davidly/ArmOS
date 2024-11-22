@@ -1,4 +1,4 @@
-Thu Nov 21 23:23:52 PST 2024
+Fri Nov 22 15:05:30 PST 2024
 c_tests/bin0/tcmp
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -2640,7 +2640,7 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin3/fileops
-fp: 4836736
+fp: 4832640
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -2653,7 +2653,7 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4836736
+fp: 4832640
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -2695,7 +2695,7 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/binfast/fileops
-fp: 4836736
+fp: 4832640
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -2708,7 +2708,7 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4836736
+fp: 4832640
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -2750,30 +2750,30 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 2, min 23, sec 58
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 7, min 23, sec 58
+before TZ is set: tz: '(null)', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 18, min 5, sec 37
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 23, min 5, sec 37
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 2, min 23, sec 58
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 7, min 23, sec 58
+before TZ is set: tz: '(null)', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 18, min 5, sec 37
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 23, min 5, sec 37
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 2, min 23, sec 58
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 7, min 23, sec 58
+before TZ is set: tz: '(null)', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 18, min 5, sec 37
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 23, min 5, sec 37
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 2, min 23, sec 58
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 7, min 23, sec 58
+before TZ is set: tz: '(null)', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 18, min 5, sec 37
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 23, min 5, sec 37
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 2, min 23, sec 58
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 21, hour 23, min 23, sec 58
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 7, min 23, sec 58
+before TZ is set: tz: '(null)', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 18, min 5, sec 37
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 15, min 5, sec 37
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 23, min 5, sec 37
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/bin1/tm
@@ -3392,16 +3392,16 @@ allocation 6 succeeded 0x43b0010
 allocation 7 succeeded 0x4781010
 allocation 8 succeeded 0x4b52010
 allocation 9 succeeded 0x4f23010
-allocation 10 succeeded 0x4bf930
-allocation 11 succeeded 0x890240
-allocation 12 succeeded 0xc60b50
-allocation 13 succeeded 0x1031460
-allocation 14 succeeded 0x1401d70
-allocation 15 succeeded 0x17d2680
-allocation 16 succeeded 0x1ba2f90
-allocation 17 succeeded 0x1f738a0
-allocation 18 succeeded 0x23441b0
-allocation 19 succeeded 0x2714ac0
+allocation 10 succeeded 0x4bf940
+allocation 11 succeeded 0x890250
+allocation 12 succeeded 0xc60b60
+allocation 13 succeeded 0x1031470
+allocation 14 succeeded 0x1401d80
+allocation 15 succeeded 0x17d2690
+allocation 16 succeeded 0x1ba2fa0
+allocation 17 succeeded 0x1f738b0
+allocation 18 succeeded 0x23441c0
+allocation 19 succeeded 0x2714ad0
 caught a standard execption: std::bad_alloc
 leaving main
 c_tests/bin0/an david lee
@@ -3626,39 +3626,139 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-start time: 23:24:02.564
-1,166 ms for 1 iterations
-end time: 23:24:03.729
+1,034 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-start time: 23:24:03.751
-247 ms for 1 iterations
-end time: 23:24:03.998
+201 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-start time: 23:24:04.016
-217 ms for 1 iterations
-end time: 23:24:04.234
+182 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-start time: 23:24:04.252
-219 ms for 1 iterations
-end time: 23:24:04.472
+204 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-start time: 23:24:04.491
-219 ms for 1 iterations
-end time: 23:24:04.710
+201 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.s, use registers: yes, expression optimization: yes
+parsing input file c_tests/tp.bas
+created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 rust_tests/bin0/e
 testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
@@ -3676,19 +3776,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   16.658371ms
+serial runtime:   16.2646ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   4.021501ms
+serial runtime:   4.154975ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   3.026003ms
+serial runtime:   2.7863ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.319804ms
+serial runtime:   2.301659ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -3947,4 +4047,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Thu Nov 21 23:24:09 PST 2024
+Fri Nov 22 15:05:49 PST 2024

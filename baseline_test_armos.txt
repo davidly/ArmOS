@@ -1,4 +1,4 @@
-Fri 11/22/2024  8:02:18.45 
+Fri 11/22/2024  8:30:59.87 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 20
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 20
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 20
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 20
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 2
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 2
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 2
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 2
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -732,9 +732,31 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-827 ms for 1 iterations
+815 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\bin1\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -1291,10 +1313,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 26
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 26
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 26
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 26
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 7
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 7
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 7
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 7
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1471,6 +1493,28 @@ parsing input file tp.bas
 186 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\bin2\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -2027,10 +2071,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 29
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 29
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 29
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 29
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 11
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 11
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 11
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 11
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2204,9 +2248,31 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-172 ms for 1 iterations
+177 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\bin3\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -2763,10 +2829,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 33
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 33
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 33
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 33
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 15
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -2940,9 +3006,31 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-190 ms for 1 iterations
+189 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\binfast\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -3499,10 +3587,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 2, sec 36
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 2, sec 36
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 2, sec 36
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 2, sec 36
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 18
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 18
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 18
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 18
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -3676,15 +3764,37 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-185 ms for 1 iterations
+187 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test rust_tests\bin0\e 
 testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   16.8968ms
+serial runtime:   15.7238ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -3756,7 +3866,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.2899ms
+serial runtime:   4.2668ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -3828,7 +3938,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.9974ms
+serial runtime:   3.0386ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -3900,7 +4010,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.3713ms
+serial runtime:   2.3594ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -3980,10 +4090,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-253.576019 milliseconds
+274.028015 milliseconds
 test armos 
 starting
-257659 microseconds (-6)
+262053 microseconds (-6)
 1 iterations
 6493 moves
-Fri 11/22/2024  8:02:47.52 
+Fri 11/22/2024  8:31:29.31 

@@ -32,6 +32,10 @@ for opt in 0 1 2 3 fast;
 do
     echo c_tests/bin$opt/ba c_tests/tp.bas >>$outputfile
     $_armoscmd c_tests/bin$opt/ba c_tests/tp.bas >>$outputfile
+    for codegen in 6 8 a d 3 i I m o r x;
+    do
+        $_armoscmd c_tests/bin$opt/ba -a:$codegen -x c_tests/tp.bas >>$outputfile
+    done
 done
 
 for arg in e ttt fileops ato tap real tphi mysort;
