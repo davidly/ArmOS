@@ -2119,8 +2119,8 @@ void Arm64::trace_state()
             }
             break;
         }
-        case 0x1e: // FMOV <Wd>, <Hn>    ;    FMUL    ;    FMOV <Wd>, imm
-        case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>
+        case 0x1e: // FMOV <Wd>, <Hn>    ;    FMUL                ;    FMOV <Wd>, imm       ;    FCVTZU <Wd>, <Dn>
+        case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>
         {
             uint64_t sf = opbits( 31, 1 );
             uint64_t ftype = opbits( 22, 2 );
@@ -2180,6 +2180,11 @@ void Arm64::trace_state()
                             tracer.Trace( "fmov x%llu, v%llu.D[1]\n", d, n );
                     }
                 }
+            }
+            else if ( 0x40 == bits18_10 && bit21 && 3 == rmode ) // FCVTZU <Wd>, <Dn>
+            {
+                char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
+                tracer.Trace( "fcvtzu %s, %c%llu\n", reg_or_zr( d, sf ), t, n );
             }
             else if ( 0x40 == ( bits18_10 & 0x1c0 ) && !bit21 && 3 == rmode ) // FCVTZU <Wd>, <Dn>, #<fbits>
             {
@@ -5474,6 +5479,40 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                 unhandled();
                         }
                     }
+                }
+                else if ( 0x40 == bits18_10 && bit21 && 3 == rmode ) // FCVTZU <Wd>, <Dn>
+                {
+                    if ( 31 == d )
+                        break;
+
+                    double src = 0.0;
+                    if ( 0 == ftype )
+                        src = vreg_getfloat( n, 0 );
+                    else if ( 1 == ftype )
+                        src = vreg_getdouble( n, 0 );
+                    else
+                        unhandled();
+
+                    uint64_t result = 0;
+                    if ( src > 0.0 )
+                    {
+                        if ( sf )
+                        {
+                            if ( src > (double) UINT64_MAX )
+                                result = UINT64_MAX;
+                            else
+                                result = (uint64_t) src;
+    
+                        }
+                        else
+                        {
+                            if ( src > (double) UINT32_MAX )
+                                result = UINT32_MAX;
+                            else
+                                result = (uint32_t) src;
+                        }
+                    }
+                    regs[ d ] = result;
                 }
                 else if ( ( 0x40 == ( bits18_10 & 0x1c0 ) ) && !bit21 && 3 == rmode ) // FCVTZU <Wd>, <Dn>, #<fbits>
                 {
