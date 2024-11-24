@@ -1,4 +1,4 @@
-Sat 11/23/2024 16:45:02.59 
+Sun 11/24/2024 11:31:06.00 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 5
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 5
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 5
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 5
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 8
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -648,48 +648,34 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x68cb010
-allocation 1 succeeded 0x6c9c010
-allocation 2 succeeded 0x706d010
-allocation 3 succeeded 0x743e010
-allocation 4 succeeded 0x780f010
-allocation 5 succeeded 0x7be0010
-allocation 6 succeeded 0x7fb1010
-allocation 7 succeeded 0x8382010
-allocation 8 succeeded 0x8753010
-allocation 9 succeeded 0x8b24010
-allocation 10 succeeded 0x4c1920
-allocation 11 succeeded 0x892230
-allocation 12 succeeded 0xc62b40
-allocation 13 succeeded 0x1033450
-allocation 14 succeeded 0x1403d60
-allocation 15 succeeded 0x17d4670
-allocation 16 succeeded 0x1ba4f80
-allocation 17 succeeded 0x1f75890
-allocation 18 succeeded 0x23461a0
-allocation 19 succeeded 0x2716ab0
-allocation 20 succeeded 0x2ae73c0
-allocation 21 succeeded 0x2eb7cd0
-allocation 22 succeeded 0x32885e0
-allocation 23 succeeded 0x3658ef0
-allocation 24 succeeded 0x3a29800
-allocation 25 succeeded 0x3dfa110
-allocation 26 succeeded 0x41caa20
-allocation 27 succeeded 0x459b330
-allocation 28 succeeded 0x496bc40
-allocation 29 succeeded 0x4d3c550
-allocation 30 succeeded 0x510ce60
-allocation 31 succeeded 0x54dd770
-allocation 32 succeeded 0x58ae080
-allocation 33 succeeded 0x5c7e990
-allocation 34 succeeded 0x604f2a0
-allocation 35 succeeded 0x641fbb0
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\bin0\mm 
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 test c_tests\bin0\an 
 a delve id
 a delved i
@@ -736,7 +722,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-912 ms for 1 iterations
+842 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1317,10 +1303,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 10
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 10
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 10
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 10
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 13
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 13
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 13
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 13
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1410,48 +1396,34 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x68ca010
-allocation 1 succeeded 0x6c9b010
-allocation 2 succeeded 0x706c010
-allocation 3 succeeded 0x743d010
-allocation 4 succeeded 0x780e010
-allocation 5 succeeded 0x7bdf010
-allocation 6 succeeded 0x7fb0010
-allocation 7 succeeded 0x8381010
-allocation 8 succeeded 0x8752010
-allocation 9 succeeded 0x8b23010
-allocation 10 succeeded 0x4c0900
-allocation 11 succeeded 0x891210
-allocation 12 succeeded 0xc61b20
-allocation 13 succeeded 0x1032430
-allocation 14 succeeded 0x1402d40
-allocation 15 succeeded 0x17d3650
-allocation 16 succeeded 0x1ba3f60
-allocation 17 succeeded 0x1f74870
-allocation 18 succeeded 0x2345180
-allocation 19 succeeded 0x2715a90
-allocation 20 succeeded 0x2ae63a0
-allocation 21 succeeded 0x2eb6cb0
-allocation 22 succeeded 0x32875c0
-allocation 23 succeeded 0x3657ed0
-allocation 24 succeeded 0x3a287e0
-allocation 25 succeeded 0x3df90f0
-allocation 26 succeeded 0x41c9a00
-allocation 27 succeeded 0x459a310
-allocation 28 succeeded 0x496ac20
-allocation 29 succeeded 0x4d3b530
-allocation 30 succeeded 0x510be40
-allocation 31 succeeded 0x54dc750
-allocation 32 succeeded 0x58ad060
-allocation 33 succeeded 0x5c7d970
-allocation 34 succeeded 0x604e280
-allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\bin1\mm 
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 test c_tests\bin1\an 
 a delve id
 a delved i
@@ -1498,7 +1470,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-193 ms for 1 iterations
+189 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2079,10 +2051,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 14
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 14
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 14
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 14
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 17
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 17
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 17
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 17
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2172,48 +2144,34 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x68ca010
-allocation 1 succeeded 0x6c9b010
-allocation 2 succeeded 0x706c010
-allocation 3 succeeded 0x743d010
-allocation 4 succeeded 0x780e010
-allocation 5 succeeded 0x7bdf010
-allocation 6 succeeded 0x7fb0010
-allocation 7 succeeded 0x8381010
-allocation 8 succeeded 0x8752010
-allocation 9 succeeded 0x8b23010
-allocation 10 succeeded 0x4c0900
-allocation 11 succeeded 0x891210
-allocation 12 succeeded 0xc61b20
-allocation 13 succeeded 0x1032430
-allocation 14 succeeded 0x1402d40
-allocation 15 succeeded 0x17d3650
-allocation 16 succeeded 0x1ba3f60
-allocation 17 succeeded 0x1f74870
-allocation 18 succeeded 0x2345180
-allocation 19 succeeded 0x2715a90
-allocation 20 succeeded 0x2ae63a0
-allocation 21 succeeded 0x2eb6cb0
-allocation 22 succeeded 0x32875c0
-allocation 23 succeeded 0x3657ed0
-allocation 24 succeeded 0x3a287e0
-allocation 25 succeeded 0x3df90f0
-allocation 26 succeeded 0x41c9a00
-allocation 27 succeeded 0x459a310
-allocation 28 succeeded 0x496ac20
-allocation 29 succeeded 0x4d3b530
-allocation 30 succeeded 0x510be40
-allocation 31 succeeded 0x54dc750
-allocation 32 succeeded 0x58ad060
-allocation 33 succeeded 0x5c7d970
-allocation 34 succeeded 0x604e280
-allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\bin2\mm 
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 test c_tests\bin2\an 
 a delve id
 a delved i
@@ -2260,7 +2218,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-181 ms for 1 iterations
+173 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2841,10 +2799,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 18
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 18
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 18
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 18
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 20
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -2934,48 +2892,34 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x68ca010
-allocation 1 succeeded 0x6c9b010
-allocation 2 succeeded 0x706c010
-allocation 3 succeeded 0x743d010
-allocation 4 succeeded 0x780e010
-allocation 5 succeeded 0x7bdf010
-allocation 6 succeeded 0x7fb0010
-allocation 7 succeeded 0x8381010
-allocation 8 succeeded 0x8752010
-allocation 9 succeeded 0x8b23010
-allocation 10 succeeded 0x4c0900
-allocation 11 succeeded 0x891210
-allocation 12 succeeded 0xc61b20
-allocation 13 succeeded 0x1032430
-allocation 14 succeeded 0x1402d40
-allocation 15 succeeded 0x17d3650
-allocation 16 succeeded 0x1ba3f60
-allocation 17 succeeded 0x1f74870
-allocation 18 succeeded 0x2345180
-allocation 19 succeeded 0x2715a90
-allocation 20 succeeded 0x2ae63a0
-allocation 21 succeeded 0x2eb6cb0
-allocation 22 succeeded 0x32875c0
-allocation 23 succeeded 0x3657ed0
-allocation 24 succeeded 0x3a287e0
-allocation 25 succeeded 0x3df90f0
-allocation 26 succeeded 0x41c9a00
-allocation 27 succeeded 0x459a310
-allocation 28 succeeded 0x496ac20
-allocation 29 succeeded 0x4d3b530
-allocation 30 succeeded 0x510be40
-allocation 31 succeeded 0x54dc750
-allocation 32 succeeded 0x58ad060
-allocation 33 succeeded 0x5c7d970
-allocation 34 succeeded 0x604e280
-allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\bin3\mm 
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 test c_tests\bin3\an 
 a delve id
 a delved i
@@ -3022,7 +2966,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-193 ms for 1 iterations
+188 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3603,10 +3547,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 21
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 21
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 21
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 21
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 24
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 24
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 24
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 24
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -3696,48 +3640,34 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x68ca010
-allocation 1 succeeded 0x6c9b010
-allocation 2 succeeded 0x706c010
-allocation 3 succeeded 0x743d010
-allocation 4 succeeded 0x780e010
-allocation 5 succeeded 0x7bdf010
-allocation 6 succeeded 0x7fb0010
-allocation 7 succeeded 0x8381010
-allocation 8 succeeded 0x8752010
-allocation 9 succeeded 0x8b23010
-allocation 10 succeeded 0x4c0910
-allocation 11 succeeded 0x891220
-allocation 12 succeeded 0xc61b30
-allocation 13 succeeded 0x1032440
-allocation 14 succeeded 0x1402d50
-allocation 15 succeeded 0x17d3660
-allocation 16 succeeded 0x1ba3f70
-allocation 17 succeeded 0x1f74880
-allocation 18 succeeded 0x2345190
-allocation 19 succeeded 0x2715aa0
-allocation 20 succeeded 0x2ae63b0
-allocation 21 succeeded 0x2eb6cc0
-allocation 22 succeeded 0x32875d0
-allocation 23 succeeded 0x3657ee0
-allocation 24 succeeded 0x3a287f0
-allocation 25 succeeded 0x3df9100
-allocation 26 succeeded 0x41c9a10
-allocation 27 succeeded 0x459a320
-allocation 28 succeeded 0x496ac30
-allocation 29 succeeded 0x4d3b540
-allocation 30 succeeded 0x510be50
-allocation 31 succeeded 0x54dc760
-allocation 32 succeeded 0x58ad070
-allocation 33 succeeded 0x5c7d980
-allocation 34 succeeded 0x604e290
-allocation 35 succeeded 0x641eba0
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\binfast\mm 
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 test c_tests\binfast\an 
 a delve id
 a delved i
@@ -3784,7 +3714,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-197 ms for 1 iterations
+187 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3814,7 +3744,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   16.4141ms
+serial runtime:   16.01ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -3886,7 +3816,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.3992ms
+serial runtime:   4.1348ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -3958,7 +3888,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   3.0892ms
+serial runtime:   2.9324ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -4030,7 +3960,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.5198ms
+serial runtime:   2.3743ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -4110,10 +4040,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-268.343018 milliseconds
+254.253006 milliseconds
 test armos 
 starting
-264441 microseconds (-6)
+253580 microseconds (-6)
 1 iterations
 6493 moves
-Sat 11/23/2024 16:45:32.63 
+Sun 11/24/2024 11:31:35.21 

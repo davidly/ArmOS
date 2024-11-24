@@ -7,248 +7,123 @@
 #define LINT_ARGS
 
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-#define l 20 /* rows in A and resulting matrix C */
-#define m 20 /* columns in A and rows in B (must be identical) */
-#define n 20 /* columns in B and resulting matrix C */
+#define matrix_test( ftype, dim ) \
+  ftype A_##ftype##dim[ dim ][ dim ]; \
+  ftype B_##ftype##dim[ dim ][ dim ]; \
+  ftype C_##ftype##dim[ dim ][ dim ]; \
+  void fillA_##ftype##dim() \
+  { \
+    for ( int i = 0; i < dim; i++ ) \
+        for ( int j = 0; j < dim; j++ ) \
+            A_##ftype##dim[ i ][ j ] = (ftype) ( i + j + 2 ); \
+  } \
+  void fillB_##ftype##dim() \
+  { \
+    for ( int i = 0; i < dim; i++ ) \
+        for ( int j = 0; j < dim; j++ ) \
+            B_##ftype##dim[ i ][ j ] = (ftype) ( ( i + j + 2 ) / ( j + 1 ) ); \
+  } \
+  void fillC_##ftype##dim() \
+  { \
+    for ( int i = 0; i < dim; i++ ) \
+        for ( int j = 0; j < dim; j++ ) \
+            C_##ftype##dim[ i ][ j ] = (ftype) 0.0; \
+  } \
+  __attribute__((noinline)) void print_array_##ftype##dim( ftype a[dim][dim] ) \
+  { \
+    printf( "array: \n" ); \
+    for ( int i = 0; i < dim; i++ ) \
+    { \
+        for ( int j = 0; j < dim; j++ ) \
+            printf( " %lf", a[ i ][ j ] ); \
+        printf( "\n" ); \
+    } \
+  } \
+  void matmult_##ftype##dim() \
+  { \
+      for ( int i = 0; i < dim; i++ ) \
+          for ( int j = 0; j < dim; j++ ) \
+              for ( int k = 0; k < dim; k++ ) \
+                  C_##ftype##dim[ i ][ j ] += A_##ftype##dim[ i ][ k ] * B_##ftype##dim[ k ][ j ]; \
+  } \
+  ftype sum_##ftype##dim() \
+  { \
+    ftype result = 0.0; \
+    for ( int i = 0; i < dim; i++ ) \
+        for ( int j = 0; j < dim; j++ ) \
+            result += C_##ftype##dim[ i ][ j ]; \
+    return result; \
+  } \
+  ftype run_##ftype##dim() \
+  { \
+      fillA_##ftype##dim(); \
+      fillB_##ftype##dim(); \
+      fillC_##ftype##dim(); \
+      matmult_##ftype##dim(); \
+      /*print_array_##ftype##dim( A_##ftype##dim );*/ \
+      /*print_array_##ftype##dim( B_##ftype##dim );*/ \
+      /*print_array_##ftype##dim( C_##ftype##dim );*/ \
+      return sum_##ftype##dim(); \
+  }
 
-float Summ;
-float A[ l ] [ m ];
-float B[ m ] [ n ];
-float C[ l ] [ n ];
+matrix_test( float, 2 );  
+matrix_test( float, 3 );  
+matrix_test( float, 4 );  
+matrix_test( float, 5 );  
+matrix_test( float, 6 );  
+matrix_test( float, 7 );  
+matrix_test( float, 8 );
+matrix_test( float, 9 );
+matrix_test( float, 10 );
+matrix_test( float, 11 );
+matrix_test( float, 12 );
+matrix_test( float, 20 );  
 
-double d_Summ;
-double d_A[ l ] [ m ];
-double d_B[ m ] [ n ];
-double d_C[ l ] [ n ];
-
-void filla()
-{
-    int i, j;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < m; j++ )
-            A[ i ][ j ] = (float) ( i + j + 2 );
-}
-
-void d_filla()
-{
-    int i, j;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < m; j++ )
-            d_A[ i ][ j ] = (double) ( i + j + 2 );
-}
-
-void d_printa()
-{
-    int i, j;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < m; j++ )
-            printf( "d_A[%d][%d] = %lf\n", i, j, d_A[ i ][ j ] );
-}
-
-void fillb()
-{
-    int i, j;
-    for ( i = 0; i < m; i++ )
-        for ( j = 0; j < n; j++ )
-            B[ i ][ j ] = (float) ( ( i + j + 2 ) / ( j + 1 ) );
-}
-
-void d_fillb()
-{
-    int i, j;
-    for ( i = 0; i < m; i++ )
-        for ( j = 0; j < n; j++ )
-            d_B[ i ][ j ] = (double) ( ( i + j + 2 ) / ( j + 1 ) );
-}
-
-void d_printb()
-{
-    int i, j;
-    for ( i = 0; i < m; i++ )
-        for ( j = 0; j < n; j++ )
-            printf( "d_B[%d][%d] = %lf\n", i, j, d_B[i][j] );
-}
-
-void fillc()
-{
-    int i, j;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < n; j++ )
-            C[ i ][ j ] = (float) 0;
-}
-
-void d_fillc()
-{
-    int i, j;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < n; j++ )
-            d_C[ i ][ j ] = (double) 0;
-}
-
-void fast_fillc()
-{
-    float * p = (float *) C;
-    float * pend = ( (float *) C ) + ( l * n );
-
-    while ( p < pend )
-        *p++ = 0;
-}
-
-void matmult()
-{
-    int i, j, k;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < n; j++ )
-            for ( k = 0; k < m; k++ )
-            {
-                C[ i ][ j ] += A[ i ][ k ] * B[ k ][ j ];
-//                printf( "i %d j %d k %d, newc: %lf\n", i, j, k, C[ i ][ j ] );
-            }
-}
-
-void d_matmult()
-{
-    int i, j, k;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < n; j++ )
-            for ( k = 0; k < m; k++ )
-            {
-                d_C[ i ][ j ] += d_A[ i ][ k ] * d_B[ k ][ j ];
-//                printf( "i %d j %d k %d, A %lf, B %lf, newc: %lf\n", i, j, k, d_A[i][k], d_B[k][j], d_C[ i ][ j ] );
-            }
-}
-
-void fast_matmult()
-{
-    static int i, j, k;
-    static float * pC, * pA, * pAI, * pBJ, *pCI;
-
-    for ( i = 0; i < l; i++ )
-    {
-        pAI = (float *) & ( A[ i ][ 0 ] );
-        pCI = (float *) & ( C[ i ][ 0 ] );
-
-        for ( j = 0; j < n; j++ )
-        {
-            pC = (float *) & pCI[ j ];
-            pA = pAI;
-            pBJ = & ( B[ 0 ][ j ] );
-
-            for ( k = 0; k < m; k++ )
-            {
-                *pC += pA[ k ] * ( *pBJ );
-                pBJ += m;
-            }
-        }
-    }
-}
-
-void summit()
-{
-    int i, j;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < n; j++ )
-            Summ += C[ i ][ j ];
-}
-
-void d_summit()
-{
-    int i, j;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < n; j++ )
-            d_Summ += d_C[ i ][ j ];
-}
-
-void d_printC()
-{
-    int i, j;
-    for ( i = 0; i < l; i++ )
-        for ( j = 0; j < n; j++ )
-            printf( "i %d j %d val %lf\n", i, j, d_C[ i ][ j ] );
-}
-
-void fast_summit()
-{
-    float * p = (float *) C;
-    float * pend = ( (float *) C ) + ( l * n );
-
-    while ( p < pend )
-        Summ += *p++;
-}
-
-void matrix_test_3()
-{
-    const int size = 3;
-    static float f_sum_3 = 0.0;
-    static float f_A_3[ 3 ] [ 3 ];
-    static float f_B_3[ 3 ] [ 3 ];
-    static float f_C_3[ 3 ] [ 3 ];
-
-    for ( int i = 0; i < 3; i++ )
-        for ( int j = 0; j < 3; j++ )
-            f_A_3[ i ][ j ] = (float) ( i + j + 2 );
-printf( "after init A\n" );        
-
-    for ( int i = 0; i < 3; i++ )
-        for ( int j = 0; j < 3; j++ )
-            f_B_3[ i ][ j ] = (float) ( ( i + j + 2 ) / ( j + 1 ) );
-
-printf( "after init b\n" );
-    for ( int i = 0; i < 3; i++ )
-        for ( int j = 0; j < 3; j++ )
-            f_C_3[ i ][ j ] = (float) 0;
-
-printf( "after init c\n" );
-    for ( int i = 0; i < 3; i++ )
-        for ( int j = 0; j < 3; j++ )
-            for ( int k = 0; k < 3; k++ )
-                f_C_3[ i ][ j ] += f_A_3[ i ][ k ] * f_B_3[ k ][ j ];
-
-printf( "after mult\n" );            
-
-    for ( int i = 0; i < 3; i++ )
-        for ( int j = 0; j < 3; j++ )
-            f_sum_3 += f_C_3[ i ][ j ];
-
-printf( "after summ\n" );        
-
-    printf( "f_sum_3:   %f\n", f_sum_3 );
-
-    static double d_sum_3;
-    static double d_A_3[ 3 ] [ 3 ];
-    static double d_B_3[ 3 ] [ 3 ];
-    static double d_C_3[ 3 ] [ 3 ];
-
-}
+matrix_test( double, 2 );  
+matrix_test( double, 3 );  
+matrix_test( double, 4 );  
+matrix_test( double, 5 );  
+matrix_test( double, 6 );  
+matrix_test( double, 7 );  
+matrix_test( double, 8 );  
+matrix_test( double, 9 );  
+matrix_test( double, 10 );  
+matrix_test( double, 11 );  
+matrix_test( double, 12 );  
+matrix_test( double, 20 );  
 
 int main( int argc, char * argv[] )
 {
-    filla();
-    fillb();
+    printf( "matrix float 2: %f\n", run_float2() );
+    printf( "matrix float 3: %f\n", run_float3() );
+    printf( "matrix float 4: %f\n", run_float4() );
+    printf( "matrix float 5: %f\n", run_float5() );
+    printf( "matrix float 6: %f\n", run_float6() );
+    printf( "matrix float 7: %f\n", run_float7() );
+    printf( "matrix float 8: %f\n", run_float8() );
+    printf( "matrix float 9: %f\n", run_float9() );
+    printf( "matrix float 10: %f\n", run_float10() );
+    printf( "matrix float 11: %f\n", run_float11() );
+    printf( "matrix float 12: %f\n", run_float12() );
+    printf( "matrix float 20: %f\n", run_float20() );
 
-    Summ = 0;
-    fillc();
-    matmult();
-    summit();
-    printf( "slow summ is:   %f\n", Summ );
+    printf( "matrix double 2: %lf\n", run_double2() );
+    printf( "matrix double 3: %lf\n", run_double3() );
+    printf( "matrix double 4: %lf\n", run_double4() );
+    printf( "matrix double 5: %lf\n", run_double5() );
+    printf( "matrix double 6: %lf\n", run_double6() );
+    printf( "matrix double 7: %lf\n", run_double7() );
+    printf( "matrix double 8: %lf\n", run_double8() );
+    printf( "matrix double 9: %lf\n", run_double9() );
+    printf( "matrix double 10: %lf\n", run_double10() );
+    printf( "matrix double 11: %lf\n", run_double11() );
+    printf( "matrix double 12: %lf\n", run_double12() );
+    printf( "matrix double 20: %lf\n", run_double20() );
 
-    Summ = 0;
-    fast_fillc();
-    fast_matmult();
-    fast_summit();
-    printf( "fast summ is:   %f\n", Summ );
-
-    d_filla();
-    d_fillb();
-    d_Summ = 0;
-    d_fillc();
-    d_matmult();
-    d_summit();
-    printf( "double summ is: %lf\n", d_Summ );
-
-    //matrix_test_3();
-
+    printf( "matrix multiply test completed with great success\n" );
     return 0;
 }
 

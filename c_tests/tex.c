@@ -18,6 +18,10 @@ struct exceptional : std::exception
     const char * what() const noexcept { return "exceptional"; }
 };
 
+// without this, the call to operator new is optimized out
+
+#pragma GCC optimize("O0")
+
 int main()
 {
     printf( "top of tex\n" );
@@ -33,15 +37,21 @@ int main()
         printf( "caught exception %s\n", e.what() );
     }
 
+    int successful = 0;
+
     try
     {
         printf( "attempting large allocations\n" );
         for ( size_t i = 0; i < 1000; i++ )
         {
             int * myarray = new int[ 1000000 ];
-            printf( "allocation %zd succeeded %p\n", i, myarray );
+            if ( myarray )
+                successful++;
+            else
+                printf( "new failed but didn't raise!?!\n" );
+            //printf( "allocation %zd succeeded %p\n", i, myarray );
         }
-        printf( "large allocations succeeded?!?\n" );
+        printf( "large allocations succeeded?!? (%d)\n", successful );
     }
     catch ( exception & e )
     {
