@@ -79,6 +79,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     an          finds anagrams
     words.txt   list of English words used by various test programs including an
     ba          simplistic BASIC interpreter and compiler (targets 6502, 8080, 8086, x32, x64, arm32, arm64, RISC-V64)
+    mm          floating point matrix multiplication
     tp.bas      BASIC test program for BA
     mall.sh     builds the C/C++ test apps
     
