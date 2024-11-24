@@ -1,4 +1,4 @@
-Sat Nov 23 23:14:05 PST 2024
+Sun Nov 24 14:03:55 PST 2024
 c_tests/bin0/tcmp
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -2750,30 +2750,30 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 2, min 14, sec 12
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 7, min 14, sec 12
+before TZ is set: tz: '(null)', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 17, min 4, sec 2
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 22, min 4, sec 2
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 2, min 14, sec 12
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 7, min 14, sec 12
+before TZ is set: tz: '(null)', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 17, min 4, sec 2
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 22, min 4, sec 2
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 2, min 14, sec 12
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 7, min 14, sec 12
+before TZ is set: tz: '(null)', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 17, min 4, sec 2
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 22, min 4, sec 2
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 2, min 14, sec 12
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 7, min 14, sec 12
+before TZ is set: tz: '(null)', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 17, min 4, sec 2
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 22, min 4, sec 2
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 2, min 14, sec 12
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 23, min 14, sec 12
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 7, min 14, sec 12
+before TZ is set: tz: '(null)', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 17, min 4, sec 2
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 14, min 4, sec 2
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 22, min 4, sec 2
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/bin1/tm
@@ -3274,26 +3274,6 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x2ccb010
-allocation 1 succeeded 0x309c010
-allocation 2 succeeded 0x346d010
-allocation 3 succeeded 0x383e010
-allocation 4 succeeded 0x3c0f010
-allocation 5 succeeded 0x3fe0010
-allocation 6 succeeded 0x43b1010
-allocation 7 succeeded 0x4782010
-allocation 8 succeeded 0x4b53010
-allocation 9 succeeded 0x4f24010
-allocation 10 succeeded 0x4c0950
-allocation 11 succeeded 0x891260
-allocation 12 succeeded 0xc61b70
-allocation 13 succeeded 0x1032480
-allocation 14 succeeded 0x1402d90
-allocation 15 succeeded 0x17d36a0
-allocation 16 succeeded 0x1ba3fb0
-allocation 17 succeeded 0x1f748c0
-allocation 18 succeeded 0x23451d0
-allocation 19 succeeded 0x2715ae0
 caught a standard execption: std::bad_alloc
 leaving main
 c_tests/bin1/tex
@@ -3301,26 +3281,6 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x2cca010
-allocation 1 succeeded 0x309b010
-allocation 2 succeeded 0x346c010
-allocation 3 succeeded 0x383d010
-allocation 4 succeeded 0x3c0e010
-allocation 5 succeeded 0x3fdf010
-allocation 6 succeeded 0x43b0010
-allocation 7 succeeded 0x4781010
-allocation 8 succeeded 0x4b52010
-allocation 9 succeeded 0x4f23010
-allocation 10 succeeded 0x4bf930
-allocation 11 succeeded 0x890240
-allocation 12 succeeded 0xc60b50
-allocation 13 succeeded 0x1031460
-allocation 14 succeeded 0x1401d70
-allocation 15 succeeded 0x17d2680
-allocation 16 succeeded 0x1ba2f90
-allocation 17 succeeded 0x1f738a0
-allocation 18 succeeded 0x23441b0
-allocation 19 succeeded 0x2714ac0
 caught a standard execption: std::bad_alloc
 leaving main
 c_tests/bin2/tex
@@ -3328,26 +3288,6 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x2cca010
-allocation 1 succeeded 0x309b010
-allocation 2 succeeded 0x346c010
-allocation 3 succeeded 0x383d010
-allocation 4 succeeded 0x3c0e010
-allocation 5 succeeded 0x3fdf010
-allocation 6 succeeded 0x43b0010
-allocation 7 succeeded 0x4781010
-allocation 8 succeeded 0x4b52010
-allocation 9 succeeded 0x4f23010
-allocation 10 succeeded 0x4bf930
-allocation 11 succeeded 0x890240
-allocation 12 succeeded 0xc60b50
-allocation 13 succeeded 0x1031460
-allocation 14 succeeded 0x1401d70
-allocation 15 succeeded 0x17d2680
-allocation 16 succeeded 0x1ba2f90
-allocation 17 succeeded 0x1f738a0
-allocation 18 succeeded 0x23441b0
-allocation 19 succeeded 0x2714ac0
 caught a standard execption: std::bad_alloc
 leaving main
 c_tests/bin3/tex
@@ -3355,26 +3295,6 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x2cca010
-allocation 1 succeeded 0x309b010
-allocation 2 succeeded 0x346c010
-allocation 3 succeeded 0x383d010
-allocation 4 succeeded 0x3c0e010
-allocation 5 succeeded 0x3fdf010
-allocation 6 succeeded 0x43b0010
-allocation 7 succeeded 0x4781010
-allocation 8 succeeded 0x4b52010
-allocation 9 succeeded 0x4f23010
-allocation 10 succeeded 0x4bf930
-allocation 11 succeeded 0x890240
-allocation 12 succeeded 0xc60b50
-allocation 13 succeeded 0x1031460
-allocation 14 succeeded 0x1401d70
-allocation 15 succeeded 0x17d2680
-allocation 16 succeeded 0x1ba2f90
-allocation 17 succeeded 0x1f738a0
-allocation 18 succeeded 0x23441b0
-allocation 19 succeeded 0x2714ac0
 caught a standard execption: std::bad_alloc
 leaving main
 c_tests/binfast/tex
@@ -3382,48 +3302,138 @@ top of tex
 I am unwound, x should be 44: 44
 caught exception exceptional
 attempting large allocations
-allocation 0 succeeded 0x2cca010
-allocation 1 succeeded 0x309b010
-allocation 2 succeeded 0x346c010
-allocation 3 succeeded 0x383d010
-allocation 4 succeeded 0x3c0e010
-allocation 5 succeeded 0x3fdf010
-allocation 6 succeeded 0x43b0010
-allocation 7 succeeded 0x4781010
-allocation 8 succeeded 0x4b52010
-allocation 9 succeeded 0x4f23010
-allocation 10 succeeded 0x4bf940
-allocation 11 succeeded 0x890250
-allocation 12 succeeded 0xc60b60
-allocation 13 succeeded 0x1031470
-allocation 14 succeeded 0x1401d80
-allocation 15 succeeded 0x17d2690
-allocation 16 succeeded 0x1ba2fa0
-allocation 17 succeeded 0x1f738b0
-allocation 18 succeeded 0x23441c0
-allocation 19 succeeded 0x2714ad0
 caught a standard execption: std::bad_alloc
 leaving main
 c_tests/bin0/mm
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 c_tests/bin1/mm
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 c_tests/bin2/mm
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 c_tests/bin3/mm
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 c_tests/binfast/mm
-slow summ is:   465880.000000
-fast summ is:   465880.000000
-double summ is: 465880.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 20: 465880.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 20: 465880.000000
+matrix multiply test completed with great success
 c_tests/bin0/an david lee
 a delve id
 a delved i
@@ -3646,7 +3656,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-1,042 ms for 1 iterations
+1,047 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -3673,7 +3683,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-204 ms for 1 iterations
+202 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -3700,7 +3710,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-182 ms for 1 iterations
+184 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -3727,7 +3737,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-201 ms for 1 iterations
+204 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -3754,7 +3764,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-203 ms for 1 iterations
+204 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -3796,19 +3806,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   16.055964ms
+serial runtime:   16.245904ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   4.075591ms
+serial runtime:   3.990434ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   2.791982ms
+serial runtime:   2.819209ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.3111ms
+serial runtime:   2.281584ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -4067,4 +4077,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Sat Nov 23 23:14:24 PST 2024
+Sun Nov 24 14:04:14 PST 2024
