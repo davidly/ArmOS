@@ -10,7 +10,7 @@ date_time=$(date)
 echo "$date_time" >$outputfile
 
 for arg in tcmp e printint sieve simple tmuldiv tpi ts tarray tbits trw tmmap tstr \
-           fileops ttime tm glob tap tsimplef tphi tf ttt td terrno t_setjmp tex;
+           fileops ttime tm glob tap tsimplef tphi tf ttt td terrno t_setjmp tex mm;
 do
     echo $arg
     for opt in 0 1 2 3 fast;

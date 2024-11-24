@@ -1,4 +1,4 @@
-Fri 11/22/2024  8:30:59.87 
+Sat 11/23/2024 16:45:02.59 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 2
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 2
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 2
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 2
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 5
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 5
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 5
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 5
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -686,6 +686,10 @@ allocation 34 succeeded 0x604f2a0
 allocation 35 succeeded 0x641fbb0
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\bin0\mm 
+slow summ is:   465880.000000
+fast summ is:   465880.000000
+double summ is: 465880.000000
 test c_tests\bin0\an 
 a delve id
 a delved i
@@ -732,7 +736,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-815 ms for 1 iterations
+912 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1313,10 +1317,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 7
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 7
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 7
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 7
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 10
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 10
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 10
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 10
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1444,6 +1448,10 @@ allocation 34 succeeded 0x604e280
 allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\bin1\mm 
+slow summ is:   465880.000000
+fast summ is:   465880.000000
+double summ is: 465880.000000
 test c_tests\bin1\an 
 a delve id
 a delved i
@@ -1490,7 +1498,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-186 ms for 1 iterations
+193 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2071,10 +2079,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 11
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 11
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 11
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 11
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 14
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 14
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 14
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 14
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2202,6 +2210,10 @@ allocation 34 succeeded 0x604e280
 allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\bin2\mm 
+slow summ is:   465880.000000
+fast summ is:   465880.000000
+double summ is: 465880.000000
 test c_tests\bin2\an 
 a delve id
 a delved i
@@ -2248,7 +2260,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-177 ms for 1 iterations
+181 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2829,10 +2841,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 15
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 15
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 15
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 15
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 18
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 18
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 18
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 18
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -2960,6 +2972,10 @@ allocation 34 succeeded 0x604e280
 allocation 35 succeeded 0x641eb90
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\bin3\mm 
+slow summ is:   465880.000000
+fast summ is:   465880.000000
+double summ is: 465880.000000
 test c_tests\bin3\an 
 a delve id
 a delved i
@@ -3006,7 +3022,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-189 ms for 1 iterations
+193 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3587,10 +3603,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 22, hour 8, min 31, sec 18
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 22, hour 11, min 31, sec 18
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 22, hour 8, min 31, sec 18
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 22, hour 16, min 31, sec 18
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 23, hour 16, min 45, sec 21
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 23, hour 19, min 45, sec 21
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 23, hour 16, min 45, sec 21
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 0, min 45, sec 21
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -3718,6 +3734,10 @@ allocation 34 succeeded 0x604e290
 allocation 35 succeeded 0x641eba0
 caught a standard execption: std::bad_alloc
 leaving main
+test c_tests\binfast\mm 
+slow summ is:   465880.000000
+fast summ is:   465880.000000
+double summ is: 465880.000000
 test c_tests\binfast\an 
 a delve id
 a delved i
@@ -3764,7 +3784,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-187 ms for 1 iterations
+197 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3794,7 +3814,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   15.7238ms
+serial runtime:   16.4141ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -3866,7 +3886,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.2668ms
+serial runtime:   4.3992ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -3938,7 +3958,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   3.0386ms
+serial runtime:   3.0892ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -4010,7 +4030,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.3594ms
+serial runtime:   2.5198ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -4090,10 +4110,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-274.028015 milliseconds
+268.343018 milliseconds
 test armos 
 starting
-262053 microseconds (-6)
+264441 microseconds (-6)
 1 iterations
 6493 moves
-Fri 11/22/2024  8:31:29.31 
+Sat 11/23/2024 16:45:32.63 
