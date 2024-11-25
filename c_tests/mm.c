@@ -1,8 +1,10 @@
 /* BYTE magazine October 1982. Jerry Pournelle. */
-/* ported to C and double test cases by David Lee */
+/* ported to C and added test cases by David Lee */
 /* various bugs not found because dimensions are square fixed by David Lee */
-/* expected result: 4.65880E+05 */
-/* normal version runs in 13 seconds on the original PC and 8.9 seconds with the "fast" versions */
+/* expected result for 20/20/20: 4.65880E+05 */
+/* 20/20/20 float version runs in 13 seconds on the original PC */
+
+/* why so many matrix size variants? g++ produces different code to optimize for each ase */
 
 #define LINT_ARGS
 
@@ -44,6 +46,7 @@
   } \
   void matmult_##ftype##dim() \
   { \
+      /* this debugging line causes the compiler to optimize code differently (tbl/zip)! syscall( 0x2002, 1 ); */ \
       for ( int i = 0; i < dim; i++ ) \
           for ( int j = 0; j < dim; j++ ) \
               for ( int k = 0; k < dim; k++ ) \
