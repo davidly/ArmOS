@@ -36,7 +36,7 @@
         uint32_t c_oflag;     /* output mode flags */
         uint32_t c_cflag;     /* control mode flags */
         uint32_t c_lflag;     /* local mode flags */
-        uint8_t c_line;          /* line discipline */
+        uint8_t c_line;       /* line discipline */
         uint8_t c_cc[local_KERNEL_NCCS]; /* control characters */
     };
 #else
@@ -2232,7 +2232,7 @@ void arm64_invoke_svc( Arm64 & cpu )
             tracer.Trace( "  ioctl fd %d, request %lx\n", fd, request );
             struct local_kernel_termios * pt = (struct local_kernel_termios *) cpu.getmem( cpu.regs[ 2 ] );
 
-            if ( 0 == fd ) // stdin
+            if ( 0 == fd || 1 == fd || 2 == fd ) // stdin, stdout, stderr
             {
 #ifdef _WIN32
                 if ( 0x5401 == request ) // TCGETS
