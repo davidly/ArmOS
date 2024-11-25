@@ -3636,24 +3636,24 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
                 uint64_t result = 0;
-                uint64_t val = val_reg_or_zr( n );
+                uint64_t nval = val_reg_or_zr( n );
 
                 if ( 4 == bits23_21 ) // csinv / csneg
                 {
                     if ( bit11 )
                         unhandled();
                     uint64_t m = opbits( 16, 5 );
+                    uint64_t mval = val_reg_or_zr( m );
                     uint64_t cond = opbits( 12, 4 );
                     if ( check_conditional( cond ) )
                         result = val_reg_or_zr( n );
                     else
-                        result = bit10 ? ( (uint64_t) ( - (int64_t) val_reg_or_zr( m ) ) ) : ~ ( val_reg_or_zr( m ) );
+                        result = bit10 ? ( (uint64_t) ( - (int64_t) mval ) ) : ~ ( mval );
                 }
                 else if ( 6 == bits23_21 )
                 {
                     if ( 0 == bits15_10 ) // rbit
                     {
-                        uint64_t nval = val_reg_or_zr( n );
                         if ( xregs )
                         {
                             for ( uint64_t bit = 0; bit < 64; bit++ )
@@ -3678,17 +3678,16 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         for ( uint64_t c = 0; c < containers; c++ )
                         {
                             //tracer.Trace( "in rev top level loop, c: %llu, container_size %llu\n", c, container_size );
-                            uint64_t container = get_elem_bits( val, c, container_size );
+                            uint64_t container = get_elem_bits( nval, c, container_size );
                             result |= get_elem_bits( reverse_bytes( container, container_size ), c, container_size );
                         }
-                        //tracer.Trace( "val: %llx, result %llx\n", val, result );
                     }
                     else if ( 4 == bits15_10 ) // clz
                     {
                         int64_t cur = ( xregs ? 63 : 31 );
                         while ( cur >= 0 )
                         {
-                            if ( ! ( val & ( 1ull << cur ) ) )
+                            if ( ! ( nval & ( 1ull << cur ) ) )
                             {
                                 result++;
                                 cur--;
@@ -3893,8 +3892,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t op2 = 0;
                         if ( 0 == o2 ) // register
                         {
-                            uint64_t m = ( ( op >> 16 ) & 0x1f );
-                            op2 = regs[ m ];
+                            uint64_t m = opbits( 16, 5 );
+                            op2 = val_reg_or_zr( m );
                         }
                         else if ( 2 == o2 ) // immediate
                             op2 = ( ( op >> 16 ) & 0x1f );
@@ -4396,8 +4395,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
                     uint64_t n = ( ( op >> 5 ) & 0x1f );
                     uint64_t d = ( op & 0x1f );
-                    uint64_t nvalue = regs[ n ];
-    
+                    uint64_t nvalue = val_reg_or_zr( n );
                     regs[ d ] = nvalue ^ op2;
                     if ( !xregs )
                         regs[ d ] &= 0xffffffff;
@@ -4453,11 +4451,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t N_immr_imms = opbits( 10, 13 );
                     uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
                     uint64_t n = opbits( 5, 5 );
+                    uint64_t nval = val_reg_or_zr( n );
                     uint64_t d = opbits( 0, 5 );
-                    uint64_t result = ( regs[ n ] & op2 );
-
-                    if ( 31 != d )
-                        regs[ d ] = result;
+                    regs[ d ] = ( nval & op2 );
                 }
                 break;
             }
@@ -4483,8 +4479,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
             }
             case 0xd4: // SVC
             {
-                uint8_t bit23 = ( op >> 23 ) & 1;
-                uint8_t hw = ( op >> 21 ) & 3;
+                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t hw = opbits( 21, 2 );
 
                 if ( ( 0 == bit23 ) && ( 0 == hw ) )
                 {
@@ -4495,6 +4491,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
+                else
+                    unhandled();
                 break;
             }
             case 0xd5: // MSR / MRS
@@ -5947,6 +5945,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         regs[ n ] = address;
                     }
                 }
+#if 0
                 else if ( 0 == opcode && 0 == opbits( 12, 9 ) ) // LD4 multiple structures
                 {
                     uint64_t datasize = 64ull << Q;
@@ -5980,6 +5979,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         unhandled();
                     trace_vregs();
                 }
+#endif
                 else
                     unhandled();
                 break;
@@ -5999,16 +5999,14 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 if ( 0x1f != t2 )
                     unhandled();
 
-                if ( 31 == t )
-                    break;
-
                 if ( 0 == L ) // stxr, stlr
                 {
                     uint64_t bit30 = opbits( 30, 1 );
+                    uint64_t tval = val_reg_or_zr( t );
                     if ( bit30 )
-                        setui64( regs[ n ], regs[ t ] );
+                        setui64( regs[ n ], tval );
                     else
-                        setui32( regs[ n ], regs[ t ] & 0xffffffff );
+                        setui32( regs[ n ], tval & 0xffffffff );
 
                     if ( !bit23 && 31 != s ) // stxr
                         regs[ s ] = 0; // success
@@ -6018,10 +6016,13 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( 0x1f != s )
                         unhandled();
 
-                    if ( 0xc8 == hi8 )
-                        regs[ t ] = getui64( regs[ n ] );
-                    else
-                        regs[ t ] = getui32( regs[ n ] );
+                    if ( 31 != t )
+                    {
+                        if ( 0xc8 == hi8 )
+                            regs[ t ] = getui64( regs[ n ] );
+                        else
+                            regs[ t ] = getui32( regs[ n ] );
+                    }
                 }
                 break;
             }
@@ -6260,9 +6261,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     int64_t offset = extend_reg( m, option, shift );
                     address += offset;
 
-                    //tracer.Trace( "offset %llx, m %llx, option %llx, shift %llx\n", offset, m, option, shift );
-                    //tracer.Trace( "  reading from address %#llx\n", address );
-
                     if ( 0x38 == hi8 )
                         regs[ t ] = getui8( address );
                     else if ( 0x78 == hi8 )
@@ -6352,7 +6350,10 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     {
                         int64_t offset = 0;
                         if ( 3 == option )
-                            offset = ( ( mIsX ? regs[ m ] : ( regs[ m ] & 0xffffffff ) ) << shift );
+                        {
+                            uint64_t mval = regs[ m ];
+                            offset = ( ( mIsX ? mval : ( mval & 0xffffffff ) ) << shift );
+                        }
                         else
                             offset = extend_reg( m, option, shift );
                         address += offset;
