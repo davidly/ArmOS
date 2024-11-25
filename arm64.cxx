@@ -2187,9 +2187,9 @@ void Arm64::trace_state()
                         if ( 3 == ftype && 6 == opcode )
                             tracer.Trace( "fmov x%llu, h%llu\n", d, n );
                         else if ( 3 == ftype && 7 == opcode )
-                            tracer.Trace( "fmov h%llu, x%llu\n", d, n );
+                            tracer.Trace( "fmov h%llu, %s\n", d, reg_or_zr( n, false ) );
                         else if ( 1 == ftype && 7 == opcode )
-                            tracer.Trace( "fmov d%llu, x%llu\n", d, n );
+                            tracer.Trace( "fmov d%llu, %s\n", d, reg_or_zr( n, true ) );
                         else if ( 1 == ftype && 6 == opcode )
                             tracer.Trace( "fmov x%llu, d%llu\n", d, n );
                         else
@@ -5481,6 +5481,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 if ( ( 0x180 == ( bits18_10 & 0x1bf ) ) && ( 1 == bit21 ) && ( 0 == ( rmode & 2 ) ) ) // fmov reg, vreg  OR mov vreg, reg
                 {
                     uint64_t opcode = opbits( 16, 3 );
+                    uint64_t nval = val_reg_or_zr( n );
                     if ( 0 == sf )
                     {
                         if ( 0 != rmode )
@@ -5493,7 +5494,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             else if ( 7 == opcode )
                             {
                                 zero_vreg( d );
-                                vregs[ d ].h = (uint16_t) regs[ n ];
+                                vregs[ d ].h = (uint16_t) nval;
                             }
                             else
                                 unhandled();
@@ -5503,7 +5504,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             if ( 7 == opcode )
                             {
                                 zero_vreg( d );
-                                memcpy( vreg_ptr( d, 0 ), & regs[ n ], 4 );
+                                memcpy( vreg_ptr( d, 0 ), & nval, 4 );
                             }
                             else if ( 6 == opcode )
                             {
@@ -5525,12 +5526,12 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             else if ( 3 == ftype && 7 == opcode )
                             {
                                 zero_vreg( d );
-                                memcpy( vreg_ptr( d, 0 ), & regs[ n ], 2 );
+                                memcpy( vreg_ptr( d, 0 ), & nval, 2 );
                             }
                             else if ( 1 == ftype && 7 == opcode )
                             {
                                 zero_vreg( d );
-                                memcpy( vreg_ptr( d, 0 ), & regs[ n ], 8 );
+                                memcpy( vreg_ptr( d, 0 ), & nval, 8 );
                             }
                             else if ( 1 == ftype && 6 == opcode )
                                 memcpy( & regs[ d ], vreg_ptr( n, 0 ), 8 );
@@ -5540,7 +5541,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         else
                         {
                             if ( 2 == ftype && 7 == opcode )
-                                memcpy( vreg_ptr( d, 8 ), & regs[ n ], 8 );
+                                memcpy( vreg_ptr( d, 8 ), & nval, 8 );
                             else if ( 2 == ftype && 6 == opcode )
                                 memcpy( & regs[ d ], vreg_ptr( n, 8 ), 8 );
                             else
