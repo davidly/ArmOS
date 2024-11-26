@@ -46,6 +46,8 @@ bool Arm64::trace_instructions( bool t )
     return prev;
 } //trace_instructions
 
+void Arm64::end_emulation() { g_State |= stateEndEmulation; }
+
 uint64_t count_bits( uint64_t x )
 {
     uint64_t count = 0;
@@ -75,8 +77,7 @@ uint64_t gen_bitmask( uint64_t n )
   if ( 0 == n )
       return 0;
 
-  uint64_t full = ~ 0ull;
-  return full >> ( 64ull - n );
+  return ( ~0ull ) >> ( 64ull - n );
 } //gen_bitmask
 
 uint64_t get_elem_bits( uint64_t val, uint64_t c, uint64_t container_size )
@@ -111,7 +112,7 @@ uint64_t get_bits( uint64_t x, uint64_t lowbit, uint64_t len )
 uint64_t one_bits( uint64_t bits )
 {
     if ( 64 == bits )
-        return ~ (uint64_t) 0;
+        return ~ 0ull;
 
     return ( ( 1ull << bits ) - 1 );
 } //one_bits
@@ -135,9 +136,10 @@ int64_t sign_extend( uint64_t x, uint64_t high_bit )
     return ( x ^ m ) - m;
 } //sign_extend
 
-uint32_t sign_extend32( uint32_t x, uint32_t bits )
+uint32_t sign_extend32( uint32_t x, uint32_t high_bit )
 {
-    const int32_t m = ( (uint32_t) 1 ) << bits;
+    x &= ( 1u << ( high_bit + 1 ) ) - 1; // clear bits above the high bit since they may contain noise
+    const int32_t m = ( (uint32_t) 1 ) << high_bit;
     return ( x ^ m ) - m;
 } //sign_extend32
 
@@ -185,13 +187,12 @@ uint64_t low_bits( uint64_t x, uint64_t num )
 
 const char * Arm64::render_flags()
 {
-    static char ac[ 5 ];
+    static char ac[ 5 ] = {0};
 
     ac[ 0 ] = fN ? 'N' : 'n';
     ac[ 1 ] = fZ ? 'Z' : 'z';
     ac[ 2 ] = fC ? 'C' : 'c';
     ac[ 3 ] = fV ? 'V' : 'v';
-    ac[ 4 ] = 0;
 
     return ac;
 } //render_flags
@@ -432,8 +433,6 @@ uint64_t Arm64::extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift )
     x <<= shift;
     return x;
 } //extend_reg
-
-void Arm64::end_emulation() { g_State |= stateEndEmulation; }
 
 const char * shift_type( uint64_t x )
 {
@@ -785,7 +784,7 @@ void Arm64::trace_state()
 
             bool isn = ( 0 != bit21 );
             char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
-            if ( 0 == bit15 )
+            if ( !bit15 )
                 tracer.Trace( "%s %c%llu, %c%llu, %c%llu, %c%llu\n", isn ? "fnmadd" : "fmadd", t, d, t, n, t, m, t, a );
             else
                 tracer.Trace( "%s %c%llu, %c%llu, %c%llu, %c%llu\n", isn ? "fnmsub" : "fmsub", t, d, t, n, t, m, t, a );
@@ -806,7 +805,7 @@ void Arm64::trace_state()
             bool preIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 3 == bits11_10 ) );
             bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bits11_10 ) );
             bool signedUnscaledOffset = ( ( 0xc == ( hi8 & 0xf ) ) && ( 0 == bits11_10 ) );
-            bool shiftExtend = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bit21 ) && ( 2 == bits11_10 ) );
+            bool shiftExtend = ( ( 0xc == ( hi8 & 0xf ) ) && ( bit21 ) && ( 2 == bits11_10 ) );
             uint64_t imm12 = opbits( 10, 12 );
             int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
             uint64_t size = opbits( 30, 2 );
@@ -922,9 +921,9 @@ void Arm64::trace_state()
             uint64_t L = opbits( 22, 1 );
             uint64_t bit23 = opbits( 23, 1 );
 
-            bool preIndex = ( ( 0xd == ( hi8 & 0xf ) ) && ( 1 == bit23 ) );
-            bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bit23 ) );
-            bool signedOffset = ( ( 0xd == ( hi8 & 0xf ) ) && ( 0 == bit23 ) );
+            bool preIndex = ( ( 0xd == ( hi8 & 0xf ) ) && bit23 );
+            bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && bit23 );
+            bool signedOffset = ( ( 0xd == ( hi8 & 0xf ) ) && !bit23 );
 
             uint64_t scale = 2 + opc;
             int64_t offset = sign_extend( imm7, 6 ) << scale;
@@ -978,7 +977,7 @@ void Arm64::trace_state()
 
             if ( 0 == bits23_19 )
             {
-                if ( ( 0x2f == hi8 || 0x6f == hi8 ) && 0 == bit11 && 1 == bit10 &&
+                if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 &&
                      ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xf ) ) ) ) // mvni
                 {
                     if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
@@ -1004,7 +1003,7 @@ void Arm64::trace_state()
                 }
                 else if ( 0 == bit12 || ( 0xc == ( cmode & 0xe ) ) ) // movi
                 {
-                    if ( 0 == bit29 ) // movi
+                    if ( !bit29) // movi
                     {
                         if ( 0xe == cmode )
                         {
@@ -1210,7 +1209,6 @@ void Arm64::trace_state()
                     uint64_t sz = opbits( 22, 1 );
                     uint64_t L = opbits( 21, 1 );
                     uint64_t H = opbits( 11, 1 );
-
                     uint64_t index = ( !sz ) ? ( ( H << 1 ) | L ) : H;
                     const char * pT = ( Q && sz ) ? "2D" : ( !Q && !sz ) ? "2S" : ( Q && !sz ) ? "4S" : "?";
                     tracer.Trace( "fmul v%llu.%s, v%llu.%s, v%llu.%c[%llu]\n", d, pT, n, pT, m, sz ? 'D' : 'S', index );
@@ -1422,7 +1420,7 @@ void Arm64::trace_state()
             uint64_t m = opbits( 8, 4 );
             uint64_t t = opbits( 0, 5 );
 
-            if ( 1 == l ) // MRS <Xt>, (<systemreg>|S<op0>_<op1>_<Cn>_<Cm>_<op2>).   read system register
+            if ( l ) // MRS <Xt>, (<systemreg>|S<op0>_<op1>_<Cn>_<Cm>_<op2>).   read system register
             {
                 if ( ( 3 == op0 ) && ( 14 == n ) && ( 3 == op1 ) && ( 0 == m ) && ( 2 == op2 ) ) // cntvct_el0 counter-timer virtual count register
                     tracer.Trace( "mrs x%llu, cntvct_el0\n", t );
@@ -1758,7 +1756,7 @@ void Arm64::trace_state()
             bool xregs = ( 0 != ( hi8 & 0x80 ) );
             uint64_t bit23 = opbits( 23, 1 );
 
-            if ( 1 == bit23 ) // movz xd, imm16
+            if ( bit23 ) // movz xd, imm16
             {
                 uint64_t d = opbits( 0, 5 );
                 uint64_t imm16 = opbits( 5, 16 );
@@ -1791,7 +1789,7 @@ void Arm64::trace_state()
             uint8_t bit23 = ( op >> 23 ) & 1;
             uint8_t hw = ( op >> 21 ) & 3;
 
-            if ( ( 0 == bit23 ) && ( 0 == hw ) )
+            if ( !bit23 && ( 0 == hw ) )
             {
                 uint64_t imm16 = ( op >> 5 ) & 0xffff;
                 uint8_t op2 = (uint8_t) ( ( op >> 2 ) & 7 );
@@ -1836,7 +1834,7 @@ void Arm64::trace_state()
                 tracer.Trace( "ushl, v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             else if ( bit21 && 8 == bits20_17 && 0xe == opcode7 ) // UADDLV <V><d>, <Vn>.<T>
                 tracer.Trace( "uaddlv v%llu, v%llu.%s\n", d, n, pT );
-            else if ( 0x6e == hi8 && 0 == bits23_21 && 0 == bit15 && 1 == bit10 )
+            else if ( 0x6e == hi8 && 0 == bits23_21 && !bit15 && bit10 )
             {
                 uint64_t imm5 = opbits( 16, 5 );
                 uint64_t imm4 = opbits( 11, 5 );
@@ -2055,7 +2053,7 @@ void Arm64::trace_state()
                 const char * pT = ( 0 == ty ) ? "2s" : ( 1 == ty ) ? "4s" : ( 3 == ty ) ? "2d" : "?";
                 tracer.Trace( "scvtf v%llu.%s, v%llu.%s\n", d, pT, n, pT );
             }
-            else if ( 0x4e == hi8 && 0 == bits23_21 && 0 == bit15 && 3 == bits14_11 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
+            else if ( 0x4e == hi8 && 0 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
             {
                 char T = '?';
                 uint64_t index = 0;
@@ -2083,7 +2081,7 @@ void Arm64::trace_state()
                     unhandled();
                 tracer.Trace( "ins v%llu.%c[%llu], %s\n", d, T, index, reg_or_zr( n, ( 4 == ( imm5 & 0xf ) ) ) );
             }
-            else if ( 0 == bit21 && 0 == bit15 && ( 7 == bits14_11 || 5 == bits14_11 ) && 1 == bit10 )
+            else if ( !bit21 && !bit15 && ( 7 == bits14_11 || 5 == bits14_11 ) && bit10 )
             {
                 // UMOV <Wd>, <Vn>.<Ts>[<index>]    ;    UMOV <Xd>, <Vn>.D[<index>]    ;     SMOV <Wd>, <Vn>.<Ts>[<index>]    ;    SMOV <Xd>, <Vn>.<Ts>[<index>]
                 uint64_t size = lowest_set_bit_nz( imm5 & ( ( 7 == bits14_11 ) ? 0xf : 7 ) );
@@ -2103,7 +2101,7 @@ void Arm64::trace_state()
                     unhandled();
                 tracer.Trace( "%cmov %s, v%llu.%s[%llu]\n", ( 7 == bits14_11 ) ? 'u' : 's', reg_or_zr( d, Q ), n, pT, index );
             }
-            else if ( 0 == bit21 && 0 == bit15 && ( 0x3 == bits14_11 || 0xb == bits14_11 ) && 0 == bit10 ) // 
+            else if ( !bit21 && !bit15 && ( 0x3 == bits14_11 || 0xb == bits14_11 ) && !bit10 ) // 
             {
                 uint64_t size = opbits( 22, 2 );
                 uint64_t part = opbits( 14, 1 );
@@ -2111,40 +2109,40 @@ void Arm64::trace_state()
                 const char * pT = get_ld1_vector_T( size, Q );
                 tracer.Trace( "uzp%c v%llu.%s, v%llu.%s, v%llu.%s\n", ( 1 == part ) ? '2' : '1', d, pT, n, pT, m, pT );
             }
-            else if ( 1 == bits23_21 && 0 == bit15 && 3 == bits14_11 && 1 == bit10 ) // AND <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            else if ( 1 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // AND <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = imm5;
                 const char * pT = ( 0 == Q ) ? "8B" : "16B";
                 tracer.Trace( "and v%llu.%s, v%llu.%s v%llu.%s\n", d, pT, n, pT, m, pT );
             }
-            else if ( 5 == bits23_21 && 0 == bit15 && 3 == bits14_11 && 1 == bit10 ) // ORR <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            else if ( 5 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // ORR <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = imm5;
                 const char * pT = ( 0 == Q ) ? "8B" : "16B";
                 tracer.Trace( "orr v%llu.%s, v%llu.%s v%llu.%s\n", d, pT, n, pT, m, pT );
             }
-            else if ( 1 == bit21 && 1 == bit15 && 3 == bits14_11 && 0 == bit10 && 0 == bits20_16 )  // CMEQ <Vd>.<T>, <Vn>.<T>, #0
+            else if ( bit21 && bit15 && 3 == bits14_11 && !bit10 && 0 == bits20_16 )  // CMEQ <Vd>.<T>, <Vn>.<T>, #0
             {
                 uint64_t size = opbits( 22, 2 );
                 tracer.Trace( "cmeq v%llu.%s, v%llu.%s, #0\n", d, get_ld1_vector_T( size, Q ), n, get_ld1_vector_T( size, Q ) );
             }
-            else if ( 1 == bit21 && 0 == bit15 && 6 == bits14_11 && 1 == bit10 ) // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            else if ( bit21 && !bit15 && 6 == bits14_11 && bit10 ) // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t size = opbits( 22, 2 );
                 const char * pT = get_ld1_vector_T( size, Q );
                 tracer.Trace( "cmgt v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             }
-            else if ( 1 == bit21 && 1 == bit15 && 7 == bits14_11 && 1 == bit10 ) // ADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            else if ( bit21 && bit15 && 7 == bits14_11 && bit10 ) // ADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t size = opbits( 22, 2 );
                 const char * pT = get_ld1_vector_T( size, Q );
                 tracer.Trace( "addp v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             }
-            else if ( 0 == bits23_21 && 0 == bit15 && 1 == bits14_11 && 1 == bit10 ) // DUP <Vd>.<T>, <R><n>
+            else if ( 0 == bits23_21 && !bit15 && 1 == bits14_11 && bit10 ) // DUP <Vd>.<T>, <R><n>
                 tracer.Trace( "dup v%llu.%s, %s\n", d, get_vector_T( imm5, Q ), reg_or_zr( n, 0x1000 == ( imm5 & 0xffff ) ) );
-            else if ( 0 == bits23_21 && 0 == bit15 && 0 == bits14_11 && 1 == bit10 ) // DUP <Vd>.<T>, <Vn>.<Ts>[<index>]
+            else if ( 0 == bits23_21 && !bit15 && 0 == bits14_11 && bit10 ) // DUP <Vd>.<T>, <Vn>.<Ts>[<index>]
             {
                 uint64_t size = lowest_set_bit_nz( imm5 & 0xf );
                 uint64_t index = get_bits( imm5, size + 1, 4 - ( size + 1 ) + 1 );
@@ -2156,14 +2154,14 @@ void Arm64::trace_state()
                 char byte_len = ( imm5 & 1 ) ? 'B' : ( 2 == ( imm5 & 3 ) ) ? 'H' : ( 4 == ( imm5 & 7 ) ) ? 'S' : ( 8 == ( imm5 & 0xf ) ) ? 'D' : '?';
                 tracer.Trace( "dup v%llu.%s, v%llu.%c[%llu]\n", d, get_vector_T( imm5, Q ), n, byte_len, index );
             }
-            else if ( 1 == bit21 && 1 == bit15 && 0 == bits14_11 && 1 == bit10 ) // ADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>.   add vector
+            else if ( bit21 && bit15 && 0 == bits14_11 && bit10 ) // ADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>.   add vector
             {
                 uint64_t size = opbits( 22, 2 );
                 uint64_t m = opbits( 16, 5 );
                 const char * pT = get_ld1_vector_T( size, Q );
                 tracer.Trace( "add v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             }
-            else if ( 1 == bit21 && 0xb == bits14_11 && 0 == bits20_16 && 0 == bit15 ) // CNT
+            else if ( bit21 && 0xb == bits14_11 && 0 == bits20_16 && !bit15 ) // CNT
             {
                 uint64_t size = opbits( 22, 2 );
                 if ( 0 != size )
@@ -2172,7 +2170,7 @@ void Arm64::trace_state()
                 const char * pT = get_ld1_vector_T( size, Q );
                 tracer.Trace( "cnt v%llu.%s, v%llu.%s\n", d, pT, n, pT );
             }
-            else if ( 1 == bit21 && 0x11 == bits20_16 && 1 == bit15 && 7 == bits14_11 ) // ADDV <V><d>, <Vn>.<T>
+            else if ( bit21 && 0x11 == bits20_16 && bit15 && 7 == bits14_11 ) // ADDV <V><d>, <Vn>.<T>
             {
                 uint64_t size = opbits( 22, 2 );
                 if ( 3 == size )
@@ -2181,7 +2179,7 @@ void Arm64::trace_state()
                 char dstT = ( 0 == size ) ? 'B' : ( 1 == size ) ? 'H' : 'S';
                 tracer.Trace( "addv %c%llu, v%llu.%s\n", dstT, d, n, pT );
             }
-            else if ( 1 == bit21 && 1 == bits20_16 && 0 == bit15 && 5 == bits14_11 && 0 == bit10 ) // xtn, xtn2 XTN{2} <Vd>.<Tb>, <Vn>.<Ta>
+            else if ( bit21 && 1 == bits20_16 && !bit15 && 5 == bits14_11 && !bit10 ) // xtn, xtn2 XTN{2} <Vd>.<Tb>, <Vn>.<Ta>
             {
                 uint64_t size = opbits( 22, 2 );
                 if ( 3 == size )
@@ -2211,7 +2209,7 @@ void Arm64::trace_state()
             uint64_t rmode = opbits( 19, 2 );
             //tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
 
-            if ( ( 0x180 == ( bits18_10 & 0x1bf ) ) && ( 1 == bit21 ) && ( 0 == ( rmode & 2 ) ) ) // fmov reg, vreg  OR mov vreg, reg
+            if ( ( 0x180 == ( bits18_10 & 0x1bf ) ) && ( bit21 ) && ( 0 == ( rmode & 2 ) ) ) // fmov reg, vreg  OR mov vreg, reg
             {
                 uint64_t opcode = opbits( 16, 3 );
                 if ( 0 == sf )
@@ -2272,7 +2270,7 @@ void Arm64::trace_state()
                 uint64_t fbits = 64 - scale;
                 tracer.Trace( "fcvtzu %s, %cllu, #%llu\n", reg_or_zr( d, sf ), t, n, fbits );
             }
-            else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( 1 == bit21 ) ) // fmov vreg, immf
+            else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( bit21 ) ) // fmov vreg, immf
             {
                 tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
                 uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8 << ( ftype ^ 2 ) );
@@ -2291,7 +2289,7 @@ void Arm64::trace_state()
                 }
                 tracer.Trace( "fmov %c%llu, #%lf // %#llx\n", width, d, dval, val );
             }
-            else if ( ( 0x1e == hi8 ) && ( 2 == ( bits18_10 & 0x3f ) ) && ( 1 == bit21 ) ) // fmul vreg, vreg, vreg
+            else if ( ( 0x1e == hi8 ) && ( 2 == ( bits18_10 & 0x3f ) ) && ( bit21 ) ) // fmul vreg, vreg, vreg
             {
                 uint64_t m = opbits( 16, 5 );
                 if ( 0 == ftype ) // single-precision
@@ -2301,7 +2299,7 @@ void Arm64::trace_state()
                 else
                     unhandled();
             }
-            else if ( ( 0x1e == hi8 ) && ( 0x90 == ( bits18_10 & 0x19f ) ) && ( 1 == bit21 ) ) // fcvt vreg, vreg
+            else if ( ( 0x1e == hi8 ) && ( 0x90 == ( bits18_10 & 0x19f ) ) && ( bit21 ) ) // fcvt vreg, vreg
             {
                 uint64_t opc = opbits( 15, 2 );
                 tracer.Trace( "fcvt %c%llu, %c%llu\n", get_fcvt_precision( opc ), d, get_fcvt_precision( ftype ), n ); 
@@ -2310,7 +2308,7 @@ void Arm64::trace_state()
             {
                 tracer.Trace( "fmov %c%llu, %c%llu\n", get_fcvt_precision( ftype ), d, get_fcvt_precision( ftype ), n );
             }
-            else if ( ( 0x1e == hi8 ) && ( 8 == ( bits18_10 & 0x3f ) ) && ( 1 == bit21 ) ) // fcmp vreg, vreg   OR    fcmp vreg, 0.0 and fcmpe variants
+            else if ( ( 0x1e == hi8 ) && ( 8 == ( bits18_10 & 0x3f ) ) && ( bit21 ) ) // fcmp vreg, vreg   OR    fcmp vreg, 0.0 and fcmpe variants
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t opc = opbits( 3, 2 );
@@ -2325,7 +2323,7 @@ void Arm64::trace_state()
             {
                 tracer.Trace( "fabs %c%llu, %c%llu\n", get_fcvt_precision( ftype ), d, get_fcvt_precision( ftype ), n );
             }
-            else if ( 0x1e == hi8 && ( 6 == ( 0x3f & bits18_10 ) ) && 1 == bit21 ) // fdiv
+            else if ( 0x1e == hi8 && ( 6 == ( 0x3f & bits18_10 ) ) && bit21 ) // fdiv
             {
                 uint64_t m = opbits( 16, 5 );
                 if ( 0 == ftype ) // single-precision
@@ -2345,7 +2343,7 @@ void Arm64::trace_state()
                 else
                     unhandled();
             }
-            else if ( 0x1e == hi8 && ( 0xe == ( 0x3f & bits18_10 ) ) && 1 == bit21 ) // fsub
+            else if ( 0x1e == hi8 && ( 0xe == ( 0x3f & bits18_10 ) ) && bit21 ) // fsub
             {
                 uint64_t m = opbits( 16, 5 );
                 if ( 0 == ftype ) // single-precision
@@ -2355,34 +2353,34 @@ void Arm64::trace_state()
                 else
                     unhandled();
             }
-            else if ( 0x80 == bits18_10 && 1 == bit21 && 0 == rmode ) // SCVTF (scalar, integer)
+            else if ( 0x80 == bits18_10 && bit21 && 0 == rmode ) // SCVTF (scalar, integer)
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 tracer.Trace( "scvtf %c%llu, %s\n", t, d, reg_or_zr( n, sf ) );
             }
-            else if ( 0x70 == bits18_10 && 1 == bit21 && 0 == rmode ) // fsqrt s#, s#
+            else if ( 0x70 == bits18_10 && bit21 && 0 == rmode ) // fsqrt s#, s#
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 tracer.Trace( "fsqrt %c%llu, %c%llu\n", t, d, t, n );
             }
-            else if ( 1 == bit21 && ( 3 == ( 3 & bits18_10 ) ) ) // fcsel
+            else if ( bit21 && ( 3 == ( 3 & bits18_10 ) ) ) // fcsel
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 uint64_t m = opbits( 16, 5 );
                 uint64_t cond = opbits( 12, 4 );
                 tracer.Trace( "fcsel %c%llu, %c%llu, %c%llu, %s\n", t, d, t, n, t, m, get_cond( cond ) );
             }
-            else if ( 1 == bit21 && ( 0x50 == bits18_10 ) ) // fneg (scalar)
+            else if ( bit21 && ( 0x50 == bits18_10 ) ) // fneg (scalar)
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 tracer.Trace( "fneg %c%llu, %c%llu\n", t, d, t, n );
             }
-            else if ( 1 == bit21 && 0 == bits18_10 && 3 == rmode ) // fcvtzs
+            else if ( bit21 && 0 == bits18_10 && 3 == rmode ) // fcvtzs
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 tracer.Trace( "fcvtzs %s, %c%llu\n", reg_or_zr( d, sf ), t, n );
             }
-            else if ( 1 == bit21 && ( 1 == ( bits18_10 & 3 ) ) && ( 0 == opbits( 4, 1 ) ) ) // fccmp
+            else if ( bit21 && ( 1 == ( bits18_10 & 3 ) ) && ( 0 == opbits( 4, 1 ) ) ) // fccmp
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 uint64_t m = opbits( 16, 5 );
@@ -2390,7 +2388,7 @@ void Arm64::trace_state()
                 uint64_t nzcv = opbits( 0, 4 );
                 tracer.Trace( "fccmp %c%llu, %c%llu, #%#llx, %s\n", t, n, t, m, nzcv, get_cond( cond ) );
             }
-            else if ( 1 == bit21 && ( 0xc0 == ( 0x1c0 & bits18_10 ) ) && 0 == rmode ) // UCVTF <Hd>, <Wn>, #<fbits>
+            else if ( bit21 && ( 0xc0 == ( 0x1c0 & bits18_10 ) ) && 0 == rmode ) // UCVTF <Hd>, <Wn>, #<fbits>
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 uint64_t scale = opbits( 10, 6 );
@@ -2552,7 +2550,7 @@ void Arm64::trace_state()
         {
             uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
             uint64_t bit23 = opbits( 23, 1 ); // 1 for MOVK, 0 for ANDS
-            if ( 1 == bit23 ) // MOVK
+            if ( bit23 ) // MOVK
             {
                 uint64_t hw = ( ( op >> 21 ) & 3 );
                 uint64_t pos = ( hw << 4 );
@@ -2814,17 +2812,15 @@ uint64_t Arm64::shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount 
 {
     uint64_t val = ( 31 == reg ) ? 0 : regs[ reg ];
     amount &= 0x7f;
+    if ( 0 == amount )
+        return val;
 
     if ( 0 == shift_type ) // lsl
         val <<= amount;
     else if ( 1 == shift_type ) // lsr
         val >>= amount;
-    else if ( 2 == shift_type ) // asr. keep sign bit the same with each bit rotation
-    {
-        int64_t i = (int64_t) sign_extend( amount, 5 );
-        uint64_t result = val >> i;
-        val = ( 0x3f & (uint64_t) result );
-    }
+    else if ( 2 == shift_type ) // asr
+        val = (uint64_t) ( ( (int64_t) val ) >> amount ); // modern C compilers do the right thing
     else if ( 3 == shift_type ) // ror.
         val = ( ( val >> amount ) | ( val << ( 64 - amount ) ) );
     else
@@ -2837,17 +2833,15 @@ uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount 
 {
     uint32_t val = ( 31 == reg ) ? 0 : ( regs[ reg ] & 0xffffffff );
     amount &= 0x3f;
+    if ( 0 == amount )
+        return val;
 
     if ( 0 == shift_type ) // lsl
         val <<= amount;
     else if ( 1 == shift_type ) // lsr
         val >>= amount;
-    else if ( 2 == shift_type ) // asr. keep sign bit the same with each bit rotation
-    {
-        int32_t i = (int32_t) sign_extend( amount, 4 );
-        uint32_t result = val >> i;
-        val = ( 0x1f & (uint32_t) result );
-    }
+    else if ( 2 == shift_type ) // asr
+        val = (uint32_t) ( (int32_t) val >> amount ); // modern C compilers do the right thing
     else if ( 3 == shift_type ) // ror.
         val = ( ( val >> amount ) | ( val << ( 32 - amount ) ) );
     else
@@ -2970,9 +2964,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
             case 0: // UDF
             {
                 uint64_t bits23to16 = opbits( 16, 8 );
-                uint64_t imm16 = op & 0xffff;
                 if ( 0 == bits23to16 )
+                {
+                    uint64_t imm16 = op & 0xffff;
                     arm64_hard_termination( *this, "permanently undefined instruction encountered", imm16 );
+                }
                 else
                     unhandled();
                 break;
@@ -2987,7 +2983,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t post_index = opbits( 23, 1 );
                 uint64_t opcode = opbits( 13, 3 );
                 uint64_t bit13 = opbits( 13, 1 );
-                if ( 0 != bit13 )
+                if ( bit13 )
                     unhandled();
                 uint64_t size = opbits( 10, 2 );
                 uint64_t n = opbits( 5, 5 );
@@ -3072,7 +3068,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t L = opbits( 22, 1 );
                 uint64_t bit21 = opbits( 21, 1 );
                 uint64_t s = opbits( 16, 5 );
-                //uint64_t oO = opbits( 15, 1 ); // no need to distinguish stlxr vs stxr
                 uint64_t t2 = opbits( 10, 5 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t t = opbits( 0, 5 );
@@ -3096,7 +3091,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 }
                 else
                 {
-                    if ( 0 == bit23 && 31 != s )
+                    if ( !bit23 && 31 != s )
                         regs[ s ] = 0; // indicate the store succeeded for stlxrW and stxrW
 
                     if ( is16 )
@@ -3109,7 +3104,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
             case 0x1f: // fmadd, vnmadd, fmsub, fnmsub
             {
                 uint64_t ftype = opbits( 22, 2 );
-                //uint64_t bit21 = opbits( 21, 1 );
                 uint64_t bit15 = opbits( 15, 1 );
                 uint64_t m = opbits( 16, 5 );
                 uint64_t a = opbits( 10, 5 );
@@ -3119,7 +3113,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                 if ( 0 == ftype ) // float
                 {
-                    if ( 0 == bit15 )
+                    if ( !bit15 )
                         vregs[ d ].f = vregs[ a ].f + vregs[ n ].f * vregs[ m ].f;
                     else
                         vregs[ d ].f = vregs[ a ].f - vregs[ n ].f * vregs[ m ].f;
@@ -3127,7 +3121,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 }
                 else if ( 1 == ftype ) // double
                 {
-                    if ( 0 == bit15 )
+                    if ( !bit15 )
                         vregs[ d ].d = vregs[ a ].d + vregs[ n ].d * vregs[ m ].d;
                     else
                         vregs[ d ].d = vregs[ a ].d - vregs[ n ].d * vregs[ m ].d;
@@ -3153,7 +3147,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 bool preIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 3 == bits11_10 ) );
                 bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bits11_10 ) );
                 bool signedUnscaledOffset = ( ( 0xc == ( hi8 & 0xf ) ) && ( 0 == bits11_10 ) );
-                bool shiftExtend = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bit21 ) && ( 2 == bits11_10 ) );
+                bool shiftExtend = ( ( 0xc == ( hi8 & 0xf ) ) && ( bit21 ) && ( 2 == bits11_10 ) );
                 uint64_t imm12 = opbits( 10, 12 );
                 int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
                 uint64_t size = opbits( 30, 2 );
@@ -3259,9 +3253,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t L = opbits( 22, 1 );
                 uint64_t bit23 = opbits( 23, 1 );
     
-                bool preIndex = ( ( 0xd == ( hi8 & 0xf ) ) && ( 1 == bit23 ) );
-                bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bit23 ) );
-                bool signedOffset = ( ( 0xd == ( hi8 & 0xf ) ) && ( 0 == bit23 ) );
+                bool preIndex = ( ( 0xd == ( hi8 & 0xf ) ) && bit23 );
+                bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && bit23 );
+                bool signedOffset = ( ( 0xd == ( hi8 & 0xf ) ) && !bit23 );
     
                 uint64_t scale = 2 + opc;
                 int64_t offset = sign_extend( imm7, 6 ) << scale;
@@ -3318,7 +3312,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                 if ( 0 == bits23_19 )
                 {
-                    if ( ( 0x2f == hi8 || 0x6f == hi8 ) && 0 == bit11 && 1 == bit10 &&
+                    if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 &&
                          ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xf ) ) ) ) // mvni
                     {
                         if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
@@ -3346,9 +3340,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         else
                             unhandled();
                     }
-                    else if ( 0 == bit12 || ( 0xc == ( cmode & 0xe ) ) ) // movi
+                    else if ( !bit12|| ( 0xc == ( cmode & 0xe ) ) ) // movi
                     {
-                        if ( 0 == bit29 )
+                        if ( !bit29)
                         {
                             if ( 0xe == cmode )
                             {
@@ -3430,11 +3424,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             }
                         }
                     }
-                    else if ( 0 == bit29 ) // BIC register
+                    else if ( !bit29 ) // BIC register
                     {
                         unhandled();
                     }
-                    else if ( ( 1 == bit29 ) && ( 1 == bit12 ) ) // BIC immediate
+                    else if ( bit29 && bit12 ) // BIC immediate
                     {
                         uint64_t notimm = ~imm;
     
@@ -4460,7 +4454,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 bool xregs = ( 0 != ( hi8 & 0x80 ) );
                 uint8_t bit23 = ( op >> 23 ) & 1;
 
-                if ( 1 == bit23 ) // movz xd, imm16
+                if ( bit23 ) // movz xd, imm16
                 {
                     uint64_t d = opbits( 0, 5 );
                     uint64_t imm16 = opbits( 5, 16 );
@@ -4561,7 +4555,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bit23 = opbits( 23, 1 );
                 uint64_t hw = opbits( 21, 2 );
 
-                if ( ( 0 == bit23 ) && ( 0 == hw ) )
+                if ( !bit23 && ( 0 == hw ) )
                 {
                     uint8_t op2 = (uint8_t) ( ( op >> 2 ) & 7 );
                     uint8_t ll = (uint8_t) ( op & 3 );
@@ -4596,7 +4590,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t m = opbits( 8, 4 );
                 uint64_t t = opbits( 0, 5 );
     
-                if ( 1 == l ) // MRS <Xt>, (<systemreg>|S<op0>_<op1>_<Cn>_<Cm>_<op2>).   read system register
+                if ( l ) // MRS <Xt>, (<systemreg>|S<op0>_<op1>_<Cn>_<Cm>_<op2>).   read system register
                 {
                     if ( ( 3 == op0 ) && ( 14 == n ) && ( 3 == op1 ) && ( 0 == m ) && ( 2 == op2 ) ) // cntvct_el0 counter-timer virtual count register
                     {
@@ -4753,7 +4747,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     zero_vreg( d );
                     vreg_setui64( d, 0, sum );
                 }
-                else if ( 0x6e == hi8 && 0 == bits23_21 && 0 == bit15 && 1 == bit10 )
+                else if ( 0x6e == hi8 && 0 == bits23_21 && !bit15 && bit10 )
                 {
                     uint64_t imm5 = opbits( 16, 5 );
                     uint64_t imm4 = opbits( 11, 5 );
@@ -5277,7 +5271,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             vreg_setdouble( d, e * esize_bytes, (double) (int64_t) vreg_getui64( n, e * esize_bytes ) );
                     }
                 }
-                else if ( 0x4e == hi8 && 0 == bits23_21 && 0 == bit15 && 3 == bits14_11 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
+                else if ( 0x4e == hi8 && 0 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
                 {
                     uint64_t index = 0;
                     uint64_t target_bytes = 0;
@@ -5309,7 +5303,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         src &= 0xffffffff;
                     memcpy( vreg_ptr( d, index * target_bytes ), &src, target_bytes );
                 }
-                else if ( 0 == bit21 && 0 == bit15 && ( 7 == bits14_11 || 5 == bits14_11 ) && 1 == bit10 )
+                else if ( !bit21 && !bit15 && ( 7 == bits14_11 || 5 == bits14_11 ) && bit10 )
                 {
                     // UMOV <Wd>, <Vn>.<Ts>[<index>]    ;    UMOV <Xd>, <Vn>.D[<index>]    ;     SMOV <Wd>, <Vn>.<Ts>[<index>]    ;   
                     uint64_t size = lowest_set_bit_nz( imm5 & ( ( 7 == bits14_11 ) ? 0xf : 7 ) );
@@ -5327,7 +5321,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( 31 != d )
                         regs[ d ] = Q ? val : ( val & 0xffffffff );
                 }
-                else if ( 1 == bits23_21 && 0 == bit15 && 3 == bits14_11 && 1 == bit10 ) // AND <Vd>.<T>, 
+                else if ( 1 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // AND <Vd>.<T>, 
                 {
                     uint64_t m = imm5;
                     uint64_t lo = vreg_getui64( n, 0 ) & vreg_getui64( m, 0 );
@@ -5337,7 +5331,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     vreg_setui64( d, 0, lo );
                     vreg_setui64( d, 8, hi );
                 }
-                else if ( 0 == bit21 && 0 == bit15 && ( 0x3 == bits14_11 || 0xb == bits14_11 ) && 0 == bit10 ) // UZP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UZP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                else if ( !bit21 && !bit15 && ( 0x3 == bits14_11 || 0xb == bits14_11 ) && !bit10 ) // UZP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UZP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t size = opbits( 22, 2 );
                     uint64_t m = imm5;
@@ -5368,7 +5362,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     vreg_setui64( d, 0, lo );
                     vreg_setui64( d, 8, hi );
                 }
-                else if ( 0 == bits23_21 && 0 == bit15 && 1 == bits14_11 && 1 == bit10 ) // DUP <Vd>.<T>, <R><n>
+                else if ( 0 == bits23_21 && !bit15 && 1 == bits14_11 && bit10 ) // DUP <Vd>.<T>, <R><n>
                 {
                     uint64_t size = lowest_set_bit_nz( imm5 & 0xf );
                     uint64_t esize = 8ull << size;
@@ -5381,7 +5375,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         memcpy( pmem + ( e * bytesize ), &val, bytesize );
                     //tracer.TraceBinaryData( vregs[ d ].b16, sizeof( vregs[ d ].b16 ), 4 );
                 }
-                else if ( 0 == bits23_21 && 0 == bit15 && 0 == bits14_11 && 1 == bit10 ) // DUP <Vd>.<T>, <Vn>.<Ts>[<index>]
+                else if ( 0 == bits23_21 && !bit15 && 0 == bits14_11 && bit10 ) // DUP <Vd>.<T>, <Vn>.<Ts>[<index>]
                 {
                     uint64_t size = lowest_set_bit_nz( imm5 & 0xf );
                     uint64_t index = get_bits( imm5, size + 1, 4 - ( size + 1 ) + 1 );
@@ -5394,7 +5388,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     for ( uint64_t e = 0; e < elements; e++ )
                         memcpy( vreg_ptr( d, e * ebytes ), &element, ebytes );
                 }
-                else if ( 1 == bit21 && 1 == bit15 && 3 == bits14_11 && 0 == bit10 && 0 == bits20_16 )  // CMEQ <Vd>.<T>, <Vn>.<T>, #
+                else if ( bit21 && bit15 && 3 == bits14_11 && !bit10 && 0 == bits20_16 )  // CMEQ <Vd>.<T>, <Vn>.<T>, #
                 {
                     uint64_t size = opbits( 22, 2 );
                     uint64_t esize = 8ull << size;
@@ -5411,7 +5405,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             memcpy( pd + ( e * bytesize ), vec_zeroes, bytesize );
                     }
                 }
-                else if ( 1 == bit21 && 0 == bit15 && 6 == bits14_11 && 1 == bit10 ) // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                else if ( bit21 && !bit15 && 6 == bits14_11 && bit10 ) // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
@@ -5435,7 +5429,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         memcpy( vreg_ptr( d, e * bytesize ), ( a > b ) ? &ones : &zeroes, bytesize );
                     }
                 }
-                else if ( 1 == bit21 && 1 == bit15 && 7 == bits14_11 && 1 == bit10 ) // ADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                else if ( bit21 && bit15 && 7 == bits14_11 && bit10 ) // ADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t size = opbits( 22, 2 );
                     uint64_t esize = 8ull << size;
@@ -5472,7 +5466,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     }
                     memcpy( vreg_ptr( d, 0 ), &target, sizeof( target ) );
                 }
-                else if ( ( 0x4e == hi8 || 0x0e == hi8 ) && 1 == bit21 && 1 == bit15 && 0 == bits14_11 && 1 == bit10 ) // ADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>.   add vector
+                else if ( ( 0x4e == hi8 || 0x0e == hi8 ) && bit21 && bit15 && 0 == bits14_11 && bit10 ) // ADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>.   add vector
                 {
                     uint64_t size = opbits( 22, 2 );
                     uint64_t esize = 8ull << size;
@@ -5499,7 +5493,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                     memcpy( vreg_ptr( d, 0 ), &target, sizeof( target ) );
                 }
-                else if ( 1 == bit21 && 0xb == bits14_11 && 0 == bits20_16 && 0 == bit15 ) // CNT <Vd>.<T>, <Vn>.<T>
+                else if ( bit21 && 0xb == bits14_11 && 0 == bits20_16 && !bit15 ) // CNT <Vd>.<T>, <Vn>.<T>
                 {
                     uint64_t size = opbits( 22, 2 );
                     if ( 0 != size )
@@ -5512,7 +5506,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     zero_vreg( d );
                     vreg_setui64( d, 0, bitcount );
                 }
-                else if ( ( 0x4e == hi8 || 0x0e == hi8 ) && 1 == bit21 && 0x11 == bits20_16 && 1 == bit15 && 7 == bits14_11 ) // ADDV <V><d>, <Vn>.<T>
+                else if ( ( 0x4e == hi8 || 0x0e == hi8 ) && bit21 && 0x11 == bits20_16 && bit15 && 7 == bits14_11 ) // ADDV <V><d>, <Vn>.<T>
                 {
                     uint64_t size = opbits( 22, 2 );
                     if ( 3 == size )
@@ -5533,7 +5527,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     zero_vreg( d );
                     memcpy( vreg_ptr( d, 0 ), &total, esize_bytes );
                 }
-                else if ( 1 == bit21 && 1 == bits20_16 && 0 == bit15 && 5 == bits14_11 && 0 == bit10 ) // xtn, xtn2 XTN{2} <Vd>.<Tb>, <Vn>.<Ta>
+                else if ( bit21 && 1 == bits20_16 && !bit15 && 5 == bits14_11 && !bit10 ) // xtn, xtn2 XTN{2} <Vd>.<Tb>, <Vn>.<Ta>
                 {
                     uint64_t size = opbits( 22, 2 );
                     if ( 3 == size )
@@ -5580,7 +5574,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
     
-                if ( ( 0x180 == ( bits18_10 & 0x1bf ) ) && ( 1 == bit21 ) && ( 0 == ( rmode & 2 ) ) ) // fmov reg, vreg  OR mov vreg, reg
+                if ( ( 0x180 == ( bits18_10 & 0x1bf ) ) && ( bit21 ) && ( 0 == ( rmode & 2 ) ) ) // fmov reg, vreg  OR mov vreg, reg
                 {
                     uint64_t opcode = opbits( 16, 3 );
                     uint64_t nval = val_reg_or_zr( n );
@@ -5703,7 +5697,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         regs[ d ] = (uint32_t) val;
                 }
-                else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( 1 == bit21 ) ) // fmov scalar immediate
+                else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( bit21 ) ) // fmov scalar immediate
                 {
                     uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8 << ( ftype ^ 2 ) );
                     uint64_t imm8 = opbits( 13, 8 );
@@ -5711,7 +5705,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     memset( & vregs[ d ], 0, sizeof( vregs[ d ] ) );
                     memcpy( & vregs[ d ], & val, fltsize / 8 );
                 }
-                else if ( ( 0x1e == hi8 ) && ( 2 == ( bits18_10 & 0x3f ) ) && ( 1 == bit21 ) ) // fmul (scalar)
+                else if ( ( 0x1e == hi8 ) && ( 2 == ( bits18_10 & 0x3f ) ) && ( bit21 ) ) // fmul (scalar)
                 {
                     uint64_t m = opbits( 16, 5 );
                     if ( 0 == ftype ) // single-precision
@@ -5728,7 +5722,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         unhandled();
                     trace_vregs();
                 }
-                else if ( ( 0x1e == hi8 ) && ( 0x90 == ( bits18_10 & 0x19f ) ) && ( 1 == bit21 ) ) // fcvt
+                else if ( ( 0x1e == hi8 ) && ( 0x90 == ( bits18_10 & 0x19f ) ) && ( bit21 ) ) // fcvt
                 {
                     uint64_t opc = opbits( 15, 2 );
                     if ( 0 == ftype )
@@ -5760,7 +5754,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     memcpy( vreg_ptr( d, 0 ), vreg_ptr( n, 0 ), sizeof( vec16_t ) );
                 }
-                else if ( ( 0x1e == hi8 ) && ( 8 == ( bits18_10 & 0x3f ) ) && ( 1 == bit21 ) ) // fcmp and fcmpe (no signaling yet)
+                else if ( ( 0x1e == hi8 ) && ( 8 == ( bits18_10 & 0x3f ) ) && ( bit21 ) ) // fcmp and fcmpe (no signaling yet)
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t opc = opbits( 3, 2 );
@@ -5800,7 +5794,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
-                else if ( 0x1e == hi8 && ( 6 == ( 0x3f & bits18_10 ) ) && 1 == bit21 ) // fdiv v, v, v
+                else if ( 0x1e == hi8 && ( 6 == ( 0x3f & bits18_10 ) ) && bit21 ) // fdiv v, v, v
                 {
                     uint64_t m = opbits( 16, 5 );
                     if ( 0 == ftype ) // single-precision
@@ -5811,7 +5805,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         unhandled();
                     trace_vregs();
                 }
-                else if ( 0x1e == hi8 && ( 0xa == ( 0x3f & bits18_10 ) ) && 1 == bit21 ) // fadd v, v, v
+                else if ( 0x1e == hi8 && ( 0xa == ( 0x3f & bits18_10 ) ) && bit21 ) // fadd v, v, v
                 {
                     uint64_t m = opbits( 16, 5 );
                     if ( 0 == ftype ) // single-precision
@@ -5821,7 +5815,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
-                else if ( 0x1e == hi8 && ( 0xe == ( 0x3f & bits18_10 ) ) && 1 == bit21 ) // fsub v, v, v
+                else if ( 0x1e == hi8 && ( 0xe == ( 0x3f & bits18_10 ) ) && bit21 ) // fsub v, v, v
                 {
                     uint64_t m = opbits( 16, 5 );
                     if ( 0 == ftype ) // single-precision
@@ -5831,7 +5825,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
-                else if ( 0x80 == bits18_10 && 1 == bit21 && 0 == rmode ) // SCVTF (scalar, integer)
+                else if ( 0x80 == bits18_10 && bit21 && 0 == rmode ) // SCVTF (scalar, integer)
                 {
                     uint64_t nval = val_reg_or_zr( n );
                     if ( !sf )
@@ -5851,7 +5845,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
-                else if ( 0x70 == bits18_10 && 1 == bit21 && 0 == rmode ) // fsqrt s#, s#
+                else if ( 0x70 == bits18_10 && bit21 && 0 == rmode ) // fsqrt s#, s#
                 {
                     if ( 0 == ftype )
                         vregs[ d ].f = sqrtf( vregs[ n ].f );
@@ -5860,7 +5854,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
-                else if ( 1 == bit21 && ( 3 == ( 3 & bits18_10 ) ) ) // fcsel
+                else if ( bit21 && ( 3 == ( 3 & bits18_10 ) ) ) // fcsel
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t cond = opbits( 12, 4 );
@@ -5873,7 +5867,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
-                else if ( 1 == bit21 && ( 0x50 == bits18_10 ) ) // fneg (scalar)
+                else if ( bit21 && ( 0x50 == bits18_10 ) ) // fneg (scalar)
                 {
                     if ( 0 == ftype )
                         vregs[ d ].f = - vregs[ n ].f;
@@ -5882,7 +5876,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
-                else if ( 1 == bit21 && 0 == bits18_10 && 3 == rmode ) // fcvtzs
+                else if ( bit21 && 0 == bits18_10 && 3 == rmode ) // fcvtzs
                 {
                     if ( 0 == ftype )
                     {
@@ -5901,7 +5895,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         unhandled();
                 }
-                else if ( 1 == bit21 && ( 1 == ( bits18_10 & 3 ) ) && ( 0 == opbits( 4, 1 ) ) ) // fccmp
+                else if ( bit21 && ( 1 == ( bits18_10 & 3 ) ) && ( 0 == opbits( 4, 1 ) ) ) // fccmp
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t cond = opbits( 12, 4 );
@@ -5925,7 +5919,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         fV = ( nzcv & 1 );
                     }
                 }
-                else if ( 1 == bit21 && ( 0xc0 == ( 0x1c0 & bits18_10 ) ) && 0 == rmode ) // UCVTF <Hd>, <Wn>, #<fbits>
+                else if ( bit21 && ( 0xc0 == ( 0x1c0 & bits18_10 ) ) && 0 == rmode ) // UCVTF <Hd>, <Wn>, #<fbits>
                 {
                     uint64_t val = val_reg_or_zr( n );
                     if ( 0 == sf )
@@ -6049,41 +6043,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         regs[ n ] = address;
                     }
                 }
-#if 0
-                else if ( 0 == opcode && 0 == opbits( 12, 9 ) ) // LD4 multiple structures
-                {
-                    uint64_t datasize = 64ull << Q;
-                    uint64_t esize = 8 << size;
-                    uint64_t ebytes = esize / 8;
-                    uint64_t selem = 4;
-                    uint64_t elements = datasize / esize;
-                    uint64_t offs = 0;
-                    uint64_t nval = regs[ n ];
-                    if ( 2 == bits23_21 ) // no offset LD4 { <Vt>.<T>, <Vt2>.<T>, <Vt3>.<T>, <Vt4>.<T> }, [<Xn|SP>]
-                    {
-                        //tracer.Trace( "ld4. ebytes %llu, elements %llu, selem %llu\n", ebytes, elements, selem );
-                        for ( uint64_t e = 0; e < elements; e++ )
-                        {
-                            uint64_t tt = t % 32;
-                            for ( uint64_t s = 0; s < selem; s++ )
-                            {
-                                //tracer.Trace( "e %llu, s %llu, tt %llu, offs %llu\n", e, s, tt, offs );
-                                if ( L )
-                                    memcpy( vreg_ptr( tt, e * ebytes ), getmem( nval + offs ), ebytes );
-                                else
-                                    memcpy( getmem( nval + offs ), vreg_ptr( tt, e * ebytes ), ebytes );
-                                offs += ebytes;
-                                tt = ( tt + 1 ) % 32;
-                            }
-                        }
-                    }
-                    else if ( 6 == bits23_21 ) // post-index
-                        unhandled();
-                    else
-                        unhandled();
-                    trace_vregs();
-                }
-#endif
                 else
                     unhandled();
                 break;
@@ -6142,7 +6101,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     unhandled();
                 if ( 0x1f0 != op2 )
                     unhandled();
-                if ( ( 0 != A ) || ( 0 != M ) )
+                if ( A || M )
                     unhandled();
 
                 if ( 0 == theop ) // br
@@ -6222,7 +6181,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t d = opbits( 0, 5 );
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
                 uint64_t bit23 = opbits( 23, 1 ); // 1 for MOVK, 0 for ANDS
-                if ( 1 == bit23 )  // MOVK <Xd>, #<imm>{, LSL #<shift>}
+                if ( bit23 )  // MOVK <Xd>, #<imm>{, LSL #<shift>}
                 {
                     uint64_t hw = opbits( 21, 2 );
                     uint64_t pos = ( hw << 4 );
