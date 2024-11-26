@@ -1,4 +1,4 @@
-Sun 11/24/2024 11:31:06.00 
+Mon 11/25/2024 20:16:26.67 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 8
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 8
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 8
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 8
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 25, hour 20, min 16, sec 29
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 25, hour 23, min 16, sec 29
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 25, hour 20, min 16, sec 29
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 4, min 16, sec 29
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -651,6 +651,7 @@ attempting large allocations
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\bin0\mm 
+matrix float 1: 4.000000
 matrix float 2: 50.000000
 matrix float 3: 228.000000
 matrix float 4: 706.000000
@@ -662,7 +663,15 @@ matrix float 9: 17793.000000
 matrix float 10: 27355.000000
 matrix float 11: 40084.000000
 matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
 matrix float 20: 465880.000000
+matrix double 1: 4.000000
 matrix double 2: 50.000000
 matrix double 3: 228.000000
 matrix double 4: 706.000000
@@ -674,6 +683,13 @@ matrix double 9: 17793.000000
 matrix double 10: 27355.000000
 matrix double 11: 40084.000000
 matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
 matrix double 20: 465880.000000
 matrix multiply test completed with great success
 test c_tests\bin0\an 
@@ -722,7 +738,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-842 ms for 1 iterations
+874 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1303,10 +1319,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 13
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 13
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 13
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 13
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 25, hour 20, min 16, sec 34
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 25, hour 23, min 16, sec 34
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 25, hour 20, min 16, sec 34
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 4, min 16, sec 34
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1399,6 +1415,7 @@ attempting large allocations
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\bin1\mm 
+matrix float 1: 4.000000
 matrix float 2: 50.000000
 matrix float 3: 228.000000
 matrix float 4: 706.000000
@@ -1410,7 +1427,15 @@ matrix float 9: 17793.000000
 matrix float 10: 27355.000000
 matrix float 11: 40084.000000
 matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
 matrix float 20: 465880.000000
+matrix double 1: 4.000000
 matrix double 2: 50.000000
 matrix double 3: 228.000000
 matrix double 4: 706.000000
@@ -1422,6 +1447,13 @@ matrix double 9: 17793.000000
 matrix double 10: 27355.000000
 matrix double 11: 40084.000000
 matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
 matrix double 20: 465880.000000
 matrix multiply test completed with great success
 test c_tests\bin1\an 
@@ -1470,7 +1502,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-189 ms for 1 iterations
+185 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2051,10 +2083,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 17
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 17
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 17
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 17
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 25, hour 20, min 16, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 25, hour 23, min 16, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 25, hour 20, min 16, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 4, min 16, sec 38
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2147,6 +2179,7 @@ attempting large allocations
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\bin2\mm 
+matrix float 1: 4.000000
 matrix float 2: 50.000000
 matrix float 3: 228.000000
 matrix float 4: 706.000000
@@ -2158,7 +2191,15 @@ matrix float 9: 17793.000000
 matrix float 10: 27355.000000
 matrix float 11: 40084.000000
 matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
 matrix float 20: 465880.000000
+matrix double 1: 4.000000
 matrix double 2: 50.000000
 matrix double 3: 228.000000
 matrix double 4: 706.000000
@@ -2170,6 +2211,13 @@ matrix double 9: 17793.000000
 matrix double 10: 27355.000000
 matrix double 11: 40084.000000
 matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
 matrix double 20: 465880.000000
 matrix multiply test completed with great success
 test c_tests\bin2\an 
@@ -2218,7 +2266,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-173 ms for 1 iterations
+169 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2799,10 +2847,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 20
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 20
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 20
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 20
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 25, hour 20, min 16, sec 41
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 25, hour 23, min 16, sec 41
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 25, hour 20, min 16, sec 41
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 4, min 16, sec 41
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -2895,6 +2943,7 @@ attempting large allocations
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\bin3\mm 
+matrix float 1: 4.000000
 matrix float 2: 50.000000
 matrix float 3: 228.000000
 matrix float 4: 706.000000
@@ -2906,7 +2955,15 @@ matrix float 9: 17793.000000
 matrix float 10: 27355.000000
 matrix float 11: 40084.000000
 matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
 matrix float 20: 465880.000000
+matrix double 1: 4.000000
 matrix double 2: 50.000000
 matrix double 3: 228.000000
 matrix double 4: 706.000000
@@ -2918,6 +2975,13 @@ matrix double 9: 17793.000000
 matrix double 10: 27355.000000
 matrix double 11: 40084.000000
 matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
 matrix double 20: 465880.000000
 matrix multiply test completed with great success
 test c_tests\bin3\an 
@@ -2966,7 +3030,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-188 ms for 1 iterations
+182 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3547,10 +3611,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 24, hour 11, min 31, sec 24
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 24, hour 14, min 31, sec 24
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 24, hour 11, min 31, sec 24
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 24, hour 19, min 31, sec 24
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 25, hour 20, min 16, sec 45
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 25, hour 23, min 16, sec 45
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 25, hour 20, min 16, sec 45
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 4, min 16, sec 45
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -3643,6 +3707,7 @@ attempting large allocations
 caught a standard execption: std::bad_alloc
 leaving main
 test c_tests\binfast\mm 
+matrix float 1: 4.000000
 matrix float 2: 50.000000
 matrix float 3: 228.000000
 matrix float 4: 706.000000
@@ -3654,7 +3719,15 @@ matrix float 9: 17793.000000
 matrix float 10: 27355.000000
 matrix float 11: 40084.000000
 matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
 matrix float 20: 465880.000000
+matrix double 1: 4.000000
 matrix double 2: 50.000000
 matrix double 3: 228.000000
 matrix double 4: 706.000000
@@ -3666,6 +3739,13 @@ matrix double 9: 17793.000000
 matrix double 10: 27355.000000
 matrix double 11: 40084.000000
 matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
 matrix double 20: 465880.000000
 matrix multiply test completed with great success
 test c_tests\binfast\an 
@@ -3714,7 +3794,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-187 ms for 1 iterations
+189 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3744,7 +3824,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   16.01ms
+serial runtime:   15.9748ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -3816,7 +3896,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.1348ms
+serial runtime:   5.5537ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -3888,7 +3968,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.9324ms
+serial runtime:   2.8071ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -3960,7 +4040,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.3743ms
+serial runtime:   2.3025ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -4040,10 +4120,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-254.253006 milliseconds
+247.762009 milliseconds
 test armos 
 starting
-253580 microseconds (-6)
+179553 microseconds (-6)
 1 iterations
 6493 moves
-Sun 11/24/2024 11:31:35.21 
+Mon 11/25/2024 20:16:56.08 

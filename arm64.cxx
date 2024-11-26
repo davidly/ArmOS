@@ -343,25 +343,25 @@ const char * get_vector_T( uint64_t imm5, uint64_t Q )
     if ( 1 == ( 1 & imm5 ) )
     {
         if ( 0 == Q )
-            return "8B";
+            return "8b";
         else
-            return "16B";
+            return "16b";
     }
 
     if ( 2 == ( 3 & imm5 ) )
     {
         if ( 0 == Q )
-            return "4H";
+            return "4h";
         else
-            return "8H";
+            return "8h";
     }
 
     if ( 4 == ( 7 & imm5 ) )
     {
         if ( 0 == Q )
-            return "2S";
+            return "2s";
         else
-            return "4S";
+            return "4s";
     }
 
     if ( 8 == ( 0xf & imm5 ) )
@@ -369,11 +369,48 @@ const char * get_vector_T( uint64_t imm5, uint64_t Q )
         if ( 0 == Q )
             return "RESERVED";
         else
-            return "2D";
+            return "2d";
     }
 
     return "RESERVED";
 } //get_vector_T
+
+const char * get_sshr_vector_T( uint64_t immh, uint64_t Q )
+{
+    if ( 1 == immh )
+    {
+        if ( 0 == Q )
+            return "8b";
+        else
+            return "16b";
+    }
+
+    if ( 2 == ( 0xe & immh ) )
+    {
+        if ( 0 == Q )
+            return "4h";
+        else
+            return "8h";
+    }
+
+    if ( 4 == ( 0xc & immh ) )
+    {
+        if ( 0 == Q )
+            return "2s";
+        else
+            return "4s";
+    }
+
+    if ( 8 == ( 8 & immh ) )
+    {
+        if ( 0 == Q )
+            return "RESERVED";
+        else
+            return "2d";
+    }
+
+    return "RESERVED";
+} //get_sshr_vector_T
 
 uint64_t Arm64::extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift )
 {
@@ -921,7 +958,7 @@ void Arm64::trace_state()
             // USHR <Vd>.<T>, <Vn>.<T>, #<shift>         ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
             // FMOV <Vd>.<T>, #<imm>                     ;    FMOV <Vd>.<T>, #<imm>               ;    FMOV <Vd>.2D, #<imm>
             // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>   ;    SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>  ;   SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
-            // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
+            // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ; SSHR <Vd>.<T>, <Vn>.<T>, #<shift>
         {
             uint64_t cmode = opbits( 12, 4 );
             uint64_t abc = opbits( 16, 3 );
@@ -1070,7 +1107,17 @@ void Arm64::trace_state()
             {
                 uint64_t opcode = opbits( 12, 4 );
 
-                if ( ( 0x4f == hi8 || 0x0f == hi8 ) && bit23 && 1 == opcode && !bit10 ) // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
+                if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 == opcode && !bit11 && bit10 ) // SSHR <Vd>.<T>, <Vn>.<T>, #<shift>
+                {
+                    uint64_t n = opbits( 5, 5 );
+                    uint64_t immh = opbits( 19, 4 );
+                    uint64_t immb = opbits( 16, 3 );
+                    uint64_t esize = 8ull << highest_set_bit_nz( immh );
+                    uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
+                    const char * pT = get_sshr_vector_T( immh, Q );
+                    tracer.Trace( "sshr v%llu.%s, v%llu.%s, #%llu\n", d, pT, n, pT, shift );
+                }
+                else if ( ( 0x4f == hi8 || 0x0f == hi8 ) && bit23 && 1 == opcode && !bit10 ) // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
                 {
                     uint64_t n = opbits( 5, 5 );
                     uint64_t m = opbits( 16, 5 );
@@ -1924,7 +1971,7 @@ void Arm64::trace_state()
                               // SMOV <Wd>, <Vn>.<Ts>[<index>]       ;    SMOV <Xd>, <Vn>.<Ts>[<index>]    ;    INS <Vd>.<Ts>[<index>], <R><n> ;    CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                               // SCVTF <Vd>.<T>, <Vn>.<T>            ;    FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<T>;    FADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                               // TRN1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    TRN2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   TBL <Vd>.<Ta>, { <Vn>.16B }, <Vm>.<Ta> ; TBL <Vd>.<Ta>, { <Vn>.16B, <Vn+1>.16B, <Vn+2>.16B, <Vn+3>.16B }, <Vm>.<Ta>
-                              // ZIP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ZIP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                              // ZIP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ZIP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
 
         {
             uint64_t Q = opbits( 30, 1 );
@@ -1941,7 +1988,16 @@ void Arm64::trace_state()
             uint64_t bits20_16 = opbits( 16, 5 );
             uint64_t bits14_10 = opbits( 10, 5 );
 
-            if ( !bit21 && !bit15 && ( 0x1e == bits14_10 || 0xe == bits14_10 ) ) // ZIP1/2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            if ( bit21 && bit15 && 8 == bits14_11 && !bit10 ) // SMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+            {
+                uint64_t m = opbits( 16, 5 );
+                uint64_t size = opbits( 22, 2 );
+                uint64_t part = Q;
+                const char * pTA = ( 0 == size ) ? "8H" : ( 1 == size ) ? "4s" : ( 2 == size ) ? "2d" : "unknown";
+                const char * pTB = get_ld1_vector_T( size, Q );
+                tracer.Trace( "smull%s v%llu.%s, v%llu.%s, v%llu.%s\n", part ? "2" : "", d, pTA, n, pTB, m, pTB );
+            }
+            else if ( !bit21 && !bit15 && ( 0x1e == bits14_10 || 0xe == bits14_10 ) ) // ZIP1/2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t size = opbits( 22, 2 );
@@ -3408,7 +3464,30 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t opcode = opbits( 12, 4 );
 
-                    if ( ( 0x4f == hi8 || 0x0f == hi8 ) && bit23 && 1 == opcode && !bit10 ) // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
+                    if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 == opcode && !bit11 && bit10 ) // SSHR <Vd>.<T>, <Vn>.<T>, #<shift>
+                    {
+                        uint64_t n = opbits( 5, 5 );
+                        uint64_t immh = opbits( 19, 4 );
+                        uint64_t immb = opbits( 16, 3 );
+                        uint64_t esize = 8ull << highest_set_bit_nz( immh );
+                        uint64_t ebytes = esize / 8;
+                        uint64_t datasize = 64 << Q;
+                        uint64_t elements = datasize / esize;
+                        uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
+                        vec16_t target = { 0 };
+                        uint8_t * ptarget = (uint8_t *) &target;
+
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            uint64_t elem = 0;
+                            memcpy( &elem, vreg_ptr( n, e * ebytes ), ebytes );
+                            elem >>= shift;
+                            memcpy( ptarget + e * ebytes, &elem, ebytes );
+                        }
+
+                        memcpy( vreg_ptr( d, 0 ), ptarget, sizeof( target ) );
+                    }
+                    else if ( ( 0x4f == hi8 || 0x0f == hi8 ) && bit23 && 1 == opcode && !bit10 ) // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
                     {
                         uint64_t n = opbits( 5, 5 );
                         uint64_t m = opbits( 16, 5 );
@@ -5010,7 +5089,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                   // SMOV <Wd>, <Vn>.<Ts>[<index>]       ;    SMOV <Xd>, <Vn>.<Ts>[<index>]    ;    INS <Vd>.<Ts>[<index>], <R><n> ;    CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                                   // SCVTF <Vd>.<T>, <Vn>.<T>            ;    FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<T>;    FADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                                   // TRN1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    TRN2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   TBL <Vd>.<Ta>, { <Vn>.16B }, <Vm>.<Ta> ; TBL <Vd>.<Ta>, { <Vn>.16B, <Vn+1>.16B, <Vn+2>.16B, <Vn+3>.16B }, <Vm>.<Ta>
-                                  // ZIP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ZIP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                                  // ZIP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ZIP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
             {
                 uint64_t Q = opbits( 30, 1 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -5027,7 +5106,32 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bits14_10 = opbits( 10, 5 );
                 uint64_t bits12_10 = opbits( 10, 3 );
 
-                if ( !bit21 && !bit15 && ( 0x1e == bits14_10 || 0xe == bits14_10 ) ) // ZIP1/2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                if ( bit21 && bit15 && 8 == bits14_11 && !bit10 ) // SMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    uint64_t size = opbits( 22, 2 );
+                    uint64_t esize = 8 << size;
+                    uint64_t ebytes = esize / 8;
+                    datasize = 64;
+                    uint64_t part = Q;
+                    uint64_t elements = datasize / esize;
+                    vec16_t target = { 0 };
+                    uint8_t * ptarget = (uint8_t *) &target;
+
+                    for ( uint64_t e = 0; e < elements; e++ )
+                    {
+                        int64_t nval = 0;
+                        memcpy( &nval, vreg_ptr( n, ( part ? 8 : 0 ) + e * ebytes ), ebytes );
+                        nval = sign_extend( nval, esize - 1 );
+                        int64_t mval = 0;
+                        memcpy( &mval, vreg_ptr( m, (part ? 8 : 0 ) + e * ebytes ), ebytes );
+                        mval = sign_extend( mval, esize - 1 );
+                        int64_t result = nval * mval;
+                        memcpy( ptarget + e * ebytes * 2, &result, ebytes * 2 );
+                    }
+                    memcpy( vreg_ptr( d, 0 ), ptarget, sizeof( target ) );
+                }
+                else if ( !bit21 && !bit15 && ( 0x1e == bits14_10 || 0xe == bits14_10 ) ) // ZIP1/2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
