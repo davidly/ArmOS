@@ -88,6 +88,9 @@ matrix_test( float, 13 );
 matrix_test( float, 14 );
 matrix_test( float, 15 );
 matrix_test( float, 16 );
+matrix_test( float, 17 );
+matrix_test( float, 18 );
+matrix_test( float, 19 );
 matrix_test( float, 20 );  
 
 matrix_test( double, 1 );  
@@ -106,6 +109,9 @@ matrix_test( double, 13 );
 matrix_test( double, 14 );  
 matrix_test( double, 15 );  
 matrix_test( double, 16 );  
+matrix_test( double, 17 );  
+matrix_test( double, 18 );  
+matrix_test( double, 19 );  
 matrix_test( double, 20 );  
 
 int main( int argc, char * argv[] )
@@ -126,6 +132,9 @@ int main( int argc, char * argv[] )
     printf( "matrix float 14: %f\n", run_float14() );
     printf( "matrix float 15: %f\n", run_float15() );
     printf( "matrix float 16: %f\n", run_float16() );
+    printf( "matrix float 17: %f\n", run_float17() );
+    printf( "matrix float 18: %f\n", run_float18() );
+    printf( "matrix float 19: %f\n", run_float19() );
     printf( "matrix float 20: %f\n", run_float20() );
 
     printf( "matrix double 1: %lf\n", run_double1() );
@@ -144,6 +153,9 @@ int main( int argc, char * argv[] )
     printf( "matrix double 14: %lf\n", run_double14() );
     printf( "matrix double 15: %lf\n", run_double15() );
     printf( "matrix double 16: %lf\n", run_double16() );
+    printf( "matrix double 17: %lf\n", run_double17() );
+    printf( "matrix double 18: %lf\n", run_double18() );
+    printf( "matrix double 19: %lf\n", run_double19() );
     printf( "matrix double 20: %lf\n", run_double20() );
     printf( "matrix multiply test completed with great success\n" );
     return 0;
