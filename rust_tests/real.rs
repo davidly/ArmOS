@@ -51,13 +51,29 @@ fn main()
         _r64x *= 1.002020202;
     }
 
-
     println!( "_r32x = {_r32x}" );
     println!( "_r64x = {_r64x}" );
-
     _r64x += _r32x as f64;
     println!( "sum: = {_r64x}" );
 
+    let mut r32_total : f32 = 0.0;
+    let mut r64_total : f64 = 0.0;
+    let mut r32_loop : f32 = 0.05;
+    let mut r64_loop : f64 = 0.05;  
+
+    for _x in 0..=30
+    {
+        r32_loop += 0.104;
+        r64_loop += 0.104;
+        r32_total += r32_loop.sin();
+        r64_total += r64_loop.sin();
+        r32_total += r32_loop.cos();
+        r64_total += r64_loop.cos();
+        r32_total += r32_loop.tan();
+        r64_total += r64_loop.tan();
+    }         
+
+    println!( "32 total {}, 64 total {}", r32_total, r64_total );
     println!( "exiting real number testing with great success" );
 } //main
 

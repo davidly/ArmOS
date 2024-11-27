@@ -1,4 +1,4 @@
-Tue 11/26/2024 13:55:17.66 
+Wed 11/27/2024 15:09:12.68 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 26, hour 13, min 55, sec 20
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 26, hour 16, min 55, sec 20
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 26, hour 13, min 55, sec 20
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 21, min 55, sec 20
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 27, hour 15, min 9, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 27, hour 18, min 9, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 27, hour 15, min 9, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 27, hour 23, min 9, sec 15
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -738,7 +738,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-864 ms for 1 iterations
+858 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1319,10 +1319,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 26, hour 13, min 55, sec 25
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 26, hour 16, min 55, sec 25
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 26, hour 13, min 55, sec 25
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 21, min 55, sec 25
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 27, hour 15, min 9, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 27, hour 18, min 9, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 27, hour 15, min 9, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 27, hour 23, min 9, sec 20
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1502,7 +1502,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-182 ms for 1 iterations
+183 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2083,10 +2083,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 26, hour 13, min 55, sec 29
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 26, hour 16, min 55, sec 29
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 26, hour 13, min 55, sec 29
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 21, min 55, sec 29
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 27, hour 15, min 9, sec 24
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 27, hour 18, min 9, sec 24
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 27, hour 15, min 9, sec 24
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 27, hour 23, min 9, sec 24
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2266,7 +2266,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-164 ms for 1 iterations
+169 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2847,10 +2847,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 26, hour 13, min 55, sec 32
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 26, hour 16, min 55, sec 32
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 26, hour 13, min 55, sec 32
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 21, min 55, sec 32
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 27, hour 15, min 9, sec 27
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 27, hour 18, min 9, sec 27
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 27, hour 15, min 9, sec 27
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 27, hour 23, min 9, sec 27
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -3030,7 +3030,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-181 ms for 1 iterations
+184 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3611,10 +3611,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 26, hour 13, min 55, sec 36
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 26, hour 16, min 55, sec 36
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 26, hour 13, min 55, sec 36
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 26, hour 21, min 55, sec 36
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 27, hour 15, min 9, sec 31
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 27, hour 18, min 9, sec 31
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 27, hour 15, min 9, sec 31
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 27, hour 23, min 9, sec 31
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -3794,7 +3794,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-180 ms for 1 iterations
+184 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3824,7 +3824,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   15.8546ms
+serial runtime:   15.7951ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -3876,6 +3876,7 @@ r64 atan: 0.3525136397354091
 _r32x = 2976.1567
 _r64x = 2976.1192265545533
 sum: = 5952.275964835803
+32 total 4.101693, 64 total 4.101914337473573
 exiting real number testing with great success
 test rust_tests\bin0\tphi 
 phi should tend towards 1.61803398874989484820458683436563811772030
@@ -3896,7 +3897,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.0804ms
+serial runtime:   4.0455ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -3948,6 +3949,7 @@ r64 atan: 0.3525136397354091
 _r32x = 2976.1567
 _r64x = 2976.1192265545533
 sum: = 5952.275964835803
+32 total 4.101693, 64 total 4.101914337473573
 exiting real number testing with great success
 test rust_tests\bin1\tphi 
 phi should tend towards 1.61803398874989484820458683436563811772030
@@ -3968,7 +3970,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.8749ms
+serial runtime:   2.7981ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -4020,6 +4022,7 @@ r64 atan: 0.3525136397354091
 _r32x = 2976.1567
 _r64x = 2976.1192265545533
 sum: = 5952.275964835803
+32 total 4.101693, 64 total 4.101914337473573
 exiting real number testing with great success
 test rust_tests\bin2\tphi 
 phi should tend towards 1.61803398874989484820458683436563811772030
@@ -4040,7 +4043,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.253ms
+serial runtime:   2.2423ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -4092,6 +4095,7 @@ r64 atan: 0.3525136397354091
 _r32x = 2976.1567
 _r64x = 2976.1192265545533
 sum: = 5952.275964835803
+32 total 4.101693, 64 total 4.101914337473573
 exiting real number testing with great success
 test rust_tests\bin3\tphi 
 phi should tend towards 1.61803398874989484820458683436563811772030
@@ -4120,10 +4124,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-248.372009 milliseconds
+253.878006 milliseconds
 test armos 
 starting
-182630 microseconds (-6)
+252560 microseconds (-6)
 1 iterations
 6493 moves
-Tue 11/26/2024 13:55:46.88 
+Wed 11/27/2024 15:09:41.72 
