@@ -187,6 +187,7 @@ struct Arm64
     uint64_t adv_simd_expand_imm( uint64_t op, uint64_t cmode, uint64_t imm8 );
     uint64_t replicate_bytes( uint64_t val, uint64_t byte_len );
     void set_flags_from_double( double result );
+    void set_flags_from_nzcv( uint64_t nzcv );
 
     void trace_state( void );                  // trace the machine current status
 }; //Arm64

@@ -48,6 +48,14 @@ bool Arm64::trace_instructions( bool t )
 
 void Arm64::end_emulation() { g_State |= stateEndEmulation; }
 
+void Arm64::set_flags_from_nzcv( uint64_t nzcv )
+{
+    fN = ( 0 != ( nzcv & 8 ) );
+    fZ = ( 0 != ( nzcv & 4 ) );
+    fC = ( 0 != ( nzcv & 2 ) );
+    fV = ( 0 != ( nzcv & 1 ) );
+} //set_flags_from_nzcv
+
 uint64_t count_bits( uint64_t x )
 {
     uint64_t count = 0;
@@ -59,6 +67,38 @@ uint64_t count_bits( uint64_t x )
     }
     return count;
 } //count_bits
+
+int32_t double_to_fixed_int32( double d, uint64_t fracbits, uint64_t rmode )
+{
+    if ( 3 == rmode )
+        return (int32_t) floor( d * ( 1 << fracbits ) );
+
+    return (int32_t) round( d * ( 1 << fracbits ) );
+} //double_to_fixed_int32
+
+uint32_t double_to_fixed_uint32( double d, uint64_t fracbits, uint64_t rmode )
+{
+    if ( 3 == rmode )
+        return (uint32_t) floor( d * ( 1 << fracbits ) );
+
+    return (uint32_t) round( d * ( 1 << fracbits ) );
+} //double_to_fixed_uint32
+
+int64_t double_to_fixed_int64( double d, uint64_t fracbits, uint64_t rmode )
+{
+    if ( 3 == rmode )
+        return (int64_t) floor( d * ( 1 << fracbits ) );
+
+    return (int64_t) round( d * ( 1 << fracbits ) );
+} //double_to_fixed_int64
+
+uint64_t double_to_fixed_uint64( double d, uint64_t fracbits, uint64_t rmode )
+{
+    if ( 3 == rmode )
+        return (uint64_t) floor( d * ( 1 << fracbits ) );
+
+    return (uint64_t) round( d * ( 1 << fracbits ) );
+} //double_to_fixed_uint64
 
 uint64_t get_bit( uint64_t x, uint64_t bit_number )
 {
@@ -1816,10 +1856,7 @@ void Arm64::trace_state()
             uint64_t size = opbits( 22, 2 );
             uint64_t bit23 = opbits( 23, 1 );
             uint64_t bit21 = opbits( 21, 1 );
-            uint64_t bit20 = opbits( 20, 1 );
-            uint64_t bit19 = opbits( 19, 1 );
             uint64_t bit15 = opbits( 15, 1 );
-            uint64_t bit11 = opbits( 11, 1 );
             uint64_t bit10 = opbits( 10, 1 );
             uint64_t bits23_21 = opbits( 21, 3 );
             const char * pT = get_ld1_vector_T( size, Q );
@@ -2206,14 +2243,33 @@ void Arm64::trace_state()
             uint64_t sf = opbits( 31, 1 );
             uint64_t ftype = opbits( 22, 2 );
             uint64_t bit21 = opbits( 21, 1 );
+            uint64_t bit11 = opbits( 11, 1 );
+            uint64_t bit10 = opbits( 10, 1 );
+            uint64_t bit4 = opbits( 4, 1 );
             uint64_t bits21_19 = opbits( 19, 3 );
+            uint64_t bits18_16 = opbits( 16, 3 );
             uint64_t bits18_10 = opbits( 10, 9 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
             uint64_t rmode = opbits( 19, 2 );
             //tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
 
-            if ( 4 == bits21_19 && 0x100 == bits18_10 ) // FCVTAS <Xd>, <Dn>
+            if ( 0x1e == hi8 && bit21 && !bit11 && bit10 && bit4 ) // FCCMPE <Sn>, <Sm>, #<nzcv>, <cond>    ;    FCCMPE <Dn>, <Dm>, #<nzcv>, <cond>
+            {
+                char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
+                uint64_t m = opbits( 16, 5 );
+                uint64_t nzcv = opbits( 0, 4 );
+                uint64_t cond = opbits( 12, 4 );
+                tracer.Trace( "fccmpe %c%llu, %c%llu, #%#llx, %s\n", t, n, t, m, nzcv, get_cond( cond ) );
+            }
+            else if ( 3 == bits21_19 && 0 == bits18_16 ) // FCVTZS <Xd>, <Dn>, #<fbits>
+            {
+                char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
+                uint64_t scale = opbits( 10, 6 );
+                uint64_t fbits = 64 - scale;
+                tracer.Trace( "fcvtzs %s, %c%llu, #%llu\n", reg_or_zr( d, sf ), t, n, fbits );
+            }
+            else if ( 4 == bits21_19 && 0x100 == bits18_10 ) // FCVTAS <Xd>, <Dn>
             {
                 char type = ( 0 == ftype ) ? 's' : ( 1 == ftype ) ? 'd' : ( 3 == ftype ) ? 'h' : '?';
                 tracer.Trace( "fcvtas %s, %c%llu\n", reg_or_zr( d, sf ), type, n );
@@ -2284,7 +2340,7 @@ void Arm64::trace_state()
                 uint64_t fbits = 64 - scale;
                 tracer.Trace( "fcvtzu %s, %cllu, #%llu\n", reg_or_zr( d, sf ), t, n, fbits );
             }
-            else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( bit21 ) ) // fmov vreg, immf
+            else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && bit21 && 0 == opbits( 5, 5 ) ) // fmov scalar immediate
             {
                 tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
                 uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8 << ( ftype ^ 2 ) );
@@ -3348,7 +3404,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                 if ( 0 == bits23_19 )
                 {
-                    if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 &&
+                    if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 && // MOVI <Vd>.<T>, #<imm8>{, LSL #0}    ;    MVNI <Vd>.<T>, #<imm8>, MSL #<amount>
                          ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xf ) ) ) ) // mvni
                     {
                         if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
@@ -3369,7 +3425,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         }
                         else if ( 0xc == ( cmode & 0xf ) ) // 32-bit shifting ones
                         {
-                            uint64_t imm = adv_simd_expand_imm( 1, cmode, val );
                             uint64_t invimm = (uint64_t) ~imm;
                             vreg_setui64( d, 0, invimm );
                             if ( Q )
@@ -4030,12 +4085,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             sub32( op1 & 0xffffffff, op2 & 0xffffffff, true );
                     }
                     else
-                    {
-                        fN = ( 0 != ( nzcv & 8 ) );
-                        fZ = ( 0 != ( nzcv & 4 ) );
-                        fC = ( 0 != ( nzcv & 2 ) );
-                        fV = ( 0 != ( nzcv & 1 ) );
-                    }
+                        set_flags_from_nzcv( nzcv );
                 }
                 else if ( ( 0x3a == hi8 || 0xba == hi8 ) && 0 == bits23_21 ) // ADCS
                 {
@@ -5610,13 +5660,59 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t sf = opbits( 31, 1 );
                 uint64_t ftype = opbits( 22, 2 );
                 uint64_t bit21 = opbits( 21, 1 );
+                uint64_t bit11 = opbits( 11, 1 );
+                uint64_t bit10 = opbits( 10, 1 );
+                uint64_t bit4 = opbits( 4, 1 );
                 uint64_t bits21_19 = opbits( 19, 3 );
                 uint64_t rmode = opbits( 19, 2 );
+                uint64_t bits18_16 = opbits( 16, 3 );
                 uint64_t bits18_10 = opbits( 10, 9 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
 
-                if ( 4 == bits21_19 && 0x100 == bits18_10 ) // FCVTAS <Xd>, <Dn>
+                if ( 0x1e == hi8 && bit21 && !bit11 && bit10 && bit4 ) // FCCMPE <Sn>, <Sm>, #<nzcv>, <cond>    ;    FCCMPE <Dn>, <Dm>, #<nzcv>, <cond>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    uint64_t cond = opbits( 12, 4 );
+
+                    if ( check_conditional( cond ) )
+                    {
+                        //tracer.Trace( "condition holds, so doing compare\n" );
+                        double result = 0.0;
+                        if ( 0 == ftype )
+                            result = (double) ( vregs[ n ].f - vregs[ m ].f );
+                        else if ( 1 == ftype )
+                            result = vregs[ n ].d - vregs[ m ].d;
+                        else
+                            unhandled();
+    
+                        set_flags_from_double( result );
+                    }
+                }
+                else if ( 3 == bits21_19 && 0 == bits18_16 ) // FCVTZS <Xd>, <Dn>, #<fbits>
+                {
+                    if ( 31 == d )
+                        break;
+                    uint64_t scale = opbits( 10, 6 );
+                    uint64_t fracbits = 64 - scale;
+                    double src = 0.0;
+                    if ( 0 == ftype )
+                        src = vreg_getfloat( n, 0 );
+                    else if ( 1 == ftype )
+                        src = vreg_getdouble( n, 0 );
+                    else
+                        unhandled();
+
+                    uint64_t result = 0;
+
+                    if ( sf )
+                        result = double_to_fixed_int64( src, fracbits, rmode );
+                    else
+                        result = (uint64_t) (uint32_t) double_to_fixed_int64( src, fracbits, rmode );
+
+                    regs[ d ] = result;
+                }
+                else if ( 4 == bits21_19 && 0x100 == bits18_10 ) // FCVTAS <Xd>, <Dn>
                 {
                     if ( !sf && 0 == ftype )
                         regs[ d ] = (uint32_t) (int32_t) round( vreg_getfloat( n, 0 ) );
@@ -5732,7 +5828,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                 result = UINT64_MAX;
                             else
                                 result = (uint64_t) src;
-    
                         }
                         else
                         {
@@ -5746,21 +5841,41 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 }
                 else if ( ( 0x40 == ( bits18_10 & 0x1c0 ) ) && !bit21 && 3 == rmode ) // FCVTZU <Wd>, <Dn>, #<fbits>
                 {
-                    double val = 0.0;
+                    double src = 0.0;
                     if ( 31 == d )
                         break;
 
                     if ( 0 == ftype )
-                        val = vregs[ n ].f;
+                        src = vregs[ n ].f;
                     else if ( 1 == ftype )
-                        val = vregs[ n ].d;
+                        src = vregs[ n ].d;
                     else
                         unhandled();
 
-                    if ( sf )
-                        regs[ d ] = (uint64_t) val;
-                    else
-                        regs[ d ] = (uint32_t) val;
+                    uint64_t result = 0;
+
+                    if ( src > 0.0 )
+                    {
+                        uint64_t scale = opbits( 10, 6 );
+                        uint64_t fracbits = 64 - scale;
+
+                        if ( sf )
+                        {
+                            if ( src > (double) UINT64_MAX )
+                                result = UINT64_MAX;
+                            else
+                                result = double_to_fixed_uint64( src, fracbits, rmode );
+                        }
+                        else
+                        {
+                            if ( src > (double) UINT32_MAX )
+                                result = UINT32_MAX;
+                            else
+                                result = double_to_fixed_uint32( src, fracbits, rmode );
+                        }
+                    }
+
+                    regs[ d ] = result;
                 }
                 else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( bit21 ) ) // fmov scalar immediate
                 {
@@ -5946,16 +6061,16 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( 0 == ftype )
                     {
                         if ( sf )
-                            regs[ d ] = (uint64_t) vregs[ n ].f;
+                            regs[ d ] = (uint64_t) floor( vregs[ n ].f );
                         else
-                            regs[ d ] = (uint32_t) vregs[ n ].f;
+                            regs[ d ] = (uint32_t) floor( vregs[ n ].f );
                     }
                     else if ( 1 == ftype )
                     {
                         if ( sf )
-                            regs[ d ] = (uint64_t) vregs[ n ].d;
+                            regs[ d ] = (uint64_t) floor( vregs[ n ].d );
                         else
-                            regs[ d ] = (uint32_t) vregs[ n ].d;
+                            regs[ d ] = (uint32_t) floor( vregs[ n ].d );
                     }
                     else
                         unhandled();
@@ -5978,10 +6093,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( ! check_conditional( cond ) )
                     {
                         uint64_t nzcv = opbits( 0, 4 );
-                        fN = ( nzcv & 8 );
-                        fZ = ( nzcv & 4 );
-                        fC = ( nzcv & 2 );
-                        fV = ( nzcv & 1 );
+                        set_flags_from_nzcv( nzcv );
                     }
                 }
                 else if ( bit21 && ( 0xc0 == ( 0x1c0 & bits18_10 ) ) && 0 == rmode ) // UCVTF <Hd>, <Wn>, #<fbits>
