@@ -2254,7 +2254,12 @@ void Arm64::trace_state()
             uint64_t rmode = opbits( 19, 2 );
             //tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
 
-            if ( 0x1e == hi8 && bit21 && !bit11 && bit10 && bit4 ) // FCCMPE <Sn>, <Sm>, #<nzcv>, <cond>    ;    FCCMPE <Dn>, <Dm>, #<nzcv>, <cond>
+            if ( 0x1e == hi8 && 4 == bits21_19 && 0x150 == bits18_10 ) // FRINTM <Dd>, <Dn>
+            {
+                char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
+                tracer.Trace( "frintm %c%llu, %c%llu\n", t, d, t, n );
+            }
+            else if ( 0x1e == hi8 && bit21 && !bit11 && bit10 && bit4 ) // FCCMPE <Sn>, <Sm>, #<nzcv>, <cond>    ;    FCCMPE <Dn>, <Dm>, #<nzcv>, <cond>
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 uint64_t m = opbits( 16, 5 );
@@ -5670,7 +5675,16 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
 
-                if ( 0x1e == hi8 && bit21 && !bit11 && bit10 && bit4 ) // FCCMPE <Sn>, <Sm>, #<nzcv>, <cond>    ;    FCCMPE <Dn>, <Dm>, #<nzcv>, <cond>
+                if ( 0x1e == hi8 && 4 == bits21_19 && 0x150 == bits18_10 ) // FRINTM <Dd>, <Dn>
+                {
+                    if ( 0 == ftype )
+                        vregs[ d ].f = floor( vregs[ n ].f );
+                    else if ( 1 == ftype )
+                        vregs[ d ].d = floor( vregs[ n ].d );
+                    else
+                        unhandled();
+                }
+                else if ( 0x1e == hi8 && bit21 && !bit11 && bit10 && bit4 ) // FCCMPE <Sn>, <Sm>, #<nzcv>, <cond>    ;    FCCMPE <Dn>, <Dm>, #<nzcv>, <cond>
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t cond = opbits( 12, 4 );
