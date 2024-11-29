@@ -11,8 +11,7 @@ using namespace std;
 double fpart_nomod( double x )
 {
     //printf( "finding fpart_nomod of %lf\n", x );
-    assert( x < 2.0 && x > -2.0 );
-    assert( x > -1.0 );
+    assert( x < 2.0 );
     assert( x >= 0.0 );
 
     double d;
@@ -25,27 +24,6 @@ double fpart_nomod( double x )
     //printf( "fpart of x %.*lf is %.*lf\n", 20, x, 20, d );
     return d;
 } //fpart_nomod
-
-double fpart_nomod_debug( double x )
-{
-    assert( x < 2.0 && x > -2.0 );
-    assert( x > -1.0 );
-    assert( x >= 0.0 );
-
-    double d;
-
-    if ( x >= 1.0 )
-        d = x - 1.0;
-    else if ( x <= -1.0 )
-        d = x + 2.0;
-    else if ( x < 0.0 )
-        d = x + 1.0;
-    else
-        d = x;
-
-    //printf( "fpart of x %.*lf is %.*lf\n", 20, x, 20, d );
-    return d;
-} //fpart_nomod_debug
 
 double fpart( double x )
 {
@@ -66,44 +44,6 @@ double eps( double d )
     //printf( "  n %.*lf eps of %.*lf is %.*lf\n", 20, n, 20, d, 20, r );
     return r;
 } //eps
-
-size_t powermod_fast( size_t b, size_t e, size_t m )
-{
-    // https://en.wikipedia.org/wiki/Modular_exponentiation
-    // faster way to calculate b^e % m
-
-    if ( 1 == m )
-        return 0;
-
-    size_t c = 1;
-
-    for ( size_t ep = 0; ep < e; ep++ )
-        c = ( c * b ) % m;
-
-    return c;
-} //powermod_fast
-
-size_t powermod_faster( size_t b, size_t e, size_t m )
-{
-    // https://en.wikipedia.org/wiki/Modular_exponentiation
-    // faster way to calculate b^e % m
-
-    if ( 1 == m )
-        return 0;
-
-    size_t result = 1;
-    b = b % m;
-
-    while ( e > 0 )
-    {
-        if ( e & 1 )
-            result = ( result * b ) % m;
-        e >>= 1;
-        b = ( b * b ) % m;
-    }
-
-    return result;
-} //powermod_faster
 
 size_t powermod16_faster( size_t e, size_t m )
 {
@@ -218,7 +158,6 @@ int main( int argc, char * argv[] )
     memset( ac, 0, bufsize );
 
     const size_t chunkSize = 32; // rely on fact that 32*32 = 1024
-
     size_t startInChunks = startingOffset1k * chunkSize;
     size_t limitInChunks = startInChunks + ( countGenerated1k * chunkSize );
 
@@ -227,7 +166,6 @@ int main( int argc, char * argv[] )
     size_t complete = 0;
     size_t generatedChunks = countGenerated1k * chunkSize;
 
-//    parallel_for( startInChunks, limitInChunks, [&] ( size_t i )
     for ( size_t i = startInChunks; i < limitInChunks; i++ )
     {
         size_t start = i * chunkSize;
@@ -239,10 +177,8 @@ int main( int argc, char * argv[] )
             ac[ d - startingOffset ] = c;
         }
 
-        {
-            complete++;
-            printf( "percent complete: %lf\n", 100.0 * (double) complete / (double) generatedChunks );
-        }
+        complete++;
+        printf( "percent complete: %lf\n", 100.0 * (double) complete / (double) generatedChunks );
     };
 
     if ( 0 == startingOffset && countGenerated1k >= 1 )
@@ -269,7 +205,6 @@ int main( int argc, char * argv[] )
     }
 
     printf( "final: %s\n", ac );
-
     return 0;
 } //main
 

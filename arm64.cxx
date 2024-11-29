@@ -68,36 +68,75 @@ uint64_t count_bits( uint64_t x )
     return count;
 } //count_bits
 
-int32_t double_to_fixed_int32( double d, uint64_t fracbits, uint64_t rmode )
+Arm64::FPRounding Arm64::fp_decode_rm( uint64_t rm )
 {
-    if ( 3 == rmode )
-        return (int32_t) floor( d * ( 1 << fracbits ) );
+    if ( 0 == rm )
+        return FPRounding_TIEAWAY;
+    if ( 1 == rm )
+        return FPRounding_TIEEVEN;
+    if ( 2 == rm )
+        return FPRounding_POSINF;
+    if ( 3 == rm )
+        FPRounding_NEGINF;
+    unhandled();
+    return FPRounding_TIEEVEN;
+} //fp_decode_rm
 
-    return (int32_t) round( d * ( 1 << fracbits ) );
+Arm64::FPRounding Arm64::fp_decode_rmode( uint64_t rmode )
+{
+    if ( 0 == rmode )
+        return FPRounding_TIEEVEN;
+    if ( 1 == rmode )
+        return FPRounding_POSINF;
+    if ( 2 == rmode )
+        return FPRounding_NEGINF;
+    if ( 3 == rmode )
+        return FPRounding_ZERO;
+    unhandled();
+    return FPRounding_TIEEVEN;
+} //fp_decode_rmode
+
+double Arm64::round_double( double d, FPRounding rounding )
+{
+    if ( FPRounding_NEGINF == rounding )
+        return floor( d );
+    if ( FPRounding_POSINF == rounding )
+        return ceil( d );
+    if ( FPRounding_TIEEVEN == rounding || FPRounding_TIEAWAY == rounding )
+        return round( d );
+    if ( FPRounding_ODD == rounding )
+    {
+        double rounded = d;
+        if ( ( 0 == fmod( rounded, 2 ) ) && ( 0.5 == fabs( d - rounded ) ) )
+            rounded += ( d > 0.0 ) ? 1.0 : -1.0;
+
+        return rounded;
+    }
+    if ( FPRounding_ZERO == rounding )
+        return (double) (int64_t) d;
+
+    unhandled();
+    return d;
+} //round_double
+
+int32_t Arm64::double_to_fixed_int32( double d, uint64_t fracbits, FPRounding rounding )
+{
+    return (int32_t) round_double( d * ( 1 << fracbits ), rounding );
 } //double_to_fixed_int32
 
-uint32_t double_to_fixed_uint32( double d, uint64_t fracbits, uint64_t rmode )
+uint32_t Arm64::double_to_fixed_uint32( double d, uint64_t fracbits, FPRounding rounding )
 {
-    if ( 3 == rmode )
-        return (uint32_t) floor( d * ( 1 << fracbits ) );
-
-    return (uint32_t) round( d * ( 1 << fracbits ) );
+    return (int32_t) round_double( d * ( 1 << fracbits ), rounding );
 } //double_to_fixed_uint32
 
-int64_t double_to_fixed_int64( double d, uint64_t fracbits, uint64_t rmode )
+int64_t Arm64::double_to_fixed_int64( double d, uint64_t fracbits, FPRounding rounding )
 {
-    if ( 3 == rmode )
-        return (int64_t) floor( d * ( 1 << fracbits ) );
-
-    return (int64_t) round( d * ( 1 << fracbits ) );
+    return (int64_t) round_double( d * ( 1 << fracbits ), rounding );
 } //double_to_fixed_int64
 
-uint64_t double_to_fixed_uint64( double d, uint64_t fracbits, uint64_t rmode )
+uint64_t Arm64::double_to_fixed_uint64( double d, uint64_t fracbits, FPRounding rounding )
 {
-    if ( 3 == rmode )
-        return (uint64_t) floor( d * ( 1 << fracbits ) );
-
-    return (uint64_t) round( d * ( 1 << fracbits ) );
+    return (uint64_t) round_double( d * ( 1 << fracbits ), rounding );
 } //double_to_fixed_uint64
 
 uint64_t get_bit( uint64_t x, uint64_t bit_number )
@@ -5678,9 +5717,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 if ( 0x1e == hi8 && 4 == bits21_19 && 0x150 == bits18_10 ) // FRINTM <Dd>, <Dn>
                 {
                     if ( 0 == ftype )
-                        vregs[ d ].f = floor( vregs[ n ].f );
+                        vregs[ d ].f = (float) round_double( (double) vregs[ n ].f, FPRounding_NEGINF );
                     else if ( 1 == ftype )
-                        vregs[ d ].d = floor( vregs[ n ].d );
+                        vregs[ d ].d = round_double( vregs[ n ].d, FPRounding_NEGINF );
                     else
                         unhandled();
                 }
@@ -5720,9 +5759,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t result = 0;
 
                     if ( sf )
-                        result = double_to_fixed_int64( src, fracbits, rmode );
+                        result = double_to_fixed_uint64( src, fracbits, FPRounding_ZERO );
                     else
-                        result = (uint64_t) (uint32_t) double_to_fixed_int64( src, fracbits, rmode );
+                        result = double_to_fixed_uint32( src, fracbits, FPRounding_ZERO );
 
                     regs[ d ] = result;
                 }
@@ -5742,9 +5781,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( 0x1e == hi8 && 4 == bits21_19 && 0x190 == bits18_10 ) // FRINTA <Dd>, <Dn>
                 {
                     if ( 0 == ftype )
-                        vreg_setfloat( d, 0, (float) round( vreg_getfloat( n, 0 ) ) );
+                        vreg_setfloat( d, 0, (float) round_double( (double) vreg_getfloat( n, 0 ), FPRounding_TIEAWAY ) );
                     else if ( 1 == ftype )
-                        vreg_setdouble( d, 0, (double) round( vreg_getdouble( n, 0 ) ) );
+                        vreg_setdouble( d, 0, round_double( vreg_getdouble( n, 0 ), FPRounding_TIEAWAY ) );
                     else
                         unhandled();
                     trace_vregs();
@@ -5878,14 +5917,14 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             if ( src > (double) UINT64_MAX )
                                 result = UINT64_MAX;
                             else
-                                result = double_to_fixed_uint64( src, fracbits, rmode );
+                                result = double_to_fixed_uint64( src, fracbits, FPRounding_ZERO );
                         }
                         else
                         {
                             if ( src > (double) UINT32_MAX )
                                 result = UINT32_MAX;
                             else
-                                result = double_to_fixed_uint32( src, fracbits, rmode );
+                                result = double_to_fixed_uint32( src, fracbits, FPRounding_ZERO );
                         }
                     }
 

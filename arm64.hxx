@@ -147,6 +147,7 @@ struct Arm64
     void force_trace_vregs();
 
   private:
+    enum FPRounding { FPRounding_TIEEVEN, FPRounding_POSINF, FPRounding_NEGINF,  FPRounding_ZERO, FPRounding_TIEAWAY, FPRounding_ODD };
     enum ElementComparisonResult { ecr_lt, ecr_eq, ecr_gt };
     uint64_t op;
 
@@ -188,6 +189,13 @@ struct Arm64
     uint64_t replicate_bytes( uint64_t val, uint64_t byte_len );
     void set_flags_from_double( double result );
     void set_flags_from_nzcv( uint64_t nzcv );
+    int64_t double_to_fixed_int64( double d, uint64_t fracbits, FPRounding rounding );
+    uint64_t double_to_fixed_uint64( double d, uint64_t fracbits, FPRounding rounding );
+    uint32_t double_to_fixed_uint32( double d, uint64_t fracbits, FPRounding rounding );
+    int32_t double_to_fixed_int32( double d, uint64_t fracbits, FPRounding rounding );
+    double round_double( double d, FPRounding rounding );
+    FPRounding fp_decode_rmode( uint64_t rmode );
+    FPRounding fp_decode_rm( uint64_t rm );
 
     void trace_state( void );                  // trace the machine current status
 }; //Arm64
