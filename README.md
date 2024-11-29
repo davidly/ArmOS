@@ -48,6 +48,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
 * The rust_tests folder has a number of Rust apps that can be built with mall.sh on an Arm64 Linux machine. The apps are built with optimization levels 0, 1, 2, and 3 using -C opt-level=.
 * I've also tested with emulators found in my sister repos: NTVAO (Apple 1 + 6502), NTVCM (CP/M 2.2 + 8080/Z80), NTVDM (MS-DOS 3.x + 8086), RVOS (Linux + RISC-V64). ArmOS runs all of these emulators when they are compiled for Arm64 (tested with g++ optimization flags -O2, -O3, and -Ofast). ArmOS also runs itself recursively an arbitrary number of times. RVOS runs ArmOS when it's compiled for RISC-V64. I've validated ArmOS running RVOS running NTVDM running NTVCM running Turbo Pascal for CP/M 2.2; performance isn't great.
 * Testing of ArmOS on Windows is done with the Microsoft C++ compiler. On Linux I use g++. On macOS I use the native C++ compiler g++ maps to. All test apps are built on Arm64 Linux using g++ and Rust.
+* CoreMark runs with correct results about 50x slower than native speed: [https://github.com/eembc/coremark/tree/main](https://github.com/eembc/coremark/tree/main) Note that the Makefile must be updated to link the binary -static.
 
 ## C/C++ Tests
     tcmp        tests comparisons
