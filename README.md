@@ -4,7 +4,7 @@ Runs Linux Arm64 binaries on platforms including Windows on x32/AMD64/ARM64, mac
 ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on other platforms. It emulates the Arm64 ISA and Linux syscalls sufficiently for many small apps to work.
 
 ## Caveats
-* Only a subset (perhaps 30%) of Base and SIMD&FP instructions are implemented. Specifically, those instructions the g++ and Rust compilers emit for the test apps in this repo along with their language runtimes. It's not too hard to find new C++ or Rust programs that won't run because the instructions they require aren't implemented.
+* Only a subset (perhaps 40%) of Base and SIMD&FP instructions are implemented. Specifically, those instructions the g++ and Rust compilers emit for the test apps in this repo along with their language runtimes. It's not too hard to find new C++ or Rust programs that won't run because the instructions they require aren't implemented.
 * Linux emulation is limited to one core with one thread. Syscalls for time, file system, mmap, brk, and other basic services exist, but there is no support for threads, child process creation, networking, and a long list of other basic system services.
 * Apps must be linked static; ArmOS doesn't load dependent libraries at runtime. Use -static with ld or g++. Use -C target-feature=+crt-static for Rust apps.
 
@@ -46,7 +46,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
 * I've tested on AMD64 and Arm64 machines running Windows along with AMD64, Arm32, Arm64, and RISC-V64 machines running Linux. I also tested on an M3 macOS 15.0 BuildVersion 24A335.
 * The c_tests folder has a number of C and C++ apps that can be built with mall.sh (make all) on an Arm64 Linux machine. I'm sure cross-compilation will work too, though I haven't tested it. These apps are built with various optimization flags: -O0, -O1, -O2, -O3, and -Ofast. Each variation utilizes different Arm64 instructions, which improves test coverage.
 * The rust_tests folder has a number of Rust apps that can be built with mall.sh on an Arm64 Linux machine. The apps are built with optimization levels 0, 1, 2, and 3 using -C opt-level=.
-* I've also tested with emulators found in my sister repos: NTVAO (Apple 1 + 6502), NTVCM (CP/M 2.2 + 8080/Z80), NTVDM (MS-DOS 3.x + 8086), RVOS (Linux + RISC-V64). ArmOS runs all of these emulators when they are compiled for Arm64 (tested with g++ optimization flags -O2 and -O3). ArmOS also runs itself recursively an arbitrary number of times. RVOS runs ArmOS when it's compiled for RISC-V64. I've validated ArmOS running RVOS running NTVDM running NTVCM running Turbo Pascal for CP/M 2.2; performance isn't great.
+* I've also tested with emulators found in my sister repos: NTVAO (Apple 1 + 6502), NTVCM (CP/M 2.2 + 8080/Z80), NTVDM (MS-DOS 3.x + 8086), RVOS (Linux + RISC-V64). ArmOS runs all of these emulators when they are compiled for Arm64 (tested with g++ optimization flags -O2, -O3, and -Ofast). ArmOS also runs itself recursively an arbitrary number of times. RVOS runs ArmOS when it's compiled for RISC-V64. I've validated ArmOS running RVOS running NTVDM running NTVCM running Turbo Pascal for CP/M 2.2; performance isn't great.
 * Testing of ArmOS on Windows is done with the Microsoft C++ compiler. On Linux I use g++. On macOS I use the native C++ compiler g++ maps to. All test apps are built on Arm64 Linux using g++ and Rust.
 
 ## C/C++ Tests
@@ -57,6 +57,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     simple      show arguments and environment variables
     tmuldiv     tests integer multiply and divide of various widths
     tpi         finds digits of the irrational number PI
+    pis         finds hexadecimal digits of PI
     ts          tests bit shifting
     tarray      tests array access
     tbits       tests bitwise operations
