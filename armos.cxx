@@ -138,6 +138,14 @@ struct linux_timeval
     uint64_t tv_usec;      // suseconds_t
 };
 
+struct linux_tms_syscall
+{
+    uint64_t tms_utime;
+    uint64_t tms_stime;
+    uint64_t tms_cutime;
+    uint64_t tms_cstime;
+};
+
 struct linux_rusage_syscall {
     struct linux_timeval ru_utime; /* user CPU time used */
     struct linux_timeval ru_stime; /* system CPU time used */
@@ -470,7 +478,6 @@ int gettimeofday( linux_timeval * tp )
     sc::seconds s = sc::duration_cast<sc::seconds>( d );
     tp->tv_sec = s.count();
     tp->tv_usec = sc::duration_cast<sc::microseconds>( d - s ).count();
-
     return 0;
 } //gettimeofday
 
@@ -2056,7 +2063,27 @@ void arm64_invoke_svc( Arm64 & cpu )
                 else
                     tracer.Trace( "  unable to GetProcessTimes, error %d\n", GetLastError() );
 #else
-                getrusage( who, (struct rusage *) prusage );
+                struct rusage local_rusage;
+                getrusage( who, &local_rusage ); // on 32-bit systems fields are 32 bit
+                prusage->ru_utime.tv_sec = local_rusage.ru_utime.tv_sec;
+                prusage->ru_utime.tv_usec = local_rusage.ru_utime.tv_usec;
+                prusage->ru_stime.tv_sec = local_rusage.ru_stime.tv_sec;
+                prusage->ru_stime.tv_usec = local_rusage.ru_stime.tv_usec;
+                prusage->ru_maxrss = local_rusage.ru_maxrss;
+                prusage->ru_ixrss = local_rusage.ru_ixrss;
+                prusage->ru_idrss = local_rusage.ru_idrss;
+                prusage->ru_isrss = local_rusage.ru_isrss;
+                prusage->ru_minflt = local_rusage.ru_minflt;
+                prusage->ru_majflt = local_rusage.ru_majflt;
+                prusage->ru_nswap = local_rusage.ru_nswap;
+                prusage->ru_inblock = local_rusage.ru_inblock;
+                prusage->ru_oublock = local_rusage.ru_oublock;                
+                prusage->ru_msgsnd = local_rusage.ru_msgsnd;
+                prusage->ru_msgrcv = local_rusage.ru_msgrcv;                                                                                                
+                prusage->ru_nsignals = local_rusage.ru_nsignals;
+                prusage->ru_nvcsw = local_rusage.ru_nvcsw;
+                prusage->ru_nivcsw = local_rusage.ru_nivcsw;
+
 #endif
             }
 
@@ -2156,10 +2183,10 @@ void arm64_invoke_svc( Arm64 & cpu )
         {
             // this function is long obsolete. return in milliseconds because that's what dhrystone expects.
 
-            struct tms * ptms = ( 0 != cpu.regs[ 0 ] ) ? (struct tms *) cpu.getmem( cpu.regs[ 0 ] ) : 0;
+            struct linux_tms_syscall * ptms = ( 0 != cpu.regs[ 0 ] ) ? (struct linux_tms_syscall *) cpu.getmem( cpu.regs[ 0 ] ) : 0;
             if ( 0 != ptms ) // apparently 0 is legal
             {
-                memset( ptms, 0, sizeof ( struct tms ) );
+                memset( ptms, 0, sizeof ( struct linux_tms_syscall ) );
 #ifdef _WIN32
                 FILETIME ftCreation, ftExit, ftKernel, ftUser;
                 if ( GetProcessTimes( GetCurrentProcess(), &ftCreation, &ftExit, &ftKernel, &ftUser ) )
@@ -2170,7 +2197,12 @@ void arm64_invoke_svc( Arm64 & cpu )
                 else
                     tracer.Trace( "  unable to GetProcessTimes, error %d\n", GetLastError() );
 #else
-                times( ptms );
+                struct tms local_tms; // on 32-bit systems the members are 32 bit.
+                times( &local_tms );
+                ptms->tms_utime = local_tms.tms_utime;
+                ptms->tms_stime = local_tms.tms_stime;
+                ptms->tms_cutime = local_tms.tms_cutime;
+                ptms->tms_cstime = local_tms.tms_cstime;
 #endif
 
             }
