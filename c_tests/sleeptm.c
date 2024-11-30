@@ -28,7 +28,8 @@ int main( int argc, char * argv[] )
     struct tms tend_sleep;
     clock_t cend_sleep = times( &tend_sleep );
     clock_t cduration = cend_sleep - cstart;
-    printf( "sleep duration %#llx = end %#llx - start %#llx\n", cduration, cend_sleep, cstart );
+//    printf( "sleep duration %#llx = end %#llx - start %#llx\n", cduration, cend_sleep, cstart );
+    printf( "sleep duration %#llx\n", cduration );
     printf( "  sleep duration in milliseconds: %llu\n", ( cduration * 1000 ) / clk_tck );
     printf( "  user time: %llu, kernel time: %llu\n", tend_sleep.tms_utime, tend_sleep.tms_stime );
 
@@ -37,7 +38,7 @@ int main( int argc, char * argv[] )
     {
         clock_t cbusy_loop = times( 0 );
         clock_t busy_time = ( ( cbusy_loop - cend_sleep ) * 1000 ) / clk_tck;
-        if ( busy_time > 1000 )
+        if ( busy_time >= 1000 )
             break;
         busy_work *= busy_time;
         busy_work -= 33;
@@ -48,7 +49,8 @@ int main( int argc, char * argv[] )
     clock_t cend = times( &tend );
     cduration = cend - cend_sleep;
     printf( "busy_work value (this will be somewhat random): %#llx\n", busy_work );
-    printf( "  busy duration %#llx = end %#llx - start %#llx\n", cduration, cend, cend_sleep );
+    //printf( "  busy duration %#llx = end %#llx - start %#llx\n", cduration, cend, cend_sleep );
+    printf( "  busy duration %#llx\n", cduration );
     printf( "  busy duration in milliseconds: %llu\n", ( cduration * 1000 ) / clk_tck );
     uint64_t user_ms = ( tend.tms_utime * 1000 ) / clk_tck;
     uint64_t system_ms = ( tend.tms_stime * 1000 ) / clk_tck;

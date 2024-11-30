@@ -1,4 +1,4 @@
-Sat 11/30/2024  7:55:08.97 
+Sat 11/30/2024  8:32:22.26 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 7, min 55, sec 11
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 10, min 55, sec 11
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 7, min 55, sec 11
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 15, min 55, sec 11
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 32, sec 24
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 32, sec 24
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 32, sec 24
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 32, sec 24
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -732,14 +732,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin0\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc8 = end 0x285960dbe7 - start 0x285960db1f
-  sleep duration in milliseconds: 2000
-  user time: 0, kernel time: 1
-busy_work value (this will be somewhat random): 0xff8648166220ce92
-  busy duration 0x65 = end 0x285960dc4c - start 0x285960dbe7
-  busy duration in milliseconds: 1010
-  user time in ms: 810, kernel time: 10
-getrusage user time in ms: 812, system time 15
+sleep duration 0xc9
+  sleep duration in milliseconds: 2010
+  user time: 1, kernel time: 0
+busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
+  busy duration 0x64
+  busy duration in milliseconds: 1000
+  user time in ms: 710, kernel time: 0
+getrusage user time in ms: 718, system time 0
 sleepy time ended with great success
 test c_tests\bin0\an 
 a delve id
@@ -787,7 +787,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-826 ms for 1 iterations
+822 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1368,10 +1368,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 7, min 55, sec 23
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 10, min 55, sec 23
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 7, min 55, sec 23
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 15, min 55, sec 23
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 32, sec 36
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 32, sec 36
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 32, sec 36
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 32, sec 36
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1545,14 +1545,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin1\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc8 = end 0x285960dfbe - start 0x285960def6
+sleep duration 0xc8
   sleep duration in milliseconds: 2000
-  user time: 0, kernel time: 1
-busy_work value (this will be somewhat random): 0xff8648166220ce92
-  busy duration 0x65 = end 0x285960e023 - start 0x285960dfbe
-  busy duration in milliseconds: 1010
-  user time in ms: 840, kernel time: 10
-getrusage user time in ms: 843, system time 15
+  user time: 0, kernel time: 0
+busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
+  busy duration 0x64
+  busy duration in milliseconds: 1000
+  user time in ms: 620, kernel time: 0
+getrusage user time in ms: 625, system time 0
 sleepy time ended with great success
 test c_tests\bin1\an 
 a delve id
@@ -1600,7 +1600,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-188 ms for 1 iterations
+183 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2181,10 +2181,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 7, min 55, sec 32
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 10, min 55, sec 32
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 7, min 55, sec 32
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 15, min 55, sec 32
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 32, sec 45
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 32, sec 45
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 32, sec 45
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 32, sec 45
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2358,14 +2358,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin2\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc9 = end 0x285960e304 - start 0x285960e23b
+sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 3, kernel time: 0
-busy_work value (this will be somewhat random): 0xff8648166220ce92
-  busy duration 0x65 = end 0x285960e369 - start 0x285960e304
-  busy duration in milliseconds: 1010
-  user time in ms: 570, kernel time: 0
-getrusage user time in ms: 578, system time 0
+  user time: 0, kernel time: 0
+busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
+  busy duration 0x64
+  busy duration in milliseconds: 1000
+  user time in ms: 780, kernel time: 0
+getrusage user time in ms: 781, system time 0
 sleepy time ended with great success
 test c_tests\bin2\an 
 a delve id
@@ -2413,7 +2413,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-174 ms for 1 iterations
+179 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2994,10 +2994,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 7, min 55, sec 40
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 10, min 55, sec 40
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 7, min 55, sec 40
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 15, min 55, sec 40
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 32, sec 53
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 32, sec 53
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 32, sec 53
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 32, sec 53
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -3171,14 +3171,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin3\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc9 = end 0x285960e642 - start 0x285960e579
+sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 3, kernel time: 0
-busy_work value (this will be somewhat random): 0xff8648166220ce92
-  busy duration 0x65 = end 0x285960e6a7 - start 0x285960e642
-  busy duration in milliseconds: 1010
-  user time in ms: 890, kernel time: 0
-getrusage user time in ms: 890, system time 0
+  user time: 1, kernel time: 3
+busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
+  busy duration 0x64
+  busy duration in milliseconds: 1000
+  user time in ms: 810, kernel time: 30
+getrusage user time in ms: 812, system time 31
 sleepy time ended with great success
 test c_tests\bin3\an 
 a delve id
@@ -3807,10 +3807,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 7, min 55, sec 48
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 10, min 55, sec 48
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 7, min 55, sec 48
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 15, min 55, sec 48
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 33, sec 1
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 33, sec 1
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 33, sec 1
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 33, sec 1
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -3984,14 +3984,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\binfast\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc9 = end 0x285960e982 - start 0x285960e8b9
+sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 3, kernel time: 1
-busy_work value (this will be somewhat random): 0xff8648166220ce92
-  busy duration 0x65 = end 0x285960e9e7 - start 0x285960e982
-  busy duration in milliseconds: 1010
-  user time in ms: 820, kernel time: 10
-getrusage user time in ms: 828, system time 15
+  user time: 0, kernel time: 0
+busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
+  busy duration 0x64
+  busy duration in milliseconds: 1000
+  user time in ms: 850, kernel time: 0
+getrusage user time in ms: 859, system time 0
 sleepy time ended with great success
 test c_tests\binfast\an 
 a delve id
@@ -4039,7 +4039,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-179 ms for 1 iterations
+181 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4069,7 +4069,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   17.6781ms
+serial runtime:   16.0532ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -4142,7 +4142,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.1661ms
+serial runtime:   4.1274ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -4215,7 +4215,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.889ms
+serial runtime:   2.973ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -4288,7 +4288,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.3227ms
+serial runtime:   2.3629ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -4369,10 +4369,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-251.982010 milliseconds
+257.342010 milliseconds
 test armos 
 starting
-254828 microseconds (-6)
+254187 microseconds (-6)
 1 iterations
 6493 moves
-Sat 11/30/2024  7:56:04.43 
+Sat 11/30/2024  8:33:17.60 
