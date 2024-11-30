@@ -50,7 +50,9 @@
 #define SYS_signalstack 132
 #define SYS_sigaction 134
 #define SYS_rt_sigprocmask 135
+#define SYS_times 153
 #define SYS_uname 160
+#define SYS_getrusage 165
 #define SYS_prctl 167
 #define SYS_gettimeofday 169
 #define SYS_getpid 172

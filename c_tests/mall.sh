@@ -1,7 +1,8 @@
 #!/bin/bash
 
 for arg in tcmp e printint sieve simple tmuldiv tpi ts tarray tbits trw tmmap tstr \
-           fileops ttime tm glob tap tsimplef tphi tf ttt td terrno t_setjmp tex pis mm an ba;
+           fileops ttime tm glob tap tsimplef tphi tf ttt td terrno t_setjmp tex \
+           pis mm sleeptm an ba;
 do
     echo $arg
     for optflag in 0 1 2 3 fast;

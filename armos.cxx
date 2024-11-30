@@ -27,6 +27,14 @@
        size_t iov_len; /* Length in bytes */
     };
 
+    struct tms
+    {
+        uint64_t tms_utime;
+        uint64_t tms_stime;
+        uint64_t tms_cutime;
+        uint64_t tms_cstime;
+    };
+
     typedef SSIZE_T ssize_t;
 
     #define local_KERNEL_NCCS 19
@@ -43,9 +51,11 @@
     #include <unistd.h>
 
     #ifndef OLDGCC      // the several-years-old Gnu C compiler for the RISC-V development boards
-    #include <termios.h>
+        #include <termios.h>
         #include <sys/random.h>
         #include <sys/uio.h>
+        #include <sys/times.h>
+        #include <sys/resource.h>
         #include <dirent.h>
         #ifndef __APPLE__
             #include <sys/sysinfo.h>
@@ -120,6 +130,31 @@ struct linux_dirent64_syscall {
     char pad
     char d_type
     */
+};
+
+struct linux_timeval
+{
+    uint64_t tv_sec;       // time_t
+    uint64_t tv_usec;      // suseconds_t
+};
+
+struct linux_rusage_syscall {
+    struct linux_timeval ru_utime; /* user CPU time used */
+    struct linux_timeval ru_stime; /* system CPU time used */
+    long   ru_maxrss;        /* maximum resident set size */
+    long   ru_ixrss;         /* integral shared memory size */
+    long   ru_idrss;         /* integral unshared data size */
+    long   ru_isrss;         /* integral unshared stack size */
+    long   ru_minflt;        /* page reclaims (soft page faults) */
+    long   ru_majflt;        /* page faults (hard page faults) */
+    long   ru_nswap;         /* swaps */
+    long   ru_inblock;       /* block input operations */
+    long   ru_oublock;       /* block output operations */
+    long   ru_msgsnd;        /* IPC messages sent */
+    long   ru_msgrcv;        /* IPC messages received */
+    long   ru_nsignals;      /* signals received */
+    long   ru_nvcsw;         /* voluntary context switches */
+    long   ru_nivcsw;        /* involuntary context switches */
 };
 
 struct pollfd_syscall {
@@ -423,12 +458,6 @@ void usage( char const * perror = 0 )
     printf( "  %s\n", build_string() );
     exit( 1 );
 } //usage
-
-struct linux_timeval
-{
-    uint64_t tv_sec;       // time_t
-    uint64_t tv_usec;      // suseconds_t
-};
 
 int gettimeofday( linux_timeval * tp )
 {
@@ -999,7 +1028,9 @@ static const SysCall syscalls[] =
     { "SYS_signalstack", SYS_signalstack },
     { "SYS_sigaction", SYS_sigaction },
     { "SYS_rt_sigprocmask", SYS_rt_sigprocmask },
+    { "SYS_times", SYS_times },
     { "SYS_uname", SYS_uname },
+    { "SYS_getrusage", SYS_getrusage },
     { "SYS_prctl", SYS_prctl },
     { "SYS_gettimeofday", SYS_gettimeofday },
     { "SYS_getpid", SYS_getpid },
@@ -2004,6 +2035,33 @@ void arm64_invoke_svc( Arm64 & cpu )
             update_x0_errno( cpu, 0 );
             break;
         }
+        case SYS_getrusage:
+        {
+            int who = (int) cpu.regs[ 0 ];
+            struct linux_rusage_syscall *prusage = (struct linux_rusage_syscall *) cpu.getmem( cpu.regs[ 1 ] );
+
+            if ( 0 == who ) // RUSAGE_SELF
+            {
+#ifdef _WIN32
+                FILETIME ftCreation, ftExit, ftKernel, ftUser;
+                if ( GetProcessTimes( GetCurrentProcess(), &ftCreation, &ftExit, &ftKernel, &ftUser ) )
+                {
+                    uint64_t utotal = ( ( (uint64_t) ftUser.dwHighDateTime << 32 ) + ftUser.dwLowDateTime ) / 10; // 100ns to microseconds
+                    prusage->ru_utime.tv_sec = utotal / 1000000;
+                    prusage->ru_utime.tv_usec = utotal % 1000000;
+                    uint64_t stotal = ( ( (uint64_t) ftKernel.dwHighDateTime << 32 ) + ftKernel.dwLowDateTime ) / 10; 
+                    prusage->ru_stime.tv_sec = stotal / 1000000;
+                    prusage->ru_stime.tv_usec = stotal % 1000000;
+                }
+                else
+                    tracer.Trace( "  unable to GetProcessTimes, error %d\n", GetLastError() );
+#else
+                getrusage( who, (struct rusage *) prusage );
+#endif
+            }
+
+            update_x0_errno( cpu, 0 );
+        }
         case SYS_futex: 
         {
             if ( !cpu.is_address_valid( cpu.regs[ 0 ] ) ) // sometimes it's malformed on arm64. not sure why yet.
@@ -2092,6 +2150,41 @@ void arm64_invoke_svc( Arm64 & cpu )
             //errno = EACCES;
             //update_x0_errno( cpu, -1 );
             update_x0_errno( cpu, 0 );
+            break;
+        }
+        case SYS_times:
+        {
+            // this function is long obsolete. return in milliseconds because that's what dhrystone expects.
+
+            struct tms * ptms = ( 0 != cpu.regs[ 0 ] ) ? (struct tms *) cpu.getmem( cpu.regs[ 0 ] ) : 0;
+            if ( 0 != ptms ) // apparently 0 is legal
+            {
+                memset( ptms, 0, sizeof ( struct tms ) );
+#ifdef _WIN32
+                FILETIME ftCreation, ftExit, ftKernel, ftUser;
+                if ( GetProcessTimes( GetCurrentProcess(), &ftCreation, &ftExit, &ftKernel, &ftUser ) )
+                {
+                    ptms->tms_utime = ( ( (uint64_t) ftUser.dwHighDateTime << 32) + ftUser.dwLowDateTime ) / 100000; // 100ns to hundredths of a second
+                    ptms->tms_stime = ( ( (uint64_t) ftKernel.dwHighDateTime << 32 ) + ftKernel.dwLowDateTime ) / 100000; 
+                }
+                else
+                    tracer.Trace( "  unable to GetProcessTimes, error %d\n", GetLastError() );
+#else
+                times( ptms );
+#endif
+
+            }
+
+            struct linux_timeval tv;
+            gettimeofday( &tv );
+
+            // ticks is generally in hundredths of a second per sysconf( _SC_CLK_TCK )
+            uint64_t sc_clk_tck = 100ull;
+#ifndef _WIN32
+            sc_clk_tck = sysconf( _SC_CLK_TCK );
+#endif
+            uint64_t ticks = ( (uint64_t) tv.tv_sec * sc_clk_tck ) + ( ( (uint64_t) tv.tv_usec * sc_clk_tck ) / 1000000ull );
+            update_x0_errno( cpu, ticks );
             break;
         }
         case SYS_rt_sigprocmask:

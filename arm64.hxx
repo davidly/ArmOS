@@ -60,6 +60,7 @@ struct Arm64
     floating vregs[ 32 ];           // v0 through v31
     uint64_t pc;
     uint64_t tpidr_el0;             // thread id, can be set and retrieved by apps via msr/mrs tpidr_el0.
+    uint64_t fpcr;                  // floating point control register
     bool fN, fZ, fC, fV;            // negative, zero, unsigned carry or overflow, signed overflow.
 
     uint64_t cycles_so_far;
