@@ -1214,7 +1214,7 @@ void Arm64::trace_state()
                     uint64_t index = 0;
                     uint64_t rmhi = 0;
                     char TS = '?';
-                    char * pT = "invalid";
+                    const char * pT = "invalid";
                     if ( 1 == size )
                     {
                         index = ( H << 2 ) | ( L << 1 ) | M;
