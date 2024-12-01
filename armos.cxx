@@ -2046,6 +2046,7 @@ void arm64_invoke_svc( Arm64 & cpu )
         {
             int who = (int) cpu.regs[ 0 ];
             struct linux_rusage_syscall *prusage = (struct linux_rusage_syscall *) cpu.getmem( cpu.regs[ 1 ] );
+            memset( prusage, 0, sizeof( struct linux_rusage_syscall ) );
 
             if ( 0 == who ) // RUSAGE_SELF
             {
@@ -2083,9 +2084,10 @@ void arm64_invoke_svc( Arm64 & cpu )
                 prusage->ru_nsignals = local_rusage.ru_nsignals;
                 prusage->ru_nvcsw = local_rusage.ru_nvcsw;
                 prusage->ru_nivcsw = local_rusage.ru_nivcsw;
-
 #endif
             }
+            else
+                tracer.Trace( "  unsupported request for who %u\n", who );
 
             update_x0_errno( cpu, 0 );
         }
@@ -2181,10 +2183,10 @@ void arm64_invoke_svc( Arm64 & cpu )
         }
         case SYS_times:
         {
-            // this function is long obsolete. return in milliseconds because that's what dhrystone expects.
+            // this function is long obsolete, but older apps call it and it's still supported on recent Linux builds
 
             struct linux_tms_syscall * ptms = ( 0 != cpu.regs[ 0 ] ) ? (struct linux_tms_syscall *) cpu.getmem( cpu.regs[ 0 ] ) : 0;
-            if ( 0 != ptms ) // apparently 0 is legal
+            if ( 0 != ptms ) // 0 is legal if callers just want the return value
             {
                 memset( ptms, 0, sizeof ( struct linux_tms_syscall ) );
 #ifdef _WIN32

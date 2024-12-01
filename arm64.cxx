@@ -77,7 +77,7 @@ Arm64::FPRounding Arm64::fp_decode_rm( uint64_t rm )
     if ( 2 == rm )
         return FPRounding_POSINF;
     if ( 3 == rm )
-        FPRounding_NEGINF;
+        return FPRounding_NEGINF;
     unhandled();
     return FPRounding_TIEEVEN;
 } //fp_decode_rm
