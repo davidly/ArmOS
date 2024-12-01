@@ -2059,12 +2059,18 @@ void Arm64::trace_state()
                 unhandled();
             break;
         }
-        case 0x5e: // SCVTF <V><d>, <V><n>    ;    ADDP D<d>, <Vn>.2D    ;    DUP <V><d>, <Vn>.<T>[<index>]
+        case 0x5e: // SCVTF <V><d>, <V><n>    ;    ADDP D<d>, <Vn>.2D    ;    DUP <V><d>, <Vn>.<T>[<index>]    ;    FCVTZS <V><d>, <V><n>
         {
             uint64_t bits23_10 = opbits( 10, 14 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
 
+            if ( 0x386e == bits23_10 || 0x286e == bits23_10 ) // FCVTZS <V><d>, <V><n>
+            {
+                uint64_t sz = opbits( 22, 1 );
+                char width = sz ? 'd' : 's';
+                tracer.Trace( "fcvtzs %c%llu, %c%llu\n", width, d, width, n );
+            }
             if ( 0x0876 == ( bits23_10 & 0x2fff ) ) // SCVTF <V><d>, <V><n>
             {
                 uint64_t sz = opbits( 22, 1 );
@@ -5317,13 +5323,29 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 trace_vregs();
                 break;
             }
-            case 0x5e: // SCVTF <V><d>, <V><n>    ;    ADDP D<d>, <Vn>.2D    ;    DUP <V><d>, <Vn>.<T>[<index>]
+            case 0x5e: // SCVTF <V><d>, <V><n>    ;    ADDP D<d>, <Vn>.2D    ;    DUP <V><d>, <Vn>.<T>[<index>]    ;    FCVTZS <V><d>, <V><n>
             {
                 uint64_t bits23_10 = opbits( 10, 14 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
     
-                if ( 0x0876 == ( bits23_10 & 0x2fff ) ) // SCVTF <Vd>.<T>, <Vn>.<T>
+                if ( 0x386e == bits23_10 || 0x286e == bits23_10 ) // FCVTZS <V><d>, <V><n>. round towards zero fp to signed integer
+                {
+                    uint64_t sz = opbits( 22, 1 );
+                    if ( sz )
+                    {
+                        int64_t nval = double_to_fixed_int64( vregs[ n ].d, 0, FPRounding_ZERO );
+                        zero_vreg( d );
+                        memcpy( vreg_ptr( d, 0 ), &nval, 8 );
+                    }
+                    else
+                    {
+                        int32_t nval = double_to_fixed_int32( (double) vregs[ n ].f, 0, FPRounding_ZERO );
+                        zero_vreg( d );
+                        memcpy( vreg_ptr( d, 0 ), &nval, 4 );
+                    }
+                }
+                else if ( 0x0876 == ( bits23_10 & 0x2fff ) ) // SCVTF <Vd>.<T>, <Vn>.<T>
                 {
                     uint64_t sz = opbits( 22, 1 );
                     if ( sz )
