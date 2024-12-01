@@ -4,13 +4,15 @@
 /* expected result for 20/20/20: 4.65880E+05 */
 /* 20/20/20 float version runs in 13 seconds on the original PC */
 
-/* why so many matrix size variants? g++ produces different code to optimize for each ase */
+/* why so many matrix size and datatype variants? g++ produces different code to optimize for each case */
 
 #define LINT_ARGS
+#pragma GCC diagnostic ignored "-Wformat="
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 #define matrix_test( ftype, dim ) \
   ftype A_##ftype##dim[ dim ][ dim ]; \
@@ -32,7 +34,7 @@
   { \
     for ( int i = 0; i < dim; i++ ) \
         for ( int j = 0; j < dim; j++ ) \
-            C_##ftype##dim[ i ][ j ] = (ftype) 0.0; \
+            C_##ftype##dim[ i ][ j ] = (ftype) 0; \
   } \
   __attribute__((noinline)) void print_array_##ftype##dim( ftype a[dim][dim] ) \
   { \
@@ -40,7 +42,7 @@
     for ( int i = 0; i < dim; i++ ) \
     { \
         for ( int j = 0; j < dim; j++ ) \
-            printf( " %lf", a[ i ][ j ] ); \
+            printf( " %lf", (double) a[ i ][ j ] ); \
         printf( "\n" ); \
     } \
   } \
@@ -54,7 +56,7 @@
   } \
   ftype sum_##ftype##dim() \
   { \
-    ftype result = 0.0; \
+    ftype result = (ftype) 0; \
     for ( int i = 0; i < dim; i++ ) \
         for ( int j = 0; j < dim; j++ ) \
             result += C_##ftype##dim[ i ][ j ]; \
@@ -72,91 +74,66 @@
       return sum_##ftype##dim(); \
   }
 
-matrix_test( float, 1 );  
-matrix_test( float, 2 );  
-matrix_test( float, 3 );  
-matrix_test( float, 4 );  
-matrix_test( float, 5 );  
-matrix_test( float, 6 );  
-matrix_test( float, 7 );  
-matrix_test( float, 8 );
-matrix_test( float, 9 );
-matrix_test( float, 10 );
-matrix_test( float, 11 );
-matrix_test( float, 12 );
-matrix_test( float, 13 );
-matrix_test( float, 14 );
-matrix_test( float, 15 );
-matrix_test( float, 16 );
-matrix_test( float, 17 );
-matrix_test( float, 18 );
-matrix_test( float, 19 );
-matrix_test( float, 20 );  
+#define declare_matrix_tests( type ) \
+    matrix_test( type, 1 ); \
+    matrix_test( type, 2 ); \
+    matrix_test( type, 3 ); \
+    matrix_test( type, 4 ); \
+    matrix_test( type, 5 ); \
+    matrix_test( type, 6 ); \
+    matrix_test( type, 7 ); \
+    matrix_test( type, 8 ); \
+    matrix_test( type, 9 ); \
+    matrix_test( type, 10 ); \
+    matrix_test( type, 11 ); \
+    matrix_test( type, 12 ); \
+    matrix_test( type, 13 ); \
+    matrix_test( type, 14 ); \
+    matrix_test( type, 15 ); \
+    matrix_test( type, 16 ); \
+    matrix_test( type, 17 ); \
+    matrix_test( type, 18 ); \
+    matrix_test( type, 19 ); \
+    matrix_test( type, 20 );
 
-matrix_test( double, 1 );  
-matrix_test( double, 2 );  
-matrix_test( double, 3 );  
-matrix_test( double, 4 );  
-matrix_test( double, 5 );  
-matrix_test( double, 6 );  
-matrix_test( double, 7 );  
-matrix_test( double, 8 );  
-matrix_test( double, 9 );  
-matrix_test( double, 10 );  
-matrix_test( double, 11 );  
-matrix_test( double, 12 );  
-matrix_test( double, 13 );  
-matrix_test( double, 14 );  
-matrix_test( double, 15 );  
-matrix_test( double, 16 );  
-matrix_test( double, 17 );  
-matrix_test( double, 18 );  
-matrix_test( double, 19 );  
-matrix_test( double, 20 );  
+declare_matrix_tests( float );
+declare_matrix_tests( double );
+declare_matrix_tests( int32_t );
+declare_matrix_tests( uint32_t );
+declare_matrix_tests( int64_t );
+declare_matrix_tests( uint64_t );
+
+#define run_tests( type, format ) \
+    printf( "matrix %s 1: " format "\n", #type, run_##type##1() ); \
+    printf( "matrix %s 2: " format "\n", #type, run_##type##2() ); \
+    printf( "matrix %s 3: " format "\n", #type, run_##type##3() ); \
+    printf( "matrix %s 4: " format "\n", #type, run_##type##4() ); \
+    printf( "matrix %s 5: " format "\n", #type, run_##type##5() ); \
+    printf( "matrix %s 6: " format "\n", #type, run_##type##6() ); \
+    printf( "matrix %s 7: " format "\n", #type, run_##type##7() ); \
+    printf( "matrix %s 8: " format "\n", #type, run_##type##8() ); \
+    printf( "matrix %s 9: " format "\n", #type, run_##type##9() ); \
+    printf( "matrix %s 10: " format "\n", #type, run_##type##10() ); \
+    printf( "matrix %s 11: " format "\n", #type, run_##type##11() ); \
+    printf( "matrix %s 12: " format "\n", #type, run_##type##12() ); \
+    printf( "matrix %s 13: " format "\n", #type, run_##type##13() ); \
+    printf( "matrix %s 14: " format "\n", #type, run_##type##14() ); \
+    printf( "matrix %s 15: " format "\n", #type, run_##type##15() ); \
+    printf( "matrix %s 16: " format "\n", #type, run_##type##16() ); \
+    printf( "matrix %s 17: " format "\n", #type, run_##type##17() ); \
+    printf( "matrix %s 18: " format "\n", #type, run_##type##18() ); \
+    printf( "matrix %s 19: " format "\n", #type, run_##type##19() ); \
+    printf( "matrix %s 20: " format "\n", #type, run_##type##20() );
 
 int main( int argc, char * argv[] )
 {
-    printf( "matrix float 1: %f\n", run_float1() );
-    printf( "matrix float 2: %f\n", run_float2() );
-    printf( "matrix float 3: %f\n", run_float3() );
-    printf( "matrix float 4: %f\n", run_float4() );
-    printf( "matrix float 5: %f\n", run_float5() );
-    printf( "matrix float 6: %f\n", run_float6() );
-    printf( "matrix float 7: %f\n", run_float7() );
-    printf( "matrix float 8: %f\n", run_float8() );
-    printf( "matrix float 9: %f\n", run_float9() );
-    printf( "matrix float 10: %f\n", run_float10() );
-    printf( "matrix float 11: %f\n", run_float11() );
-    printf( "matrix float 12: %f\n", run_float12() );
-    printf( "matrix float 13: %f\n", run_float13() );
-    printf( "matrix float 14: %f\n", run_float14() );
-    printf( "matrix float 15: %f\n", run_float15() );
-    printf( "matrix float 16: %f\n", run_float16() );
-    printf( "matrix float 17: %f\n", run_float17() );
-    printf( "matrix float 18: %f\n", run_float18() );
-    printf( "matrix float 19: %f\n", run_float19() );
-    printf( "matrix float 20: %f\n", run_float20() );
+    run_tests( float, "%f");
+    run_tests( double, "%lf");
+    run_tests( int32_t, "%d");
+    run_tests( uint32_t, "%u");
+    run_tests( int64_t, "%lld");
+    run_tests( uint64_t, "%llu");
 
-    printf( "matrix double 1: %lf\n", run_double1() );
-    printf( "matrix double 2: %lf\n", run_double2() );
-    printf( "matrix double 3: %lf\n", run_double3() );
-    printf( "matrix double 4: %lf\n", run_double4() );
-    printf( "matrix double 5: %lf\n", run_double5() );
-    printf( "matrix double 6: %lf\n", run_double6() );
-    printf( "matrix double 7: %lf\n", run_double7() );
-    printf( "matrix double 8: %lf\n", run_double8() );
-    printf( "matrix double 9: %lf\n", run_double9() );
-    printf( "matrix double 10: %lf\n", run_double10() );
-    printf( "matrix double 11: %lf\n", run_double11() );
-    printf( "matrix double 12: %lf\n", run_double12() );
-    printf( "matrix double 13: %lf\n", run_double13() );
-    printf( "matrix double 14: %lf\n", run_double14() );
-    printf( "matrix double 15: %lf\n", run_double15() );
-    printf( "matrix double 16: %lf\n", run_double16() );
-    printf( "matrix double 17: %lf\n", run_double17() );
-    printf( "matrix double 18: %lf\n", run_double18() );
-    printf( "matrix double 19: %lf\n", run_double19() );
-    printf( "matrix double 20: %lf\n", run_double20() );
     printf( "matrix multiply test completed with great success\n" );
     return 0;
 }

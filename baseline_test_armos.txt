@@ -1,4 +1,4 @@
-Sat 11/30/2024  8:32:22.26 
+Sun 12/01/2024 13:52:15.74 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 32, sec 24
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 32, sec 24
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 32, sec 24
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 32, sec 24
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 18
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 18
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 18
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 18
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -691,6 +691,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
 matrix multiply test completed with great success
 test c_tests\bin0\pis 
 startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
@@ -734,13 +814,15 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 1, kernel time: 0
+  user time: 0, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 710, kernel time: 0
-getrusage user time in ms: 718, system time 0
+  user time in ms: 600, kernel time: 0
+getrusage user time in ms: 609, system time 0
 sleepy time ended with great success
+test c_tests\bin0\tatomic 
+test atomic completed with great success
 test c_tests\bin0\an 
 a delve id
 a delved i
@@ -787,7 +869,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-822 ms for 1 iterations
+844 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1368,10 +1450,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 32, sec 36
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 32, sec 36
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 32, sec 36
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 32, sec 36
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 29
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 29
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 29
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 29
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1504,6 +1586,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
 matrix multiply test completed with great success
 test c_tests\bin1\pis 
 startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
@@ -1545,15 +1707,17 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin1\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc8
-  sleep duration in milliseconds: 2000
+sleep duration 0xc9
+  sleep duration in milliseconds: 2010
   user time: 0, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 620, kernel time: 0
-getrusage user time in ms: 625, system time 0
+  user time in ms: 650, kernel time: 0
+getrusage user time in ms: 656, system time 0
 sleepy time ended with great success
+test c_tests\bin1\tatomic 
+test atomic completed with great success
 test c_tests\bin1\an 
 a delve id
 a delved i
@@ -1600,7 +1764,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-183 ms for 1 iterations
+182 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2181,10 +2345,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 32, sec 45
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 32, sec 45
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 32, sec 45
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 32, sec 45
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 38
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2317,6 +2481,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
 matrix multiply test completed with great success
 test c_tests\bin2\pis 
 startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
@@ -2358,15 +2602,17 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin2\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc9
-  sleep duration in milliseconds: 2010
+sleep duration 0xc8
+  sleep duration in milliseconds: 2000
   user time: 0, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 780, kernel time: 0
-getrusage user time in ms: 781, system time 0
+  user time in ms: 920, kernel time: 0
+getrusage user time in ms: 921, system time 0
 sleepy time ended with great success
+test c_tests\bin2\tatomic 
+test atomic completed with great success
 test c_tests\bin2\an 
 a delve id
 a delved i
@@ -2413,7 +2659,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-179 ms for 1 iterations
+164 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2994,10 +3240,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 32, sec 53
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 32, sec 53
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 32, sec 53
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 32, sec 53
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 46
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 46
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 46
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 46
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -3130,6 +3376,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
 matrix multiply test completed with great success
 test c_tests\bin3\pis 
 startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
@@ -3173,13 +3499,15 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 1, kernel time: 3
+  user time: 3, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 810, kernel time: 30
-getrusage user time in ms: 812, system time 31
+  user time in ms: 590, kernel time: 0
+getrusage user time in ms: 593, system time 0
 sleepy time ended with great success
+test c_tests\bin3\tatomic 
+test atomic completed with great success
 test c_tests\bin3\an 
 a delve id
 a delved i
@@ -3226,7 +3554,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-184 ms for 1 iterations
+183 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3807,10 +4135,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 11, day 30, hour 8, min 33, sec 1
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 11, day 30, hour 11, min 33, sec 1
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 11, day 30, hour 8, min 33, sec 1
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 11, day 30, hour 16, min 33, sec 1
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 55
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 55
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 55
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 55
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -3943,6 +4271,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
 matrix multiply test completed with great success
 test c_tests\binfast\pis 
 startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
@@ -3990,9 +4398,11 @@ sleep duration 0xc9
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 850, kernel time: 0
-getrusage user time in ms: 859, system time 0
+  user time in ms: 890, kernel time: 0
+getrusage user time in ms: 890, system time 0
 sleepy time ended with great success
+test c_tests\binfast\tatomic 
+test atomic completed with great success
 test c_tests\binfast\an 
 a delve id
 a delved i
@@ -4039,7 +4449,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-181 ms for 1 iterations
+180 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4069,7 +4479,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   16.0532ms
+serial runtime:   16.3564ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -4142,7 +4552,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.1274ms
+serial runtime:   4.3347ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -4215,7 +4625,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.973ms
+serial runtime:   2.9665ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -4288,7 +4698,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.3629ms
+serial runtime:   2.7133ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -4369,10 +4779,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-257.342010 milliseconds
+245.965012 milliseconds
 test armos 
 starting
-254187 microseconds (-6)
+250293 microseconds (-6)
 1 iterations
 6493 moves
-Sat 11/30/2024  8:33:17.60 
+Sun 12/01/2024 13:53:10.55 
