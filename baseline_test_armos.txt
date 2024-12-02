@@ -1,162 +1,170 @@
-Mon 12/02/2024  9:13:42.40 
+Mon 12/02/2024 11:05:58.28 
 test c_tests\bin0\tcmp 
 uint8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 floating point:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 test c_tests\bin0\e 
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 done
@@ -521,7 +529,6 @@ testing printf
 45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 tstr completed with great success
 test c_tests\bin0\fileops 
-fp: 4832576
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -534,7 +541,6 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4832576
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -576,10 +582,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 13, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 13, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 13, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 13, sec 44
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 11, min 6, sec 0
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 14, min 6, sec 0
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 11, min 6, sec 0
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 19, min 6, sec 0
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -915,12 +921,12 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc8
   sleep duration in milliseconds: 2000
-  user time: 0, kernel time: 4
+  user time: 0, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 320, kernel time: 40
-getrusage user time in ms: 328, system time 46
+  user time in ms: 640, kernel time: 0
+getrusage user time in ms: 640, system time 0
 sleepy time ended with great success
 test c_tests\bin0\tatomic 
 test atomic completed with great success
@@ -970,7 +976,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-595 ms for 1 iterations
+587 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -997,162 +1003,170 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\bin1\tcmp 
 uint8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 floating point:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 test c_tests\bin1\e 
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 done
@@ -1517,7 +1531,6 @@ testing printf
 45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 tstr completed with great success
 test c_tests\bin1\fileops 
-fp: 4832576
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -1530,7 +1543,6 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4832576
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -1572,10 +1584,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 13, sec 53
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 13, sec 53
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 13, sec 53
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 13, sec 53
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 11, min 6, sec 9
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 14, min 6, sec 9
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 11, min 6, sec 9
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 19, min 6, sec 9
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1911,12 +1923,12 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 3, kernel time: 0
+  user time: 1, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 890, kernel time: 0
-getrusage user time in ms: 890, system time 0
+  user time in ms: 870, kernel time: 0
+getrusage user time in ms: 875, system time 0
 sleepy time ended with great success
 test c_tests\bin1\tatomic 
 test atomic completed with great success
@@ -1966,7 +1978,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-128 ms for 1 iterations
+114 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1993,162 +2005,170 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\bin2\tcmp 
 uint8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 floating point:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 test c_tests\bin2\e 
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 done
@@ -2513,7 +2533,6 @@ testing printf
 45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 tstr completed with great success
 test c_tests\bin2\fileops 
-fp: 4836672
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -2526,7 +2545,6 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4836672
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -2568,10 +2586,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 14, sec 1
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 14, sec 1
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 14, sec 1
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 14, sec 1
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 11, min 6, sec 17
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 14, min 6, sec 17
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 11, min 6, sec 17
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 19, min 6, sec 17
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2905,14 +2923,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin2\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc8
-  sleep duration in milliseconds: 2000
-  user time: 3, kernel time: 0
+sleep duration 0xc9
+  sleep duration in milliseconds: 2010
+  user time: 0, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 730, kernel time: 0
-getrusage user time in ms: 734, system time 0
+  user time in ms: 820, kernel time: 0
+getrusage user time in ms: 828, system time 0
 sleepy time ended with great success
 test c_tests\bin2\tatomic 
 test atomic completed with great success
@@ -2962,7 +2980,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-104 ms for 1 iterations
+105 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2989,162 +3007,170 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\bin3\tcmp 
 uint8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 floating point:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 test c_tests\bin3\e 
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 done
@@ -3509,7 +3535,6 @@ testing printf
 45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 tstr completed with great success
 test c_tests\bin3\fileops 
-fp: 4832592
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -3522,7 +3547,6 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4832592
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -3564,10 +3588,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 14, sec 9
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 14, sec 9
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 14, sec 9
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 14, sec 9
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 11, min 6, sec 25
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 14, min 6, sec 25
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 11, min 6, sec 25
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 19, min 6, sec 25
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -3901,14 +3925,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin3\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xca
-  sleep duration in milliseconds: 2020
+sleep duration 0xc8
+  sleep duration in milliseconds: 2000
   user time: 0, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 810, kernel time: 0
-getrusage user time in ms: 812, system time 0
+  user time in ms: 930, kernel time: 0
+getrusage user time in ms: 937, system time 0
 sleepy time ended with great success
 test c_tests\bin3\tatomic 
 test atomic completed with great success
@@ -3958,7 +3982,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-117 ms for 1 iterations
+116 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3985,162 +4009,170 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\binfast\tcmp 
 uint8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int8_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int16_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int32_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 uint64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
 int64_t:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 1 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 floating point:
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 1 eq 0 le 1 ge 0
-  gt 0 lt 0 eq 1 le 0 ge 1
-  gt 0 lt 0 eq 1 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
-  gt 1 lt 0 eq 0 le 0 ge 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
 test c_tests\binfast\e 
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 done
@@ -4505,7 +4537,6 @@ testing printf
 45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 tstr completed with great success
 test c_tests\binfast\fileops 
-fp: 4832592
 current offset: 0
 result of fseek: 0
 file length from ftell: 0
@@ -4518,7 +4549,6 @@ file length from ftell: 8320
 8192 + 128 = 8320 file length from portable_filelen: 8320
 result of fseek to middle of file: 0
 result of fwrite to middle of file (should be 1): 1
-fp: 4832592
 current offset: 0
 result of fseek: 0
 file length from ftell: 8320
@@ -4560,10 +4590,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 14, sec 16
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 14, sec 16
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 14, sec 16
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 14, sec 16
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 11, min 6, sec 32
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 14, min 6, sec 32
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 11, min 6, sec 32
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 19, min 6, sec 32
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -4903,8 +4933,8 @@ sleep duration 0xc9
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 920, kernel time: 10
-getrusage user time in ms: 921, system time 15
+  user time in ms: 840, kernel time: 10
+getrusage user time in ms: 843, system time 15
 sleepy time ended with great success
 test c_tests\binfast\tatomic 
 test atomic completed with great success
@@ -4984,7 +5014,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   8.9925ms
+serial runtime:   11.1251ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -5057,7 +5087,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   2.5233ms
+serial runtime:   2.5285ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -5130,7 +5160,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   1.7883ms
+serial runtime:   1.7698ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -5203,7 +5233,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   1.4216ms
+serial runtime:   1.3663ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -5284,10 +5314,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-170.598007 milliseconds
+165.949005 milliseconds
 test armos 
 starting
-122336 microseconds (-6)
+126132 microseconds (-6)
 1 iterations
 6493 moves
-Mon 12/02/2024  9:14:29.50 
+Mon 12/02/2024 11:06:45.18 

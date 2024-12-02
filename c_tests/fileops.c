@@ -74,7 +74,7 @@ int main( int argc, char * argv[] )
     remove( pcFile );
 
     fp = fopen( pcFile, "wb+" );
-    printf( "fp: %d\n", fp );
+    //printf( "fp: %d\n", fp );
     if ( 0 == fp )
     {
         printf( "unable to open file, errno %d\n", errno );
@@ -117,7 +117,7 @@ int main( int argc, char * argv[] )
     fclose( fp );
 
     fp = fopen( pcFile, "rb+" );
-    printf( "fp: %d\n", fp );
+    //printf( "fp: %d\n", fp );
     if ( 0 == fp )
     {
         printf( "unable to open file a second time, errno %d\n", errno );
@@ -130,9 +130,7 @@ int main( int argc, char * argv[] )
     memset( acbuf512, 'd', sizeof( acbuf512 ) );
     chunkLen = 512;
     for ( offset = 0; offset < 8320; offset += chunkLen )
-    {
         read_and_validate( offset, chunkLen, fp );
-    }
 
     /* now read in blocks from the end of the file to the start using fseek() */
 

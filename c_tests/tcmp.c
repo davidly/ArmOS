@@ -12,7 +12,7 @@ template <class T> void cmp( T a, T b )
     bool eq = ( a == b );
     bool le = ( a <= b );
     bool ge = ( a >= b );
-    printf( "  gt %d lt %d eq %d le %d ge %d\n", gt, lt, eq, le, ge );
+    printf( "  lt %d le %d eq %d ge %d gt %d\n", lt, le, eq, ge, gt );
 } //cmp
 
 void cmp_double( double a, double b )
@@ -24,7 +24,7 @@ void cmp_double( double a, double b )
     bool eq = ( abs_diff < DBL_EPSILON );
     bool le = ( diff <= 0.0 || abs_diff < DBL_EPSILON );
     bool ge = ( diff >= 0.0 || abs_diff < DBL_EPSILON );
-    printf( "  gt %d lt %d eq %d le %d ge %d\n", gt, lt, eq, le, ge );
+    printf( "  lt %d le %d eq %d ge %d gt %d\n", lt, le, eq, ge, gt );
 } //cmp_double
 
 void cmp_float( float a, float b )
@@ -36,7 +36,7 @@ void cmp_float( float a, float b )
     bool eq = ( abs_diff < FLT_EPSILON );
     bool le = ( diff <= 0.0 || abs_diff < FLT_EPSILON );
     bool ge = ( diff >= 0.0 || abs_diff < FLT_EPSILON );
-    printf( "  gt %d lt %d eq %d le %d ge %d\n", gt, lt, eq, le, ge );
+    printf( "  lt %d le %d eq %d ge %d gt %d\n", lt, le, eq, ge, gt );
 } //cmp_float
 
 int main( int argc, char * argv[] )
@@ -47,6 +47,7 @@ int main( int argc, char * argv[] )
     cmp( (uint8_t) -1, (uint8_t) 3 );
     cmp( (uint8_t) -1, (uint8_t) -3 );
     cmp( (uint8_t) -1, (uint8_t) -1 );
+    cmp( (uint8_t) 1, (uint8_t) -1 );
     cmp( (uint8_t) 247, (uint8_t) 3 );
     cmp( (uint8_t) 247, (uint8_t) -3 );
     cmp( (uint8_t) -247, (uint8_t) 3 );
@@ -65,6 +66,7 @@ int main( int argc, char * argv[] )
     cmp( (int8_t) -1, (int8_t) 3 );
     cmp( (int8_t) -1, (int8_t) -3 );
     cmp( (int8_t) -1, (int8_t) -1 );
+    cmp( (int8_t) 1, (int8_t) -1 );
     cmp( (int8_t) 247, (int8_t) 3 );
     cmp( (int8_t) 247, (int8_t) -3 );
     cmp( (int8_t) -247, (int8_t) 3 );
@@ -83,6 +85,7 @@ int main( int argc, char * argv[] )
     cmp( (uint16_t) -1, (uint16_t) 3 );
     cmp( (uint16_t) -1, (uint16_t) -3 );
     cmp( (uint16_t) -1, (uint16_t) -1 );
+    cmp( (uint16_t) 1, (uint16_t) -1 );
     cmp( (uint16_t) 247, (uint16_t) 3 );
     cmp( (uint16_t) 247, (uint16_t) -3 );
     cmp( (uint16_t) -247, (uint16_t) 3 );
@@ -101,6 +104,7 @@ int main( int argc, char * argv[] )
     cmp( (int16_t) -1, (int16_t) 3 );
     cmp( (int16_t) -1, (int16_t) -3 );
     cmp( (int16_t) -1, (int16_t) -1 );
+    cmp( (int16_t) 1, (int16_t) -1 );
     cmp( (int16_t) 247, (int16_t) 3 );
     cmp( (int16_t) 247, (int16_t) -3 );
     cmp( (int16_t) -247, (int16_t) 3 );
@@ -119,6 +123,7 @@ int main( int argc, char * argv[] )
     cmp( (uint32_t) -1, (uint32_t) 3 );
     cmp( (uint32_t) -1, (uint32_t) -3 );
     cmp( (uint32_t) -1, (uint32_t) -1 );
+    cmp( (uint32_t) 1, (uint32_t) -1 );
     cmp( (uint32_t) 247, (uint32_t) 3 );
     cmp( (uint32_t) 247, (uint32_t) -3 );
     cmp( (uint32_t) -247, (uint32_t) 3 );
@@ -137,6 +142,7 @@ int main( int argc, char * argv[] )
     cmp( (int32_t) -1, (int32_t) 3 );
     cmp( (int32_t) -1, (int32_t) -3 );
     cmp( (int32_t) -1, (int32_t) -1 );
+    cmp( (int32_t) 1, (int32_t) -1 );
     cmp( (int32_t) 247, (int32_t) 3 );
     cmp( (int32_t) 247, (int32_t) -3 );
     cmp( (int32_t) -247, (int32_t) 3 );
@@ -155,6 +161,7 @@ int main( int argc, char * argv[] )
     cmp( (uint64_t) -1, (uint64_t) 3 );
     cmp( (uint64_t) -1, (uint64_t) -3 );
     cmp( (uint64_t) -1, (uint64_t) -1 );
+    cmp( (uint64_t) 1, (uint64_t) -1 );
     cmp( (uint64_t) 247, (uint64_t) 3 );
     cmp( (uint64_t) 247, (uint64_t) -3 );
     cmp( (uint64_t) -247, (uint64_t) 3 );
@@ -173,6 +180,7 @@ int main( int argc, char * argv[] )
     cmp( (int64_t) -1, (int64_t) 3 );
     cmp( (int64_t) -1, (int64_t) -3 );
     cmp( (int64_t) -1, (int64_t) -1 );
+    cmp( (int64_t) 1, (int64_t) -1 );
     cmp( (int64_t) 247, (int64_t) 3 );
     cmp( (int64_t) 247, (int64_t) -3 );
     cmp( (int64_t) -247, (int64_t) 3 );
