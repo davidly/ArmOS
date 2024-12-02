@@ -1,4 +1,4 @@
-Mon Dec  2 08:01:56 PST 2024
+Mon Dec  2 09:35:50 PST 2024
 c_tests/bin0/tcmp
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -134,6 +134,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 0 lt 1 eq 0 le 1 ge 0
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
 c_tests/bin1/tcmp
@@ -273,6 +294,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
 c_tests/bin2/tcmp
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -408,6 +450,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 0 lt 1 eq 0 le 1 ge 0
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
 c_tests/bin3/tcmp
@@ -547,6 +610,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
 c_tests/binfast/tcmp
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -682,6 +766,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 0 lt 1 eq 0 le 1 ge 0
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 0 ge 1
+  gt 0 lt 0 eq 1 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
 c_tests/bin0/e
@@ -2750,30 +2855,30 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 35, sec 57
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 35, sec 57
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 35, sec 57
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 35, sec 57
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 35, sec 57
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 35, sec 57
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 35, sec 57
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 35, sec 57
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 35, sec 57
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 35, sec 57
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 35, sec 57
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/bin1/tm
@@ -3131,7 +3236,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115104228782838925952666189789578010509155762176.000000
@@ -3153,7 +3258,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115104228782838925952666189789578010509155762176.000000
@@ -3175,7 +3280,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115104228782838925952666189789578010509155762176.000000
@@ -3197,7 +3302,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115104228782838925952666189789578010509155762176.000000
@@ -3219,7 +3324,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115100744291401655542800324833597909202670452736.000000
@@ -4508,20 +4613,20 @@ sleep duration 0xc8
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 870, kernel time: 120
-getrusage user time in ms: 876, system time 123
+  user time in ms: 830, kernel time: 170
+getrusage user time in ms: 831, system time 171
 sleepy time ended with great success
 c_tests/bin1/sleeptm
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc8
   sleep duration in milliseconds: 2000
-  user time: 0, kernel time: 1
+  user time: 0, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 890, kernel time: 120
-getrusage user time in ms: 890, system time 124
+  user time in ms: 800, kernel time: 190
+getrusage user time in ms: 807, system time 198
 sleepy time ended with great success
 c_tests/bin2/sleeptm
 this test should take about 3 seconds to complete
@@ -4532,8 +4637,8 @@ sleep duration 0xc8
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 840, kernel time: 150
-getrusage user time in ms: 846, system time 156
+  user time in ms: 870, kernel time: 130
+getrusage user time in ms: 870, system time 135
 sleepy time ended with great success
 c_tests/bin3/sleeptm
 this test should take about 3 seconds to complete
@@ -4544,8 +4649,8 @@ sleep duration 0xc8
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 860, kernel time: 130
-getrusage user time in ms: 868, system time 131
+  user time in ms: 840, kernel time: 150
+getrusage user time in ms: 847, system time 159
 sleepy time ended with great success
 c_tests/binfast/sleeptm
 this test should take about 3 seconds to complete
@@ -4556,8 +4661,8 @@ sleep duration 0xc8
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 780, kernel time: 210
-getrusage user time in ms: 787, system time 219
+  user time in ms: 820, kernel time: 170
+getrusage user time in ms: 826, system time 179
 sleepy time ended with great success
 c_tests/bin0/tatomic
 test atomic completed with great success
@@ -4791,7 +4896,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-982 ms for 1 iterations
+987 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4818,7 +4923,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-201 ms for 1 iterations
+200 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4845,7 +4950,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-177 ms for 1 iterations
+178 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4872,7 +4977,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-198 ms for 1 iterations
+199 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4941,19 +5046,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   14.830612ms
+serial runtime:   14.990402ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   3.988203ms
+serial runtime:   3.9736ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   2.843502ms
+serial runtime:   2.745401ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.187302ms
+serial runtime:   2.1428ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -5216,4 +5321,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Mon Dec  2 08:02:43 PST 2024
+Mon Dec  2 09:36:36 PST 2024
