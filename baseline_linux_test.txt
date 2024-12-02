@@ -1,4 +1,4 @@
-Sun Dec  1 14:00:24 PST 2024
+Mon Dec  2 08:01:56 PST 2024
 c_tests/bin0/tcmp
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -2750,30 +2750,30 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 17, min 0, sec 31
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 22, min 0, sec 31
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 17, min 0, sec 31
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 22, min 0, sec 31
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 17, min 0, sec 31
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 22, min 0, sec 31
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 17, min 0, sec 31
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 22, min 0, sec 31
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 17, min 0, sec 31
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 14, min 0, sec 31
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 22, min 0, sec 31
+before TZ is set: tz: '(null)', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 11, min 2, sec 3
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 8, min 2, sec 3
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 16, min 2, sec 3
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/bin1/tm
@@ -3345,6 +3345,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -3467,6 +3547,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -3589,6 +3749,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -3711,6 +3951,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -3833,6 +4153,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -4108,20 +4508,20 @@ sleep duration 0xc8
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 900, kernel time: 90
-getrusage user time in ms: 909, system time 91
+  user time in ms: 870, kernel time: 120
+getrusage user time in ms: 876, system time 123
 sleepy time ended with great success
 c_tests/bin1/sleeptm
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc8
   sleep duration in milliseconds: 2000
-  user time: 0, kernel time: 0
+  user time: 0, kernel time: 1
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 820, kernel time: 170
-getrusage user time in ms: 829, system time 174
+  user time in ms: 890, kernel time: 120
+getrusage user time in ms: 890, system time 124
 sleepy time ended with great success
 c_tests/bin2/sleeptm
 this test should take about 3 seconds to complete
@@ -4132,8 +4532,8 @@ sleep duration 0xc8
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 850, kernel time: 150
-getrusage user time in ms: 855, system time 151
+  user time in ms: 840, kernel time: 150
+getrusage user time in ms: 846, system time 156
 sleepy time ended with great success
 c_tests/bin3/sleeptm
 this test should take about 3 seconds to complete
@@ -4144,8 +4544,8 @@ sleep duration 0xc8
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 810, kernel time: 190
-getrusage user time in ms: 815, system time 191
+  user time in ms: 860, kernel time: 130
+getrusage user time in ms: 868, system time 131
 sleepy time ended with great success
 c_tests/binfast/sleeptm
 this test should take about 3 seconds to complete
@@ -4156,8 +4556,8 @@ sleep duration 0xc8
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 880, kernel time: 120
-getrusage user time in ms: 883, system time 123
+  user time in ms: 780, kernel time: 210
+getrusage user time in ms: 787, system time 219
 sleepy time ended with great success
 c_tests/bin0/tatomic
 test atomic completed with great success
@@ -4391,7 +4791,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-1,131 ms for 1 iterations
+982 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4418,7 +4818,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-222 ms for 1 iterations
+201 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4445,7 +4845,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-198 ms for 1 iterations
+177 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4472,7 +4872,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-219 ms for 1 iterations
+198 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4499,7 +4899,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-222 ms for 1 iterations
+197 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -4541,19 +4941,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   17.729697ms
+serial runtime:   14.830612ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   4.362099ms
+serial runtime:   3.988203ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   3.172099ms
+serial runtime:   2.843502ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.551299ms
+serial runtime:   2.187302ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -4816,4 +5216,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Sun Dec  1 14:01:12 PST 2024
+Mon Dec  2 08:02:43 PST 2024
