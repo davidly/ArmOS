@@ -17,10 +17,9 @@ struct Arm64;
 
 // callbacks when instructions are executed
 
-extern void arm64_invoke_svc( Arm64 & cpu );                                               // called when the svc instruction is executed
-extern const char * arm64_symbol_lookup( uint64_t address, uint64_t & offset );            // returns the best guess for a symbol name and offset for the address
-extern void arm64_hard_termination( Arm64 & cpu, const char *pcerr, uint64_t error_value ); // show an error and exit
-extern void arm64_check_ptracenow( Arm64 & cpu );
+extern void emulator_invoke_svc( Arm64 & cpu );                                               // called when the svc instruction is executed
+extern const char * emulator_symbol_lookup( uint64_t address, uint64_t & offset );            // returns the best guess for a symbol name and offset for the address
+extern void emulator_hard_termination( Arm64 & cpu, const char *pcerr, uint64_t error_value ); // show an error and exit
 
 typedef uint8_t vec16_t[ 16 ];  // int128 would be better
 
@@ -100,10 +99,10 @@ struct Arm64
             uint8_t * r = membase + offset;
 
             if ( r >= beyond )
-                arm64_hard_termination( *this, "memory reference beyond address space:", offset );
+                emulator_hard_termination( *this, "memory reference beyond address space:", offset );
 
             if ( r < mem )
-                arm64_hard_termination( *this, "memory reference prior to address space:", offset );
+                emulator_hard_termination( *this, "memory reference prior to address space:", offset );
 
             return r;
 

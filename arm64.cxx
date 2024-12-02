@@ -742,7 +742,7 @@ void Arm64::trace_state()
 {
     static const char * previous_symbol = 0;
     uint64_t symbol_offset;
-    const char * symbol_name = arm64_symbol_lookup( pc, symbol_offset );
+    const char * symbol_name = emulator_symbol_lookup( pc, symbol_offset );
     if ( symbol_name == previous_symbol )
         symbol_name = "";
     else
@@ -3123,7 +3123,7 @@ __declspec(noinline)
 #endif
 void Arm64::unhandled()
 {
-    arm64_hard_termination( *this, "opcode not handled:", op );
+    emulator_hard_termination( *this, "opcode not handled:", op );
 } //unhandled
 
 uint64_t Arm64::run( uint64_t max_cycles )
@@ -3135,19 +3135,19 @@ uint64_t Arm64::run( uint64_t max_cycles )
     {
         #ifndef NDEBUG
             if ( regs[ 31 ] <= ( stack_top - stack_size ) )
-                arm64_hard_termination( *this, "stack pointer is below stack memory:", regs[ 31 ] );
+                emulator_hard_termination( *this, "stack pointer is below stack memory:", regs[ 31 ] );
 
             if ( regs[ 31 ] > stack_top )
-                arm64_hard_termination( *this, "stack pointer is above the top of its starting point:", regs[ 31 ] );
+                emulator_hard_termination( *this, "stack pointer is above the top of its starting point:", regs[ 31 ] );
 
             if ( pc < base )
-                arm64_hard_termination( *this, "pc is lower than memory:", pc );
+                emulator_hard_termination( *this, "pc is lower than memory:", pc );
 
             if ( pc >= ( base + mem_size - stack_size ) )
-                arm64_hard_termination( *this, "pc is higher than it should be:", pc );
+                emulator_hard_termination( *this, "pc is higher than it should be:", pc );
 
             if ( 0 != ( regs[ 31 ] & 0xf ) ) // by convention, arm64 stacks are 16-byte aligned
-                arm64_hard_termination( *this, "the stack pointer isn't 16-byte aligned:", regs[ 31 ] );
+                emulator_hard_termination( *this, "the stack pointer isn't 16-byte aligned:", regs[ 31 ] );
         #endif
 
         op = getui32( pc );
@@ -3173,7 +3173,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 if ( 0 == bits23to16 )
                 {
                     uint64_t imm16 = op & 0xffff;
-                    arm64_hard_termination( *this, "permanently undefined instruction encountered", imm16 );
+                    emulator_hard_termination( *this, "permanently undefined instruction encountered", imm16 );
                 }
                 else
                     unhandled();
@@ -4881,7 +4881,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint8_t op2 = (uint8_t) ( ( op >> 2 ) & 7 );
                     uint8_t ll = (uint8_t) ( op & 3 );
                     if ( ( 0 == op2 ) && ( 1 == ll ) ) // svc imm16 supervisor call
-                        arm64_invoke_svc( *this );
+                        emulator_invoke_svc( *this );
                     else
                         unhandled();
                 }

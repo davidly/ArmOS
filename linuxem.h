@@ -1,12 +1,12 @@
 #pragma once
 
-#define armos_sys_rand               0x2000
-#define armos_sys_print_double       0x2001
-#define armos_sys_trace_instructions 0x2002
-#define armos_sys_exit               0x2003
-#define armos_sys_print_text         0x2004
-#define armos_sys_get_datetime       0x2005
-#define armos_sys_print_int64        0x2006
+#define emulator_sys_rand               0x2000
+#define emulator_sys_print_double       0x2001
+#define emulator_sys_trace_instructions 0x2002
+#define emulator_sys_exit               0x2003
+#define emulator_sys_print_text         0x2004
+#define emulator_sys_get_datetime       0x2005
+#define emulator_sys_print_int64        0x2006
 
 // Linux syscall numbers differ by ISA. InSAne. These are RISC and ARM64, which are the same!
 // Note that there are differences between these two sets. which is correct?
@@ -75,7 +75,7 @@
 #define SYS_getrandom 278
 #define SYS_rseq 293
 
-// open apparently undefined for riscv? the old g++ compiler/runtime uses this value
+// open apparently undefined for riscv? the old RISC-V64 g++ compiler/runtime uses these syscalls
 
 #define SYS_open 1024
 #define SYS_link 1025
@@ -85,14 +85,4 @@
 #define SYS_lstat 1039
 #define SYS_time 1062
 
-extern "C" void armos_printf( const char * fmt, ... );
-extern "C" int armos_sprintf( char * pc, const char * fmt, ... );
-extern "C" void armos_print_text( const char * pc );
-extern "C" uint64_t armos_rand( void );
-extern "C" uint64_t armos_exit( int code );
-extern "C" char * armos_floattoa( char *buffer, float f, int precision );
-extern "C" void armos_print_double( double d );
-extern "C" int armos_gettimeofday( struct timeval * p, void * x );
-extern "C" bool armos_trace_instructions( bool enable );
-extern "C" void armos_sp_add( uint64_t val );
 
