@@ -4,7 +4,7 @@ Runs Linux Arm64 binaries on platforms including Windows on x32/AMD64/ARM64, mac
 ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on other platforms. It emulates the Arm64 ISA and Linux syscalls sufficiently for many small apps to work.
 
 ## Caveats
-* Only a subset (perhaps 40%) of Base and SIMD&FP instructions are implemented. Specifically, those instructions the g++ and Rust compilers emit for the test apps in this repo along with their language runtimes. It's not too hard to find new C++ or Rust programs that won't run because the instructions they require aren't implemented.
+* Only a subset (perhaps 50%) of Base and SIMD&FP instructions are implemented. Specifically, those instructions the g++ and Rust compilers emit for the test apps in this repo along with their language runtimes. It's not too hard to find new C++ or Rust programs that won't run because the instructions they require aren't implemented.
 * Linux emulation is limited to one core with one thread. Syscalls for time, file system, mmap, brk, and other basic services exist, but there is no support for threads, child process creation, networking, and a long list of other basic system services.
 * Apps must be linked static; ArmOS doesn't load dependent libraries at runtime. Use -static with ld or g++. Use -C target-feature=+crt-static for Rust apps.
 
@@ -66,6 +66,8 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     fileops     tests file I/O using fopen/fread/fwrite/fclose
     tmmap       tests mmap, mremap, munmap Linux syscalls using patterns clib uses for its heap
     tsimplef    simple test for floats
+    tatomoc     tests some C++ atomic operations and mutexes
+    sleeptm     tests nanosleep(), times(), and getrusage()
     tstr        tests various string functions: strlen, strchr, strrchr, memcpy, memcmp, printf
     ttime       tests localtime() and timezones
     tm          tests malloc and free
@@ -81,7 +83,7 @@ ArmOS is a C++ app that can load and run standard/ELF Linux Arm64 binaries on ot
     an          finds anagrams
     words.txt   list of English words used by various test programs including an
     ba          simplistic BASIC interpreter and compiler (targets 6502, 8080, 8086, x32, x64, arm32, arm64, RISC-V64)
-    mm          floating point matrix multiplication
+    mm          floating point and integer matrix multiplication
     tp.bas      BASIC test program for BA
     mall.sh     builds the C/C++ test apps
     
