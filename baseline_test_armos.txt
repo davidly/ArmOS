@@ -1,4 +1,4 @@
-Sun 12/01/2024 13:52:15.74 
+Mon 12/02/2024  7:39:45.14 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -555,10 +555,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 18
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 18
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 18
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 18
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 39, sec 47
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 39, sec 47
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 39, sec 47
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 39, sec 47
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -691,6 +691,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -814,12 +894,12 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 0, kernel time: 0
+  user time: 1, kernel time: 1
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 600, kernel time: 0
-getrusage user time in ms: 609, system time 0
+  user time in ms: 420, kernel time: 10
+getrusage user time in ms: 421, system time 15
 sleepy time ended with great success
 test c_tests\bin0\tatomic 
 test atomic completed with great success
@@ -869,7 +949,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-844 ms for 1 iterations
+823 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1450,10 +1530,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 29
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 29
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 29
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 29
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 39, sec 59
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 39, sec 59
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 39, sec 59
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 39, sec 59
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1586,6 +1666,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -1709,12 +1869,12 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 0, kernel time: 0
+  user time: 1, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 650, kernel time: 0
-getrusage user time in ms: 656, system time 0
+  user time in ms: 890, kernel time: 0
+getrusage user time in ms: 890, system time 0
 sleepy time ended with great success
 test c_tests\bin1\tatomic 
 test atomic completed with great success
@@ -1764,7 +1924,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-182 ms for 1 iterations
+188 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2345,10 +2505,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 38
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 38
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 38
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 38
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 40, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 40, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 40, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 40, sec 8
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2481,6 +2641,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -2604,12 +2844,12 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc8
   sleep duration in milliseconds: 2000
-  user time: 0, kernel time: 0
+  user time: 1, kernel time: 1
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 920, kernel time: 0
-getrusage user time in ms: 921, system time 0
+  user time in ms: 760, kernel time: 10
+getrusage user time in ms: 765, system time 15
 sleepy time ended with great success
 test c_tests\bin2\tatomic 
 test atomic completed with great success
@@ -2659,7 +2899,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-164 ms for 1 iterations
+167 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3240,10 +3480,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 46
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 46
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 46
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 46
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 40, sec 16
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 40, sec 16
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 40, sec 16
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 40, sec 16
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -3376,6 +3616,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -3499,12 +3819,12 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 3, kernel time: 0
+  user time: 1, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 590, kernel time: 0
-getrusage user time in ms: 593, system time 0
+  user time in ms: 820, kernel time: 0
+getrusage user time in ms: 828, system time 0
 sleepy time ended with great success
 test c_tests\bin3\tatomic 
 test atomic completed with great success
@@ -3554,7 +3874,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-183 ms for 1 iterations
+184 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4135,10 +4455,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 1, hour 13, min 52, sec 55
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 1, hour 16, min 52, sec 55
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 1, hour 13, min 52, sec 55
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 1, hour 21, min 52, sec 55
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 40, sec 25
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 40, sec 25
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 40, sec 25
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 40, sec 25
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -4271,6 +4591,86 @@ matrix double 17: 238612.000000
 matrix double 18: 302274.000000
 matrix double 19: 376846.000000
 matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
 matrix int32_t 1: 4
 matrix int32_t 2: 50
 matrix int32_t 3: 228
@@ -4394,12 +4794,12 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 0, kernel time: 0
+  user time: 3, kernel time: 1
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 890, kernel time: 0
-getrusage user time in ms: 890, system time 0
+  user time in ms: 960, kernel time: 10
+getrusage user time in ms: 968, system time 15
 sleepy time ended with great success
 test c_tests\binfast\tatomic 
 test atomic completed with great success
@@ -4449,7 +4849,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-180 ms for 1 iterations
+183 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4479,7 +4879,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   16.3564ms
+serial runtime:   15.6475ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -4552,7 +4952,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.3347ms
+serial runtime:   4.2726ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -4625,7 +5025,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.9665ms
+serial runtime:   2.9728ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -4698,7 +5098,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.7133ms
+serial runtime:   2.3796ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -4779,10 +5179,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-245.965012 milliseconds
+258.637024 milliseconds
 test armos 
 starting
-250293 microseconds (-6)
+173412 microseconds (-6)
 1 iterations
 6493 moves
-Sun 12/01/2024 13:53:10.55 
+Mon 12/02/2024  7:40:40.65 

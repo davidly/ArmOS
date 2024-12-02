@@ -791,7 +791,7 @@ void Arm64::trace_state()
             uint64_t n = opbits( 5, 5 );
             uint64_t m = opbits( 16, 5 );
             uint64_t t = opbits( 0, 5 );
-            uint64_t replicate = opbits( 14, 1 );
+            uint64_t replicate = ( 6 == opcode );
             uint64_t S = opbits( 12, 1 );
             uint64_t Q = opbits( 30, 1 );
             uint64_t L = opbits( 22, 1 );
@@ -1050,7 +1050,7 @@ void Arm64::trace_state()
             // FMOV <Vd>.<T>, #<imm>                     ;    FMOV <Vd>.<T>, #<imm>               ;    FMOV <Vd>.2D, #<imm>
             // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>   ;    SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>  ;   SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
             // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ; SSHR <Vd>.<T>, <Vn>.<T>, #<shift>    ;    SHL <Vd>.<T>, <Vn>.<T>, #<shift>
-            // MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
+            // MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ; URSRA <Vd>.<T>, <Vn>.<T>, #<shift>    ;    USRA <Vd>.<T>, <Vn>.<T>, #<shift>
         {
             uint64_t cmode = opbits( 12, 4 );
             uint64_t abc = opbits( 16, 3 );
@@ -1201,8 +1201,18 @@ void Arm64::trace_state()
                 uint64_t opcode = opbits( 12, 4 );
                 uint64_t bits23_22 = opbits( 22, 2 );
                 uint64_t bits15_12 = opbits( 12, 4 );
+                uint64_t immh = opbits( 19, 4 );
 
-                if ( ( ( 1 == bits23_22 || 2 == bits23_22 ) && !bit10 ) &&
+                if ( !bit23 && 0 != immh && 1 == bits15_12 && !bit11 && bit10 ) // USRA <Vd>.<T>, <Vn>.<T>, #<shift>
+                {
+                    uint64_t immb = opbits( 16, 3 );
+                    uint64_t n = opbits( 5, 5 );
+                    uint64_t esize = 8ull << highest_set_bit_nz( immh );
+                    uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
+                    const char * pT = get_sshr_vector_T( immh, Q );
+                    tracer.Trace( "usra v%llu.%s, v%llu.%s, #%llu\n", d, pT, n, pT, shift );
+                }
+                else if ( ( ( 1 == bits23_22 || 2 == bits23_22 ) && !bit10 ) &&
                      ( ( ( 0x4f == hi8 || 0x0f == hi8 ) && 8 == bits15_12 ) ||    // MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
                        ( ( 0x2f == hi8 || 0x6f == hi8 ) && 0 == bits15_12 ) ) )   // MLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
                 {
@@ -1238,7 +1248,6 @@ void Arm64::trace_state()
                 else if ( ( 0x4f == hi8 || 0x0f == hi8 ) && !bit23 && 5 == opcode && !bit11 && bit10 ) // SHL <Vd>.<T>, <Vn>.<T>, #<shift>
                 {
                     uint64_t n = opbits( 5, 5 );
-                    uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
                     uint64_t esize = 8ull << highest_set_bit_nz( immh );
                     uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
@@ -1248,7 +1257,6 @@ void Arm64::trace_state()
                 else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 == opcode && !bit11 && bit10 ) // SSHR <Vd>.<T>, <Vn>.<T>, #<shift>
                 {
                     uint64_t n = opbits( 5, 5 );
-                    uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
                     uint64_t esize = 8ull << highest_set_bit_nz( immh );
                     uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
@@ -1271,7 +1279,6 @@ void Arm64::trace_state()
                 else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 0xa == opcode && !bit11 && bit10 ) // SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
                 {
                     uint64_t n = opbits( 5, 5 );
-                    uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
                     uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                     uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
@@ -1287,7 +1294,6 @@ void Arm64::trace_state()
                 else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 8 == opcode && !bit11 && bit10 ) // SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>
                 {
                     uint64_t n = opbits( 5, 5 );
-                    uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
                     uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                     uint64_t shift = ( 2 * esize ) - ( ( immh << 3 ) | immb );
@@ -1303,7 +1309,6 @@ void Arm64::trace_state()
                 else if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit23 && 0 != bits23_19 && ( 0xa == opcode ) && !bit11 && bit10 ) // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
                 {
                     uint64_t n = opbits( 5, 5 );
-                    uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
                     uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                     if ( 0x7f == hi8 )
@@ -1319,7 +1324,6 @@ void Arm64::trace_state()
                 else if ( ( 0x2f == hi8 || 0x7f == hi8 || 0x6f == hi8 ) && !bit23 && 0 == opcode && !bit11 && bit10 ) // USHR
                 {
                     uint64_t n = opbits( 5, 5 );
-                    uint64_t immh = opbits( 19, 4 );
                     uint64_t immb = opbits( 16, 3 );
                     uint64_t esize = 8ull << highest_set_bit_nz( immh );
                     if ( 0x7f == hi8 )
@@ -3187,7 +3191,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t Q = opbits( 30, 1 );
                 uint64_t L = opbits( 22, 1 );
                 uint64_t index = 0;
-                uint64_t replicate = opbits( 14, 1 );
+                uint64_t replicate = ( 6 == opcode );
                 uint64_t scale = get_bits( opcode, 1, 2 );
                 if ( 3 == scale )
                     scale = size;
@@ -3680,8 +3684,34 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t opcode = opbits( 12, 4 );
                     uint64_t bits23_22 = opbits( 22, 2 );
                     uint64_t bits15_12 = opbits( 12, 4 );
+                    uint64_t immh = opbits( 19, 4 );
 
-                    if ( ( ( 1 == bits23_22 || 2 == bits23_22 ) && !bit10 ) &&
+                    if ( !bit23 && 0 != immh && 1 == bits15_12 && !bit11 && bit10 ) // USRA <Vd>.<T>, <Vn>.<T>, #<shift>
+                    {
+                        uint64_t immb = opbits( 16, 3 );
+                        uint64_t n = opbits( 5, 5 );
+                        uint64_t esize = 8ull << highest_set_bit_nz( immh );
+                        uint64_t ebytes = esize / 8;
+                        uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
+                        uint64_t datasize = 64ull << Q;
+                        uint64_t elements = datasize / esize;
+                        vec16_t target = { 0 };
+                        uint8_t * ptarget = (uint8_t *) &target;
+
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            uint64_t nval = 0;
+                            memcpy( &nval, vreg_ptr( n, e * ebytes ), ebytes );
+                            nval >>= shift;
+                            uint64_t dval = 0;
+                            memcpy( &dval, vreg_ptr( d, e * ebytes ), ebytes );
+                            dval += nval;
+                            memcpy( ptarget + e * ebytes, &dval, ebytes );
+                        }
+
+                        memcpy( vreg_ptr( d, 0 ), ptarget, sizeof( target ) );
+                    }
+                    else if ( ( ( 1 == bits23_22 || 2 == bits23_22 ) && !bit10 ) &&
                          ( ( ( 0x4f == hi8 || 0x0f == hi8 ) && 8 == bits15_12 ) ||    // MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
                            ( ( 0x2f == hi8 || 0x6f == hi8 ) && 0 == bits15_12 ) ) )   // MLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
                     {
@@ -3737,7 +3767,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else if ( ( 0x4f == hi8 || 0x0f == hi8 ) && !bit23 && 5 == opcode && !bit11 && bit10 ) // SHL <Vd>.<T>, <Vn>.<T>, #<shift>
                     {
                         uint64_t n = opbits( 5, 5 );
-                        uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
@@ -3755,7 +3784,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 == opcode && !bit11 && bit10 ) // SSHR <Vd>.<T>, <Vn>.<T>, #<shift>
                     {
                         uint64_t n = opbits( 5, 5 );
-                        uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
@@ -3828,7 +3856,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 0xa == opcode && !bit11 && bit10 ) // SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
                     {
                         uint64_t n = opbits( 5, 5 );
-                        uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t esize_bytes = esize / 8;
@@ -3854,7 +3881,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != bits23_19 && 8 == opcode && !bit11 && bit10 ) // SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>
                     {
                         uint64_t n = opbits( 5, 5 );
-                        uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t esize_bytes = esize / 8;
@@ -3885,7 +3911,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit23 && 0 != bits23_19 && ( 0xa == opcode ) && !bit11 && bit10 ) // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
                     {
                         uint64_t n = opbits( 5, 5 );
-                        uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t esize_bytes = esize / 8;
@@ -3910,7 +3935,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else if ( ( 0x2f == hi8 || 0x7f == hi8 || 0x6f == hi8 ) && !bit23 && !bit15 && !bit14 && !bit13 && !bit12 && !bit11 && bit10 ) // USHR
                     {
                         uint64_t n = opbits( 5, 5 );
-                        uint64_t immh = opbits( 19, 4 );
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         if ( 0x7f == hi8 )
