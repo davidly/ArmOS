@@ -2095,15 +2095,24 @@ void Arm64::trace_state()
                 unhandled();
             break;
         }
-        case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>    ;    FADDP <V><d>, <Vn>.<T>
+        case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>    ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
         {
             uint64_t bits23_10 = opbits( 10, 14 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
+            uint64_t bit23 = opbits( 23, 1 );
+            uint64_t sz = opbits( 22, 1 );
+            uint64_t bit21 = opbits( 21, 1 );
+            uint64_t opcode = opbits( 10, 6 );
 
-            if ( 0x0c36 == bits23_10 || 0x1c36 == bits23_10 ) // FADDP <V><d>, <Vn>.<T>
+            if ( bit23 && bit21 && 0x35 == opcode ) // FABD <V><d>, <V><n>, <V><m>
             {
-                uint64_t sz = opbits( 22, 1 );
+                char width = sz ? 'd' : 's';
+                uint64_t m = opbits( 16, 5 );
+                tracer.Trace( "fabd %c%llu, %c%llu, %c%llu\n", width, d, width, n, width, m );
+            }
+            else if ( 0x0c36 == bits23_10 || 0x1c36 == bits23_10 ) // FADDP <V><d>, <Vn>.<T>
+            {
                 char width = sz ? 'd' : 's';
                 tracer.Trace( "faddp %c%llu, v%llu.2%c\n", width, d, n, width );
             }
@@ -2111,7 +2120,6 @@ void Arm64::trace_state()
                 tracer.Trace( "cmge d%llu, d%llu, #0\n", d, n );
             else if ( 0x0876 == ( bits23_10 & 0x2fff ) )
             {
-                uint64_t sz = opbits( 22, 1 );
                 char width = sz ? 'd' : 's';
                 tracer.Trace( "ucvtf %c%llu, %c%llu\n", width, d, width, n );
             }
@@ -5406,10 +5414,29 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bits23_10 = opbits( 10, 14 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
-    
-                if ( 0x0c36 == bits23_10 || 0x1c36 == bits23_10 ) // FADDP <V><d>, <Vn>.<T>
+                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t sz = opbits( 22, 1 );
+                uint64_t bit21 = opbits( 21, 1 );
+                uint64_t opcode = opbits( 10, 6 );
+
+                if ( bit23 && bit21 && 0x35 == opcode ) // FABD <V><d>, <V><n>, <V><m>     scalar single and double precision
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t m = opbits( 16, 5 );
+                    if ( sz )
+                    {
+                        double result = fabs( vregs[ n ].d - vregs[ m ].d );
+                        zero_vreg( d );
+                        vregs[ d ].d = result;
+                    }
+                    else
+                    {
+                        float result = fabsf( vregs[ n ].f - vregs[ m ].f );
+                        zero_vreg( d );
+                        vregs[ d ].f = result;
+                    }
+                }
+                else if ( 0x0c36 == bits23_10 || 0x1c36 == bits23_10 ) // FADDP <V><d>, <Vn>.<T>
+                {
                     if ( sz )
                     {
                         double result = vreg_getdouble( n, 0 ) + vreg_getdouble( n, 8 );
@@ -5435,7 +5462,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 }
                 else if ( 0x0876 == ( bits23_10 & 0x2fff ) )
                 {
-                    uint64_t sz = opbits( 22, 1 );
                     if ( sz )
                         vregs[ d ].d = (double) vreg_getui64( n, 0 );
                     else
@@ -6278,7 +6304,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         unhandled();
                     else if ( 0 == ftype )
                     {
-                        vregs[ d ].f = (float) fabs( vregs[ n ].f );
+                        vregs[ d ].f = fabsf( vregs[ n ].f );
                         memset( vreg_ptr( d, 4 ), 0, 12 );
                     }
                     else if ( 1 == ftype )

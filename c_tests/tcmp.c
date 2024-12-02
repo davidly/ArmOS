@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <cmath>
+#include <float.h>
 
 //#pragma GCC optimize("O0")
 
@@ -12,6 +14,30 @@ template <class T> void cmp( T a, T b )
     bool ge = ( a >= b );
     printf( "  gt %d lt %d eq %d le %d ge %d\n", gt, lt, eq, le, ge );
 } //cmp
+
+void cmp_double( double a, double b )
+{
+    double diff = a - b;
+    double abs_diff = fabs( diff );
+    bool gt = ( diff > 0.0 && abs_diff > DBL_EPSILON );
+    bool lt = ( diff < 0.0 && abs_diff > DBL_EPSILON );
+    bool eq = ( abs_diff < DBL_EPSILON );
+    bool le = ( diff <= 0.0 || abs_diff < DBL_EPSILON );
+    bool ge = ( diff >= 0.0 || abs_diff < DBL_EPSILON );
+    printf( "  gt %d lt %d eq %d le %d ge %d\n", gt, lt, eq, le, ge );
+} //cmp_double
+
+void cmp_float( float a, float b )
+{
+    float diff = a - b;
+    float abs_diff = fabsf( diff );
+    bool gt = ( diff > 0.0 && abs_diff > FLT_EPSILON );
+    bool lt = ( diff < 0.0 && abs_diff > FLT_EPSILON );
+    bool eq = ( abs_diff < FLT_EPSILON );
+    bool le = ( diff <= 0.0 || abs_diff < FLT_EPSILON );
+    bool ge = ( diff >= 0.0 || abs_diff < FLT_EPSILON );
+    printf( "  gt %d lt %d eq %d le %d ge %d\n", gt, lt, eq, le, ge );
+} //cmp_float
 
 int main( int argc, char * argv[] )
 {
@@ -158,4 +184,15 @@ int main( int argc, char * argv[] )
     cmp( (int64_t) 0x8000000000000001, (int64_t) 0x7ffffffffffffff8 );
     cmp( (int64_t) 0, (int64_t) 0x8000000000000000 );
     cmp( (int64_t) 0x7fffffffffffffff, (int64_t) 0x8000000000000000 );
+
+    printf( "floating point:\n" );
+    float f = -0.5f;
+    double d = -0.5;
+    for ( int i = 0; i < 10; i++ )
+    {
+        cmp_float( f, 0.2f );
+        cmp_double( d, 0.2 );
+        f += 0.1f;
+        d += 0.1;
+    }
 } //main

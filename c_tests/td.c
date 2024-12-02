@@ -61,8 +61,8 @@ extern "C" int main()
     d = log10( 300.0 );
     printf( "log10 of 300: %lf\n", d );
     
-    double b = 2.7;
-    for ( double a = 2.0; a < 3.0; a += 0.1 )
+    double b = 0.2;
+    for ( double a = -0.5; a < 0.5; a += 0.1 )
     {
         if ( a > b )
             printf( "g," );

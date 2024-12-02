@@ -1,4 +1,4 @@
-Mon 12/02/2024  7:39:45.14 
+Mon 12/02/2024  9:13:42.40 
 test c_tests\bin0\tcmp 
 uint8_t:
   gt 0 lt 1 eq 0 le 1 ge 0
@@ -134,6 +134,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 0 lt 1 eq 0 le 1 ge 0
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
 test c_tests\bin0\e 
@@ -555,10 +576,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 39, sec 47
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 39, sec 47
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 39, sec 47
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 39, sec 47
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 13, sec 44
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 13, sec 44
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 13, sec 44
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 13, sec 44
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -629,7 +650,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115104228782838925952666189789578010509155762176.000000
@@ -892,14 +913,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin0\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc9
-  sleep duration in milliseconds: 2010
-  user time: 1, kernel time: 1
+sleep duration 0xc8
+  sleep duration in milliseconds: 2000
+  user time: 0, kernel time: 4
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 420, kernel time: 10
-getrusage user time in ms: 421, system time 15
+  user time in ms: 320, kernel time: 40
+getrusage user time in ms: 328, system time 46
 sleepy time ended with great success
 test c_tests\bin0\tatomic 
 test atomic completed with great success
@@ -949,7 +970,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-823 ms for 1 iterations
+595 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1109,6 +1130,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 0 lt 1 eq 0 le 1 ge 0
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
 test c_tests\bin1\e 
@@ -1530,10 +1572,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 39, sec 59
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 39, sec 59
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 39, sec 59
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 39, sec 59
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 13, sec 53
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 13, sec 53
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 13, sec 53
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 13, sec 53
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -1604,7 +1646,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115104228782838925952666189789578010509155762176.000000
@@ -1869,7 +1911,7 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc9
   sleep duration in milliseconds: 2010
-  user time: 1, kernel time: 0
+  user time: 3, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
@@ -1924,7 +1966,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-188 ms for 1 iterations
+128 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2084,6 +2126,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 0 lt 1 eq 0 le 1 ge 0
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
 test c_tests\bin2\e 
@@ -2505,10 +2568,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 40, sec 8
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 40, sec 8
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 40, sec 8
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 40, sec 8
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 14, sec 1
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 14, sec 1
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 14, sec 1
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 14, sec 1
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -2579,7 +2642,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115104228782838925952666189789578010509155762176.000000
@@ -2844,12 +2907,12 @@ this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
 sleep duration 0xc8
   sleep duration in milliseconds: 2000
-  user time: 1, kernel time: 1
+  user time: 3, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 760, kernel time: 10
-getrusage user time in ms: 765, system time 15
+  user time in ms: 730, kernel time: 0
+getrusage user time in ms: 734, system time 0
 sleepy time ended with great success
 test c_tests\bin2\tatomic 
 test atomic completed with great success
@@ -2899,7 +2962,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-167 ms for 1 iterations
+104 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3059,6 +3122,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 0 lt 1 eq 0 le 1 ge 0
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 0 lt 0 eq 1 le 1 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
 test c_tests\bin3\e 
@@ -3480,10 +3564,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 40, sec 16
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 40, sec 16
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 40, sec 16
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 40, sec 16
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 14, sec 9
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 14, sec 9
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 14, sec 9
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 14, sec 9
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -3554,7 +3638,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115104228782838925952666189789578010509155762176.000000
@@ -3817,14 +3901,14 @@ final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e63
 test c_tests\bin3\sleeptm 
 this test should take about 3 seconds to complete
 clk_tck / number of linux ticks per second: 100
-sleep duration 0xc9
-  sleep duration in milliseconds: 2010
-  user time: 1, kernel time: 0
+sleep duration 0xca
+  sleep duration in milliseconds: 2020
+  user time: 0, kernel time: 0
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 820, kernel time: 0
-getrusage user time in ms: 828, system time 0
+  user time in ms: 810, kernel time: 0
+getrusage user time in ms: 812, system time 0
 sleepy time ended with great success
 test c_tests\bin3\tatomic 
 test atomic completed with great success
@@ -3874,7 +3958,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-184 ms for 1 iterations
+117 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4034,6 +4118,27 @@ int64_t:
   gt 0 lt 1 eq 0 le 1 ge 0
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 0 lt 1 eq 0 le 1 ge 0
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+floating point:
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 1 eq 0 le 1 ge 0
+  gt 0 lt 0 eq 1 le 0 ge 1
+  gt 0 lt 0 eq 1 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
+  gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
   gt 1 lt 0 eq 0 le 0 ge 1
 test c_tests\binfast\e 
@@ -4455,10 +4560,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 7, min 40, sec 25
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 10, min 40, sec 25
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 7, min 40, sec 25
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 15, min 40, sec 25
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 2, hour 9, min 14, sec 16
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 2, hour 12, min 14, sec 16
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 2, hour 9, min 14, sec 16
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 2, hour 17, min 14, sec 16
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -4529,7 +4634,7 @@ asin of 0.3 is 0.304693
 tanh of 2.2 is 0.304693
 log of 0.3: -1.203973
 log10 of 300: 2.477121
-l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
   r high point 3187071009115100744291401655542800324833597909202670452736.000000
@@ -4798,8 +4903,8 @@ sleep duration 0xc9
 busy_work value (this will be somewhat random): 0x1d38e955cd20f8da
   busy duration 0x64
   busy duration in milliseconds: 1000
-  user time in ms: 960, kernel time: 10
-getrusage user time in ms: 968, system time 15
+  user time in ms: 920, kernel time: 10
+getrusage user time in ms: 921, system time 15
 sleepy time ended with great success
 test c_tests\binfast\tatomic 
 test atomic completed with great success
@@ -4849,7 +4954,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-183 ms for 1 iterations
+117 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4879,7 +4984,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   15.6475ms
+serial runtime:   8.9925ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -4952,7 +5057,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.2726ms
+serial runtime:   2.5233ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -5025,7 +5130,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.9728ms
+serial runtime:   1.7883ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -5098,7 +5203,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.3796ms
+serial runtime:   1.4216ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -5179,10 +5284,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-258.637024 milliseconds
+170.598007 milliseconds
 test armos 
 starting
-173412 microseconds (-6)
+122336 microseconds (-6)
 1 iterations
 6493 moves
-Mon 12/02/2024  7:40:40.65 
+Mon 12/02/2024  9:14:29.50 
