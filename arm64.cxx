@@ -6029,6 +6029,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
     
                         set_flags_from_double( result );
                     }
+                    else
+                    {
+                        uint64_t nzcv = opbits( 0, 4 );
+                        set_flags_from_nzcv( nzcv );
+                    }
                 }
                 else if ( 3 == bits21_19 && 0 == bits18_16 ) // FCVTZS <Xd>, <Dn>, #<fbits>
                 {
