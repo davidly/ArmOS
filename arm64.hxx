@@ -21,7 +21,18 @@ extern void emulator_invoke_svc( Arm64 & cpu );                                 
 extern const char * emulator_symbol_lookup( uint64_t address, uint64_t & offset );            // returns the best guess for a symbol name and offset for the address
 extern void emulator_hard_termination( Arm64 & cpu, const char *pcerr, uint64_t error_value ); // show an error and exit
 
-typedef uint8_t vec16_t[ 16 ];  // int128 would be better
+typedef struct vec16_t
+{
+    union
+    {
+        uint64_t ui64[ 2 ];
+        uint32_t ui32[ 4 ];
+        uint16_t ui16[ 8 ];
+        uint8_t ui8[ 16 ];
+        double d[ 2 ];
+        float f[ 4 ];
+    };
+} vec16_t;
 
 struct Arm64
 {
@@ -40,23 +51,15 @@ struct Arm64
         mem_size = memory.size();
         beyond = mem + memory.size();              // addresses beyond and later are illegal
         membase = mem - base;                      // real pointer to the start of the app's memory (prior to offset)
-        memset( vec_ones, 0xff, sizeof( vec_ones ) );
+        memset( &vec_ones, 0xff, sizeof( vec_ones ) );
     } //Arm64
 
     uint64_t run( uint64_t max_cycles );
     const char * reg_name( uint64_t reg );
     const char * vreg_name( uint64_t reg );
 
-    union floating
-    {
-        uint16_t h;
-        float f;
-        double d;
-        vec16_t b16;
-    };
-
     uint64_t regs[ 32 ];            // x0 through x31. x31 is sp. XZR references to x31 are handled in code
-    floating vregs[ 32 ];           // v0 through v31
+    vec16_t vregs[ 32 ];            // v0 through v31
     uint64_t pc;
     uint64_t tpidr_el0;             // thread id, can be set and retrieved by apps via msr/mrs tpidr_el0.
     uint64_t fpcr;                  // floating point control register
@@ -181,7 +184,7 @@ struct Arm64
     ElementComparisonResult compare_vector_elements( uint8_t * pl, uint8_t * pr, uint64_t width, bool unsigned_compare );
     uint8_t * vreg_ptr( uint64_t reg, uint64_t offset )
     {
-        uint8_t * pv = (uint8_t *) vregs[ reg ].b16;
+        uint8_t * pv = (uint8_t *) & ( vregs[ reg ] );
         return pv + offset;
     }
     void zero_vreg( uint64_t reg ) { memset( vreg_ptr( reg, 0 ), 0, sizeof( vec16_t ) ); }
