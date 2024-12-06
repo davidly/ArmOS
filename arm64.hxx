@@ -149,12 +149,6 @@ struct Arm64
         return ( val & ( ( 1ull << len ) - 1 ) );
     } //opbits
 
-    // when inlined, the compiler uses btc for bits. when non-inlined it does the slow thing
-    // bits is the 0-based high bit that will be extended to the left.
-
-#ifdef _MSC_VER
-    __forceinline
-#endif
     uint64_t openai_add_with_carry64( uint64_t x, uint64_t y, bool carry, bool setflags );
     uint64_t add_with_carry64( uint64_t x, uint64_t y, bool carry, bool setflags );
     uint32_t add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags );
@@ -168,11 +162,7 @@ struct Arm64
     uint64_t val_reg_or_zr( uint64_t r );
     const char * render_flags();
     ElementComparisonResult compare_vector_elements( uint8_t * pl, uint8_t * pr, uint64_t width, bool unsigned_compare );
-    uint8_t * vreg_ptr( uint64_t reg, uint64_t offset )
-    {
-        uint8_t * pv = (uint8_t *) & ( vregs[ reg ] );
-        return pv + offset;
-    }
+    uint8_t * vreg_ptr( uint64_t reg, uint64_t offset ) { return offset + (uint8_t *) & ( vregs[ reg ] ); }
     void zero_vreg( uint64_t reg ) { vregs[ reg ] = vec_zeroes; }
     uint64_t adv_simd_expand_imm( uint64_t op, uint64_t cmode, uint64_t imm8 );
     uint64_t replicate_bytes( uint64_t val, uint64_t byte_len );

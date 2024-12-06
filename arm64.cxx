@@ -79,7 +79,7 @@ Arm64::FPRounding Arm64::fp_decode_rm( uint64_t rm )
     if ( 3 == rm )
         return FPRounding_NEGINF;
     unhandled();
-    return FPRounding_TIEEVEN;
+    return FPRounding_TIEEVEN; // keep the compiler happy
 } //fp_decode_rm
 
 Arm64::FPRounding Arm64::fp_decode_rmode( uint64_t rmode ) // rmode is what is stored in 23:22 of fpcr
@@ -93,7 +93,7 @@ Arm64::FPRounding Arm64::fp_decode_rmode( uint64_t rmode ) // rmode is what is s
     if ( 3 == rmode )
         return FPRounding_ZERO;
     unhandled();
-    return FPRounding_TIEEVEN;
+    return FPRounding_TIEEVEN; // keep the compiler happy
 } //fp_decode_rmode
 
 const char * get_rmode_text( uint64_t rmode )
@@ -129,7 +129,7 @@ double Arm64::round_double( double d, FPRounding rounding )
         return (double) (int64_t) d;
 
     unhandled();
-    return d;
+    return d; // keep the compiler happy
 } //round_double
 
 int32_t Arm64::double_to_fixed_int32( double d, uint64_t fracbits, FPRounding rounding )
@@ -191,12 +191,12 @@ uint64_t reverse_bytes( uint64_t val, uint64_t n )
     }
 
     return result;
-} //reverse_elems
+} //reverse_bytes
 
 uint64_t get_bits( uint64_t x, uint64_t lowbit, uint64_t len )
 {
     uint64_t val = ( x >> lowbit );
-    if ( 64 == len )
+    if ( 64 == len ) // this actually happens
         return val;
     return ( val & ( ( 1ull << len ) - 1 ) );
 } //get_bits
@@ -223,6 +223,7 @@ uint64_t replicate_bits( uint64_t val, uint64_t len )
 
 int64_t sign_extend( uint64_t x, uint64_t high_bit )
 {
+    assert( high_bit < 63 );
     x &= ( 1ull << ( high_bit + 1 ) ) - 1; // clear bits above the high bit since they may contain noise
     const int64_t m = 1ull << high_bit;
     return ( x ^ m ) - m;
@@ -230,6 +231,7 @@ int64_t sign_extend( uint64_t x, uint64_t high_bit )
 
 uint32_t sign_extend32( uint32_t x, uint32_t high_bit )
 {
+    assert( high_bit < 31 );
     x &= ( 1u << ( high_bit + 1 ) ) - 1; // clear bits above the high bit since they may contain noise
     const int32_t m = ( (uint32_t) 1 ) << high_bit;
     return ( x ^ m ) - m;
@@ -708,15 +710,15 @@ const char * get_cond( uint64_t x )
 char get_byte_len( uint64_t l )
 {
     if ( 1 == l )
-        return 'B';
+        return 'b';
     if ( 2 == l )
-        return 'H';
+        return 'h';
     if ( 4 == l )
-        return 'W';
+        return 'w';
     if ( 8 == l )
-        return 'D';
+        return 'd';
     if ( 16 == l )
-        return 'Q';
+        return 'q';
 
     return '?';
 } //get_byte_len
@@ -746,6 +748,9 @@ char get_fcvt_precision( uint64_t x )
 
 void Arm64::trace_state()
 {
+    if ( !tracer.IsEnabled() ) // can happen when an app enables instruction tracing via a syscall but overall tracing is turned off. 
+        return;
+
     static const char * previous_symbol = 0;
     uint64_t symbol_offset;
     const char * symbol_name = emulator_symbol_lookup( pc, symbol_offset );
@@ -3064,24 +3069,26 @@ uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount 
 
 bool Arm64::check_conditional( uint64_t cond )
 {
-    bool met = false;
-    uint64_t chk = ( ( cond >> 1 ) & 7 ); // switch on bits 4..1
+    assert( cond <= 15 );
 
-    switch ( chk )
+    switch ( cond )
     {
-        case 0: { met = fZ; break; }                      // EQ or NE    EQ = Zero / Equal.                  NE = Not Equal
-        case 1: { met = fC; break; }                      // CS or CC    CS = Carry Set.                     CC = Carry Clear
-        case 2: { met = fN; break; }                      // MI or PL    MI = Minus / Negative.              PL = Plus. Positive or Zero
-        case 3: { met = fV; break; }                      // VS or VC    VS = Overflow Set.                  VC = Overflow Clear
-        case 4: { met = ( fC && !fZ ); break; }           // HI or LS    HI = Unsigned Higher.               LS = Lower or Same
-        case 5: { met = ( fN == fV ); break; }            // GE or LT    GE = Signed Greater Than or Equal.  LT = Signed Less Than
-        case 6: { met = ( ( fN == fV ) && !fZ ); break; } // GT or LE    GT = Signed Greater Than.           LE = Signed Less Than or Equal
-        default: { return true; }                         // AL, regardless of low bit. not used in practice
+        case 0: { return fZ; }                          // EQ = Zero / Equal
+        case 1: { return !fZ; }                         // NE = Not Equal
+        case 2: { return fC; }                          // CS = Carry Set
+        case 3: { return !fC; }                         // CC = Carry Clear
+        case 4: { return fN; }                          // MI = Minus / Negative
+        case 5: { return !fN; }                         // PL = Plus. Positive or Zero
+        case 6: { return fV;  }                         // VS = Overflow Set
+        case 7: { return !fV;  }                        // VC = Overflow Clear
+        case 8: { return ( fC && !fZ ); }               // HI = Unsigned Higher
+        case 9: { return ( !fC || fZ ); }               // LS = Lower or Same
+        case 10: { return ( fN == fV ); }               // GE = Signed Greater Than or Equal
+        case 11: { return ( fN != fV ); }               // LT = Signed Less Than
+        case 12: { return ( ( fN == fV ) && !fZ ); }    // GT = Signed Greater Than
+        case 13: { return ( ( fN != fV ) || fZ ); }     // LE = Signed Less Than or Equal
+        default: { return true; }                       // AL = Always true. not used in practice. 14 and 15
     }
-
-    if ( 0 != ( 1 & cond ) ) // invert if the low bit is set.
-        met = !met;
-    return met;
 } //check_conditional
 
 void Arm64::set_flags_from_double( double result )
@@ -3091,10 +3098,10 @@ void Arm64::set_flags_from_double( double result )
         fN = fZ = false;
         fC = fV = true;
     }
-    else if ( 0.0 == result )
+    else if ( result > 0.0 )
     {
-        fN = fV = false;
-        fZ = fC = true;
+        fN = fZ = fV = false;
+        fC = true;
     }
     else if ( result < 0.0 )
     {
@@ -3103,13 +3110,16 @@ void Arm64::set_flags_from_double( double result )
     }
     else
     {
-        fN = fZ = fV = false;
-        fC = true;
+        fN = fV = false;
+        fZ = fC = true;
     }
 } //set_flags_from_double
 
 void Arm64::trace_vregs()
 {
+    if ( !tracer.IsEnabled() ) // can happen when an app enables instruction tracing via a syscall but overall tracing is turned off. 
+        return;
+
     if ( ! ( g_State & stateTraceInstructions ) )
         return;
 
