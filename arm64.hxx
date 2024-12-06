@@ -132,20 +132,6 @@ struct Arm64
     void setfloat( uint64_t o, float val ) { * (float *) getmem( o ) = val; }
     void setdouble( uint64_t o, double val ) { * (double *) getmem( o ) = val; }
 
-    uint8_t vreg_getui8( uint64_t vreg, uint64_t lowbyte ) { return * (uint8_t *) ( vreg_ptr( vreg, lowbyte ) ); }
-    uint16_t vreg_getui16( uint64_t vreg, uint64_t lowbyte ) { return * (uint16_t *) ( vreg_ptr( vreg, lowbyte ) ); }
-    uint32_t vreg_getui32( uint64_t vreg, uint64_t lowbyte ) { return * (uint32_t *) ( vreg_ptr( vreg, lowbyte ) ); }
-    uint64_t vreg_getui64( uint64_t vreg, uint64_t lowbyte ) { return * (uint64_t *) ( vreg_ptr( vreg, lowbyte ) ); }
-    float vreg_getfloat( uint64_t vreg, uint64_t lowbyte ) { return * (float *) ( vreg_ptr( vreg, lowbyte ) ); }
-    double vreg_getdouble( uint64_t vreg, uint64_t lowbyte ) { return * (double *) ( vreg_ptr( vreg, lowbyte ) ); }
-
-    void vreg_setui8( uint64_t vreg, uint64_t lowbyte, uint8_t val ) { * (uint8_t *) ( vreg_ptr( vreg, lowbyte ) ) = val; }
-    void vreg_setui16( uint64_t vreg, uint64_t lowbyte, uint16_t val ) { * (uint16_t *) ( vreg_ptr( vreg, lowbyte ) ) = val; }
-    void vreg_setui32( uint64_t vreg, uint64_t lowbyte, uint32_t val ) { * (uint32_t *) ( vreg_ptr( vreg, lowbyte ) ) = val; }
-    void vreg_setui64( uint64_t vreg, uint64_t lowbyte, uint64_t val ) { * (uint64_t *) ( vreg_ptr( vreg, lowbyte ) ) = val; }
-    void vreg_setfloat( uint64_t vreg, uint64_t lowbyte, float val ) { * (float *) ( vreg_ptr( vreg, lowbyte ) ) = val; }
-    void vreg_setdouble( uint64_t vreg, uint64_t lowbyte, double val ) { * (double *) ( vreg_ptr( vreg, lowbyte ) ) = val; }
-
     void trace_vregs();
     void force_trace_vregs();
 
@@ -187,7 +173,7 @@ struct Arm64
         uint8_t * pv = (uint8_t *) & ( vregs[ reg ] );
         return pv + offset;
     }
-    void zero_vreg( uint64_t reg ) { memset( vreg_ptr( reg, 0 ), 0, sizeof( vec16_t ) ); }
+    void zero_vreg( uint64_t reg ) { vregs[ reg ] = vec_zeroes; }
     uint64_t adv_simd_expand_imm( uint64_t op, uint64_t cmode, uint64_t imm8 );
     uint64_t replicate_bytes( uint64_t val, uint64_t byte_len );
     void set_flags_from_double( double result );

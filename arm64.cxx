@@ -1991,7 +1991,7 @@ void Arm64::trace_state()
                 tracer.Trace( "ushl, v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             else if ( bit21 && 8 == bits20_17 && 0xe == opcode7 ) // UADDLV <V><d>, <Vn>.<T>
                 tracer.Trace( "uaddlv v%llu, v%llu.%s\n", d, n, pT );
-            else if ( 0x6e == hi8 && 0 == bits23_21 && !bit15 && bit10 )
+            else if ( 0x6e == hi8 && 0 == bits23_21 && !bit15 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
             {
                 uint64_t imm5 = opbits( 16, 5 );
                 uint64_t imm4 = opbits( 11, 5 );
@@ -2485,11 +2485,11 @@ void Arm64::trace_state()
             }
             else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && bit21 && 0 == opbits( 5, 5 ) ) // fmov scalar immediate
             {
-                tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
+                //tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
                 uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8 << ( ftype ^ 2 ) );
                 char width = ( 3 == ftype ) ? 'H' : ( 0 == ftype ) ? 'S' : ( 1 == ftype ) ? 'D' : '?';
                 uint64_t imm8 = opbits( 13, 8 );
-                tracer.Trace( "imm8: %llu == %#llx\n", imm8, imm8 );
+                //tracer.Trace( "imm8: %llu == %#llx\n", imm8, imm8 );
                 uint64_t val = vfp_expand_imm( imm8, fltsize );
                 double dval = 0.0;
                 if ( 1 == ftype )
@@ -3240,8 +3240,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t element = 0;
                         memcpy( &element, getmem( eaddr ), ebytes );
                         element = replicate_bytes( element, ebytes );
-                        vreg_setui64( t, 0, element );
-                        vreg_setui64( t, 8, Q ? element : 0 );
+                        vregs[ t ].ui64[ 0 ] = element;
+                        vregs[ t ].ui64[ 1 ] = Q ? element : 0 ;
                         offs += ebytes;
                         t = ( ( t + 1 ) % 32 );
                     }
@@ -3459,7 +3459,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                 if ( is_ldr )
                 {
-                    memset( vreg_ptr( t, 0 ), 0, sizeof( vec16_t ) );
+                    zero_vreg( t );
                     memcpy( vreg_ptr( t, 0 ), getmem( address ), byte_len );
                 }
                 else
@@ -3500,8 +3500,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                 if ( 1 == L ) // ldp
                 {
-                    memset( vreg_ptr( t1, 0 ), 0, sizeof( vec16_t ) );
-                    memset( vreg_ptr( t2, 0 ), 0, sizeof( vec16_t ) );
+                    zero_vreg( t1 );
+                    zero_vreg( t2 );
                     memcpy( vreg_ptr( t1, 0 ), getmem( address ), byte_len );
                     memcpy( vreg_ptr( t2, 0 ), getmem( address + byte_len ), byte_len );
                 }
@@ -3553,23 +3553,23 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             uint64_t amount = get_bits( cmode, 1, 1 ) * 8;
                             val <<= amount;
                             uint16_t invval = (uint16_t) ~val;
-                            for ( uint64_t o = 0; o < ( Q ? 16 : 8 ); o+= 2 )
-                                vreg_setui16( d, o, invval );
+                            for ( uint64_t o = 0; o < ( Q ? 8 : 4 ); o++ )
+                                vregs[ d ].ui16[ o ] = invval;
                         }
                         else if ( 0 == ( cmode & 9 ) ) // 32-bit shifted immediate
                         {
                             uint64_t amount = get_bits( cmode, 1, 2 ) * 8;
                             val <<= amount;
                             uint32_t invval = (uint32_t) ~val;
-                            for ( uint64_t o = 0; o < ( Q ? 16 : 8 ); o+= 4 )
-                                vreg_setui32( d, o, invval );
+                            for ( uint64_t o = 0; o < ( Q ? 4 : 2 ); o++ )
+                                vregs[ d ].ui32[ o ] = invval;
                         }
                         else if ( 0xc == ( cmode & 0xf ) ) // 32-bit shifting ones
                         {
                             uint64_t invimm = (uint64_t) ~imm;
-                            vreg_setui64( d, 0, invimm );
+                            vregs[ d ].ui64[ 0 ] = invimm;
                             if ( Q )
-                                vreg_setui64( d, 8, invimm );
+                                vregs[ d ].ui64[ 1 ] = invimm;
                         }
                         else
                             unhandled();
@@ -3580,28 +3580,24 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         {
                             if ( 0xe == cmode ) // 64-bit 
                             {
-                                zero_vreg( d );
-                                vreg_setui64( d, 0, imm );
-                                if ( Q )
-                                    vreg_setui64( d, 8, imm );
+                                vregs[ d ].ui64[ 0 ] = imm;
+                                vregs[ d ].ui64[ 1 ] = Q ? imm : 0;
                             }
                             else if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
                             {
                                 uint64_t amount = ( cmode & 2 ) ? 8 : 0;
                                 val <<= amount;
                                 zero_vreg( d );
-                                for ( uint64_t o = 0; o < ( Q ? 16 : 8 ); o += 2 )
-                                    * (uint16_t *) vreg_ptr( d, o ) = (uint16_t) val;
+                                for ( uint64_t o = 0; o < ( Q ? 8 : 4 ); o++ )
+                                    vregs[ d ].ui16[ o ] = (uint16_t) val;
                             }
                             else if ( 0 == ( cmode & 9 ) ) // 32-bit shifted immediate
                             {
                                 uint64_t amount = ( 8 * ( ( cmode >> 1 ) & 3 ) );
                                 val <<= amount;
                                 val = replicate_bytes( val, 4 );
-                                zero_vreg( d );
-                                vreg_setui64( d, 0, val );
-                                if ( Q )
-                                    vreg_setui64( d, 8, val );
+                                vregs[ d ].ui64[ 0 ] = val;
+                                vregs[ d ].ui64[ 1 ] = Q ? val : 0;
                             }
                             else if ( 0xa == ( cmode & 0xe ) )
                             {
@@ -3632,11 +3628,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             imm |= h ? 0xffull : 0;
         
                             if ( ( 0 == Q ) && ( cmode == 0xe ) )
-                                vreg_setui64( d, 0, imm );
+                                vregs[ d ].ui64[ 0 ] = imm;
                             else if ( ( 1 == Q ) && ( cmode == 0xe ) )
                             {
-                                vreg_setui64( d, 0, imm );
-                                vreg_setui64( d, 8, imm );
+                                vregs[ d ].ui64[ 0 ] = imm;
+                                vregs[ d ].ui64[ 1 ] = imm;
                             }
                             else
                                 unhandled();
@@ -3647,18 +3643,18 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         zero_vreg( d );
                         if ( bit29 )
                         {
-                            vreg_setui64( d, 0, imm );
+                            vregs[ d ].ui64[ 0 ] = imm;
                             if ( Q )
-                                vreg_setui64( d, 8, imm );
+                                vregs[ d ].ui64[ 1 ] = imm;
                         }
                         else
                         {
-                            vreg_setui32( d, 0, (uint32_t) imm );
-                            vreg_setui32( d, 4, (uint32_t) imm );
+                            vregs[ d ].ui32[ 0 ] = (uint32_t) imm;
+                            vregs[ d ].ui32[ 1 ] = (uint32_t) imm;
                             if ( Q )
                             {
-                                vreg_setui32( d, 8, (uint32_t) imm );
-                                vreg_setui32( d, 12, (uint32_t) imm );
+                                vregs[ d ].ui32[ 2 ] = (uint32_t) imm;
+                                vregs[ d ].ui32[ 3 ] = (uint32_t) imm;
                             }
                         }
                     }
@@ -3902,11 +3898,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         }
 
                         if ( part )
-                            memcpy( vreg_ptr( d, 8 ), ptarget, sizeof( target ) );
+                            vregs[ d ].ui64[ 1 ] = target.ui64[ 0 ];
                         else
                         {
-                            vregs[ d ] = target;
-                            vreg_setui64( d, 8, 0 );
+                            vregs[ d ].ui64[ 0 ] = target.ui64[ 0 ];
+                            vregs[ d ].ui64[ 1 ] = 0;
                         }
                     }
                     else if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit23 && 0 != bits23_19 && ( 0xa == opcode ) && !bit11 && bit10 ) // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
@@ -4667,7 +4663,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     }
 
                     assert( 0 != dpos );
-                    if ( get_bit( result, dpos - 1 ) && ( 0x13 == hi8 || 0x93 == hi8 ) ) // SBFM
+                    if ( ( 0x13 == hi8 || 0x93 == hi8 ) && get_bit( result, dpos - 1 ) ) // SBFM
                     {
                         //tracer.Trace( "  dpos %llu, most significant bit set, sbfm, extending %llx\n", dpos, result );
                         result = sign_extend( result, dpos - 1 );
@@ -4978,24 +4974,13 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     ebytes = esize / 8;
                     elements = datasize / esize;
                     vec16_t target = { 0 };
-                    uint8_t * ptarget = (uint8_t *) &target;
 
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         if ( 4 == ebytes )
-                        {
-                            float fval;
-                            memcpy( &fval, vreg_ptr( n, e * ebytes ), 4 );
-                            fval = -fval;
-                            memcpy( ptarget + e * 4, &fval, 4 );
-                        }
+                            target.f[ e ] = - vregs[ n ].f[ e ];
                         else if ( 8 == ebytes )
-                        {
-                            double dval;
-                            memcpy( &dval, vreg_ptr( n, e * ebytes ), 8 );
-                            dval = -dval;
-                            memcpy( ptarget + e * 8, &dval, 8 );
-                        }
+                            target.d[ e ] = - vregs[ n ].d[ e ];
                         else
                             unhandled();
                     }
@@ -5008,43 +4993,22 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     ebytes = esize / 8;
                     elements = datasize / esize;
                     vec16_t target = { 0 };
-                    uint8_t * ptarget = (uint8_t *) &target;
                     // tracer.Trace( "faddp, ebytes %llu, elements %llu\n", ebytes, elements );
                     for ( uint64_t e = 0; e < elements / 2; e++ )
                     {
                         if ( 8 == ebytes )
-                        {
-                            double d1 = vreg_getdouble( m, 8 * 2 * e );
-                            double d2 = vreg_getdouble( m, 8 * ( 1 + 2 * e ) );
-                            double result = d1 + d2;
-                            memcpy( ptarget + e * 8, &result, 8 );
-                        }
+                            target.d[ e ] = vregs[ m ].d[ 2 * e ] + vregs[ m ].d[ 2 * e + 1 ];
                         else if ( 4 == ebytes )
-                        {
-                            float f1 = vreg_getfloat( m, 4 * 2 * e );
-                            float f2 = vreg_getfloat( m, 4 * ( 1 + 2 * e ) );
-                            float result = f1 + f2;
-                            memcpy( ptarget + e * 4, &result, 4 );
-                        }
+                            target.f[ e ] = vregs[ m ].f[ 2 * e ] + vregs[ m ].f[ 2 * e + 1 ];
                         else
                             unhandled();
                     }
                     for ( uint64_t e = 0; e < elements / 2; e++ )
                     {
                         if ( 8 == ebytes )
-                        {
-                            double d1 = vreg_getdouble( n, 8 * 2 * e );
-                            double d2 = vreg_getdouble( n, 8 * ( 2 * e + 1 ) );
-                            double result = d1 + d2;
-                            memcpy( ptarget + ( ( elements / 2 ) + e ) * 8, &result, 8 );
-                        }
+                            target.d[ ( elements / 2 ) + e ] = vregs[ m ].d[ 2 * e ] + vregs[ m ].d[ 2 * e + 1 ];
                         else if ( 4 == ebytes )
-                        {
-                            float f1 = vreg_getfloat( n, 4 * 2 * e );
-                            float f2 = vreg_getfloat( n, 4 * ( 2 * e + 1 ) );
-                            float result = f1 + f2;
-                            memcpy( ptarget + ( ( elements / 2 ) + e ) * 4, &result, 4 );
-                        }
+                            target.f[ ( elements / 2 ) + e ] = vregs[ m ].f[ 2 * e ] + vregs[ m ].f[ 2 * e + 1 ];
                         else
                             unhandled();
                     }
@@ -5059,7 +5023,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     {
                         uint64_t a = 0;
                         memcpy( &a, pn + ( e * ebytes ), ebytes );
-                        int8_t shift = vreg_getui8( m, e * ebytes );
+                        int8_t shift = vregs[ m ].ui8[ e * ebytes ];
                         if ( shift < 0 )
                             a >>= -shift;
                         else
@@ -5082,7 +5046,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     zero_vreg( d );
                     vregs[ d ].ui64[ 0 ] = sum;
                 }
-                else if ( 0x6e == hi8 && 0 == bits23_21 && !bit15 && bit10 )
+                else if ( 0x6e == hi8 && 0 == bits23_21 && !bit15 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
                 {
                     uint64_t imm5 = opbits( 16, 5 );
                     uint64_t imm4 = opbits( 11, 5 );
@@ -5154,9 +5118,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     elements = Q ? 2 : 1;
                     for ( uint64_t x = 0; x < elements; x++ )
                     {
-                        uint64_t dval = vreg_getui64( d, 8 * x );
-                        uint64_t nval = vreg_getui64( n, 8 * x );
-                        uint64_t mval = vreg_getui64( m, 8 * x );
+                        uint64_t dval = vregs[ d ].ui64[ x ];
+                        uint64_t nval = vregs[ n ].ui64[ x ];
+                        uint64_t mval = vregs[ m ].ui64[ x ];
                         //tracer.Trace( "x: %llu, dval %#llx, nval %#llx, mval %#llx\n", x, dval, nval, mval );
                         uint64_t result = 0;
                         for ( uint64_t b = 0; b < 64; b++ )
@@ -5165,7 +5129,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             result = plaster_bit( result, b, bbit );
                         }
                         //tracer.Trace( "  bsl writing %#llx at offset %llu\n", result, 8 * x );
-                        vreg_setui64( d, 8 * x, result );
+                        vregs[ d ].ui64[ x ] = result;
                     }
                 }
                 else if ( bit21 && 0x37 == opcode ) // FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
@@ -5200,10 +5164,10 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         if ( 64 != position ) // not implemented
                             unhandled();
 
-                        uint64_t nval = vreg_getui64( n, 8 );
-                        uint64_t mval = vreg_getui64( m, 0 );
-                        vreg_setui64( d, 0, nval );
-                        vreg_setui64( d, 8, mval );
+                        uint64_t nval = vregs[ n ].ui64[ 1 ];
+                        uint64_t mval = vregs[ m ].ui64[ 0 ];
+                        vregs[ d ].ui64[ 0 ] = nval;
+                        vregs[ d ].ui64[ 1 ] = mval;
                     }
                     else
                        unhandled();
@@ -5344,16 +5308,14 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t sz = opbits( 22, 1 );
                     if ( sz )
-                        vregs[ d ].d[ 0 ] = (double) (int64_t) vreg_getui64( n, 0 );
+                        vregs[ d ].d[ 0 ] = (double) (int64_t) vregs[ n ].ui64[ 0 ];
                     else
-                        vregs[ d ].f[ 0 ] = (float) (int32_t) vreg_getui32( n, 0 );
+                        vregs[ d ].f[ 0 ] = (float) (int32_t) vregs[ n ].ui32[ 0 ];
                 }
                 else if ( 0x3c6e == bits23_10 ) // ADDP D<d>, <Vn>.2D
                 {
-                    // addp is an integer addition, not floating point addition.
-                    uint64_t result = vreg_getui64( n, 0 ) + vreg_getui64( n, 8 );
-                    vreg_setui64( d, 8, 0ull );
-                    vreg_setui64( d, 0, result );
+                    vregs[ d ].ui64[ 0 ] = vregs[ n ].ui64[ 0 ] + vregs[ n ].ui64[ 1 ];
+                    vregs[ d ].ui64[ 1 ] = 0;
                 }
                 else if ( 1 == ( bits23_10 & 0x383f ) ) // DUP <V><d>, <Vn>.<T>[<index>]   -- scalar
                 {
@@ -5364,8 +5326,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t ebytes = esize / 8;
                     uint64_t val = 0;
                     memcpy( &val, vreg_ptr( n, index * ebytes ), ebytes );
-                    zero_vreg( d );
-                    vreg_setui64( d, 0, val );
+                    vregs[ d ].ui64[ 0 ] = val;
+                    vregs[ d ].ui64[ 1 ] = 0;
                     trace_vregs();
                 }
                 else
@@ -5403,16 +5365,16 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( sz )
                     {
                         double result = vregs[ n ].d[ 0 ] + vregs[ n ].d[ 1 ];
-                        //tracer.Trace( "adding %lf + %lf = %lf\n", vreg_getdouble( n, 0 ), vreg_getdouble( n, 8 ), result );
-                        zero_vreg( d );
-                        vreg_setdouble( d, 0, result );
+                        //tracer.Trace( "adding %lf + %lf = %lf\n", vregs[ n ].d[ 0 ], vregs[ n ].d[ 1 ], result );
+                        vregs[ d ].d[ 0 ] = result;
+                        vregs[ d ].ui64[ 1 ] = 0;
                     }
                     else
                     {
                         float result = vregs[ n ].f[ 0 ] + vregs[ n ].f[ 1 ];
-                        //tracer.Trace( "adding %f + %f = %f\n", vreg_getfloat( n, 0 ), vreg_getfloat( n, 4 ), result );
+                        //tracer.Trace( "adding %f + %f = %f\n", vregs[ n ].f[ 0 ], vregs[ n ].f[ 1 ], result );
                         zero_vreg( d );
-                        vreg_setfloat( d, 0, result );
+                        vregs[ d ].f[ 0 ] = result;
                     }
                     trace_vregs();
                 }
@@ -5543,14 +5505,14 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t reg_count = len + 1;
                     vec16_t src[ 4 ] = {0};
                     for ( uint64_t i = 0; i < reg_count; i++ )
-                        memcpy( & src[ i ], vreg_ptr( ( n + i ) % 32, 0 ), sizeof( vec16_t ) );
+                        src[ i ] = vregs[ ( n + i ) % 32 ];
                     vec16_t target = { 0 };
 
                     for ( uint64_t i = 0; i < elements; i++ )
                     {
-                        uint64_t index = vreg_getui8( m, i );
+                        uint64_t index = vregs[ m ].ui8[ i ];
                         if ( index < ( 16 * reg_count ) )
-                            target.ui8[ i ] = vreg_getui8( ( n + ( i / 16 ) ) % 32, index );
+                            target.ui8[ i ] = vregs[ ( n + ( i / 16 ) ) % 32 ].ui8[ index ];
                     }
                     vregs[ d ] = target;
                 }
@@ -5581,26 +5543,15 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
                     vec16_t target = { 0 };
-                    uint8_t * ptarget = (uint8_t *) &target;
+                    vec16_t & vn = vregs[ n ];
+                    vec16_t & vm = vregs[ m ];
 
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         if ( 8 == ebytes )
-                        {
-                            double dn = vreg_getdouble( n, e * 8 );
-                            double dm = vreg_getdouble( m, e * 8 );
-                            double result = dn + dm;
-                            assert( ( ( 1 + e ) * 8 ) <= sizeof( target ) );
-                            memcpy( ptarget + ( e * 8 ), &result, 8 );
-                        }
+                            target.d[ e ] = vn.d[ e ] + vm.d[ e ];
                         else if ( 4 == ebytes )
-                        {
-                            float fn = vreg_getfloat( n, e * 4 );
-                            float fm = vreg_getfloat( m, e * 4 );
-                            float result = fn + fm;
-                            assert( ( ( 1 + e ) * 4 ) <= sizeof( target ) );
-                            memcpy( ptarget + ( e * 4 ), &result, 4 );
-                        }
+                            target.f[ e ] = vn.f[ e ] + vm.f[ e ];
                         else
                             unhandled();
                     }
@@ -5614,28 +5565,16 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
                     vec16_t target = { 0 };
-                    uint8_t * ptarget = (uint8_t *) &target;
+                    vec16_t & vn = vregs[ n ];
+                    vec16_t & vm = vregs[ m ];
+                    vec16_t & vd = vregs[ d ];
 
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         if ( 8 == ebytes )
-                        {
-                            double dn = vreg_getdouble( n, e * 8 );
-                            double dm = vreg_getdouble( m, e * 8 );
-                            double dd = vreg_getdouble( d, e * 8 );
-                            double result = ( dn * dm ) + dd;
-                            assert( ( ( 1 + e ) * 8 ) <= sizeof( target ) );
-                            memcpy( ptarget + ( e * 8 ), &result, 8 );
-                        }
+                            target.d[ e ] = ( vn.d[ e ] * vm.d[ e ] ) + vd.d[ e ];
                         else if ( 4 == ebytes )
-                        {
-                            float fn = vreg_getfloat( n, e * 4 );
-                            float fm = vreg_getfloat( m, e * 4 );
-                            float fd = vreg_getfloat( d, e * 4 );
-                            float result = ( fn * fm ) + fd;
-                            assert( ( ( 1 + e ) * 4 ) <= sizeof( target ) );
-                            memcpy( ptarget + ( e * 4 ), &result, 4 );
-                        }
+                            target.f[ e ] = ( vn.f[ e ] * vm.f[ e ] ) + vd.f[ e ];
                         else
                             unhandled();
                     }
@@ -5650,9 +5589,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         if ( 4 == ebytes )
-                            vreg_setfloat( d, e * ebytes, (float) (int32_t) vreg_getui32( n, e * ebytes ) );
+                            vregs[ d ].f[ e ] = (float) (int32_t) vregs[ n ].ui32[ e ];
                         else if ( 8 == ebytes )
-                            vreg_setdouble( d, e * ebytes, (double) (int64_t) vreg_getui64( n, e * ebytes ) );
+                            vregs[ d ].d[ e ] = (double) (int64_t) vregs[ n ].ui64[ e ];
                     }
                 }
                 else if ( 0x4e == hi8 && 0 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
@@ -5708,12 +5647,12 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( 1 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // AND <Vd>.<T>, 
                 {
                     uint64_t m = imm5;
-                    uint64_t lo = vreg_getui64( n, 0 ) & vreg_getui64( m, 0 );
+                    uint64_t lo = vregs[ n ].ui64[ 0 ] & vregs[ m ].ui64[ 0 ];
                     uint64_t hi = 0;
                     if ( Q )
-                        hi = vreg_getui64( n, 8 ) & vreg_getui64( m, 8 );
-                    vreg_setui64( d, 0, lo );
-                    vreg_setui64( d, 8, hi );
+                        hi = vregs[ n ].ui64[ 1 ] & vregs[ m ].ui64[ 1 ];
+                    vregs[ d ].ui64[ 0 ] = lo;
+                    vregs[ d ].ui64[ 1 ] = hi;
                 }
                 else if ( !bit21 && !bit15 && ( 0x3 == bits14_11 || 0xb == bits14_11 ) && !bit10 ) // UZP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UZP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
@@ -5739,12 +5678,12 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( 5 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // ORR <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = imm5;
-                    uint64_t lo = vreg_getui64( n, 0 ) | vreg_getui64( m, 0 );
+                    uint64_t lo = vregs[ n ].ui64[ 0 ] | vregs[ m ].ui64[ 0 ];
                     uint64_t hi = 0;
                     if ( Q )
-                        hi = vreg_getui64( n, 8 ) | vreg_getui64( m, 8 );
-                    vreg_setui64( d, 0, lo );
-                    vreg_setui64( d, 8, hi );
+                        hi = vregs[ n ].ui64[ 1 ] | vregs[ m ].ui64[ 1 ];
+                    vregs[ d ].ui64[ 0 ] = lo;
+                    vregs[ d ].ui64[ 1 ] = hi;
                 }
                 else if ( 0 == bits23_21 && !bit15 && 1 == bits14_11 && bit10 ) // DUP <Vd>.<T>, <R><n>
                 {
@@ -5886,12 +5825,12 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( 0 != size )
                         unhandled();
 
-                    uint64_t bytes = ( 0 == Q ) ? 8 : 16;
+                    uint64_t elements = ( 0 == Q ) ? 1 : 2;
                     uint64_t bitcount = 0;
-                    for ( uint64_t x = 0; x < bytes; x += 8 )
-                        bitcount += count_bits( vreg_getui64( n, x ) );
-                    zero_vreg( d );
-                    vreg_setui64( d, 0, bitcount );
+                    for ( uint64_t x = 0; x < elements; x++ )
+                        bitcount += count_bits( vregs[ n ].ui64[ x ] );
+                    vregs[ d ].ui64[ 0 ] = bitcount;
+                    vregs[ d ].ui64[ 1 ] = 0;
                 }
                 else if ( ( 0x4e == hi8 || 0x0e == hi8 ) && bit21 && 0x11 == bits20_16 && bit15 && 7 == bits14_11 ) // ADDV <V><d>, <Vn>.<T>
                 {
@@ -5936,11 +5875,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     }
 
                     if ( Q )
-                        memcpy( vreg_ptr( d, 8 ), &result, 8 ); // don't modifiy the lower half
+                        vregs[ d ].ui64[ 1 ] = result; // don't modifiy the lower half
                     else
                     {
-                        zero_vreg( d ); // zero the upper half
-                        memcpy( vreg_ptr( d, 0 ), &result, 8 );
+                        vregs[ d ].ui64[ 0 ] = result;
+                        vregs[ d ].ui64[ 1 ] = 0; // zero the upper half
                     }
                 }
                 else
@@ -6037,9 +5976,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( 0x1e == hi8 && 4 == bits21_19 && 0x190 == bits18_10 ) // FRINTA <Dd>, <Dn>
                 {
                     if ( 0 == ftype )
-                        vreg_setfloat( d, 0, (float) round_double( (double) vregs[ n ].f[ 0 ], FPRounding_TIEAWAY ) );
+                        vregs[ d ].f[ 0 ] = (float) round_double( (double) vregs[ n ].f[ 0 ], FPRounding_TIEAWAY );
                     else if ( 1 == ftype )
-                        vreg_setdouble( d, 0, round_double( vregs[ n ].d[ 0 ], FPRounding_TIEAWAY ) );
+                        vregs[ d ].d[ 0 ] = round_double( vregs[ n ].d[ 0 ], FPRounding_TIEAWAY );
                     else
                         unhandled();
                     trace_vregs();
@@ -6070,7 +6009,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             if ( 7 == opcode )
                             {
                                 zero_vreg( d );
-                                memcpy( vreg_ptr( d, 0 ), & nval, 4 );
+                                vregs[ d ].ui32[ 0 ] = nval & 0xffffffff;
                             }
                             else if ( 6 == opcode )
                             {
@@ -6092,24 +6031,24 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             else if ( 3 == ftype && 7 == opcode )
                             {
                                 zero_vreg( d );
-                                memcpy( vreg_ptr( d, 0 ), & nval, 2 );
+                                vregs[ d ].ui16[ 0 ] = nval & 0xffff;
                             }
                             else if ( 1 == ftype && 7 == opcode )
                             {
-                                zero_vreg( d );
-                                memcpy( vreg_ptr( d, 0 ), & nval, 8 );
+                                vregs[ d ].ui64[ 0 ] = nval;
+                                vregs[ d ].ui64[ 1 ] = 0;
                             }
                             else if ( 1 == ftype && 6 == opcode )
-                                memcpy( & regs[ d ], vreg_ptr( n, 0 ), 8 );
+                                regs[ d ] = vregs[ n ].ui64[ 0 ];
                             else
                                 unhandled();
                         }
                         else
                         {
                             if ( 2 == ftype && 7 == opcode )
-                                memcpy( vreg_ptr( d, 8 ), & nval, 8 );
+                                vregs[ d ].ui64[ 1 ] = nval;
                             else if ( 2 == ftype && 6 == opcode )
-                                memcpy( & regs[ d ], vreg_ptr( n, 8 ), 8 );
+                                regs[ d ] = vregs[ n ].ui64[ 1 ];
                             else
                                 unhandled();
                         }
@@ -6122,9 +6061,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                     double src = 0.0;
                     if ( 0 == ftype )
-                        src = vreg_getfloat( n, 0 );
+                        src = vregs[ n ].f[ 0 ];
                     else if ( 1 == ftype )
-                        src = vreg_getdouble( n, 0 );
+                        src = vregs[ n ].d[ 0 ];
                     else
                         unhandled();
 
@@ -6320,15 +6259,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                     zero_vreg( d );
                     if ( 0 == ftype )
-                    {
-                        float f = (float) (int32_t) nval;
-                        memcpy( vreg_ptr( d, 0 ), &f, sizeof( f ) );
-                    }
+                        vregs[ d ].f[ 0 ] = (float) (int32_t) nval;
                     else if ( 1 == ftype )
-                    {
-                        double doubleval = (double) (int64_t) nval;
-                        memcpy( vreg_ptr( d, 0 ), &doubleval, sizeof( doubleval ) );
-                    }
+                        vregs[ d ].d[ 0 ] = (double) (int64_t) nval;
                     else
                         unhandled();
                 }
