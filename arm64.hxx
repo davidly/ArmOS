@@ -138,7 +138,7 @@ struct Arm64
   private:
     enum FPRounding { FPRounding_TIEEVEN, FPRounding_POSINF, FPRounding_NEGINF,  FPRounding_ZERO, FPRounding_TIEAWAY, FPRounding_ODD };
     enum ElementComparisonResult { ecr_lt, ecr_eq, ecr_gt };
-    uint64_t op;
+    uint64_t op; // opcode of the current instruction being execuetd
 
     void unhandled( void );
 

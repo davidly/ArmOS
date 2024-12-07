@@ -3166,6 +3166,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
         #endif
 
         op = getui32( pc );
+        uint8_t hi8 = (uint8_t) ( op >> 24 );
 
         if ( 0 != g_State )
         {
@@ -3179,7 +3180,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 trace_state();
         }
 
-        uint8_t hi8 = (uint8_t) ( op >> 24 );
         switch ( hi8 )
         {
             case 0: // UDF
@@ -4227,10 +4227,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
             }
             case 0x54: // b.cond
             {
-                uint64_t cond = opbits( 0, 4 );
-
-                bool branch = check_conditional( cond );
-                if ( branch )
+                if ( check_conditional( opbits( 0, 4 ) ) )
                 {
                     int64_t imm19 = opbits( 5, 19 );
                     imm19 <<= 2;
@@ -4610,12 +4607,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
             case 0x53: // UBFM <Wd>, <Wn>, #<immr>, #<imms>      // unmodified bits set to 0
             case 0xd3: // UBFM <Xd>, <Xn>, #<immr>, #<imms>
             {
-                uint64_t N = ( ( op >> 22 ) & 1 );
-                if ( ( 0x33 == hi8 || 0x53 == hi8 || 0x13 == hi8 ) && ( 0 != N ) )
-                    unhandled();
-                if ( ( 0xb3 == hi8 || 0xd3 == hi8 || 0x93 == hi8 ) && ( 1 != N ) )
-                    unhandled();
-
                 uint64_t imms = opbits( 10, 6 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
