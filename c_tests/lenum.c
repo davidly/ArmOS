@@ -16,14 +16,24 @@ int main( int argc, char * argv[] )
     }
 
     int count = 0;
+    bool parent_found = false;
     struct dirent * entry;
     while ( entry = readdir( dir ) )
     {
-        if ( 'm' == entry->d_name[ 0 ] )
-        {
-            count++;
-            printf( "file %d: %s\n", count, entry->d_name );
-        }
+        if ( !strcmp( "..", entry->d_name ) )
+            parent_found = true;
+
+        count++;
     }
+
+    if ( !parent_found )
+    {
+        printf( "error: parent folder not found in enumeration out of %d files returned\n", count );
+        return 1; 
+    }
+
     closedir( dir );
+
+    printf( "linux file system enumeration completed with great success\n" );
+    return 0;
 } // main
