@@ -134,22 +134,22 @@ double Arm64::round_double( double d, FPRounding rounding )
 
 int32_t Arm64::double_to_fixed_int32( double d, uint64_t fracbits, FPRounding rounding )
 {
-    return (int32_t) round_double( d * ( 1 << fracbits ), rounding );
+    return (int32_t) round_double( d * ( 1ull << fracbits ), rounding );
 } //double_to_fixed_int32
 
 uint32_t Arm64::double_to_fixed_uint32( double d, uint64_t fracbits, FPRounding rounding )
 {
-    return (int32_t) round_double( d * ( 1 << fracbits ), rounding );
+    return (int32_t) round_double( d * ( 1ull << fracbits ), rounding );
 } //double_to_fixed_uint32
 
 int64_t Arm64::double_to_fixed_int64( double d, uint64_t fracbits, FPRounding rounding )
 {
-    return (int64_t) round_double( d * ( 1 << fracbits ), rounding );
+    return (int64_t) round_double( d * ( 1ull << fracbits ), rounding );
 } //double_to_fixed_int64
 
 uint64_t Arm64::double_to_fixed_uint64( double d, uint64_t fracbits, FPRounding rounding )
 {
-    return (uint64_t) round_double( d * ( 1 << fracbits ), rounding );
+    return (uint64_t) round_double( d * ( 1ull << fracbits ), rounding );
 } //double_to_fixed_uint64
 
 uint64_t get_bit( uint64_t x, uint64_t bit_number )
@@ -3759,7 +3759,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             unhandled();
     
                         uint64_t m = ( rmhi << 4 ) | opbits( 16, 4 );
-                        uint64_t esize = 8 << size;
+                        uint64_t esize = 8ull << size;
                         uint64_t ebytes = esize / 8;
                         uint64_t datasize = 64ull << Q;
                         uint64_t elements = datasize / esize;
@@ -5471,7 +5471,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t ebytes = esize / 8;
                     assert( ebytes <= 4 );
                     datasize = 64;
@@ -5497,7 +5497,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
-                    uint64_t esize = 8 << size;
+                    uint64_t esize = 8ull << size;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
                     uint64_t part = opbits( 14, 1 );
