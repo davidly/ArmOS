@@ -3711,6 +3711,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t n = opbits( 5, 5 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
+                        assert( 1 == count_bits( ebytes ) );
                         uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
                         uint64_t datasize = 64ull << Q;
                         uint64_t elements = datasize / esize;
@@ -3793,6 +3794,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
+                        assert( 1 == count_bits( ebytes ) );
                         uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                         uint64_t datasize = 64 << Q;
                         uint64_t elements = datasize / esize;
@@ -3810,6 +3812,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
+                        assert( 1 == count_bits( ebytes ) );
                         uint64_t datasize = 64 << Q;
                         uint64_t elements = datasize / esize;
                         uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
@@ -3866,6 +3869,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t ebytes = esize / 8;
+                        assert( 1 == count_bits( ebytes ) );
                         uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                         uint64_t datasize = 64;
                         uint64_t elements = datasize / esize;
@@ -3891,6 +3895,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t ebytes = esize / 8;
+                        assert( ebytes <= 4 );
+                        assert( 1 == count_bits( ebytes ) );
                         uint64_t datasize = 64;
                         uint64_t part = Q;
                         uint64_t elements = datasize / esize;
@@ -3921,6 +3927,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t ebytes = esize / 8;
+                        assert( ebytes <= 4 );
+                        assert( 1 == count_bits( ebytes ) );
                         uint64_t datasize = 64;
                         uint64_t part = Q;
                         uint64_t elements = datasize / esize;
@@ -3947,6 +3955,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         if ( 0x7f == hi8 )
                             esize = 8 << 3;
                         uint64_t ebytes = esize / 8;
+                        assert( 1 == count_bits( ebytes ) );
                         uint64_t datasize = 64ull << Q;
                         if ( 0x7f == hi8 )
                             datasize = esize;
@@ -5175,107 +5184,112 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 }
                 else if ( bit21 )
                 {
-                    if ( 0x30 == opcode && Q ) // umull{2}
-                        elements /= 2;
-
-                    //tracer.Trace( "elements: %llu, ebytes %llu\n", elements, ebytes );
                     vec16_t target = { 0 };
-                    uint8_t * ptarget = (uint8_t *) &target;
-                    for ( uint64_t e = 0; e < elements; e++ )
+
+                    if ( 7 == opcode ) // EOR (0 == opc2), BIT (2 == opc1), BSL (1 == opc2), and BIF (3 == opc2)
                     {
-                        uint64_t offset = ( e * ebytes );
-                        ElementComparisonResult res = ecr_eq;
-                        if ( 0x21 != opcode && 0x07 != opcode && 0x30 != opcode && 0x25 != opcode )
-                            res = compare_vector_elements( vreg_ptr( n, offset ), vreg_ptr( m, offset ), ebytes, true );
+                        // EOR <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                        // BIT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                        // BSL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                        // BIF <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+
+                        for ( uint64_t e = 0; e <= Q; e++ )
+                        {
+                            uint64_t dval = vregs[ d ].ui64[ e ];
+                            uint64_t nval = vregs[ n ].ui64[ e ];
+                            uint64_t mval = vregs[ m ].ui64[ e ];
+                            uint64_t result = 0;
+                            if ( 0 == opc2 ) // EOR
+                                result = ( nval ^ mval );
+                            else if ( 1 == opc2 ) // BSL
+                                result = ( mval ^ ( ( mval ^ nval ) & dval ) );
+                            else if ( 2 == opc2 ) // BIT
+                                result = ( dval ^ ( ( dval ^ nval ) & mval ) );
+                            else // BIF
+                                result = ( dval ^ ( ( dval ^ nval ) & ( ~mval ) ) );
+
+                            target.ui64[ e ] = result;
+                        }
+                    }
+                    else
+                    {
+                        if ( 0x30 == opcode && Q ) // umull{2}
+                            elements /= 2;
     
-                        if ( 0x23 == opcode ) // CMEQ
+                        //tracer.Trace( "elements: %llu, ebytes %llu\n", elements, ebytes );
+                        uint8_t * ptarget = (uint8_t *) &target;
+                        for ( uint64_t e = 0; e < elements; e++ )
                         {
-                            assert( ( offset + ebytes ) <= sizeof( target ) );
-                            if ( ecr_eq == res )
-                                memcpy( ptarget + offset, &vec_ones, ebytes );
-                            else
-                                memcpy( ptarget + offset, &vec_zeroes, ebytes );
-                        }
-                        else if ( 0x0f == opcode ) // CMHS
-                        {
-                            assert( ( offset + ebytes ) <= sizeof( target ) );
-                            if ( ecr_gt == res || ecr_eq == res )
-                                memcpy( ptarget + offset, &vec_ones, ebytes );
-                            else
-                                memcpy( ptarget + offset, &vec_zeroes, ebytes );
-                        }
-                        else if ( 0x21 == opcode ) // SUB
-                        {
-                            if ( ebytes <= 8 )
+                            uint64_t offset = ( e * ebytes );
+                            ElementComparisonResult res = ecr_eq;
+                            if ( 0x23 == opcode || 0x0f == opcode )
+                                res = compare_vector_elements( vreg_ptr( n, offset ), vreg_ptr( m, offset ), ebytes, true );
+        
+                            if ( 0x23 == opcode ) // CMEQ
                             {
-                                uint64_t a = 0;
-                                uint64_t b = 0;
-                                memcpy( &a, vreg_ptr( n, offset ), ebytes );
-                                memcpy( &b, vreg_ptr( m, offset ), ebytes );
-                                uint64_t result = a - b;
                                 assert( ( offset + ebytes ) <= sizeof( target ) );
-                                memcpy( ptarget + offset, &result, ebytes );
-                            }
-                            else
-                                unhandled();
-                        }
-                        else if ( 0x07 == opcode ) // EOR, BIT, BSL, and BIF
-                        {
-                            if ( ebytes <= 8 )
-                            {
-                                uint64_t a = 0;
-                                uint64_t b = 0;
-                                memcpy( &a, vreg_ptr( n, offset ), ebytes );
-                                memcpy( &b, vreg_ptr( m, offset ), ebytes );
-                                uint64_t result = 0;
-                                if ( 0 == opc2 ) // EOR
-                                    result = ( a ^ b );
+                                if ( ecr_eq == res )
+                                    memcpy( ptarget + offset, &vec_ones, ebytes );
                                 else
+                                    memcpy( ptarget + offset, &vec_zeroes, ebytes );
+                            }
+                            else if ( 0x0f == opcode ) // CMHS
+                            {
+                                assert( ( offset + ebytes ) <= sizeof( target ) );
+                                if ( ecr_gt == res || ecr_eq == res )
+                                    memcpy( ptarget + offset, &vec_ones, ebytes );
+                                else
+                                    memcpy( ptarget + offset, &vec_zeroes, ebytes );
+                            }
+                            else if ( 0x21 == opcode ) // SUB
+                            {
+                                if ( ebytes <= 8 )
                                 {
-                                    if ( 3 == opc2 ) // BIF
-                                        b = ~b;
-                                    memcpy( &result, vreg_ptr( d, offset ), ebytes );
-                                    result = ( result ^ ( ( result ^ a ) & b ) );
+                                    uint64_t a = 0;
+                                    uint64_t b = 0;
+                                    memcpy( &a, vreg_ptr( n, offset ), ebytes );
+                                    memcpy( &b, vreg_ptr( m, offset ), ebytes );
+                                    uint64_t result = a - b;
+                                    assert( ( offset + ebytes ) <= sizeof( target ) );
+                                    memcpy( ptarget + offset, &result, ebytes );
                                 }
+                                else
+                                    unhandled();
+                            }
+                            else if ( 0x30 == opcode ) // UMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                            {
+                                uint64_t a = 0;
+                                uint64_t b = 0;
+                                if ( Q )
+                                    offset += 8; // {2}
+                                assert( ebytes <= sizeof( a ) );
+                                memcpy( &a, vreg_ptr( n, offset ), ebytes );
+                                memcpy( &b, vreg_ptr( m, offset ), ebytes );
+                                uint64_t result = a * b;
+                                uint64_t output_offset = e * ebytes * 2;
+                                assert( ( output_offset + ebytes * 2 ) <= sizeof( target ) );
+                                //tracer.Trace( "  umullX read a %#llx, b %#llx, from offset %#llx, ebytes %#llx, output offset: %#llx\n", a, b, offset, ebytes, output_offset );
+                                memcpy( ptarget + output_offset, &result, ebytes * 2 );
+                            }
+                            else if ( 0x25 == opcode ) // MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                            {
+                                uint64_t a = 0;
+                                uint64_t b = 0;
+                                uint64_t c = 0;
+                                memcpy( &a, vreg_ptr( n, offset ), ebytes );
+                                memcpy( &b, vreg_ptr( m, offset ), ebytes );
+                                memcpy( &c, vreg_ptr( d, offset ), ebytes );
+    
+                                if ( 2 == size ) // S datatype not yet implemented
+                                    unhandled();
+    
+                                uint64_t result = c - ( a * b );
                                 assert( ( offset + ebytes ) <= sizeof( target ) );
                                 memcpy( ptarget + offset, &result, ebytes );
                             }
                             else
                                 unhandled();
                         }
-                        else if ( 0x30 == opcode ) // UMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
-                        {
-                            uint64_t a = 0;
-                            uint64_t b = 0;
-                            if ( Q )
-                                offset += 8; // {2}
-                            assert( ebytes <= sizeof( a ) );
-                            memcpy( &a, vreg_ptr( n, offset ), ebytes );
-                            memcpy( &b, vreg_ptr( m, offset ), ebytes );
-                            uint64_t result = a * b;
-                            uint64_t output_offset = e * ebytes * 2;
-                            assert( ( output_offset + ebytes * 2 ) <= sizeof( target ) );
-                            //tracer.Trace( "  umullX read a %#llx, b %#llx, from offset %#llx, ebytes %#llx, output offset: %#llx\n", a, b, offset, ebytes, output_offset );
-                            memcpy( ptarget + output_offset, &result, ebytes * 2 );
-                        }
-                        else if ( 0x25 == opcode ) // MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                        {
-                            uint64_t a = 0;
-                            uint64_t b = 0;
-                            uint64_t c = 0;
-                            memcpy( &a, vreg_ptr( n, offset ), ebytes );
-                            memcpy( &b, vreg_ptr( m, offset ), ebytes );
-                            memcpy( &c, vreg_ptr( d, offset ), ebytes );
-
-                            if ( 2 == size ) // S datatype not yet implemented
-                                unhandled();
-
-                            uint64_t result = c - ( a * b );
-                            assert( ( offset + ebytes ) <= sizeof( target ) );
-                            memcpy( ptarget + offset, &result, ebytes );
-                        }
-                        else
-                            unhandled();
                     }
 
                     vregs[ d ] = target;
@@ -5459,6 +5473,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t size = opbits( 22, 2 );
                     uint64_t esize = 8 << size;
                     uint64_t ebytes = esize / 8;
+                    assert( ebytes <= 4 );
                     datasize = 64;
                     uint64_t part = Q;
                     uint64_t elements = datasize / esize;
@@ -6013,10 +6028,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                 vregs[ d ].ui32[ 0 ] = nval & 0xffffffff;
                             }
                             else if ( 6 == opcode )
-                            {
-                                regs[ d ] = 0;
-                                memcpy( & regs[ d ], vreg_ptr( n, 0 ), 4 );
-                            }
+                                regs[ d ] = vregs[ n ].ui32[ 0 ];
                             else
                                 unhandled();
                         }
@@ -6129,6 +6141,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( bit21 ) ) // fmov scalar immediate
                 {
                     uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8 << ( ftype ^ 2 ) );
+                    assert( fltsize <= 64 );
                     uint64_t imm8 = opbits( 13, 8 );
                     uint64_t val = vfp_expand_imm( imm8, fltsize );
                     zero_vreg( d );
