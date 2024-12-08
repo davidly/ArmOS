@@ -1372,8 +1372,8 @@ void Arm64::trace_state()
             }
             break;
         }
-        case 0x5a: // REV <Wd>, <Wn>    ;    CSINV <Wd>, <Wn>, <Wm>, <cond>    ;    RBIT <Wd>, <Wn>    ;    CLZ <Wd>, <Wn>    ;    CSNEG <Wd>, <Wn>, <Wm>, <cond>
-        case 0xda: // REV <Xd>, <Xn>    ;    CSINV <Xd>, <Xn>, <Xm>, <cond>    ;    RBIT <Xd>, <Xn>    ;    CLZ <Xd>, <Xn>    ;    CSNEG <Xd>, <Xn>, <Xm>, <cond>
+        case 0x5a: // REV <Wd>, <Wn>    ;    CSINV <Wd>, <Wn>, <Wm>, <cond>    ;    RBIT <Wd>, <Wn>    ;    CLZ <Wd>, <Wn>    ;    CSNEG <Wd>, <Wn>, <Wm>, <cond>    ;    SBC <Wd>, <Wn>, <Wm>
+        case 0xda: // REV <Xd>, <Xn>    ;    CSINV <Xd>, <Xn>, <Xm>, <cond>    ;    RBIT <Xd>, <Xn>    ;    CLZ <Xd>, <Xn>    ;    CSNEG <Xd>, <Xn>, <Xm>, <cond>    ;    SBC <Xd>, <Xn>, <Xm>
         {
             uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
             uint64_t bits23_21 = opbits( 21, 3 );
@@ -1399,6 +1399,16 @@ void Arm64::trace_state()
                     tracer.Trace( "rev %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ) );
                 else if ( 4 == bits15_10 ) // clz
                     tracer.Trace( "clz %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ) );
+                else
+                    unhandled();
+            }
+            else if ( 0 == bits23_21 )
+            {
+                if ( 0 == bits15_10 ) // sbc
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    tracer.Trace( "sbc %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                }
                 else
                     unhandled();
             }
@@ -4017,8 +4027,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 trace_vregs();
                 break;
             }
-            case 0x5a: // REV <Wd>, <Wn>    ;    CSINV <Wd>, <Wn>, <Wm>, <cond>    ;    RBIT <Wd>, <Wn>    ;    CLZ <Wd>, <Wn>    ;    CSNEG <Wd>, <Wn>, <Wm>, <cond>
-            case 0xda: // REV <Xd>, <Xn>    ;    CSINV <Xd>, <Xn>, <Xm>, <cond>    ;    RBIT <Xd>, <Xn>    ;    CLZ <Xd>, <Xn>    ;    CSNEG <Xd>, <Xn>, <Xm>, <cond>
+            case 0x5a: // REV <Wd>, <Wn>    ;    CSINV <Wd>, <Wn>, <Wm>, <cond>    ;    RBIT <Wd>, <Wn>    ;    CLZ <Wd>, <Wn>    ;    CSNEG <Wd>, <Wn>, <Wm>, <cond>    ;    SBC <Wd>, <Wn>, <Wm>
+            case 0xda: // REV <Xd>, <Xn>    ;    CSINV <Xd>, <Xn>, <Xm>, <cond>    ;    RBIT <Xd>, <Xn>    ;    CLZ <Xd>, <Xn>    ;    CSNEG <Xd>, <Xn>, <Xm>, <cond>    ;    SBC <Xd>, <Xn>, <Xm>
             {
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
                 uint64_t opc = opbits( 10, 2 ); // 2 or 3 for container size
@@ -4091,6 +4101,23 @@ uint64_t Arm64::run( uint64_t max_cycles )
                             else
                                 break;
                         }
+                    }
+                    else
+                        unhandled();
+                }
+                else if ( 0 == bits23_21 )
+                {
+                    if ( 0 == bits15_10 ) // sbc
+                    {
+                        if ( 31 == d )
+                            break;
+
+                        uint64_t m = opbits( 16, 5 );
+                        uint64_t mval = val_reg_or_zr( m );
+                        if ( xregs )
+                            regs[ d ] = add_with_carry64( nval, ~mval, fC, false );
+                        else
+                            regs[ d ] = add_with_carry32( 0xffffffff & nval, 0xffffffff & ( ~ mval ), fC, false );
                     }
                     else
                         unhandled();
@@ -6943,6 +6970,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
     
                 break;
             }
+            case 0xff: // call this maximum out so the compiler doesn't do a bounds check at runtime on the switch jump table
             default:
                 unhandled();
         }
