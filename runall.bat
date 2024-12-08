@@ -2,13 +2,13 @@
 setlocal
 
 if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
-rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos.elf -h:100)
+rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)
 
 set outputfile=test_armos.txt
 echo %date% %time% >%outputfile%
 
 set _folderlist=bin0 bin1 bin2 bin3 binfast
-set _applist=tcmp e printint sieve simple tmuldiv tpi ts ttt tarray tbits trw ^
+set _applist=tcmp t e printint sieve simple tmuldiv tpi ts ttt tarray tbits trw ^
              tmmap tstr fileops ttime tm glob tap tsimplef tf td terrno ^
              t_setjmp tex mm pis sleeptm tatomic lenum
 set _optlist=6 8 a d 3 i I m o r x
