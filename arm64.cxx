@@ -393,6 +393,16 @@ Arm64::ElementComparisonResult Arm64::compare_vector_elements( uint8_t * pl, uin
             return ecr_eq;
         return ecr_gt;
     }
+    else if ( 2 == width && unsigned_compare )
+    {
+        uint16_t l = * (uint16_t *) pl;
+        uint16_t r = * (uint16_t *) pr;
+        if ( l < r )
+            return ecr_lt;
+        else if ( l == r )
+            return ecr_eq;
+        return ecr_gt;
+    }
     else if ( 4 == width && unsigned_compare )
     {
         uint32_t l = * (uint32_t *) pl;
