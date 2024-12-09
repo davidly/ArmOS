@@ -3,8 +3,7 @@
 #include <cstring>
 #include <cfloat>
 #include <assert.h>
-
-#pragma GCC diagnostic ignored "-Wformat="
+#include <new>
 
 using namespace std;
 

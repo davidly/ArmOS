@@ -3,9 +3,6 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wformat="
-
 void swap( char & a, char & b )
 {
     char c = a;
@@ -238,4 +235,3 @@ extern "C" int main()
     return 0;
 } //main
 
-#pragma GCC diagnostic pop
