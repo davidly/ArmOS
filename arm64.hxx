@@ -134,6 +134,7 @@ struct Arm64
 
     void trace_vregs();
     void force_trace_vregs();
+    void trace_state( void );                  // trace the machine current status
 
   private:
     enum FPRounding { FPRounding_TIEEVEN, FPRounding_POSINF, FPRounding_NEGINF,  FPRounding_ZERO, FPRounding_TIEAWAY, FPRounding_ODD };
@@ -158,7 +159,7 @@ struct Arm64
     uint64_t shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount );
     uint32_t shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount );
     uint64_t reg_or_sp_value( uint64_t x );
-    uint64_t extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift );
+    uint64_t extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift, bool fullm = true );
     uint64_t val_reg_or_zr( uint64_t r );
     const char * render_flags();
     ElementComparisonResult compare_vector_elements( uint8_t * pl, uint8_t * pr, uint64_t width, bool unsigned_compare );
@@ -175,8 +176,6 @@ struct Arm64
     double round_double( double d, FPRounding rounding );
     FPRounding fp_decode_rmode( uint64_t rmode );
     FPRounding fp_decode_rm( uint64_t rm );
-
-    void trace_state( void );                  // trace the machine current status
 }; //Arm64
 
 

@@ -383,30 +383,12 @@ Arm64::ElementComparisonResult Arm64::compare_vector_elements( uint8_t * pl, uin
 {
     assert( width >= 1 && width <= 16 );
 
-    if ( 1 == width && unsigned_compare )
+    if ( unsigned_compare )
     {
-        uint8_t l = *pl;
-        uint8_t r = *pr;
-        if ( l < r )
-            return ecr_lt;
-        else if ( l == r )
-            return ecr_eq;
-        return ecr_gt;
-    }
-    else if ( 2 == width && unsigned_compare )
-    {
-        uint16_t l = * (uint16_t *) pl;
-        uint16_t r = * (uint16_t *) pr;
-        if ( l < r )
-            return ecr_lt;
-        else if ( l == r )
-            return ecr_eq;
-        return ecr_gt;
-    }
-    else if ( 4 == width && unsigned_compare )
-    {
-        uint32_t l = * (uint32_t *) pl;
-        uint32_t r = * (uint32_t *) pr;
+        assert( 1 == width || 2 == width || 4 == width || 8 == width );
+        uint64_t l = 0, r = 0;
+        memcpy( &l, pl, width );
+        memcpy( &r, pr, width );
         if ( l < r )
             return ecr_lt;
         else if ( l == r )
@@ -531,9 +513,11 @@ const char * get_sshr_vector_T( uint64_t immh, uint64_t Q )
     return "RESERVED";
 } //get_sshr_vector_T
 
-uint64_t Arm64::extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift )
+uint64_t Arm64::extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift, bool fullm )
 {
     uint64_t x = ( 31 == m ) ? 0 : regs[ m ];
+    if ( !fullm )
+        x &= 0xffffffff;
 
     switch( extend_type )
     {
@@ -1003,7 +987,7 @@ void Arm64::trace_state()
                     {
                         if ( 0 == size )
                         {
-                           if ( 2 == opc )
+                           if ( 3 == opc )
                                shift = 4;
                            else if ( 1 != opc )
                                unhandled();
@@ -2234,6 +2218,7 @@ void Arm64::trace_state()
                               // TRN1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    TRN2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   TBL <Vd>.<Ta>, { <Vn>.16B }, <Vm>.<Ta> ; TBL <Vd>.<Ta>, { <Vn>.16B, <Vn+1>.16B, <Vn+2>.16B, <Vn+3>.16B }, <Vm>.<Ta>
                               // ZIP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ZIP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                               // MLA <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>  ;   CMLT <Vd>.<T>, <Vn>.<T>, #0    ;    REV64 <Vd>.<T>, <Vn>.<T>
+                              // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
 
         {
             uint64_t Q = opbits( 30, 1 );
@@ -2249,8 +2234,15 @@ void Arm64::trace_state()
             uint64_t d = opbits( 0, 5 );
             uint64_t bits20_16 = opbits( 16, 5 );
             uint64_t bits14_10 = opbits( 10, 5 );
+            uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit21 && 0 == bits20_16 && !bit15 && 2 == bits14_10 ) // REV64 <Vd>.<T>, <Vn>.<T>
+            if ( 3 == bits23_21 && 7 == bits15_10 ) // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                const char * pT = Q ? "16b" : "8b";
+                uint64_t m = opbits( 16, 5 );
+                tracer.Trace( "bic v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
+            }
+            else if ( bit21 && 0 == bits20_16 && !bit15 && 2 == bits14_10 ) // REV64 <Vd>.<T>, <Vn>.<T>
             {
                 uint64_t size = opbits( 22, 2 );
                 const char * pT = get_ld1_vector_T( size, Q );
@@ -3214,14 +3206,8 @@ void Arm64::set_flags_from_double( double result )
     }
 } //set_flags_from_double
 
-void Arm64::trace_vregs()
+void Arm64::force_trace_vregs()
 {
-    if ( !tracer.IsEnabled() ) // can happen when an app enables instruction tracing via a syscall but overall tracing is turned off. 
-        return;
-
-    if ( ! ( g_State & stateTraceInstructions ) )
-        return;
-
     for ( uint64_t i = 0; i < _countof( vregs ); i++ )
     {
         if ( memcmp( &vec_zeroes, &vregs[ i ], sizeof( vec_zeroes ) ) )
@@ -3230,6 +3216,17 @@ void Arm64::trace_vregs()
             tracer.TraceBinaryData( (uint8_t *) & vregs[ i ], 16, 4 );
         }
     }
+} //trace_vregs
+
+void Arm64::trace_vregs()
+{
+    if ( !tracer.IsEnabled() ) // can happen when an app enables instruction tracing via a syscall but overall tracing is turned off. 
+        return;
+
+    if ( ! ( g_State & stateTraceInstructions ) )
+        return;
+
+    force_trace_vregs();
 } //trace_vregs
 
 #ifdef _WIN32
@@ -3584,13 +3581,14 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t m = opbits( 16, 5 );
                     uint64_t shift = 0;
                     uint64_t S = opbits( 12, 1 );
+                    //tracer.Trace( "option %#llx, S %llu, size %llu, opc %#llx\n", option, S, size, opc );
                     if ( 0 != S )
                     {
                         if ( is_ldr )
                         {
                             if ( 0 == size )
                             {
-                               if ( 2 == opc )
+                               if ( 3 == opc )
                                    shift = 4;
                                else if ( 1 != opc )
                                    unhandled();
@@ -5656,6 +5654,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                   // TRN1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    TRN2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   TBL <Vd>.<Ta>, { <Vn>.16B }, <Vm>.<Ta> ; TBL <Vd>.<Ta>, { <Vn>.16B, <Vn+1>.16B, <Vn+2>.16B, <Vn+3>.16B }, <Vm>.<Ta>
                                   // ZIP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ZIP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                                   // MLA <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>  ;   CMLT <Vd>.<T>, <Vn>.<T>, #0    ;    REV64 <Vd>.<T>, <Vn>.<T>
+                                  // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t Q = opbits( 30, 1 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -5671,8 +5670,20 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bits20_16 = opbits( 16, 5 );
                 uint64_t bits14_10 = opbits( 10, 5 );
                 uint64_t bits12_10 = opbits( 10, 3 );
+                uint64_t bits15_10 = opbits( 10, 6 );
 
-                if ( bit21 && 0 == bits20_16 && !bit15 && 2 == bits14_10 ) // REV64 <Vd>.<T>, <Vn>.<T>
+                if ( 3 == bits23_21 && 7 == bits15_10 ) // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    vec16_t target = { 0 };
+
+                    target.ui64[ 0 ] = ( vregs[ n ].ui64[ 0 ] & ( ~ ( vregs[ m ].ui64[ 0 ] ) ) );
+                    if ( Q )
+                        target.ui64[ 1 ] = ( vregs[ n ].ui64[ 1 ] & ( ~ ( vregs[ m ].ui64[ 1 ] ) ) );
+
+                    vregs[ d ] = target;
+                }
+                else if ( bit21 && 0 == bits20_16 && !bit15 && 2 == bits14_10 ) // REV64 <Vd>.<T>, <Vn>.<T>
                 {
                     uint64_t size = opbits( 22, 2 );
                     uint64_t esize = 8ull << size;
