@@ -27,7 +27,7 @@
 using namespace std;
 using namespace std::chrono;
 
-#if defined( __GNUC__ ) && !defined( __APPLE__)
+#if defined( __GNUC__ ) && !defined( __APPLE__) && !defined( __clang__ )
 #pragma GCC diagnostic ignored "-Wformat="
 #endif
 
