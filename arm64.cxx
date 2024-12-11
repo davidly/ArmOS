@@ -5777,6 +5777,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         memcpy( &mval, vreg_ptr( m, (part ? 8 : 0 ) + e * ebytes ), ebytes );
                         mval = sign_extend( mval, esize - 1 );
                         int64_t result = nval * mval;
+                        assert( ( e * ebytes * 2 + ebytes * 2 ) <= sizeof( target ) );
                         memcpy( ptarget + e * ebytes * 2, &result, ebytes * 2 );
                     }
                     vregs[ d ] = target;
@@ -5796,7 +5797,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                     for ( uint64_t p = 0; p < pairs; p++ )
                     {
+                        assert( ( ( ( 2 * p ) * ebytes ) + ebytes ) <= sizeof( target ) );
                         memcpy( ptarget + 2 * p * ebytes, vreg_ptr( n, ( base_amount + p ) * ebytes ), ebytes );
+                        assert( ( ( ( 2 * p + 1 ) * ebytes ) + ebytes ) <= sizeof( target ) );
                         memcpy( ptarget + ( 2 * p + 1 ) * ebytes, vreg_ptr( m, ( base_amount + p ) * ebytes ), ebytes );
                     }
                     vregs[ d ] = target;
@@ -5808,6 +5811,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t elements = datasize / 8;
                     uint64_t reg_count = len + 1;
                     vec16_t src[ 4 ] = {0};
+                    assert( reg_count <= _countof( src ) );
                     for ( uint64_t i = 0; i < reg_count; i++ )
                         src[ i ] = vregs[ ( n + i ) % 32 ];
                     vec16_t target = { 0 };
@@ -5816,7 +5820,12 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     {
                         uint64_t index = vregs[ m ].ui8[ i ];
                         if ( index < ( 16 * reg_count ) )
-                            target.ui8[ i ] = vregs[ ( n + ( i / 16 ) ) % 32 ].ui8[ index ];
+                        {
+                            uint64_t src_item = index / 16;
+                            uint64_t src_index = index % 16;
+                            assert( src[ 0 ].ui8[ index ] == src[ src_item ].ui8[ src_index ] ); // index will reach into subsequent src entries!
+                            target.ui8[ i ] = src[ src_item ].ui8[ src_index ];
+                        }
                     }
                     vregs[ d ] = target;
                 }
@@ -5834,7 +5843,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
 
                     for ( uint64_t p = 0; p < pairs; p++ )
                     {
-                        memcpy( ptarget + ( ( 2 * p ) * ebytes ),    vreg_ptr( n, ( 2 * p + part ) * ebytes ), ebytes );
+                        assert( ( ( ( 2 * p ) * ebytes ) + ebytes ) <= sizeof( target ) );
+                        memcpy( ptarget + ( ( 2 * p ) * ebytes ), vreg_ptr( n, ( 2 * p + part ) * ebytes ), ebytes );
+                        assert( ( ( ( 2 * p + 1 ) * ebytes ) + ebytes ) <= sizeof( target ) );
                         memcpy( ptarget + ( ( 2 * p + 1 ) * ebytes ), vreg_ptr( m, ( 2 * p + part ) * ebytes ), ebytes );
                     }
                     vregs[ d ] = target;
