@@ -7139,7 +7139,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         int64_t offset = 0;
                         if ( 3 == option )
                         {
-                            uint64_t mval = regs[ m ];
+                            uint64_t mval = val_reg_or_zr( m );
                             offset = ( ( mIsX ? mval : ( mval & 0xffffffff ) ) << shift );
                         }
                         else
