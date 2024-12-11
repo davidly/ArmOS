@@ -1672,7 +1672,7 @@ void Arm64::trace_state()
         }
         case 0x1b: // MADD <Wd>, <Wn>, <Wm>, <Wa>    ;    MSUB <Wd>, <Wn>, <Wm>, <Wa>
         case 0x9b: // MADD <Xd>, <Xn>, <Xm>, <Xa>    ;    MSUB <Xd>, <Xn>, <Xm>, <Xa>    ;    UMULH <Xd>, <Xn>, <Xm>    ;    UMADDL <Xd>, <Wn>, <Wm>, <Xa>
-                   // SMADDL <Xd>, <Wn>, <Wm>, <Xa>  ;    SMULH <Xd>, <Xn>, <Xm>
+                   // SMADDL <Xd>, <Wn>, <Wm>, <Xa>  ;    SMULH <Xd>, <Xn>, <Xm>         ;    UMSUBL <Xd>, <Wn>, <Wm>, <Xa>
         {
             bool xregs = ( 0 != opbits( 31, 1 ) );
             uint64_t m = opbits( 16, 5 );
@@ -1682,7 +1682,9 @@ void Arm64::trace_state()
             uint64_t bits23_21 = opbits( 21, 3 );
             bool bit15 = ( 1 == opbits( 15, 1 ) );
 
-            if ( 1 == bits23_21 && bit15 ) // smsubl
+            if ( 0x9b == hi8 && 5 == bits23_21 && bit15 ) // UMSUBL <Xd>, <Wn>, <Wm>, <Xa>
+                tracer.Trace( "umsubl x%llu, w%llu, w%llu, x%llu\n", d, n, m, a );
+            else if ( 1 == bits23_21 && bit15 ) // smsubl
                 tracer.Trace( "mmsubl %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), reg_or_zr4( a, xregs ) );
             else if ( 5 == bits23_21 && !bit15 )
                 tracer.Trace( "umaddl %s, %s, %s\n", reg_or_zr( d, true ), reg_or_zr2( n, true ), reg_or_zr3( m, true ) );
@@ -3094,7 +3096,7 @@ uint64_t Arm64::sub64( uint64_t x, uint64_t y, bool setflags )
     return add_with_carry64( x, ~y, true, setflags );
 } //sub64
 
-uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags )
+__forceinline uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags )
 {
     uint64_t unsigned_sum = (uint64_t) x + (uint64_t) y + (uint64_t) carry;
     uint32_t result = (uint32_t) ( unsigned_sum & 0xffffffff );
@@ -3102,16 +3104,16 @@ uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setfl
     if ( setflags )
     {
         // this method of setting flags is as the Arm documentation suggests
-        fN = ( (int32_t) result < 0 );
+        fN = ( ( (int32_t) result ) < 0 );
         fZ = ( 0 == result );
         fC = ( (uint64_t) result != unsigned_sum );
-        int64_t signed_sum = (int64_t) (int32_t) x + (int64_t) (int32_t) y + (uint64_t) carry;
-        fV = ( (int64_t) (int32_t) result != signed_sum );
+        int64_t signed_sum = (int64_t) (int32_t) x + (int64_t) (int32_t) y + (int64_t) carry;
+        fV = ( ( (int64_t) (int32_t) result ) != signed_sum );
     }
     return result;
 } //add_with_carry32
 
-uint32_t Arm64::sub32( uint32_t x, uint32_t y, bool setflags )
+__forceinline uint32_t Arm64::sub32( uint32_t x, uint32_t y, bool setflags )
 {
     return add_with_carry32( x, ~y, true, setflags );
 } //sub32
@@ -4604,7 +4606,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 offset = sign_extend( offset, 27 );
                 regs[ 30 ] = pc + 4;
                 pc += offset;
-                trace_vregs();
+                //trace_vregs();
                 continue;
             }
             case 0x11: // add <wd|SP>, <wn|SP>, #imm [,<shift>]
@@ -4618,7 +4620,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
                 uint64_t op1 = regs[ n ];
-                uint64_t op2 = ( imm12 << ( sh ? 12 : 0 ) );
+                uint64_t op2 = sh ? ( imm12 << 12 ) : imm12;
                 bool isadd = ( 0x91 == hi8 || 0x11 == hi8 );
                 uint64_t result;
                 if ( isadd )
@@ -6841,7 +6843,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
             }
             case 0x1b: // MADD <Wd>, <Wn>, <Wm>, <Wa>    ;    MSUB <Wd>, <Wn>, <Wm>, <Wa>
             case 0x9b: // MADD <Xd>, <Xn>, <Xm>, <Xa>    ;    MSUB <Xd>, <Xn>, <Xm>, <Xa>    ;    UMULH <Xd>, <Xn>, <Xm>    ;    UMADDL <Xd>, <Wn>, <Wm>, <Xa>
-                       // SMADDL <Xd>, <Wn>, <Wm>, <Xa>  ;    SMULH <Xd>, <Xn>, <Xm>
+                       // SMADDL <Xd>, <Wn>, <Wm>, <Xa>  ;    SMULH <Xd>, <Xn>, <Xm>         ;    UMSUBL <Xd>, <Wn>, <Wm>, <Xa>
             {
                 uint64_t d = opbits( 0, 5 );
                 if ( 31 == d )
@@ -6859,7 +6861,10 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 if ( xregs )
                 {
                     //tracer.Trace( "bits23_21 %llx, bit15 %d\n", bits23_21, bit15 );
-                    if ( 1 == bits23_21 && bit15 ) // smsubl
+
+                    if ( 0x9b == hi8 && 5 == bits23_21 && bit15 ) // UMSUBL <Xd>, <Wn>, <Wm>, <Xa>
+                        regs[ d ] = regs[ a ] - ( ( regs[ n ] & 0xffffffff ) * ( regs[ m ] & 0xffffffff ) );
+                    else if ( 1 == bits23_21 && bit15 ) // smsubl
                         regs[ d ] = aval - ( ( 0xffffffff & nval ) * ( 0xffffffff & mval ) );
                     else if ( 0 == bits23_21 && bit15 ) // msub
                         regs[ d ] = aval - ( nval * mval );

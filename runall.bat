@@ -2,6 +2,8 @@
 setlocal
 
 if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
+rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
+rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)
 
 set outputfile=test_armos.txt
@@ -46,6 +48,7 @@ goto :allDone
 
 :folderRun
 
+rem ( for %%a in (%_applist%) do ( call :appRun c_tests\clang%%f\%%a ) )
 ( for %%a in (%_applist%) do ( call :appRun c_tests\%%f\%%a ) )
 
 echo test c_tests\%~1\an

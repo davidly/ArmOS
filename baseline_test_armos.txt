@@ -1,4 +1,4 @@
-Sun 12/08/2024 15:51:18.06 
+Wed 12/11/2024  7:12:10.85 
 test c_tests\bin0\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -10,7 +10,7 @@ uint8_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -28,7 +28,7 @@ int8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -46,7 +46,7 @@ uint16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -64,7 +64,7 @@ int16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -82,7 +82,7 @@ uint32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -100,7 +100,7 @@ int32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -118,7 +118,7 @@ uint64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -136,7 +136,43 @@ int64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -600,10 +636,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 8, hour 15, min 51, sec 20
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 8, hour 18, min 51, sec 20
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 8, hour 15, min 51, sec 20
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 8, hour 23, min 51, sec 20
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 14
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 14
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 14
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 14
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -987,7 +1023,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-327 ms for 1 iterations
+661 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1023,7 +1059,7 @@ uint8_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1041,7 +1077,7 @@ int8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1059,7 +1095,7 @@ uint16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1077,7 +1113,7 @@ int16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1095,7 +1131,7 @@ uint32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1113,7 +1149,7 @@ int32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1131,7 +1167,7 @@ uint64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1149,7 +1185,43 @@ int64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1613,10 +1685,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 8, hour 15, min 51, sec 28
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 8, hour 18, min 51, sec 28
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 8, hour 15, min 51, sec 28
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 8, hour 23, min 51, sec 28
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 25
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 25
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 25
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 25
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -2000,7 +2072,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-83 ms for 1 iterations
+149 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2036,7 +2108,7 @@ uint8_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2054,7 +2126,7 @@ int8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2072,7 +2144,7 @@ uint16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2090,7 +2162,7 @@ int16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2108,7 +2180,7 @@ uint32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2126,7 +2198,7 @@ int32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2144,7 +2216,7 @@ uint64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2162,7 +2234,43 @@ int64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2626,10 +2734,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 8, hour 15, min 51, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 8, hour 18, min 51, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 8, hour 15, min 51, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 8, hour 23, min 51, sec 35
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 33
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 33
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 33
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 33
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -3013,7 +3121,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-82 ms for 1 iterations
+152 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3049,7 +3157,7 @@ uint8_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3067,7 +3175,7 @@ int8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3085,7 +3193,7 @@ uint16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3103,7 +3211,7 @@ int16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3121,7 +3229,7 @@ uint32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3139,7 +3247,7 @@ int32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3157,7 +3265,7 @@ uint64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3175,7 +3283,43 @@ int64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3639,10 +3783,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 8, hour 15, min 51, sec 42
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 8, hour 18, min 51, sec 42
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 8, hour 15, min 51, sec 42
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 8, hour 23, min 51, sec 42
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 40
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 40
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 40
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 40
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -4026,7 +4170,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-88 ms for 1 iterations
+157 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4062,7 +4206,7 @@ uint8_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4080,7 +4224,7 @@ int8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4098,7 +4242,7 @@ uint16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4116,7 +4260,7 @@ int16_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4134,7 +4278,7 @@ uint32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4152,7 +4296,7 @@ int32_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4170,7 +4314,7 @@ uint64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
-  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4188,7 +4332,43 @@ int64_t:
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4652,10 +4832,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 8, hour 15, min 51, sec 49
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 8, hour 18, min 51, sec 49
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 8, hour 15, min 51, sec 49
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 8, hour 23, min 51, sec 49
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 48
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 48
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 48
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 48
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -5039,7 +5219,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-88 ms for 1 iterations
+155 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -5069,7 +5249,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   8.5507ms
+serial runtime:   16.4513ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -5142,7 +5322,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   2.4918ms
+serial runtime:   4.3909ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -5215,7 +5395,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   3.0217ms
+serial runtime:   3.0561ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -5288,7 +5468,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   1.3117ms
+serial runtime:   2.3655ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -5363,16 +5543,16 @@ test ntvcm
 moves: 6493
 iterations: 1
 test ntvdm 
-0.0 seconds
+0.1 seconds
 moves: 6493
 iterations: 1
 test rvos 
 starting...
 6493 moves
-65.965004 milliseconds
+194.132004 milliseconds
 test armos 
 starting
-120970 microseconds (-6)
+128967 microseconds (-6)
 1 iterations
 6493 moves
-Sun 12/08/2024 15:52:00.63 
+Wed 12/11/2024  7:13:03.21 
