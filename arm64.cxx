@@ -3096,7 +3096,7 @@ uint64_t Arm64::sub64( uint64_t x, uint64_t y, bool setflags )
     return add_with_carry64( x, ~y, true, setflags );
 } //sub64
 
-__forceinline uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags )
+__inline_perf uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags )
 {
     uint64_t unsigned_sum = (uint64_t) x + (uint64_t) y + (uint64_t) carry;
     uint32_t result = (uint32_t) ( unsigned_sum & 0xffffffff );
@@ -3113,7 +3113,7 @@ __forceinline uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool car
     return result;
 } //add_with_carry32
 
-__forceinline uint32_t Arm64::sub32( uint32_t x, uint32_t y, bool setflags )
+__inline_perf uint32_t Arm64::sub32( uint32_t x, uint32_t y, bool setflags )
 {
     return add_with_carry32( x, ~y, true, setflags );
 } //sub32
