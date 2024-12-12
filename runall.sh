@@ -18,6 +18,8 @@ do
     do
         echo c_tests/bin$opt/$arg >>$outputfile
         $_armoscmd c_tests/bin$opt/$arg >>$outputfile
+        echo c_tests/clangbin$opt/$arg >>$outputfile
+        $_armoscmd c_tests/clangbin$opt/$arg >>$outputfile
     done
 done
 
@@ -26,6 +28,8 @@ for opt in 0 1 2 3 fast;
 do
     echo c_tests/bin$opt/an david lee >>$outputfile
     $_armoscmd c_tests/bin$opt/an david lee >>$outputfile
+    echo c_tests/clangbin$opt/an david lee >>$outputfile
+    $_armoscmd c_tests/clangbin$opt/an david lee >>$outputfile
 done
 
 echo test BA
@@ -36,6 +40,7 @@ do
     for codegen in 6 8 a d 3 i I m o r x;
     do
         $_armoscmd c_tests/bin$opt/ba -a:$codegen -x c_tests/tp.bas >>$outputfile
+        $_armoscmd c_tests/clangbin$opt/ba -a:$codegen -x c_tests/tp.bas >>$outputfile
     done
 done
 

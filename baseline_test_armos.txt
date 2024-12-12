@@ -1,4 +1,982 @@
-Wed 12/11/2024  7:12:10.85 
+Thu 12/12/2024  6:07:57.61 
+test c_tests\clangbin0\tcmp 
+uint8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+floating point:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+test c_tests\clangbin0\t 
+a: 0 4000000000000000
+a: 4 0
+ua: 0 4000000000000000
+ua: 4 0
+a: ffffffffffffffff ffffffffffffffff
+a: ffffffffffffffff ffffffffffffffdf = -33
+int8_t result: 6
+uint8_t result: 6
+int16_t result: 6
+uint16_t result: 6
+int32_t result: 6
+uint32_t result: 6
+int64_t result: 6
+uint64_t result: 6
+int128_t result: 6
+uint128_t result: 6
+end of the app
+test c_tests\clangbin0\e 
+271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
+done
+test c_tests\clangbin0\printint 
+n -13
+test c_tests\clangbin0\sieve 
+1899 primes.
+test c_tests\clangbin0\simple 
+argument 0: c_tests/clangbin0/simple
+environment variable 0: TZ=PacificStandardTime+8
+environment variable 1: OS=ARMOS
+test c_tests\clangbin0\tmuldiv 
+app start
+i8 3 * 14: 42
+i8 3 % 14: 3
+i8 3 / 14: 0
+i8 17 * 14: -18
+i8 17 % 14: 3
+i8 17 / 14: 1
+i8 -3 * 14: -42
+i8 -3 % 14: -3
+i8 -3 / 14: 0
+i8 -17 * 14: 18
+i8 -17 % 14: -3
+i8 -17 / 14: -1
+i8 -3 * -14: 42
+i8 -3 % -14: -3
+i8 -3 / -14: 0
+i8 -17 * -14: -18
+i8 -17 % -14: -3
+i8 -17 / -14: 1
+ui8 3 * 14: 42
+ui8 3 % 14: 3
+ui8 3 / 14: 0
+ui8 17 * 14: 238
+ui8 17 % 14: 3
+ui8 17 / 14: 1
+ui8 253 * 14: 214
+ui8 253 % 14: 1
+ui8 253 / 14: 18
+ui8 239 * 14: 18
+ui8 239 % 14: 1
+ui8 239 / 14: 17
+ui8 253 * 242: 42
+ui8 253 % 242: 11
+ui8 253 / 242: 1
+ui8 239 * 242: 238
+ui8 239 % 242: 239
+ui8 239 / 242: 0
+i16 3 * 14: 42
+i16 3 % 14: 3
+i16 3 / 14: 0
+i16 3700 * 14: -13736
+i16 3700 % 14: 4
+i16 3700 / 14: 264
+i16 -3 * 14: -42
+i16 -3 % 14: -3
+i16 -3 / 14: 0
+i16 -3700 * 14: 13736
+i16 -3700 % 14: -4
+i16 -3700 / 14: -264
+i16 -3 * -14: 42
+i16 -3 % -14: -3
+i16 -3 / -14: 0
+i16 -3700 * -14: -13736
+i16 -3700 % -14: -4
+i16 -3700 / -14: 264
+ui16 3 * 14: 42
+ui16 3 % 14: 3
+ui16 3 / 14: 0
+ui16 3700 * 14: 51800
+ui16 3700 % 14: 4
+ui16 3700 / 14: 264
+ui16 65533 * 14: 65494
+ui16 65533 % 14: 13
+ui16 65533 / 14: 4680
+ui16 61836 * 14: 13736
+ui16 61836 % 14: 12
+ui16 61836 / 14: 4416
+ui16 65533 * 65522: 42
+ui16 65533 % 65522: 11
+ui16 65533 / 65522: 1
+ui16 61836 * 65522: 51800
+ui16 61836 % 65522: 61836
+ui16 61836 / 65522: 0
+i32 3 * 14: 42
+i32 3 % 14: 3
+i32 3 / 14: 0
+i32 37000 * 14: 518000
+i32 37000 % 14: 12
+i32 37000 / 14: 2642
+i32 -3 * 14: -42
+i32 -3 % 14: -3
+i32 -3 / 14: 0
+i32 -37000 * 14: -518000
+i32 -37000 % 14: -12
+i32 -37000 / 14: -2642
+i32 -3 * -14: 42
+i32 -3 % -14: -3
+i32 -3 / -14: 0
+i32 -37000 * -14: 518000
+i32 -37000 % -14: -12
+i32 -37000 / -14: 2642
+ui32 3 * 14: 42
+ui32 3 % 14: 3
+ui32 3 / 14: 0
+ui32 37000 * 14: 518000
+ui32 37000 % 14: 12
+ui32 37000 / 14: 2642
+ui32 4294967293 * 14: 4294967254
+ui32 4294967293 % 14: 1
+ui32 4294967293 / 14: 306783378
+ui32 4294930296 * 14: 4294449296
+ui32 4294930296 % 14: 6
+ui32 4294930296 / 14: 306780735
+ui32 4294967293 * 4294967282: 42
+ui32 4294967293 % 4294967282: 11
+ui32 4294967293 / 4294967282: 1
+ui32 4294930296 * 4294967282: 518000
+ui32 4294930296 % 4294967282: 4294930296
+ui32 4294930296 / 4294967282: 0
+i64 3 * 14: 42
+i64 3 % 14: 3
+i64 3 / 14: 0
+i64 370000000 * 14: 5180000000
+i64 370000000 % 14: 6
+i64 370000000 / 14: 26428571
+i64 -3 * 14: -42
+i64 -3 % 14: -3
+i64 -3 / 14: 0
+i64 -370000000 * 14: -5180000000
+i64 -370000000 % 14: -6
+i64 -370000000 / 14: -26428571
+i64 -3 * -14: 42
+i64 -3 % -14: -3
+i64 -3 / -14: 0
+i64 -370000000 * -14: 5180000000
+i64 -370000000 % -14: -6
+i64 -370000000 / -14: 26428571
+ui64 3 * 14: 42
+ui64 3 % 14: 3
+ui64 3 / 14: 0
+ui64 370000000 * 14: 5180000000
+ui64 370000000 % 14: 6
+ui64 370000000 / 14: 26428571
+ui64 18446744073709551613 * 14: 18446744073709551574
+ui64 18446744073709551613 % 14: 13
+ui64 18446744073709551613 / 14: 1317624576693539400
+ui64 18446744073339551616 * 14: 18446744068529551616
+ui64 18446744073339551616 % 14: 10
+ui64 18446744073339551616 / 14: 1317624576667110829
+ui64 18446744073709551613 * 18446744073709551602: 42
+ui64 18446744073709551613 % 18446744073709551602: 11
+ui64 18446744073709551613 / 18446744073709551602: 1
+ui64 18446744073339551616 * 18446744073709551602: 5180000000
+ui64 18446744073339551616 % 18446744073709551602: 18446744073339551616
+ui64 18446744073339551616 / 18446744073709551602: 0
+tmuldiv ended with great success
+test c_tests\clangbin0\tpi 
+314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535
+test c_tests\clangbin0\ts 
+top of app
+print an int 27
+print an int64_t 27
+sizeof T: 1, result: ff
+sizeof T: 1, result: 7f
+sizeof T: 2, result: ffff
+sizeof T: 2, result: 7fff
+sizeof T: 4, result: ffffffff
+sizeof T: 4, result: 7fffffff
+sizeof T: 8, result: ffffffffffffffff
+sizeof T: 8, result: 7fffffffffffffff
+now test left shifts
+sizeof T: 1, result: fe
+sizeof T: 1, result: fe
+sizeof T: 2, result: fffe
+sizeof T: 2, result: fffe
+sizeof T: 4, result: fffffffe
+sizeof T: 4, result: fffffffe
+sizeof T: 8, result: fffffffffffffffe
+sizeof T: 8, result: fffffffffffffffe
+now test comparisons
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+testing printf
+  string: 'hello'
+  char: 'h'
+  int: 27, 1b
+  negative int: -27, ffffffe5
+  int64_t: 27, 1b
+  negative int64_t: -27, ffffffffffffffe5
+stop
+test c_tests\clangbin0\ttt 
+starting...
+done
+64930 moves
+test c_tests\clangbin0\tarray 
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xf8
+sum: 0xf8
+    0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 08  ................................
+    0020  00 00 00 00 00 00 00 02 00 04 00 00 00 ff f8 ff : ff ff ff ff ff ff fe ff fc ff ff ff 02 10 00 00  ................................
+    0040  00 00 00 00 00 04 00 08 00 00 00 fe f0 ff ff ff : ff ff ff ff fc ff f8 ff ff ff 03 18 00 00 00 00  ................................
+    0060  00 00 00 06 00 0c 00 00 00 fd e8 ff ff ff ff ff : ff ff fa ff f4 ff ff ff 04 20 00 00 00 00 00 00  ......................... ......
+    0080  00 08 00 10 00 00 00 fc e0 ff ff ff ff ff ff ff : f8 ff f0 ff ff ff 05 28 00 00 00 00 00 00 00 0a  .......................(........
+    00a0  00 14 00 00 00 fb d8 ff ff ff ff ff ff ff f6 ff : ec ff ff ff 06 30 00 00 00 00 00 00 00 0c 00 18  .....................0..........
+    00c0  00 00 00 fa d0 ff ff ff ff ff ff ff f4 ff e8 ff : ff ff 07 38 00 00 00 00 00 00 00 0e 00 1c 00 00  ...................8............
+    00e0  00 f9 c8 ff ff ff ff ff ff ff f2 ff e4 ff ff ff : 08 40 00 00 00 00 00 00 00 10 00 20 00 00 00 f8  .................@......... ....
+    0100  c0 ff ff ff ff ff ff ff f0 ff e0 ff ff ff 09 48 : 00 00 00 00 00 00 00 12 00 24 00 00 00 f7 b8 ff  ...............H.........$......
+    0120  ff ff ff ff ff ff ee ff dc ff ff ff 0a 50 00 00 : 00 00 00 00 00 14 00 28 00 00 00 f6 b0 ff ff ff  .............P.........(........
+    0140  ff ff ff ff ec ff d8 ff ff ff 0b 58 00 00 00 00 : 00 00 00 16 00 2c 00 00 00 f5 a8 ff ff ff ff ff  ...........X.........,..........
+    0160  ff ff ea ff d4 ff ff ff 0c 60 00 00 00 00 00 00 : 00 18 00 30 00 00 00 f4 a0 ff ff ff ff ff ff ff  .........`.........0............
+    0180  e8 ff d0 ff ff ff 0d 68 00 00 00 00 00 00 00 1a : 00 34 00 00 00 f3 98 ff ff ff ff ff ff ff e6 ff  .......h.........4..............
+    01a0  cc ff ff ff 0e 70 00 00 00 00 00 00 00 1c 00 38 : 00 00 00 f2 90 ff ff ff ff ff ff ff e4 ff c8 ff  .....p.........8................
+    01c0  ff ff 0f 78 00 00 00 00 00 00 00 1e 00 3c 00 00 : 00 f1 88 ff ff ff ff ff ff ff e2 ff c4 ff ff ff  ...x.........<..................
+    01e0  10 80 00 00 00 00 00 00 00 20 00 40 00 00 00 f0 : 80 ff ff ff ff ff ff ff e0 ff c0 ff ff ff 11 88  ......... .@....................
+    0200  00 00 00 00 00 00 00 22 00 44 00 00 00 ef 78 ff : ff ff ff ff ff ff de ff bc ff ff ff 12 90 00 00  .......".D....x.................
+    0220  00 00 00 00 00 24 00 48 00 00 00 ee 70 ff ff ff : ff ff ff ff dc ff b8 ff ff ff 13 98 00 00 00 00  .....$.H....p...................
+    0240  00 00 00 26 00 4c 00 00 00 ed 68 ff ff ff ff ff : ff ff da ff b4 ff ff ff                          ...&.L....h.............
+tarray completed with great success
+test c_tests\clangbin0\tbits 
+uint8_t:
+  and 3, or 7, xor 4, nota f8, notb fc
+  and 5, or ff, xor fa, nota f8, notb 2
+  and 1, or fb, xor fa, nota 6, notb fc
+  and f9, or fd, xor 4, nota 6, notb 2
+  and ff, or ff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota 8, notb fc
+  and f5, or ff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota f6, notb fc
+  and 9, or 9, xor 0, nota f6, notb f6
+int8_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or fffffffffffffff7, xor fffffffffffffff4, nota 8, notb fffffffffffffffc
+  and fffffffffffffff5, or ffffffffffffffff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota fffffffffffffff6, notb fffffffffffffffc
+  and 9, or 9, xor 0, nota fffffffffffffff6, notb fffffffffffffff6
+uint16_t:
+  and 3, or 7, xor 4, nota fff8, notb fffc
+  and 5, or ffff, xor fffa, nota fff8, notb 2
+  and 1, or fffb, xor fffa, nota 6, notb fffc
+  and fff9, or fffd, xor 4, nota 6, notb 2
+  and ffff, or ffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ff08, notb fffc
+  and f5, or ffff, xor ff0a, nota ff08, notb 2
+  and 1, or ff0b, xor ff0a, nota f6, notb fffc
+  and ff09, or ff09, xor 0, nota f6, notb f6
+int16_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint32_t:
+  and 3, or 7, xor 4, nota fffffff8, notb fffffffc
+  and 5, or ffffffff, xor fffffffa, nota fffffff8, notb 2
+  and 1, or fffffffb, xor fffffffa, nota 6, notb fffffffc
+  and fffffff9, or fffffffd, xor 4, nota 6, notb 2
+  and ffffffff, or ffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffff08, notb fffffffc
+  and f5, or ffffffff, xor ffffff0a, nota ffffff08, notb 2
+  and 1, or ffffff0b, xor ffffff0a, nota f6, notb fffffffc
+  and ffffff09, or ffffff09, xor 0, nota f6, notb f6
+int32_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+int64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+test c_tests\clangbin0\trw 
+trw completed with great success
+test c_tests\clangbin0\tmmap 
+MAP_PRIVATE: 0x2
+MAP_ANONYMOUS: 0x20
+MREMAP_MAYMOVE: 0x1
+PROT_READ: 0x1
+PROT_WRITE: 0x2
+mmap test completed with great success
+test c_tests\clangbin0\tstr 
+testing strlen
+testing strchr and strrchr
+testing memcpy and memcmp
+testing printf
+69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+29 (29): nopqrstuvwxyzabcdefghijklmnop
+34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
+24 (24): uvwxyzabcdefghijklmnopqr
+14 (14): stuvwxyzabcdef
+31 (31): ijklmnopqrstuvwxyzabcdefghijklm
+67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
+68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+26 (26): qrstuvwxyzabcdefghijklmnop
+18 (18): jklmnopqrstuvwxyza
+66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
+27 (27): pqrstuvwxyzabcdefghijklmnop
+ 9 ( 9): ijklmnopq
+45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+tstr completed with great success
+test c_tests\clangbin0\fileops 
+current offset: 0
+result of fseek: 0
+file length from ftell: 0
+empty file length: 0
+result of fseek: 0
+result of fwrite (should be 1): 1
+current offset: 8320
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length from portable_filelen: 8320
+result of fseek to middle of file: 0
+result of fwrite to middle of file (should be 1): 1
+current offset: 0
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length: 8320
+result of read at offset 0: 512
+result of read at offset 512: 512
+result of read at offset 1024: 512
+result of read at offset 1536: 512
+result of read at offset 2048: 512
+result of read at offset 2560: 512
+result of read at offset 3072: 512
+result of read at offset 3584: 512
+result of read at offset 4096: 512
+result of read at offset 4608: 512
+result of read at offset 5120: 512
+result of read at offset 5632: 512
+result of read at offset 6144: 512
+result of read at offset 6656: 512
+result of read at offset 7168: 512
+result of read at offset 7680: 512
+result of read at offset 8192: 128
+testing backwards read
+result of read at offset 8192: 128
+result of read at offset 7680: 512
+result of read at offset 7168: 512
+result of read at offset 6656: 512
+result of read at offset 6144: 512
+result of read at offset 5632: 512
+result of read at offset 5120: 512
+result of read at offset 4608: 512
+result of read at offset 4096: 512
+result of read at offset 3584: 512
+result of read at offset 3072: 512
+result of read at offset 2560: 512
+result of read at offset 2048: 512
+result of read at offset 1536: 512
+result of read at offset 1024: 512
+result of read at offset 512: 512
+result of read at offset 0: 512
+fileops has completed with great success
+test c_tests\clangbin0\ttime 
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 7, sec 59
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 7, sec 59
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 7, sec 59
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 7, sec 59
+test c_tests\clangbin0\tm 
+tm has completed with great success
+test c_tests\clangbin0\glob 
+in CTest constructor
+top main
+value of ctest::foo: 666
+end of main
+in ~CTest destructor
+test c_tests\clangbin0\tap 
+starting, should tend towards 1.2020569031595942854...
+  at           10 iterations: 1.19753198567419305576
+  at          100 iterations: 1.20200740065967814907
+  at         1000 iterations: 1.20205640365934329772
+  at        10000 iterations: 1.20205689816009808624
+  at       100000 iterations: 1.20205690310973234425
+next implementation...
+  at           10 iterations: 1.25000000000000000000
+  at          100 iterations: 1.14942528735632176762
+  at         1000 iterations: 1.21802679658952506259
+  at        10000 iterations: 1.20293516179477921746
+tap completed with great success
+test c_tests\clangbin0\tsimplef 
+float 3.141593
+f1 2.500000 * f2 3.500000 = 8.750000
+    div = 0.714286
+    add = 6.000000
+    sub = -1.000000
+d1 9.720000 * d2 13.321000 = 129.480120
+    div = 0.729675
+    add = 23.041000
+    sub = -3.601000
+double from int128: 1000.000000
+tsimplef completed with great success
+test c_tests\clangbin0\tf 
+hello from printf
+float from printf: 45.678000
+division result: 333.333344, square root 18.257420
+result of 20.2 * -1.342: -27.108400
+result of 20.2 * -1.342 as a double: -27.108400
+pi in radians: 0.523599
+sinf of 30 degress is 0.500000
+cosf of 30 degrees is 0.866025
+tanf of 30 degrees is 0.577350
+atanf of 1.000000 is 0.785398
+atan2f of 0.3, 0.2 is 0.982794
+acosf of 0.3 is 1.266104
+asinf of 0.3 is 0.304693
+tanhf of 2.2 is 0.304693
+logf of 0.3: -1.203973
+log10f of 300: 2.477121
+pi has mantissa: 0.785398, exponent 2
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+stop
+test c_tests\clangbin0\td 
+sprintf double 3.14159265358979311600
+double from printf: 3.14159265358979311600
+float from printf: 1.202057
+double from printf r: -3.776373
+sqrt of pi: 1.772454
+pi in radians: 0.523599
+sin of 30 degress is 0.500000
+cos of 30 degrees is 0.866025
+tan of 30 degrees is 0.577350
+atan of 1.000000 is 0.785398
+atan2 of 0.3, 0.2 is 0.982794
+acos of 0.3 is 1.266104
+asin of 0.3 is 0.304693
+tanh of 2.2 is 0.304693
+log of 0.3: -1.203973
+log10 of 300: 2.477121
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
+pi has mantissa: 0.785398, exponent 2
+r should be 1.0: 1.000000
+  r high point 3187071009115104228782838925952666189789578010509155762176.000000
+stop
+test c_tests\clangbin0\terrno 
+errno opening a file for read that doesn't exist: 2 (2 file not found expected)
+errno doing write to stdin file descriptor: 13. (13 permission denied expected)
+errno opening a file for read with invalid open flags: 22 (22 invalid argument expected)
+success
+test c_tests\clangbin0\t_setjmp 
+second
+back in main
+falling out of main
+test c_tests\clangbin0\tex 
+top of tex
+I am unwound, x should be 44: 44
+caught exception exceptional
+attempting large allocations
+caught a standard execption: std::bad_alloc
+leaving main
+test c_tests\clangbin0\mm 
+matrix float 1: 4.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
+matrix float 20: 465880.000000
+matrix double 1: 4.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
+matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
+matrix multiply test completed with great success
+test c_tests\clangbin0\pis 
+startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
+startInChunks: 0, limitInChunks 32
+percent complete: 3.125000
+percent complete: 6.250000
+percent complete: 9.375000
+percent complete: 12.500000
+percent complete: 15.625000
+percent complete: 18.750000
+percent complete: 21.875000
+percent complete: 25.000000
+percent complete: 28.125000
+percent complete: 31.250000
+percent complete: 34.375000
+percent complete: 37.500000
+percent complete: 40.625000
+percent complete: 43.750000
+percent complete: 46.875000
+percent complete: 50.000000
+percent complete: 53.125000
+percent complete: 56.250000
+percent complete: 59.375000
+percent complete: 62.500000
+percent complete: 65.625000
+percent complete: 68.750000
+percent complete: 71.875000
+percent complete: 75.000000
+percent complete: 78.125000
+percent complete: 81.250000
+percent complete: 84.375000
+percent complete: 87.500000
+percent complete: 90.625000
+percent complete: 93.750000
+percent complete: 96.875000
+percent complete: 100.000000
+results are valid
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+test c_tests\clangbin0\sleeptm 
+clk_tck / number of linux ticks per second: 100
+sleepy time ended with great success
+test c_tests\clangbin0\tatomic 
+test atomic completed with great success
+test c_tests\clangbin0\lenum 
+linux file system enumeration completed with great success
 test c_tests\bin0\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -636,10 +1614,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 14
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 14
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 14
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 14
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 8, sec 6
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 8, sec 6
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 8, sec 6
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 8, sec 6
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -1021,9 +1999,53 @@ id leaved
 idea veld
 lade vied
 lead vied
+test c_tests\clangbin0\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-661 ms for 1 iterations
+311 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -1048,6 +2070,1011 @@ parsing input file tp.bas
 created assembler file: tp.s, use registers: yes, expression optimization: yes
 parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbin0\ba 
+parsing input file tp.bas
+311 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbin1\tcmp 
+uint8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+floating point:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+test c_tests\clangbin1\t 
+a: 0 4000000000000000
+a: 4 0
+ua: 0 4000000000000000
+ua: 4 0
+a: ffffffffffffffff ffffffffffffffff
+a: ffffffffffffffff ffffffffffffffdf = -33
+int8_t result: 6
+uint8_t result: 6
+int16_t result: 6
+uint16_t result: 6
+int32_t result: 6
+uint32_t result: 6
+int64_t result: 6
+uint64_t result: 6
+int128_t result: 6
+uint128_t result: 6
+end of the app
+test c_tests\clangbin1\e 
+271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
+done
+test c_tests\clangbin1\printint 
+n -13
+test c_tests\clangbin1\sieve 
+1899 primes.
+test c_tests\clangbin1\simple 
+argument 0: c_tests/clangbin1/simple
+environment variable 0: TZ=PacificStandardTime+8
+environment variable 1: OS=ARMOS
+test c_tests\clangbin1\tmuldiv 
+app start
+i8 3 * 14: 42
+i8 3 % 14: 3
+i8 3 / 14: 0
+i8 17 * 14: -18
+i8 17 % 14: 3
+i8 17 / 14: 1
+i8 -3 * 14: -42
+i8 -3 % 14: -3
+i8 -3 / 14: 0
+i8 -17 * 14: 18
+i8 -17 % 14: -3
+i8 -17 / 14: -1
+i8 -3 * -14: 42
+i8 -3 % -14: -3
+i8 -3 / -14: 0
+i8 -17 * -14: -18
+i8 -17 % -14: -3
+i8 -17 / -14: 1
+ui8 3 * 14: 42
+ui8 3 % 14: 3
+ui8 3 / 14: 0
+ui8 17 * 14: 238
+ui8 17 % 14: 3
+ui8 17 / 14: 1
+ui8 253 * 14: 214
+ui8 253 % 14: 1
+ui8 253 / 14: 18
+ui8 239 * 14: 18
+ui8 239 % 14: 1
+ui8 239 / 14: 17
+ui8 253 * 242: 42
+ui8 253 % 242: 11
+ui8 253 / 242: 1
+ui8 239 * 242: 238
+ui8 239 % 242: 239
+ui8 239 / 242: 0
+i16 3 * 14: 42
+i16 3 % 14: 3
+i16 3 / 14: 0
+i16 3700 * 14: -13736
+i16 3700 % 14: 4
+i16 3700 / 14: 264
+i16 -3 * 14: -42
+i16 -3 % 14: -3
+i16 -3 / 14: 0
+i16 -3700 * 14: 13736
+i16 -3700 % 14: -4
+i16 -3700 / 14: -264
+i16 -3 * -14: 42
+i16 -3 % -14: -3
+i16 -3 / -14: 0
+i16 -3700 * -14: -13736
+i16 -3700 % -14: -4
+i16 -3700 / -14: 264
+ui16 3 * 14: 42
+ui16 3 % 14: 3
+ui16 3 / 14: 0
+ui16 3700 * 14: 51800
+ui16 3700 % 14: 4
+ui16 3700 / 14: 264
+ui16 65533 * 14: 65494
+ui16 65533 % 14: 13
+ui16 65533 / 14: 4680
+ui16 61836 * 14: 13736
+ui16 61836 % 14: 12
+ui16 61836 / 14: 4416
+ui16 65533 * 65522: 42
+ui16 65533 % 65522: 11
+ui16 65533 / 65522: 1
+ui16 61836 * 65522: 51800
+ui16 61836 % 65522: 61836
+ui16 61836 / 65522: 0
+i32 3 * 14: 42
+i32 3 % 14: 3
+i32 3 / 14: 0
+i32 37000 * 14: 518000
+i32 37000 % 14: 12
+i32 37000 / 14: 2642
+i32 -3 * 14: -42
+i32 -3 % 14: -3
+i32 -3 / 14: 0
+i32 -37000 * 14: -518000
+i32 -37000 % 14: -12
+i32 -37000 / 14: -2642
+i32 -3 * -14: 42
+i32 -3 % -14: -3
+i32 -3 / -14: 0
+i32 -37000 * -14: 518000
+i32 -37000 % -14: -12
+i32 -37000 / -14: 2642
+ui32 3 * 14: 42
+ui32 3 % 14: 3
+ui32 3 / 14: 0
+ui32 37000 * 14: 518000
+ui32 37000 % 14: 12
+ui32 37000 / 14: 2642
+ui32 4294967293 * 14: 4294967254
+ui32 4294967293 % 14: 1
+ui32 4294967293 / 14: 306783378
+ui32 4294930296 * 14: 4294449296
+ui32 4294930296 % 14: 6
+ui32 4294930296 / 14: 306780735
+ui32 4294967293 * 4294967282: 42
+ui32 4294967293 % 4294967282: 11
+ui32 4294967293 / 4294967282: 1
+ui32 4294930296 * 4294967282: 518000
+ui32 4294930296 % 4294967282: 4294930296
+ui32 4294930296 / 4294967282: 0
+i64 3 * 14: 42
+i64 3 % 14: 3
+i64 3 / 14: 0
+i64 370000000 * 14: 5180000000
+i64 370000000 % 14: 6
+i64 370000000 / 14: 26428571
+i64 -3 * 14: -42
+i64 -3 % 14: -3
+i64 -3 / 14: 0
+i64 -370000000 * 14: -5180000000
+i64 -370000000 % 14: -6
+i64 -370000000 / 14: -26428571
+i64 -3 * -14: 42
+i64 -3 % -14: -3
+i64 -3 / -14: 0
+i64 -370000000 * -14: 5180000000
+i64 -370000000 % -14: -6
+i64 -370000000 / -14: 26428571
+ui64 3 * 14: 42
+ui64 3 % 14: 3
+ui64 3 / 14: 0
+ui64 370000000 * 14: 5180000000
+ui64 370000000 % 14: 6
+ui64 370000000 / 14: 26428571
+ui64 18446744073709551613 * 14: 18446744073709551574
+ui64 18446744073709551613 % 14: 13
+ui64 18446744073709551613 / 14: 1317624576693539400
+ui64 18446744073339551616 * 14: 18446744068529551616
+ui64 18446744073339551616 % 14: 10
+ui64 18446744073339551616 / 14: 1317624576667110829
+ui64 18446744073709551613 * 18446744073709551602: 42
+ui64 18446744073709551613 % 18446744073709551602: 11
+ui64 18446744073709551613 / 18446744073709551602: 1
+ui64 18446744073339551616 * 18446744073709551602: 5180000000
+ui64 18446744073339551616 % 18446744073709551602: 18446744073339551616
+ui64 18446744073339551616 / 18446744073709551602: 0
+tmuldiv ended with great success
+test c_tests\clangbin1\tpi 
+314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535
+test c_tests\clangbin1\ts 
+top of app
+print an int 27
+print an int64_t 27
+sizeof T: 1, result: ff
+sizeof T: 1, result: 7f
+sizeof T: 2, result: ffff
+sizeof T: 2, result: 7fff
+sizeof T: 4, result: ffffffff
+sizeof T: 4, result: 7fffffff
+sizeof T: 8, result: ffffffffffffffff
+sizeof T: 8, result: 7fffffffffffffff
+now test left shifts
+sizeof T: 1, result: fe
+sizeof T: 1, result: fe
+sizeof T: 2, result: fffe
+sizeof T: 2, result: fffe
+sizeof T: 4, result: fffffffe
+sizeof T: 4, result: fffffffe
+sizeof T: 8, result: fffffffffffffffe
+sizeof T: 8, result: fffffffffffffffe
+now test comparisons
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+testing printf
+  string: 'hello'
+  char: 'h'
+  int: 27, 1b
+  negative int: -27, ffffffe5
+  int64_t: 27, 1b
+  negative int64_t: -27, ffffffffffffffe5
+stop
+test c_tests\clangbin1\ttt 
+starting...
+done
+64930 moves
+test c_tests\clangbin1\tarray 
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xf8
+sum: 0xf8
+    0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 08  ................................
+    0020  00 00 00 00 00 00 00 02 00 04 00 00 00 ff f8 ff : ff ff ff ff ff ff fe ff fc ff ff ff 02 10 00 00  ................................
+    0040  00 00 00 00 00 04 00 08 00 00 00 fe f0 ff ff ff : ff ff ff ff fc ff f8 ff ff ff 03 18 00 00 00 00  ................................
+    0060  00 00 00 06 00 0c 00 00 00 fd e8 ff ff ff ff ff : ff ff fa ff f4 ff ff ff 04 20 00 00 00 00 00 00  ......................... ......
+    0080  00 08 00 10 00 00 00 fc e0 ff ff ff ff ff ff ff : f8 ff f0 ff ff ff 05 28 00 00 00 00 00 00 00 0a  .......................(........
+    00a0  00 14 00 00 00 fb d8 ff ff ff ff ff ff ff f6 ff : ec ff ff ff 06 30 00 00 00 00 00 00 00 0c 00 18  .....................0..........
+    00c0  00 00 00 fa d0 ff ff ff ff ff ff ff f4 ff e8 ff : ff ff 07 38 00 00 00 00 00 00 00 0e 00 1c 00 00  ...................8............
+    00e0  00 f9 c8 ff ff ff ff ff ff ff f2 ff e4 ff ff ff : 08 40 00 00 00 00 00 00 00 10 00 20 00 00 00 f8  .................@......... ....
+    0100  c0 ff ff ff ff ff ff ff f0 ff e0 ff ff ff 09 48 : 00 00 00 00 00 00 00 12 00 24 00 00 00 f7 b8 ff  ...............H.........$......
+    0120  ff ff ff ff ff ff ee ff dc ff ff ff 0a 50 00 00 : 00 00 00 00 00 14 00 28 00 00 00 f6 b0 ff ff ff  .............P.........(........
+    0140  ff ff ff ff ec ff d8 ff ff ff 0b 58 00 00 00 00 : 00 00 00 16 00 2c 00 00 00 f5 a8 ff ff ff ff ff  ...........X.........,..........
+    0160  ff ff ea ff d4 ff ff ff 0c 60 00 00 00 00 00 00 : 00 18 00 30 00 00 00 f4 a0 ff ff ff ff ff ff ff  .........`.........0............
+    0180  e8 ff d0 ff ff ff 0d 68 00 00 00 00 00 00 00 1a : 00 34 00 00 00 f3 98 ff ff ff ff ff ff ff e6 ff  .......h.........4..............
+    01a0  cc ff ff ff 0e 70 00 00 00 00 00 00 00 1c 00 38 : 00 00 00 f2 90 ff ff ff ff ff ff ff e4 ff c8 ff  .....p.........8................
+    01c0  ff ff 0f 78 00 00 00 00 00 00 00 1e 00 3c 00 00 : 00 f1 88 ff ff ff ff ff ff ff e2 ff c4 ff ff ff  ...x.........<..................
+    01e0  10 80 00 00 00 00 00 00 00 20 00 40 00 00 00 f0 : 80 ff ff ff ff ff ff ff e0 ff c0 ff ff ff 11 88  ......... .@....................
+    0200  00 00 00 00 00 00 00 22 00 44 00 00 00 ef 78 ff : ff ff ff ff ff ff de ff bc ff ff ff 12 90 00 00  .......".D....x.................
+    0220  00 00 00 00 00 24 00 48 00 00 00 ee 70 ff ff ff : ff ff ff ff dc ff b8 ff ff ff 13 98 00 00 00 00  .....$.H....p...................
+    0240  00 00 00 26 00 4c 00 00 00 ed 68 ff ff ff ff ff : ff ff da ff b4 ff ff ff                          ...&.L....h.............
+tarray completed with great success
+test c_tests\clangbin1\tbits 
+uint8_t:
+  and 3, or 7, xor 4, nota f8, notb fc
+  and 5, or ff, xor fa, nota f8, notb 2
+  and 1, or fb, xor fa, nota 6, notb fc
+  and f9, or fd, xor 4, nota 6, notb 2
+  and ff, or ff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota 8, notb fc
+  and f5, or ff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota f6, notb fc
+  and 9, or 9, xor 0, nota f6, notb f6
+int8_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or fffffffffffffff7, xor fffffffffffffff4, nota 8, notb fffffffffffffffc
+  and fffffffffffffff5, or ffffffffffffffff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota fffffffffffffff6, notb fffffffffffffffc
+  and 9, or 9, xor 0, nota fffffffffffffff6, notb fffffffffffffff6
+uint16_t:
+  and 3, or 7, xor 4, nota fff8, notb fffc
+  and 5, or ffff, xor fffa, nota fff8, notb 2
+  and 1, or fffb, xor fffa, nota 6, notb fffc
+  and fff9, or fffd, xor 4, nota 6, notb 2
+  and ffff, or ffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ff08, notb fffc
+  and f5, or ffff, xor ff0a, nota ff08, notb 2
+  and 1, or ff0b, xor ff0a, nota f6, notb fffc
+  and ff09, or ff09, xor 0, nota f6, notb f6
+int16_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint32_t:
+  and 3, or 7, xor 4, nota fffffff8, notb fffffffc
+  and 5, or ffffffff, xor fffffffa, nota fffffff8, notb 2
+  and 1, or fffffffb, xor fffffffa, nota 6, notb fffffffc
+  and fffffff9, or fffffffd, xor 4, nota 6, notb 2
+  and ffffffff, or ffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffff08, notb fffffffc
+  and f5, or ffffffff, xor ffffff0a, nota ffffff08, notb 2
+  and 1, or ffffff0b, xor ffffff0a, nota f6, notb fffffffc
+  and ffffff09, or ffffff09, xor 0, nota f6, notb f6
+int32_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+int64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+test c_tests\clangbin1\trw 
+trw completed with great success
+test c_tests\clangbin1\tmmap 
+MAP_PRIVATE: 0x2
+MAP_ANONYMOUS: 0x20
+MREMAP_MAYMOVE: 0x1
+PROT_READ: 0x1
+PROT_WRITE: 0x2
+mmap test completed with great success
+test c_tests\clangbin1\tstr 
+testing strlen
+testing strchr and strrchr
+testing memcpy and memcmp
+testing printf
+69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+29 (29): nopqrstuvwxyzabcdefghijklmnop
+34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
+24 (24): uvwxyzabcdefghijklmnopqr
+14 (14): stuvwxyzabcdef
+31 (31): ijklmnopqrstuvwxyzabcdefghijklm
+67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
+68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+26 (26): qrstuvwxyzabcdefghijklmnop
+18 (18): jklmnopqrstuvwxyza
+66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
+27 (27): pqrstuvwxyzabcdefghijklmnop
+ 9 ( 9): ijklmnopq
+45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+tstr completed with great success
+test c_tests\clangbin1\fileops 
+current offset: 0
+result of fseek: 0
+file length from ftell: 0
+empty file length: 0
+result of fseek: 0
+result of fwrite (should be 1): 1
+current offset: 8320
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length from portable_filelen: 8320
+result of fseek to middle of file: 0
+result of fwrite to middle of file (should be 1): 1
+current offset: 0
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length: 8320
+result of read at offset 0: 512
+result of read at offset 512: 512
+result of read at offset 1024: 512
+result of read at offset 1536: 512
+result of read at offset 2048: 512
+result of read at offset 2560: 512
+result of read at offset 3072: 512
+result of read at offset 3584: 512
+result of read at offset 4096: 512
+result of read at offset 4608: 512
+result of read at offset 5120: 512
+result of read at offset 5632: 512
+result of read at offset 6144: 512
+result of read at offset 6656: 512
+result of read at offset 7168: 512
+result of read at offset 7680: 512
+result of read at offset 8192: 128
+testing backwards read
+result of read at offset 8192: 128
+result of read at offset 7680: 512
+result of read at offset 7168: 512
+result of read at offset 6656: 512
+result of read at offset 6144: 512
+result of read at offset 5632: 512
+result of read at offset 5120: 512
+result of read at offset 4608: 512
+result of read at offset 4096: 512
+result of read at offset 3584: 512
+result of read at offset 3072: 512
+result of read at offset 2560: 512
+result of read at offset 2048: 512
+result of read at offset 1536: 512
+result of read at offset 1024: 512
+result of read at offset 512: 512
+result of read at offset 0: 512
+fileops has completed with great success
+test c_tests\clangbin1\ttime 
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 8, sec 16
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 8, sec 16
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 8, sec 16
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 8, sec 16
+test c_tests\clangbin1\tm 
+tm has completed with great success
+test c_tests\clangbin1\glob 
+in CTest constructor
+top main
+value of ctest::foo: 666
+end of main
+in ~CTest destructor
+test c_tests\clangbin1\tap 
+starting, should tend towards 1.2020569031595942854...
+  at           10 iterations: 1.19753198567419305576
+  at          100 iterations: 1.20200740065967814907
+  at         1000 iterations: 1.20205640365934329772
+  at        10000 iterations: 1.20205689816009808624
+  at       100000 iterations: 1.20205690310973234425
+next implementation...
+  at           10 iterations: 1.25000000000000000000
+  at          100 iterations: 1.14942528735632176762
+  at         1000 iterations: 1.21802679658952506259
+  at        10000 iterations: 1.20293516179477921746
+tap completed with great success
+test c_tests\clangbin1\tsimplef 
+float 3.141593
+f1 2.500000 * f2 3.500000 = 8.750000
+    div = 0.714286
+    add = 6.000000
+    sub = -1.000000
+d1 9.720000 * d2 13.321000 = 129.480120
+    div = 0.729675
+    add = 23.041000
+    sub = -3.601000
+double from int128: 1000.000000
+tsimplef completed with great success
+test c_tests\clangbin1\tf 
+hello from printf
+float from printf: 45.678000
+division result: 333.333344, square root 18.257420
+result of 20.2 * -1.342: -27.108400
+result of 20.2 * -1.342 as a double: -27.108400
+pi in radians: 0.523599
+sinf of 30 degress is 0.500000
+cosf of 30 degrees is 0.866025
+tanf of 30 degrees is 0.577350
+atanf of 1.000000 is 0.785398
+atan2f of 0.3, 0.2 is 0.982794
+acosf of 0.3 is 1.266104
+asinf of 0.3 is 0.304693
+tanhf of 2.2 is 0.304693
+logf of 0.3: -1.203973
+log10f of 300: 2.477121
+pi has mantissa: 0.785398, exponent 2
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+stop
+test c_tests\clangbin1\td 
+sprintf double 3.14159265358979311600
+double from printf: 3.14159265358979311600
+float from printf: 1.202057
+double from printf r: -3.776373
+sqrt of pi: 1.772454
+pi in radians: 0.523599
+sin of 30 degress is 0.500000
+cos of 30 degrees is 0.866025
+tan of 30 degrees is 0.577350
+atan of 1.000000 is 0.785398
+atan2 of 0.3, 0.2 is 0.982794
+acos of 0.3 is 1.266104
+asin of 0.3 is 0.304693
+tanh of 2.2 is 0.304693
+log of 0.3: -1.203973
+log10 of 300: 2.477121
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
+pi has mantissa: 0.785398, exponent 2
+r should be 1.0: 1.000000
+  r high point 3187071009115104228782838925952666189789578010509155762176.000000
+stop
+test c_tests\clangbin1\terrno 
+errno opening a file for read that doesn't exist: 2 (2 file not found expected)
+errno doing write to stdin file descriptor: 13. (13 permission denied expected)
+errno opening a file for read with invalid open flags: 22 (22 invalid argument expected)
+success
+test c_tests\clangbin1\t_setjmp 
+second
+back in main
+falling out of main
+test c_tests\clangbin1\tex 
+top of tex
+I am unwound, x should be 44: 44
+caught exception exceptional
+attempting large allocations
+caught a standard execption: std::bad_alloc
+leaving main
+test c_tests\clangbin1\mm 
+matrix float 1: 4.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
+matrix float 20: 465880.000000
+matrix double 1: 4.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
+matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
+matrix multiply test completed with great success
+test c_tests\clangbin1\pis 
+startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
+startInChunks: 0, limitInChunks 32
+percent complete: 3.125000
+percent complete: 6.250000
+percent complete: 9.375000
+percent complete: 12.500000
+percent complete: 15.625000
+percent complete: 18.750000
+percent complete: 21.875000
+percent complete: 25.000000
+percent complete: 28.125000
+percent complete: 31.250000
+percent complete: 34.375000
+percent complete: 37.500000
+percent complete: 40.625000
+percent complete: 43.750000
+percent complete: 46.875000
+percent complete: 50.000000
+percent complete: 53.125000
+percent complete: 56.250000
+percent complete: 59.375000
+percent complete: 62.500000
+percent complete: 65.625000
+percent complete: 68.750000
+percent complete: 71.875000
+percent complete: 75.000000
+percent complete: 78.125000
+percent complete: 81.250000
+percent complete: 84.375000
+percent complete: 87.500000
+percent complete: 90.625000
+percent complete: 93.750000
+percent complete: 96.875000
+percent complete: 100.000000
+results are valid
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+test c_tests\clangbin1\sleeptm 
+clk_tck / number of linux ticks per second: 100
+sleepy time ended with great success
+test c_tests\clangbin1\tatomic 
+test atomic completed with great success
+test c_tests\clangbin1\lenum 
+linux file system enumeration completed with great success
 test c_tests\bin1\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -1685,10 +3712,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 25
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 25
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 25
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 25
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 8, sec 22
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 8, sec 22
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 8, sec 22
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 8, sec 22
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -2021,6 +4048,7 @@ results are valid
 final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
 test c_tests\bin1\sleeptm 
 clk_tck / number of linux ticks per second: 100
+getrusage user time in ms: 1015, system time 0
 sleepy time ended with great success
 test c_tests\bin1\tatomic 
 test atomic completed with great success
@@ -2070,9 +4098,53 @@ id leaved
 idea veld
 lade vied
 lead vied
+test c_tests\clangbin1\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-149 ms for 1 iterations
+81 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2097,6 +4169,1011 @@ parsing input file tp.bas
 created assembler file: tp.s, use registers: yes, expression optimization: yes
 parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbin1\ba 
+parsing input file tp.bas
+78 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbin2\tcmp 
+uint8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+floating point:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+test c_tests\clangbin2\t 
+a: 0 4000000000000000
+a: 4 0
+ua: 0 4000000000000000
+ua: 4 0
+a: ffffffffffffffff ffffffffffffffff
+a: ffffffffffffffff ffffffffffffffdf = -33
+int8_t result: 6
+uint8_t result: 6
+int16_t result: 6
+uint16_t result: 6
+int32_t result: 6
+uint32_t result: 6
+int64_t result: 6
+uint64_t result: 6
+int128_t result: 6
+uint128_t result: 6
+end of the app
+test c_tests\clangbin2\e 
+271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
+done
+test c_tests\clangbin2\printint 
+n -13
+test c_tests\clangbin2\sieve 
+1899 primes.
+test c_tests\clangbin2\simple 
+argument 0: c_tests/clangbin2/simple
+environment variable 0: TZ=PacificStandardTime+8
+environment variable 1: OS=ARMOS
+test c_tests\clangbin2\tmuldiv 
+app start
+i8 3 * 14: 42
+i8 3 % 14: 3
+i8 3 / 14: 0
+i8 17 * 14: -18
+i8 17 % 14: 3
+i8 17 / 14: 1
+i8 -3 * 14: -42
+i8 -3 % 14: -3
+i8 -3 / 14: 0
+i8 -17 * 14: 18
+i8 -17 % 14: -3
+i8 -17 / 14: -1
+i8 -3 * -14: 42
+i8 -3 % -14: -3
+i8 -3 / -14: 0
+i8 -17 * -14: -18
+i8 -17 % -14: -3
+i8 -17 / -14: 1
+ui8 3 * 14: 42
+ui8 3 % 14: 3
+ui8 3 / 14: 0
+ui8 17 * 14: 238
+ui8 17 % 14: 3
+ui8 17 / 14: 1
+ui8 253 * 14: 214
+ui8 253 % 14: 1
+ui8 253 / 14: 18
+ui8 239 * 14: 18
+ui8 239 % 14: 1
+ui8 239 / 14: 17
+ui8 253 * 242: 42
+ui8 253 % 242: 11
+ui8 253 / 242: 1
+ui8 239 * 242: 238
+ui8 239 % 242: 239
+ui8 239 / 242: 0
+i16 3 * 14: 42
+i16 3 % 14: 3
+i16 3 / 14: 0
+i16 3700 * 14: -13736
+i16 3700 % 14: 4
+i16 3700 / 14: 264
+i16 -3 * 14: -42
+i16 -3 % 14: -3
+i16 -3 / 14: 0
+i16 -3700 * 14: 13736
+i16 -3700 % 14: -4
+i16 -3700 / 14: -264
+i16 -3 * -14: 42
+i16 -3 % -14: -3
+i16 -3 / -14: 0
+i16 -3700 * -14: -13736
+i16 -3700 % -14: -4
+i16 -3700 / -14: 264
+ui16 3 * 14: 42
+ui16 3 % 14: 3
+ui16 3 / 14: 0
+ui16 3700 * 14: 51800
+ui16 3700 % 14: 4
+ui16 3700 / 14: 264
+ui16 65533 * 14: 65494
+ui16 65533 % 14: 13
+ui16 65533 / 14: 4680
+ui16 61836 * 14: 13736
+ui16 61836 % 14: 12
+ui16 61836 / 14: 4416
+ui16 65533 * 65522: 42
+ui16 65533 % 65522: 11
+ui16 65533 / 65522: 1
+ui16 61836 * 65522: 51800
+ui16 61836 % 65522: 61836
+ui16 61836 / 65522: 0
+i32 3 * 14: 42
+i32 3 % 14: 3
+i32 3 / 14: 0
+i32 37000 * 14: 518000
+i32 37000 % 14: 12
+i32 37000 / 14: 2642
+i32 -3 * 14: -42
+i32 -3 % 14: -3
+i32 -3 / 14: 0
+i32 -37000 * 14: -518000
+i32 -37000 % 14: -12
+i32 -37000 / 14: -2642
+i32 -3 * -14: 42
+i32 -3 % -14: -3
+i32 -3 / -14: 0
+i32 -37000 * -14: 518000
+i32 -37000 % -14: -12
+i32 -37000 / -14: 2642
+ui32 3 * 14: 42
+ui32 3 % 14: 3
+ui32 3 / 14: 0
+ui32 37000 * 14: 518000
+ui32 37000 % 14: 12
+ui32 37000 / 14: 2642
+ui32 4294967293 * 14: 4294967254
+ui32 4294967293 % 14: 1
+ui32 4294967293 / 14: 306783378
+ui32 4294930296 * 14: 4294449296
+ui32 4294930296 % 14: 6
+ui32 4294930296 / 14: 306780735
+ui32 4294967293 * 4294967282: 42
+ui32 4294967293 % 4294967282: 11
+ui32 4294967293 / 4294967282: 1
+ui32 4294930296 * 4294967282: 518000
+ui32 4294930296 % 4294967282: 4294930296
+ui32 4294930296 / 4294967282: 0
+i64 3 * 14: 42
+i64 3 % 14: 3
+i64 3 / 14: 0
+i64 370000000 * 14: 5180000000
+i64 370000000 % 14: 6
+i64 370000000 / 14: 26428571
+i64 -3 * 14: -42
+i64 -3 % 14: -3
+i64 -3 / 14: 0
+i64 -370000000 * 14: -5180000000
+i64 -370000000 % 14: -6
+i64 -370000000 / 14: -26428571
+i64 -3 * -14: 42
+i64 -3 % -14: -3
+i64 -3 / -14: 0
+i64 -370000000 * -14: 5180000000
+i64 -370000000 % -14: -6
+i64 -370000000 / -14: 26428571
+ui64 3 * 14: 42
+ui64 3 % 14: 3
+ui64 3 / 14: 0
+ui64 370000000 * 14: 5180000000
+ui64 370000000 % 14: 6
+ui64 370000000 / 14: 26428571
+ui64 18446744073709551613 * 14: 18446744073709551574
+ui64 18446744073709551613 % 14: 13
+ui64 18446744073709551613 / 14: 1317624576693539400
+ui64 18446744073339551616 * 14: 18446744068529551616
+ui64 18446744073339551616 % 14: 10
+ui64 18446744073339551616 / 14: 1317624576667110829
+ui64 18446744073709551613 * 18446744073709551602: 42
+ui64 18446744073709551613 % 18446744073709551602: 11
+ui64 18446744073709551613 / 18446744073709551602: 1
+ui64 18446744073339551616 * 18446744073709551602: 5180000000
+ui64 18446744073339551616 % 18446744073709551602: 18446744073339551616
+ui64 18446744073339551616 / 18446744073709551602: 0
+tmuldiv ended with great success
+test c_tests\clangbin2\tpi 
+314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535
+test c_tests\clangbin2\ts 
+top of app
+print an int 27
+print an int64_t 27
+sizeof T: 1, result: ff
+sizeof T: 1, result: 7f
+sizeof T: 2, result: ffff
+sizeof T: 2, result: 7fff
+sizeof T: 4, result: ffffffff
+sizeof T: 4, result: 7fffffff
+sizeof T: 8, result: ffffffffffffffff
+sizeof T: 8, result: 7fffffffffffffff
+now test left shifts
+sizeof T: 1, result: fe
+sizeof T: 1, result: fe
+sizeof T: 2, result: fffe
+sizeof T: 2, result: fffe
+sizeof T: 4, result: fffffffe
+sizeof T: 4, result: fffffffe
+sizeof T: 8, result: fffffffffffffffe
+sizeof T: 8, result: fffffffffffffffe
+now test comparisons
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+testing printf
+  string: 'hello'
+  char: 'h'
+  int: 27, 1b
+  negative int: -27, ffffffe5
+  int64_t: 27, 1b
+  negative int64_t: -27, ffffffffffffffe5
+stop
+test c_tests\clangbin2\ttt 
+starting...
+done
+64930 moves
+test c_tests\clangbin2\tarray 
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xf8
+sum: 0xf8
+    0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 08  ................................
+    0020  00 00 00 00 00 00 00 02 00 04 00 00 00 ff f8 ff : ff ff ff ff ff ff fe ff fc ff ff ff 02 10 00 00  ................................
+    0040  00 00 00 00 00 04 00 08 00 00 00 fe f0 ff ff ff : ff ff ff ff fc ff f8 ff ff ff 03 18 00 00 00 00  ................................
+    0060  00 00 00 06 00 0c 00 00 00 fd e8 ff ff ff ff ff : ff ff fa ff f4 ff ff ff 04 20 00 00 00 00 00 00  ......................... ......
+    0080  00 08 00 10 00 00 00 fc e0 ff ff ff ff ff ff ff : f8 ff f0 ff ff ff 05 28 00 00 00 00 00 00 00 0a  .......................(........
+    00a0  00 14 00 00 00 fb d8 ff ff ff ff ff ff ff f6 ff : ec ff ff ff 06 30 00 00 00 00 00 00 00 0c 00 18  .....................0..........
+    00c0  00 00 00 fa d0 ff ff ff ff ff ff ff f4 ff e8 ff : ff ff 07 38 00 00 00 00 00 00 00 0e 00 1c 00 00  ...................8............
+    00e0  00 f9 c8 ff ff ff ff ff ff ff f2 ff e4 ff ff ff : 08 40 00 00 00 00 00 00 00 10 00 20 00 00 00 f8  .................@......... ....
+    0100  c0 ff ff ff ff ff ff ff f0 ff e0 ff ff ff 09 48 : 00 00 00 00 00 00 00 12 00 24 00 00 00 f7 b8 ff  ...............H.........$......
+    0120  ff ff ff ff ff ff ee ff dc ff ff ff 0a 50 00 00 : 00 00 00 00 00 14 00 28 00 00 00 f6 b0 ff ff ff  .............P.........(........
+    0140  ff ff ff ff ec ff d8 ff ff ff 0b 58 00 00 00 00 : 00 00 00 16 00 2c 00 00 00 f5 a8 ff ff ff ff ff  ...........X.........,..........
+    0160  ff ff ea ff d4 ff ff ff 0c 60 00 00 00 00 00 00 : 00 18 00 30 00 00 00 f4 a0 ff ff ff ff ff ff ff  .........`.........0............
+    0180  e8 ff d0 ff ff ff 0d 68 00 00 00 00 00 00 00 1a : 00 34 00 00 00 f3 98 ff ff ff ff ff ff ff e6 ff  .......h.........4..............
+    01a0  cc ff ff ff 0e 70 00 00 00 00 00 00 00 1c 00 38 : 00 00 00 f2 90 ff ff ff ff ff ff ff e4 ff c8 ff  .....p.........8................
+    01c0  ff ff 0f 78 00 00 00 00 00 00 00 1e 00 3c 00 00 : 00 f1 88 ff ff ff ff ff ff ff e2 ff c4 ff ff ff  ...x.........<..................
+    01e0  10 80 00 00 00 00 00 00 00 20 00 40 00 00 00 f0 : 80 ff ff ff ff ff ff ff e0 ff c0 ff ff ff 11 88  ......... .@....................
+    0200  00 00 00 00 00 00 00 22 00 44 00 00 00 ef 78 ff : ff ff ff ff ff ff de ff bc ff ff ff 12 90 00 00  .......".D....x.................
+    0220  00 00 00 00 00 24 00 48 00 00 00 ee 70 ff ff ff : ff ff ff ff dc ff b8 ff ff ff 13 98 00 00 00 00  .....$.H....p...................
+    0240  00 00 00 26 00 4c 00 00 00 ed 68 ff ff ff ff ff : ff ff da ff b4 ff ff ff                          ...&.L....h.............
+tarray completed with great success
+test c_tests\clangbin2\tbits 
+uint8_t:
+  and 3, or 7, xor 4, nota f8, notb fc
+  and 5, or ff, xor fa, nota f8, notb 2
+  and 1, or fb, xor fa, nota 6, notb fc
+  and f9, or fd, xor 4, nota 6, notb 2
+  and ff, or ff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota 8, notb fc
+  and f5, or ff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota f6, notb fc
+  and 9, or 9, xor 0, nota f6, notb f6
+int8_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or fffffffffffffff7, xor fffffffffffffff4, nota 8, notb fffffffffffffffc
+  and fffffffffffffff5, or ffffffffffffffff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota fffffffffffffff6, notb fffffffffffffffc
+  and 9, or 9, xor 0, nota fffffffffffffff6, notb fffffffffffffff6
+uint16_t:
+  and 3, or 7, xor 4, nota fff8, notb fffc
+  and 5, or ffff, xor fffa, nota fff8, notb 2
+  and 1, or fffb, xor fffa, nota 6, notb fffc
+  and fff9, or fffd, xor 4, nota 6, notb 2
+  and ffff, or ffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ff08, notb fffc
+  and f5, or ffff, xor ff0a, nota ff08, notb 2
+  and 1, or ff0b, xor ff0a, nota f6, notb fffc
+  and ff09, or ff09, xor 0, nota f6, notb f6
+int16_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint32_t:
+  and 3, or 7, xor 4, nota fffffff8, notb fffffffc
+  and 5, or ffffffff, xor fffffffa, nota fffffff8, notb 2
+  and 1, or fffffffb, xor fffffffa, nota 6, notb fffffffc
+  and fffffff9, or fffffffd, xor 4, nota 6, notb 2
+  and ffffffff, or ffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffff08, notb fffffffc
+  and f5, or ffffffff, xor ffffff0a, nota ffffff08, notb 2
+  and 1, or ffffff0b, xor ffffff0a, nota f6, notb fffffffc
+  and ffffff09, or ffffff09, xor 0, nota f6, notb f6
+int32_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+int64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+test c_tests\clangbin2\trw 
+trw completed with great success
+test c_tests\clangbin2\tmmap 
+MAP_PRIVATE: 0x2
+MAP_ANONYMOUS: 0x20
+MREMAP_MAYMOVE: 0x1
+PROT_READ: 0x1
+PROT_WRITE: 0x2
+mmap test completed with great success
+test c_tests\clangbin2\tstr 
+testing strlen
+testing strchr and strrchr
+testing memcpy and memcmp
+testing printf
+69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+29 (29): nopqrstuvwxyzabcdefghijklmnop
+34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
+24 (24): uvwxyzabcdefghijklmnopqr
+14 (14): stuvwxyzabcdef
+31 (31): ijklmnopqrstuvwxyzabcdefghijklm
+67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
+68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+26 (26): qrstuvwxyzabcdefghijklmnop
+18 (18): jklmnopqrstuvwxyza
+66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
+27 (27): pqrstuvwxyzabcdefghijklmnop
+ 9 ( 9): ijklmnopq
+45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+tstr completed with great success
+test c_tests\clangbin2\fileops 
+current offset: 0
+result of fseek: 0
+file length from ftell: 0
+empty file length: 0
+result of fseek: 0
+result of fwrite (should be 1): 1
+current offset: 8320
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length from portable_filelen: 8320
+result of fseek to middle of file: 0
+result of fwrite to middle of file (should be 1): 1
+current offset: 0
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length: 8320
+result of read at offset 0: 512
+result of read at offset 512: 512
+result of read at offset 1024: 512
+result of read at offset 1536: 512
+result of read at offset 2048: 512
+result of read at offset 2560: 512
+result of read at offset 3072: 512
+result of read at offset 3584: 512
+result of read at offset 4096: 512
+result of read at offset 4608: 512
+result of read at offset 5120: 512
+result of read at offset 5632: 512
+result of read at offset 6144: 512
+result of read at offset 6656: 512
+result of read at offset 7168: 512
+result of read at offset 7680: 512
+result of read at offset 8192: 128
+testing backwards read
+result of read at offset 8192: 128
+result of read at offset 7680: 512
+result of read at offset 7168: 512
+result of read at offset 6656: 512
+result of read at offset 6144: 512
+result of read at offset 5632: 512
+result of read at offset 5120: 512
+result of read at offset 4608: 512
+result of read at offset 4096: 512
+result of read at offset 3584: 512
+result of read at offset 3072: 512
+result of read at offset 2560: 512
+result of read at offset 2048: 512
+result of read at offset 1536: 512
+result of read at offset 1024: 512
+result of read at offset 512: 512
+result of read at offset 0: 512
+fileops has completed with great success
+test c_tests\clangbin2\ttime 
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 8, sec 30
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 8, sec 30
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 8, sec 30
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 8, sec 30
+test c_tests\clangbin2\tm 
+tm has completed with great success
+test c_tests\clangbin2\glob 
+in CTest constructor
+top main
+value of ctest::foo: 666
+end of main
+in ~CTest destructor
+test c_tests\clangbin2\tap 
+starting, should tend towards 1.2020569031595942854...
+  at           10 iterations: 1.19753198567419305576
+  at          100 iterations: 1.20200740065967814907
+  at         1000 iterations: 1.20205640365934329772
+  at        10000 iterations: 1.20205689816009808624
+  at       100000 iterations: 1.20205690310973234425
+next implementation...
+  at           10 iterations: 1.25000000000000000000
+  at          100 iterations: 1.14942528735632176762
+  at         1000 iterations: 1.21802679658952506259
+  at        10000 iterations: 1.20293516179477921746
+tap completed with great success
+test c_tests\clangbin2\tsimplef 
+float 3.141593
+f1 2.500000 * f2 3.500000 = 8.750000
+    div = 0.714286
+    add = 6.000000
+    sub = -1.000000
+d1 9.720000 * d2 13.321000 = 129.480120
+    div = 0.729675
+    add = 23.041000
+    sub = -3.601000
+double from int128: 1000.000000
+tsimplef completed with great success
+test c_tests\clangbin2\tf 
+hello from printf
+float from printf: 45.678000
+division result: 333.333344, square root 18.257420
+result of 20.2 * -1.342: -27.108400
+result of 20.2 * -1.342 as a double: -27.108400
+pi in radians: 0.523599
+sinf of 30 degress is 0.500000
+cosf of 30 degrees is 0.866025
+tanf of 30 degrees is 0.577350
+atanf of 1.000000 is 0.785398
+atan2f of 0.3, 0.2 is 0.982794
+acosf of 0.3 is 1.266104
+asinf of 0.3 is 0.304693
+tanhf of 2.2 is 0.304693
+logf of 0.3: -1.203973
+log10f of 300: 2.477121
+pi has mantissa: 0.785398, exponent 2
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+stop
+test c_tests\clangbin2\td 
+sprintf double 3.14159265358979311600
+double from printf: 3.14159265358979311600
+float from printf: 1.202057
+double from printf r: -3.776373
+sqrt of pi: 1.772454
+pi in radians: 0.523599
+sin of 30 degress is 0.500000
+cos of 30 degrees is 0.866025
+tan of 30 degrees is 0.577350
+atan of 1.000000 is 0.785398
+atan2 of 0.3, 0.2 is 0.982794
+acos of 0.3 is 1.266104
+asin of 0.3 is 0.304693
+tanh of 2.2 is 0.304693
+log of 0.3: -1.203973
+log10 of 300: 2.477121
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
+pi has mantissa: 0.785398, exponent 2
+r should be 1.0: 1.000000
+  r high point 3187071009115104228782838925952666189789578010509155762176.000000
+stop
+test c_tests\clangbin2\terrno 
+errno opening a file for read that doesn't exist: 2 (2 file not found expected)
+errno doing write to stdin file descriptor: 13. (13 permission denied expected)
+errno opening a file for read with invalid open flags: 22 (22 invalid argument expected)
+success
+test c_tests\clangbin2\t_setjmp 
+second
+back in main
+falling out of main
+test c_tests\clangbin2\tex 
+top of tex
+I am unwound, x should be 44: 44
+caught exception exceptional
+attempting large allocations
+caught a standard execption: std::bad_alloc
+leaving main
+test c_tests\clangbin2\mm 
+matrix float 1: 4.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
+matrix float 20: 465880.000000
+matrix double 1: 4.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
+matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
+matrix multiply test completed with great success
+test c_tests\clangbin2\pis 
+startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
+startInChunks: 0, limitInChunks 32
+percent complete: 3.125000
+percent complete: 6.250000
+percent complete: 9.375000
+percent complete: 12.500000
+percent complete: 15.625000
+percent complete: 18.750000
+percent complete: 21.875000
+percent complete: 25.000000
+percent complete: 28.125000
+percent complete: 31.250000
+percent complete: 34.375000
+percent complete: 37.500000
+percent complete: 40.625000
+percent complete: 43.750000
+percent complete: 46.875000
+percent complete: 50.000000
+percent complete: 53.125000
+percent complete: 56.250000
+percent complete: 59.375000
+percent complete: 62.500000
+percent complete: 65.625000
+percent complete: 68.750000
+percent complete: 71.875000
+percent complete: 75.000000
+percent complete: 78.125000
+percent complete: 81.250000
+percent complete: 84.375000
+percent complete: 87.500000
+percent complete: 90.625000
+percent complete: 93.750000
+percent complete: 96.875000
+percent complete: 100.000000
+results are valid
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+test c_tests\clangbin2\sleeptm 
+clk_tck / number of linux ticks per second: 100
+sleepy time ended with great success
+test c_tests\clangbin2\tatomic 
+test atomic completed with great success
+test c_tests\clangbin2\lenum 
+linux file system enumeration completed with great success
 test c_tests\bin2\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -2734,10 +5811,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 33
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 33
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 33
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 33
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 8, sec 35
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 8, sec 35
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 8, sec 35
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 8, sec 35
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -3119,9 +6196,53 @@ id leaved
 idea veld
 lade vied
 lead vied
+test c_tests\clangbin2\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-152 ms for 1 iterations
+77 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3146,6 +6267,1011 @@ parsing input file tp.bas
 created assembler file: tp.s, use registers: yes, expression optimization: yes
 parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbin2\ba 
+parsing input file tp.bas
+79 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbin3\tcmp 
+uint8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+floating point:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+test c_tests\clangbin3\t 
+a: 0 4000000000000000
+a: 4 0
+ua: 0 4000000000000000
+ua: 4 0
+a: ffffffffffffffff ffffffffffffffff
+a: ffffffffffffffff ffffffffffffffdf = -33
+int8_t result: 6
+uint8_t result: 6
+int16_t result: 6
+uint16_t result: 6
+int32_t result: 6
+uint32_t result: 6
+int64_t result: 6
+uint64_t result: 6
+int128_t result: 6
+uint128_t result: 6
+end of the app
+test c_tests\clangbin3\e 
+271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
+done
+test c_tests\clangbin3\printint 
+n -13
+test c_tests\clangbin3\sieve 
+1899 primes.
+test c_tests\clangbin3\simple 
+argument 0: c_tests/clangbin3/simple
+environment variable 0: TZ=PacificStandardTime+8
+environment variable 1: OS=ARMOS
+test c_tests\clangbin3\tmuldiv 
+app start
+i8 3 * 14: 42
+i8 3 % 14: 3
+i8 3 / 14: 0
+i8 17 * 14: -18
+i8 17 % 14: 3
+i8 17 / 14: 1
+i8 -3 * 14: -42
+i8 -3 % 14: -3
+i8 -3 / 14: 0
+i8 -17 * 14: 18
+i8 -17 % 14: -3
+i8 -17 / 14: -1
+i8 -3 * -14: 42
+i8 -3 % -14: -3
+i8 -3 / -14: 0
+i8 -17 * -14: -18
+i8 -17 % -14: -3
+i8 -17 / -14: 1
+ui8 3 * 14: 42
+ui8 3 % 14: 3
+ui8 3 / 14: 0
+ui8 17 * 14: 238
+ui8 17 % 14: 3
+ui8 17 / 14: 1
+ui8 253 * 14: 214
+ui8 253 % 14: 1
+ui8 253 / 14: 18
+ui8 239 * 14: 18
+ui8 239 % 14: 1
+ui8 239 / 14: 17
+ui8 253 * 242: 42
+ui8 253 % 242: 11
+ui8 253 / 242: 1
+ui8 239 * 242: 238
+ui8 239 % 242: 239
+ui8 239 / 242: 0
+i16 3 * 14: 42
+i16 3 % 14: 3
+i16 3 / 14: 0
+i16 3700 * 14: -13736
+i16 3700 % 14: 4
+i16 3700 / 14: 264
+i16 -3 * 14: -42
+i16 -3 % 14: -3
+i16 -3 / 14: 0
+i16 -3700 * 14: 13736
+i16 -3700 % 14: -4
+i16 -3700 / 14: -264
+i16 -3 * -14: 42
+i16 -3 % -14: -3
+i16 -3 / -14: 0
+i16 -3700 * -14: -13736
+i16 -3700 % -14: -4
+i16 -3700 / -14: 264
+ui16 3 * 14: 42
+ui16 3 % 14: 3
+ui16 3 / 14: 0
+ui16 3700 * 14: 51800
+ui16 3700 % 14: 4
+ui16 3700 / 14: 264
+ui16 65533 * 14: 65494
+ui16 65533 % 14: 13
+ui16 65533 / 14: 4680
+ui16 61836 * 14: 13736
+ui16 61836 % 14: 12
+ui16 61836 / 14: 4416
+ui16 65533 * 65522: 42
+ui16 65533 % 65522: 11
+ui16 65533 / 65522: 1
+ui16 61836 * 65522: 51800
+ui16 61836 % 65522: 61836
+ui16 61836 / 65522: 0
+i32 3 * 14: 42
+i32 3 % 14: 3
+i32 3 / 14: 0
+i32 37000 * 14: 518000
+i32 37000 % 14: 12
+i32 37000 / 14: 2642
+i32 -3 * 14: -42
+i32 -3 % 14: -3
+i32 -3 / 14: 0
+i32 -37000 * 14: -518000
+i32 -37000 % 14: -12
+i32 -37000 / 14: -2642
+i32 -3 * -14: 42
+i32 -3 % -14: -3
+i32 -3 / -14: 0
+i32 -37000 * -14: 518000
+i32 -37000 % -14: -12
+i32 -37000 / -14: 2642
+ui32 3 * 14: 42
+ui32 3 % 14: 3
+ui32 3 / 14: 0
+ui32 37000 * 14: 518000
+ui32 37000 % 14: 12
+ui32 37000 / 14: 2642
+ui32 4294967293 * 14: 4294967254
+ui32 4294967293 % 14: 1
+ui32 4294967293 / 14: 306783378
+ui32 4294930296 * 14: 4294449296
+ui32 4294930296 % 14: 6
+ui32 4294930296 / 14: 306780735
+ui32 4294967293 * 4294967282: 42
+ui32 4294967293 % 4294967282: 11
+ui32 4294967293 / 4294967282: 1
+ui32 4294930296 * 4294967282: 518000
+ui32 4294930296 % 4294967282: 4294930296
+ui32 4294930296 / 4294967282: 0
+i64 3 * 14: 42
+i64 3 % 14: 3
+i64 3 / 14: 0
+i64 370000000 * 14: 5180000000
+i64 370000000 % 14: 6
+i64 370000000 / 14: 26428571
+i64 -3 * 14: -42
+i64 -3 % 14: -3
+i64 -3 / 14: 0
+i64 -370000000 * 14: -5180000000
+i64 -370000000 % 14: -6
+i64 -370000000 / 14: -26428571
+i64 -3 * -14: 42
+i64 -3 % -14: -3
+i64 -3 / -14: 0
+i64 -370000000 * -14: 5180000000
+i64 -370000000 % -14: -6
+i64 -370000000 / -14: 26428571
+ui64 3 * 14: 42
+ui64 3 % 14: 3
+ui64 3 / 14: 0
+ui64 370000000 * 14: 5180000000
+ui64 370000000 % 14: 6
+ui64 370000000 / 14: 26428571
+ui64 18446744073709551613 * 14: 18446744073709551574
+ui64 18446744073709551613 % 14: 13
+ui64 18446744073709551613 / 14: 1317624576693539400
+ui64 18446744073339551616 * 14: 18446744068529551616
+ui64 18446744073339551616 % 14: 10
+ui64 18446744073339551616 / 14: 1317624576667110829
+ui64 18446744073709551613 * 18446744073709551602: 42
+ui64 18446744073709551613 % 18446744073709551602: 11
+ui64 18446744073709551613 / 18446744073709551602: 1
+ui64 18446744073339551616 * 18446744073709551602: 5180000000
+ui64 18446744073339551616 % 18446744073709551602: 18446744073339551616
+ui64 18446744073339551616 / 18446744073709551602: 0
+tmuldiv ended with great success
+test c_tests\clangbin3\tpi 
+314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535
+test c_tests\clangbin3\ts 
+top of app
+print an int 27
+print an int64_t 27
+sizeof T: 1, result: ff
+sizeof T: 1, result: 7f
+sizeof T: 2, result: ffff
+sizeof T: 2, result: 7fff
+sizeof T: 4, result: ffffffff
+sizeof T: 4, result: 7fffffff
+sizeof T: 8, result: ffffffffffffffff
+sizeof T: 8, result: 7fffffffffffffff
+now test left shifts
+sizeof T: 1, result: fe
+sizeof T: 1, result: fe
+sizeof T: 2, result: fffe
+sizeof T: 2, result: fffe
+sizeof T: 4, result: fffffffe
+sizeof T: 4, result: fffffffe
+sizeof T: 8, result: fffffffffffffffe
+sizeof T: 8, result: fffffffffffffffe
+now test comparisons
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+testing printf
+  string: 'hello'
+  char: 'h'
+  int: 27, 1b
+  negative int: -27, ffffffe5
+  int64_t: 27, 1b
+  negative int64_t: -27, ffffffffffffffe5
+stop
+test c_tests\clangbin3\ttt 
+starting...
+done
+64930 moves
+test c_tests\clangbin3\tarray 
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xf8
+sum: 0xf8
+    0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 08  ................................
+    0020  00 00 00 00 00 00 00 02 00 04 00 00 00 ff f8 ff : ff ff ff ff ff ff fe ff fc ff ff ff 02 10 00 00  ................................
+    0040  00 00 00 00 00 04 00 08 00 00 00 fe f0 ff ff ff : ff ff ff ff fc ff f8 ff ff ff 03 18 00 00 00 00  ................................
+    0060  00 00 00 06 00 0c 00 00 00 fd e8 ff ff ff ff ff : ff ff fa ff f4 ff ff ff 04 20 00 00 00 00 00 00  ......................... ......
+    0080  00 08 00 10 00 00 00 fc e0 ff ff ff ff ff ff ff : f8 ff f0 ff ff ff 05 28 00 00 00 00 00 00 00 0a  .......................(........
+    00a0  00 14 00 00 00 fb d8 ff ff ff ff ff ff ff f6 ff : ec ff ff ff 06 30 00 00 00 00 00 00 00 0c 00 18  .....................0..........
+    00c0  00 00 00 fa d0 ff ff ff ff ff ff ff f4 ff e8 ff : ff ff 07 38 00 00 00 00 00 00 00 0e 00 1c 00 00  ...................8............
+    00e0  00 f9 c8 ff ff ff ff ff ff ff f2 ff e4 ff ff ff : 08 40 00 00 00 00 00 00 00 10 00 20 00 00 00 f8  .................@......... ....
+    0100  c0 ff ff ff ff ff ff ff f0 ff e0 ff ff ff 09 48 : 00 00 00 00 00 00 00 12 00 24 00 00 00 f7 b8 ff  ...............H.........$......
+    0120  ff ff ff ff ff ff ee ff dc ff ff ff 0a 50 00 00 : 00 00 00 00 00 14 00 28 00 00 00 f6 b0 ff ff ff  .............P.........(........
+    0140  ff ff ff ff ec ff d8 ff ff ff 0b 58 00 00 00 00 : 00 00 00 16 00 2c 00 00 00 f5 a8 ff ff ff ff ff  ...........X.........,..........
+    0160  ff ff ea ff d4 ff ff ff 0c 60 00 00 00 00 00 00 : 00 18 00 30 00 00 00 f4 a0 ff ff ff ff ff ff ff  .........`.........0............
+    0180  e8 ff d0 ff ff ff 0d 68 00 00 00 00 00 00 00 1a : 00 34 00 00 00 f3 98 ff ff ff ff ff ff ff e6 ff  .......h.........4..............
+    01a0  cc ff ff ff 0e 70 00 00 00 00 00 00 00 1c 00 38 : 00 00 00 f2 90 ff ff ff ff ff ff ff e4 ff c8 ff  .....p.........8................
+    01c0  ff ff 0f 78 00 00 00 00 00 00 00 1e 00 3c 00 00 : 00 f1 88 ff ff ff ff ff ff ff e2 ff c4 ff ff ff  ...x.........<..................
+    01e0  10 80 00 00 00 00 00 00 00 20 00 40 00 00 00 f0 : 80 ff ff ff ff ff ff ff e0 ff c0 ff ff ff 11 88  ......... .@....................
+    0200  00 00 00 00 00 00 00 22 00 44 00 00 00 ef 78 ff : ff ff ff ff ff ff de ff bc ff ff ff 12 90 00 00  .......".D....x.................
+    0220  00 00 00 00 00 24 00 48 00 00 00 ee 70 ff ff ff : ff ff ff ff dc ff b8 ff ff ff 13 98 00 00 00 00  .....$.H....p...................
+    0240  00 00 00 26 00 4c 00 00 00 ed 68 ff ff ff ff ff : ff ff da ff b4 ff ff ff                          ...&.L....h.............
+tarray completed with great success
+test c_tests\clangbin3\tbits 
+uint8_t:
+  and 3, or 7, xor 4, nota f8, notb fc
+  and 5, or ff, xor fa, nota f8, notb 2
+  and 1, or fb, xor fa, nota 6, notb fc
+  and f9, or fd, xor 4, nota 6, notb 2
+  and ff, or ff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota 8, notb fc
+  and f5, or ff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota f6, notb fc
+  and 9, or 9, xor 0, nota f6, notb f6
+int8_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or fffffffffffffff7, xor fffffffffffffff4, nota 8, notb fffffffffffffffc
+  and fffffffffffffff5, or ffffffffffffffff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota fffffffffffffff6, notb fffffffffffffffc
+  and 9, or 9, xor 0, nota fffffffffffffff6, notb fffffffffffffff6
+uint16_t:
+  and 3, or 7, xor 4, nota fff8, notb fffc
+  and 5, or ffff, xor fffa, nota fff8, notb 2
+  and 1, or fffb, xor fffa, nota 6, notb fffc
+  and fff9, or fffd, xor 4, nota 6, notb 2
+  and ffff, or ffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ff08, notb fffc
+  and f5, or ffff, xor ff0a, nota ff08, notb 2
+  and 1, or ff0b, xor ff0a, nota f6, notb fffc
+  and ff09, or ff09, xor 0, nota f6, notb f6
+int16_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint32_t:
+  and 3, or 7, xor 4, nota fffffff8, notb fffffffc
+  and 5, or ffffffff, xor fffffffa, nota fffffff8, notb 2
+  and 1, or fffffffb, xor fffffffa, nota 6, notb fffffffc
+  and fffffff9, or fffffffd, xor 4, nota 6, notb 2
+  and ffffffff, or ffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffff08, notb fffffffc
+  and f5, or ffffffff, xor ffffff0a, nota ffffff08, notb 2
+  and 1, or ffffff0b, xor ffffff0a, nota f6, notb fffffffc
+  and ffffff09, or ffffff09, xor 0, nota f6, notb f6
+int32_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+int64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+test c_tests\clangbin3\trw 
+trw completed with great success
+test c_tests\clangbin3\tmmap 
+MAP_PRIVATE: 0x2
+MAP_ANONYMOUS: 0x20
+MREMAP_MAYMOVE: 0x1
+PROT_READ: 0x1
+PROT_WRITE: 0x2
+mmap test completed with great success
+test c_tests\clangbin3\tstr 
+testing strlen
+testing strchr and strrchr
+testing memcpy and memcmp
+testing printf
+69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+29 (29): nopqrstuvwxyzabcdefghijklmnop
+34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
+24 (24): uvwxyzabcdefghijklmnopqr
+14 (14): stuvwxyzabcdef
+31 (31): ijklmnopqrstuvwxyzabcdefghijklm
+67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
+68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+26 (26): qrstuvwxyzabcdefghijklmnop
+18 (18): jklmnopqrstuvwxyza
+66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
+27 (27): pqrstuvwxyzabcdefghijklmnop
+ 9 ( 9): ijklmnopq
+45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+tstr completed with great success
+test c_tests\clangbin3\fileops 
+current offset: 0
+result of fseek: 0
+file length from ftell: 0
+empty file length: 0
+result of fseek: 0
+result of fwrite (should be 1): 1
+current offset: 8320
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length from portable_filelen: 8320
+result of fseek to middle of file: 0
+result of fwrite to middle of file (should be 1): 1
+current offset: 0
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length: 8320
+result of read at offset 0: 512
+result of read at offset 512: 512
+result of read at offset 1024: 512
+result of read at offset 1536: 512
+result of read at offset 2048: 512
+result of read at offset 2560: 512
+result of read at offset 3072: 512
+result of read at offset 3584: 512
+result of read at offset 4096: 512
+result of read at offset 4608: 512
+result of read at offset 5120: 512
+result of read at offset 5632: 512
+result of read at offset 6144: 512
+result of read at offset 6656: 512
+result of read at offset 7168: 512
+result of read at offset 7680: 512
+result of read at offset 8192: 128
+testing backwards read
+result of read at offset 8192: 128
+result of read at offset 7680: 512
+result of read at offset 7168: 512
+result of read at offset 6656: 512
+result of read at offset 6144: 512
+result of read at offset 5632: 512
+result of read at offset 5120: 512
+result of read at offset 4608: 512
+result of read at offset 4096: 512
+result of read at offset 3584: 512
+result of read at offset 3072: 512
+result of read at offset 2560: 512
+result of read at offset 2048: 512
+result of read at offset 1536: 512
+result of read at offset 1024: 512
+result of read at offset 512: 512
+result of read at offset 0: 512
+fileops has completed with great success
+test c_tests\clangbin3\ttime 
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 8, sec 43
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 8, sec 43
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 8, sec 43
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 8, sec 43
+test c_tests\clangbin3\tm 
+tm has completed with great success
+test c_tests\clangbin3\glob 
+in CTest constructor
+top main
+value of ctest::foo: 666
+end of main
+in ~CTest destructor
+test c_tests\clangbin3\tap 
+starting, should tend towards 1.2020569031595942854...
+  at           10 iterations: 1.19753198567419305576
+  at          100 iterations: 1.20200740065967814907
+  at         1000 iterations: 1.20205640365934329772
+  at        10000 iterations: 1.20205689816009808624
+  at       100000 iterations: 1.20205690310973234425
+next implementation...
+  at           10 iterations: 1.25000000000000000000
+  at          100 iterations: 1.14942528735632176762
+  at         1000 iterations: 1.21802679658952506259
+  at        10000 iterations: 1.20293516179477921746
+tap completed with great success
+test c_tests\clangbin3\tsimplef 
+float 3.141593
+f1 2.500000 * f2 3.500000 = 8.750000
+    div = 0.714286
+    add = 6.000000
+    sub = -1.000000
+d1 9.720000 * d2 13.321000 = 129.480120
+    div = 0.729675
+    add = 23.041000
+    sub = -3.601000
+double from int128: 1000.000000
+tsimplef completed with great success
+test c_tests\clangbin3\tf 
+hello from printf
+float from printf: 45.678000
+division result: 333.333344, square root 18.257420
+result of 20.2 * -1.342: -27.108400
+result of 20.2 * -1.342 as a double: -27.108400
+pi in radians: 0.523599
+sinf of 30 degress is 0.500000
+cosf of 30 degrees is 0.866025
+tanf of 30 degrees is 0.577350
+atanf of 1.000000 is 0.785398
+atan2f of 0.3, 0.2 is 0.982794
+acosf of 0.3 is 1.266104
+asinf of 0.3 is 0.304693
+tanhf of 2.2 is 0.304693
+logf of 0.3: -1.203973
+log10f of 300: 2.477121
+pi has mantissa: 0.785398, exponent 2
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+stop
+test c_tests\clangbin3\td 
+sprintf double 3.14159265358979311600
+double from printf: 3.14159265358979311600
+float from printf: 1.202057
+double from printf r: -3.776373
+sqrt of pi: 1.772454
+pi in radians: 0.523599
+sin of 30 degress is 0.500000
+cos of 30 degrees is 0.866025
+tan of 30 degrees is 0.577350
+atan of 1.000000 is 0.785398
+atan2 of 0.3, 0.2 is 0.982794
+acos of 0.3 is 1.266104
+asin of 0.3 is 0.304693
+tanh of 2.2 is 0.304693
+log of 0.3: -1.203973
+log10 of 300: 2.477121
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
+pi has mantissa: 0.785398, exponent 2
+r should be 1.0: 1.000000
+  r high point 3187071009115104228782838925952666189789578010509155762176.000000
+stop
+test c_tests\clangbin3\terrno 
+errno opening a file for read that doesn't exist: 2 (2 file not found expected)
+errno doing write to stdin file descriptor: 13. (13 permission denied expected)
+errno opening a file for read with invalid open flags: 22 (22 invalid argument expected)
+success
+test c_tests\clangbin3\t_setjmp 
+second
+back in main
+falling out of main
+test c_tests\clangbin3\tex 
+top of tex
+I am unwound, x should be 44: 44
+caught exception exceptional
+attempting large allocations
+caught a standard execption: std::bad_alloc
+leaving main
+test c_tests\clangbin3\mm 
+matrix float 1: 4.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
+matrix float 20: 465880.000000
+matrix double 1: 4.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
+matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
+matrix multiply test completed with great success
+test c_tests\clangbin3\pis 
+startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
+startInChunks: 0, limitInChunks 32
+percent complete: 3.125000
+percent complete: 6.250000
+percent complete: 9.375000
+percent complete: 12.500000
+percent complete: 15.625000
+percent complete: 18.750000
+percent complete: 21.875000
+percent complete: 25.000000
+percent complete: 28.125000
+percent complete: 31.250000
+percent complete: 34.375000
+percent complete: 37.500000
+percent complete: 40.625000
+percent complete: 43.750000
+percent complete: 46.875000
+percent complete: 50.000000
+percent complete: 53.125000
+percent complete: 56.250000
+percent complete: 59.375000
+percent complete: 62.500000
+percent complete: 65.625000
+percent complete: 68.750000
+percent complete: 71.875000
+percent complete: 75.000000
+percent complete: 78.125000
+percent complete: 81.250000
+percent complete: 84.375000
+percent complete: 87.500000
+percent complete: 90.625000
+percent complete: 93.750000
+percent complete: 96.875000
+percent complete: 100.000000
+results are valid
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+test c_tests\clangbin3\sleeptm 
+clk_tck / number of linux ticks per second: 100
+sleepy time ended with great success
+test c_tests\clangbin3\tatomic 
+test atomic completed with great success
+test c_tests\clangbin3\lenum 
+linux file system enumeration completed with great success
 test c_tests\bin3\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -3783,10 +7909,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 40
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 40
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 40
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 40
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 8, sec 49
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 8, sec 49
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 8, sec 49
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 8, sec 49
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -4168,9 +8294,53 @@ id leaved
 idea veld
 lade vied
 lead vied
+test c_tests\clangbin3\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-157 ms for 1 iterations
+81 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4195,6 +8365,1011 @@ parsing input file tp.bas
 created assembler file: tp.s, use registers: yes, expression optimization: yes
 parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbin3\ba 
+parsing input file tp.bas
+75 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbinfast\tcmp 
+uint8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int8_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int16_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int32_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int64_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+uint128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+int128_t:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+floating point:
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
+test c_tests\clangbinfast\t 
+a: 0 4000000000000000
+a: 4 0
+ua: 0 4000000000000000
+ua: 4 0
+a: ffffffffffffffff ffffffffffffffff
+a: ffffffffffffffff ffffffffffffffdf = -33
+int8_t result: 6
+uint8_t result: 6
+int16_t result: 6
+uint16_t result: 6
+int32_t result: 6
+uint32_t result: 6
+int64_t result: 6
+uint64_t result: 6
+int128_t result: 6
+uint128_t result: 6
+end of the app
+test c_tests\clangbinfast\e 
+271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
+done
+test c_tests\clangbinfast\printint 
+n -13
+test c_tests\clangbinfast\sieve 
+1899 primes.
+test c_tests\clangbinfast\simple 
+argument 0: c_tests/clangbinfast/simple
+environment variable 0: TZ=PacificStandardTime+8
+environment variable 1: OS=ARMOS
+test c_tests\clangbinfast\tmuldiv 
+app start
+i8 3 * 14: 42
+i8 3 % 14: 3
+i8 3 / 14: 0
+i8 17 * 14: -18
+i8 17 % 14: 3
+i8 17 / 14: 1
+i8 -3 * 14: -42
+i8 -3 % 14: -3
+i8 -3 / 14: 0
+i8 -17 * 14: 18
+i8 -17 % 14: -3
+i8 -17 / 14: -1
+i8 -3 * -14: 42
+i8 -3 % -14: -3
+i8 -3 / -14: 0
+i8 -17 * -14: -18
+i8 -17 % -14: -3
+i8 -17 / -14: 1
+ui8 3 * 14: 42
+ui8 3 % 14: 3
+ui8 3 / 14: 0
+ui8 17 * 14: 238
+ui8 17 % 14: 3
+ui8 17 / 14: 1
+ui8 253 * 14: 214
+ui8 253 % 14: 1
+ui8 253 / 14: 18
+ui8 239 * 14: 18
+ui8 239 % 14: 1
+ui8 239 / 14: 17
+ui8 253 * 242: 42
+ui8 253 % 242: 11
+ui8 253 / 242: 1
+ui8 239 * 242: 238
+ui8 239 % 242: 239
+ui8 239 / 242: 0
+i16 3 * 14: 42
+i16 3 % 14: 3
+i16 3 / 14: 0
+i16 3700 * 14: -13736
+i16 3700 % 14: 4
+i16 3700 / 14: 264
+i16 -3 * 14: -42
+i16 -3 % 14: -3
+i16 -3 / 14: 0
+i16 -3700 * 14: 13736
+i16 -3700 % 14: -4
+i16 -3700 / 14: -264
+i16 -3 * -14: 42
+i16 -3 % -14: -3
+i16 -3 / -14: 0
+i16 -3700 * -14: -13736
+i16 -3700 % -14: -4
+i16 -3700 / -14: 264
+ui16 3 * 14: 42
+ui16 3 % 14: 3
+ui16 3 / 14: 0
+ui16 3700 * 14: 51800
+ui16 3700 % 14: 4
+ui16 3700 / 14: 264
+ui16 65533 * 14: 65494
+ui16 65533 % 14: 13
+ui16 65533 / 14: 4680
+ui16 61836 * 14: 13736
+ui16 61836 % 14: 12
+ui16 61836 / 14: 4416
+ui16 65533 * 65522: 42
+ui16 65533 % 65522: 11
+ui16 65533 / 65522: 1
+ui16 61836 * 65522: 51800
+ui16 61836 % 65522: 61836
+ui16 61836 / 65522: 0
+i32 3 * 14: 42
+i32 3 % 14: 3
+i32 3 / 14: 0
+i32 37000 * 14: 518000
+i32 37000 % 14: 12
+i32 37000 / 14: 2642
+i32 -3 * 14: -42
+i32 -3 % 14: -3
+i32 -3 / 14: 0
+i32 -37000 * 14: -518000
+i32 -37000 % 14: -12
+i32 -37000 / 14: -2642
+i32 -3 * -14: 42
+i32 -3 % -14: -3
+i32 -3 / -14: 0
+i32 -37000 * -14: 518000
+i32 -37000 % -14: -12
+i32 -37000 / -14: 2642
+ui32 3 * 14: 42
+ui32 3 % 14: 3
+ui32 3 / 14: 0
+ui32 37000 * 14: 518000
+ui32 37000 % 14: 12
+ui32 37000 / 14: 2642
+ui32 4294967293 * 14: 4294967254
+ui32 4294967293 % 14: 1
+ui32 4294967293 / 14: 306783378
+ui32 4294930296 * 14: 4294449296
+ui32 4294930296 % 14: 6
+ui32 4294930296 / 14: 306780735
+ui32 4294967293 * 4294967282: 42
+ui32 4294967293 % 4294967282: 11
+ui32 4294967293 / 4294967282: 1
+ui32 4294930296 * 4294967282: 518000
+ui32 4294930296 % 4294967282: 4294930296
+ui32 4294930296 / 4294967282: 0
+i64 3 * 14: 42
+i64 3 % 14: 3
+i64 3 / 14: 0
+i64 370000000 * 14: 5180000000
+i64 370000000 % 14: 6
+i64 370000000 / 14: 26428571
+i64 -3 * 14: -42
+i64 -3 % 14: -3
+i64 -3 / 14: 0
+i64 -370000000 * 14: -5180000000
+i64 -370000000 % 14: -6
+i64 -370000000 / 14: -26428571
+i64 -3 * -14: 42
+i64 -3 % -14: -3
+i64 -3 / -14: 0
+i64 -370000000 * -14: 5180000000
+i64 -370000000 % -14: -6
+i64 -370000000 / -14: 26428571
+ui64 3 * 14: 42
+ui64 3 % 14: 3
+ui64 3 / 14: 0
+ui64 370000000 * 14: 5180000000
+ui64 370000000 % 14: 6
+ui64 370000000 / 14: 26428571
+ui64 18446744073709551613 * 14: 18446744073709551574
+ui64 18446744073709551613 % 14: 13
+ui64 18446744073709551613 / 14: 1317624576693539400
+ui64 18446744073339551616 * 14: 18446744068529551616
+ui64 18446744073339551616 % 14: 10
+ui64 18446744073339551616 / 14: 1317624576667110829
+ui64 18446744073709551613 * 18446744073709551602: 42
+ui64 18446744073709551613 % 18446744073709551602: 11
+ui64 18446744073709551613 / 18446744073709551602: 1
+ui64 18446744073339551616 * 18446744073709551602: 5180000000
+ui64 18446744073339551616 % 18446744073709551602: 18446744073339551616
+ui64 18446744073339551616 / 18446744073709551602: 0
+tmuldiv ended with great success
+test c_tests\clangbinfast\tpi 
+314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535
+test c_tests\clangbinfast\ts 
+top of app
+print an int 27
+print an int64_t 27
+sizeof T: 1, result: ff
+sizeof T: 1, result: 7f
+sizeof T: 2, result: ffff
+sizeof T: 2, result: 7fff
+sizeof T: 4, result: ffffffff
+sizeof T: 4, result: 7fffffff
+sizeof T: 8, result: ffffffffffffffff
+sizeof T: 8, result: 7fffffffffffffff
+now test left shifts
+sizeof T: 1, result: fe
+sizeof T: 1, result: fe
+sizeof T: 2, result: fffe
+sizeof T: 2, result: fffe
+sizeof T: 4, result: fffffffe
+sizeof T: 4, result: fffffffe
+sizeof T: 8, result: fffffffffffffffe
+sizeof T: 8, result: fffffffffffffffe
+now test comparisons
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+sizeof T: 4, result: 1
+testing printf
+  string: 'hello'
+  char: 'h'
+  int: 27, 1b
+  negative int: -27, ffffffe5
+  int64_t: 27, 1b
+  negative int64_t: -27, ffffffffffffffe5
+stop
+test c_tests\clangbinfast\ttt 
+starting...
+done
+64930 moves
+test c_tests\clangbinfast\tarray 
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xf8
+sum: 0xf8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xfffffff8
+sum: 0xfffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfffffffffffffff8
+sum: 0xfff8
+sum: 0xfff8
+sum: 0xf8
+sum: 0xf8
+    0000  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 08  ................................
+    0020  00 00 00 00 00 00 00 02 00 04 00 00 00 ff f8 ff : ff ff ff ff ff ff fe ff fc ff ff ff 02 10 00 00  ................................
+    0040  00 00 00 00 00 04 00 08 00 00 00 fe f0 ff ff ff : ff ff ff ff fc ff f8 ff ff ff 03 18 00 00 00 00  ................................
+    0060  00 00 00 06 00 0c 00 00 00 fd e8 ff ff ff ff ff : ff ff fa ff f4 ff ff ff 04 20 00 00 00 00 00 00  ......................... ......
+    0080  00 08 00 10 00 00 00 fc e0 ff ff ff ff ff ff ff : f8 ff f0 ff ff ff 05 28 00 00 00 00 00 00 00 0a  .......................(........
+    00a0  00 14 00 00 00 fb d8 ff ff ff ff ff ff ff f6 ff : ec ff ff ff 06 30 00 00 00 00 00 00 00 0c 00 18  .....................0..........
+    00c0  00 00 00 fa d0 ff ff ff ff ff ff ff f4 ff e8 ff : ff ff 07 38 00 00 00 00 00 00 00 0e 00 1c 00 00  ...................8............
+    00e0  00 f9 c8 ff ff ff ff ff ff ff f2 ff e4 ff ff ff : 08 40 00 00 00 00 00 00 00 10 00 20 00 00 00 f8  .................@......... ....
+    0100  c0 ff ff ff ff ff ff ff f0 ff e0 ff ff ff 09 48 : 00 00 00 00 00 00 00 12 00 24 00 00 00 f7 b8 ff  ...............H.........$......
+    0120  ff ff ff ff ff ff ee ff dc ff ff ff 0a 50 00 00 : 00 00 00 00 00 14 00 28 00 00 00 f6 b0 ff ff ff  .............P.........(........
+    0140  ff ff ff ff ec ff d8 ff ff ff 0b 58 00 00 00 00 : 00 00 00 16 00 2c 00 00 00 f5 a8 ff ff ff ff ff  ...........X.........,..........
+    0160  ff ff ea ff d4 ff ff ff 0c 60 00 00 00 00 00 00 : 00 18 00 30 00 00 00 f4 a0 ff ff ff ff ff ff ff  .........`.........0............
+    0180  e8 ff d0 ff ff ff 0d 68 00 00 00 00 00 00 00 1a : 00 34 00 00 00 f3 98 ff ff ff ff ff ff ff e6 ff  .......h.........4..............
+    01a0  cc ff ff ff 0e 70 00 00 00 00 00 00 00 1c 00 38 : 00 00 00 f2 90 ff ff ff ff ff ff ff e4 ff c8 ff  .....p.........8................
+    01c0  ff ff 0f 78 00 00 00 00 00 00 00 1e 00 3c 00 00 : 00 f1 88 ff ff ff ff ff ff ff e2 ff c4 ff ff ff  ...x.........<..................
+    01e0  10 80 00 00 00 00 00 00 00 20 00 40 00 00 00 f0 : 80 ff ff ff ff ff ff ff e0 ff c0 ff ff ff 11 88  ......... .@....................
+    0200  00 00 00 00 00 00 00 22 00 44 00 00 00 ef 78 ff : ff ff ff ff ff ff de ff bc ff ff ff 12 90 00 00  .......".D....x.................
+    0220  00 00 00 00 00 24 00 48 00 00 00 ee 70 ff ff ff : ff ff ff ff dc ff b8 ff ff ff 13 98 00 00 00 00  .....$.H....p...................
+    0240  00 00 00 26 00 4c 00 00 00 ed 68 ff ff ff ff ff : ff ff da ff b4 ff ff ff                          ...&.L....h.............
+tarray completed with great success
+test c_tests\clangbinfast\tbits 
+uint8_t:
+  and 3, or 7, xor 4, nota f8, notb fc
+  and 5, or ff, xor fa, nota f8, notb 2
+  and 1, or fb, xor fa, nota 6, notb fc
+  and f9, or fd, xor 4, nota 6, notb 2
+  and ff, or ff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota 8, notb fc
+  and f5, or ff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota f6, notb fc
+  and 9, or 9, xor 0, nota f6, notb f6
+int8_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or fffffffffffffff7, xor fffffffffffffff4, nota 8, notb fffffffffffffffc
+  and fffffffffffffff5, or ffffffffffffffff, xor a, nota 8, notb 2
+  and 1, or b, xor a, nota fffffffffffffff6, notb fffffffffffffffc
+  and 9, or 9, xor 0, nota fffffffffffffff6, notb fffffffffffffff6
+uint16_t:
+  and 3, or 7, xor 4, nota fff8, notb fffc
+  and 5, or ffff, xor fffa, nota fff8, notb 2
+  and 1, or fffb, xor fffa, nota 6, notb fffc
+  and fff9, or fffd, xor 4, nota 6, notb 2
+  and ffff, or ffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ff08, notb fffc
+  and f5, or ffff, xor ff0a, nota ff08, notb 2
+  and 1, or ff0b, xor ff0a, nota f6, notb fffc
+  and ff09, or ff09, xor 0, nota f6, notb f6
+int16_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint32_t:
+  and 3, or 7, xor 4, nota fffffff8, notb fffffffc
+  and 5, or ffffffff, xor fffffffa, nota fffffff8, notb 2
+  and 1, or fffffffb, xor fffffffa, nota 6, notb fffffffc
+  and fffffff9, or fffffffd, xor 4, nota 6, notb 2
+  and ffffffff, or ffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffff08, notb fffffffc
+  and f5, or ffffffff, xor ffffff0a, nota ffffff08, notb 2
+  and 1, or ffffff0b, xor ffffff0a, nota f6, notb fffffffc
+  and ffffff09, or ffffff09, xor 0, nota f6, notb f6
+int32_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+uint64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+int64_t:
+  and 3, or 7, xor 4, nota fffffffffffffff8, notb fffffffffffffffc
+  and 5, or ffffffffffffffff, xor fffffffffffffffa, nota fffffffffffffff8, notb 2
+  and 1, or fffffffffffffffb, xor fffffffffffffffa, nota 6, notb fffffffffffffffc
+  and fffffffffffffff9, or fffffffffffffffd, xor 4, nota 6, notb 2
+  and ffffffffffffffff, or ffffffffffffffff, xor 0, nota 0, notb 0
+  and 3, or f7, xor f4, nota ffffffffffffff08, notb fffffffffffffffc
+  and f5, or ffffffffffffffff, xor ffffffffffffff0a, nota ffffffffffffff08, notb 2
+  and 1, or ffffffffffffff0b, xor ffffffffffffff0a, nota f6, notb fffffffffffffffc
+  and ffffffffffffff09, or ffffffffffffff09, xor 0, nota f6, notb f6
+test c_tests\clangbinfast\trw 
+trw completed with great success
+test c_tests\clangbinfast\tmmap 
+MAP_PRIVATE: 0x2
+MAP_ANONYMOUS: 0x20
+MREMAP_MAYMOVE: 0x1
+PROT_READ: 0x1
+PROT_WRITE: 0x2
+mmap test completed with great success
+test c_tests\clangbinfast\tstr 
+testing strlen
+testing strchr and strrchr
+testing memcpy and memcmp
+testing printf
+69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+29 (29): nopqrstuvwxyzabcdefghijklmnop
+34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
+24 (24): uvwxyzabcdefghijklmnopqr
+14 (14): stuvwxyzabcdef
+31 (31): ijklmnopqrstuvwxyzabcdefghijklm
+67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
+68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
+65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+26 (26): qrstuvwxyzabcdefghijklmnop
+18 (18): jklmnopqrstuvwxyza
+66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
+27 (27): pqrstuvwxyzabcdefghijklmnop
+ 9 ( 9): ijklmnopq
+45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+tstr completed with great success
+test c_tests\clangbinfast\fileops 
+current offset: 0
+result of fseek: 0
+file length from ftell: 0
+empty file length: 0
+result of fseek: 0
+result of fwrite (should be 1): 1
+current offset: 8320
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length from portable_filelen: 8320
+result of fseek to middle of file: 0
+result of fwrite to middle of file (should be 1): 1
+current offset: 0
+result of fseek: 0
+file length from ftell: 8320
+8192 + 128 = 8320 file length: 8320
+result of read at offset 0: 512
+result of read at offset 512: 512
+result of read at offset 1024: 512
+result of read at offset 1536: 512
+result of read at offset 2048: 512
+result of read at offset 2560: 512
+result of read at offset 3072: 512
+result of read at offset 3584: 512
+result of read at offset 4096: 512
+result of read at offset 4608: 512
+result of read at offset 5120: 512
+result of read at offset 5632: 512
+result of read at offset 6144: 512
+result of read at offset 6656: 512
+result of read at offset 7168: 512
+result of read at offset 7680: 512
+result of read at offset 8192: 128
+testing backwards read
+result of read at offset 8192: 128
+result of read at offset 7680: 512
+result of read at offset 7168: 512
+result of read at offset 6656: 512
+result of read at offset 6144: 512
+result of read at offset 5632: 512
+result of read at offset 5120: 512
+result of read at offset 4608: 512
+result of read at offset 4096: 512
+result of read at offset 3584: 512
+result of read at offset 3072: 512
+result of read at offset 2560: 512
+result of read at offset 2048: 512
+result of read at offset 1536: 512
+result of read at offset 1024: 512
+result of read at offset 512: 512
+result of read at offset 0: 512
+fileops has completed with great success
+test c_tests\clangbinfast\ttime 
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 8, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 8, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 8, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 8, sec 56
+test c_tests\clangbinfast\tm 
+tm has completed with great success
+test c_tests\clangbinfast\glob 
+in CTest constructor
+top main
+value of ctest::foo: 666
+end of main
+in ~CTest destructor
+test c_tests\clangbinfast\tap 
+starting, should tend towards 1.2020569031595942854...
+  at           10 iterations: 1.19753198567419305576
+  at          100 iterations: 1.20200740065967814907
+  at         1000 iterations: 1.20205640365934329772
+  at        10000 iterations: 1.20205689816009808624
+  at       100000 iterations: 1.20205690310973234425
+next implementation...
+  at           10 iterations: 1.25000000000000000000
+  at          100 iterations: 1.14942528735632176762
+  at         1000 iterations: 1.21802679658952506259
+  at        10000 iterations: 1.20293516179477921746
+tap completed with great success
+test c_tests\clangbinfast\tsimplef 
+float 3.141593
+f1 2.500000 * f2 3.500000 = 8.750000
+    div = 0.714286
+    add = 6.000000
+    sub = -1.000000
+d1 9.720000 * d2 13.321000 = 129.480120
+    div = 0.729675
+    add = 23.041000
+    sub = -3.601000
+double from int128: 1000.000000
+tsimplef completed with great success
+test c_tests\clangbinfast\tf 
+hello from printf
+float from printf: 45.678000
+division result: 333.333344, square root 18.257420
+result of 20.2 * -1.342: -27.108400
+result of 20.2 * -1.342 as a double: -27.108400
+pi in radians: 0.523599
+sinf of 30 degress is 0.500000
+cosf of 30 degrees is 0.866025
+tanf of 30 degrees is 0.577350
+atanf of 1.000000 is 0.785398
+atan2f of 0.3, 0.2 is 0.982794
+acosf of 0.3 is 1.266104
+asinf of 0.3 is 0.304693
+tanhf of 2.2 is 0.304693
+logf of 0.3: -1.203973
+log10f of 300: 2.477121
+pi has mantissa: 0.785398, exponent 2
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
+stop
+test c_tests\clangbinfast\td 
+sprintf double 3.14159265358979311600
+double from printf: 3.14159265358979311600
+float from printf: 1.202057
+double from printf r: -3.776373
+sqrt of pi: 1.772454
+pi in radians: 0.523599
+sin of 30 degress is 0.500000
+cos of 30 degrees is 0.866025
+tan of 30 degrees is 0.577350
+atan of 1.000000 is 0.785398
+atan2 of 0.3, 0.2 is 0.982794
+acos of 0.3 is 1.266104
+asin of 0.3 is 0.304693
+tanh of 2.2 is 0.304693
+log of 0.3: -1.203973
+log10 of 300: 2.477121
+l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
+pi has mantissa: 0.785398, exponent 2
+r should be 1.0: 1.000000
+  r high point 3187071009115100744291401655542800324833597909202670452736.000000
+stop
+test c_tests\clangbinfast\terrno 
+errno opening a file for read that doesn't exist: 2 (2 file not found expected)
+errno doing write to stdin file descriptor: 13. (13 permission denied expected)
+errno opening a file for read with invalid open flags: 22 (22 invalid argument expected)
+success
+test c_tests\clangbinfast\t_setjmp 
+second
+back in main
+falling out of main
+test c_tests\clangbinfast\tex 
+top of tex
+I am unwound, x should be 44: 44
+caught exception exceptional
+attempting large allocations
+caught a standard execption: std::bad_alloc
+leaving main
+test c_tests\clangbinfast\mm 
+matrix float 1: 4.000000
+matrix float 2: 50.000000
+matrix float 3: 228.000000
+matrix float 4: 706.000000
+matrix float 5: 1675.000000
+matrix float 6: 3501.000000
+matrix float 7: 6440.000000
+matrix float 8: 11060.000000
+matrix float 9: 17793.000000
+matrix float 10: 27355.000000
+matrix float 11: 40084.000000
+matrix float 12: 57474.000000
+matrix float 13: 79547.000000
+matrix float 14: 107639.000000
+matrix float 15: 142770.000000
+matrix float 16: 186432.000000
+matrix float 17: 238612.000000
+matrix float 18: 302274.000000
+matrix float 19: 376846.000000
+matrix float 20: 465880.000000
+matrix double 1: 4.000000
+matrix double 2: 50.000000
+matrix double 3: 228.000000
+matrix double 4: 706.000000
+matrix double 5: 1675.000000
+matrix double 6: 3501.000000
+matrix double 7: 6440.000000
+matrix double 8: 11060.000000
+matrix double 9: 17793.000000
+matrix double 10: 27355.000000
+matrix double 11: 40084.000000
+matrix double 12: 57474.000000
+matrix double 13: 79547.000000
+matrix double 14: 107639.000000
+matrix double 15: 142770.000000
+matrix double 16: 186432.000000
+matrix double 17: 238612.000000
+matrix double 18: 302274.000000
+matrix double 19: 376846.000000
+matrix double 20: 465880.000000
+matrix int8_t 1: 4
+matrix int8_t 2: 50
+matrix int8_t 3: -28
+matrix int8_t 4: -62
+matrix int8_t 5: -117
+matrix int8_t 6: -83
+matrix int8_t 7: 40
+matrix int8_t 8: 52
+matrix int8_t 9: -127
+matrix int8_t 10: -37
+matrix int8_t 11: -108
+matrix int8_t 12: -126
+matrix int8_t 13: -69
+matrix int8_t 14: 119
+matrix int8_t 15: -78
+matrix int8_t 16: 64
+matrix int8_t 17: 20
+matrix int8_t 18: -62
+matrix int8_t 19: 14
+matrix int8_t 20: -40
+matrix uint8_t 1: 4
+matrix uint8_t 2: 50
+matrix uint8_t 3: 228
+matrix uint8_t 4: 194
+matrix uint8_t 5: 139
+matrix uint8_t 6: 173
+matrix uint8_t 7: 40
+matrix uint8_t 8: 52
+matrix uint8_t 9: 129
+matrix uint8_t 10: 219
+matrix uint8_t 11: 148
+matrix uint8_t 12: 130
+matrix uint8_t 13: 187
+matrix uint8_t 14: 119
+matrix uint8_t 15: 178
+matrix uint8_t 16: 64
+matrix uint8_t 17: 20
+matrix uint8_t 18: 194
+matrix uint8_t 19: 14
+matrix uint8_t 20: 216
+matrix int16_t 1: 4
+matrix int16_t 2: 50
+matrix int16_t 3: 228
+matrix int16_t 4: 706
+matrix int16_t 5: 1675
+matrix int16_t 6: 3501
+matrix int16_t 7: 6440
+matrix int16_t 8: 11060
+matrix int16_t 9: 17793
+matrix int16_t 10: 27355
+matrix int16_t 11: -25452
+matrix int16_t 12: -8062
+matrix int16_t 13: 14011
+matrix int16_t 14: -23433
+matrix int16_t 15: 11698
+matrix int16_t 16: -10176
+matrix int16_t 17: -23532
+matrix int16_t 18: -25406
+matrix int16_t 19: -16370
+matrix int16_t 20: 7128
+matrix uint16_t 1: 4
+matrix uint16_t 2: 50
+matrix uint16_t 3: 228
+matrix uint16_t 4: 706
+matrix uint16_t 5: 1675
+matrix uint16_t 6: 3501
+matrix uint16_t 7: 6440
+matrix uint16_t 8: 11060
+matrix uint16_t 9: 17793
+matrix uint16_t 10: 27355
+matrix uint16_t 11: 40084
+matrix uint16_t 12: 57474
+matrix uint16_t 13: 14011
+matrix uint16_t 14: 42103
+matrix uint16_t 15: 11698
+matrix uint16_t 16: 55360
+matrix uint16_t 17: 42004
+matrix uint16_t 18: 40130
+matrix uint16_t 19: 49166
+matrix uint16_t 20: 7128
+matrix int32_t 1: 4
+matrix int32_t 2: 50
+matrix int32_t 3: 228
+matrix int32_t 4: 706
+matrix int32_t 5: 1675
+matrix int32_t 6: 3501
+matrix int32_t 7: 6440
+matrix int32_t 8: 11060
+matrix int32_t 9: 17793
+matrix int32_t 10: 27355
+matrix int32_t 11: 40084
+matrix int32_t 12: 57474
+matrix int32_t 13: 79547
+matrix int32_t 14: 107639
+matrix int32_t 15: 142770
+matrix int32_t 16: 186432
+matrix int32_t 17: 238612
+matrix int32_t 18: 302274
+matrix int32_t 19: 376846
+matrix int32_t 20: 465880
+matrix uint32_t 1: 4
+matrix uint32_t 2: 50
+matrix uint32_t 3: 228
+matrix uint32_t 4: 706
+matrix uint32_t 5: 1675
+matrix uint32_t 6: 3501
+matrix uint32_t 7: 6440
+matrix uint32_t 8: 11060
+matrix uint32_t 9: 17793
+matrix uint32_t 10: 27355
+matrix uint32_t 11: 40084
+matrix uint32_t 12: 57474
+matrix uint32_t 13: 79547
+matrix uint32_t 14: 107639
+matrix uint32_t 15: 142770
+matrix uint32_t 16: 186432
+matrix uint32_t 17: 238612
+matrix uint32_t 18: 302274
+matrix uint32_t 19: 376846
+matrix uint32_t 20: 465880
+matrix int64_t 1: 4
+matrix int64_t 2: 50
+matrix int64_t 3: 228
+matrix int64_t 4: 706
+matrix int64_t 5: 1675
+matrix int64_t 6: 3501
+matrix int64_t 7: 6440
+matrix int64_t 8: 11060
+matrix int64_t 9: 17793
+matrix int64_t 10: 27355
+matrix int64_t 11: 40084
+matrix int64_t 12: 57474
+matrix int64_t 13: 79547
+matrix int64_t 14: 107639
+matrix int64_t 15: 142770
+matrix int64_t 16: 186432
+matrix int64_t 17: 238612
+matrix int64_t 18: 302274
+matrix int64_t 19: 376846
+matrix int64_t 20: 465880
+matrix uint64_t 1: 4
+matrix uint64_t 2: 50
+matrix uint64_t 3: 228
+matrix uint64_t 4: 706
+matrix uint64_t 5: 1675
+matrix uint64_t 6: 3501
+matrix uint64_t 7: 6440
+matrix uint64_t 8: 11060
+matrix uint64_t 9: 17793
+matrix uint64_t 10: 27355
+matrix uint64_t 11: 40084
+matrix uint64_t 12: 57474
+matrix uint64_t 13: 79547
+matrix uint64_t 14: 107639
+matrix uint64_t 15: 142770
+matrix uint64_t 16: 186432
+matrix uint64_t 17: 238612
+matrix uint64_t 18: 302274
+matrix uint64_t 19: 376846
+matrix uint64_t 20: 465880
+matrix multiply test completed with great success
+test c_tests\clangbinfast\pis 
+startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
+startInChunks: 0, limitInChunks 32
+percent complete: 3.125000
+percent complete: 6.250000
+percent complete: 9.375000
+percent complete: 12.500000
+percent complete: 15.625000
+percent complete: 18.750000
+percent complete: 21.875000
+percent complete: 25.000000
+percent complete: 28.125000
+percent complete: 31.250000
+percent complete: 34.375000
+percent complete: 37.500000
+percent complete: 40.625000
+percent complete: 43.750000
+percent complete: 46.875000
+percent complete: 50.000000
+percent complete: 53.125000
+percent complete: 56.250000
+percent complete: 59.375000
+percent complete: 62.500000
+percent complete: 65.625000
+percent complete: 68.750000
+percent complete: 71.875000
+percent complete: 75.000000
+percent complete: 78.125000
+percent complete: 81.250000
+percent complete: 84.375000
+percent complete: 87.500000
+percent complete: 90.625000
+percent complete: 93.750000
+percent complete: 96.875000
+percent complete: 100.000000
+results are valid
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+test c_tests\clangbinfast\sleeptm 
+clk_tck / number of linux ticks per second: 100
+sleepy time ended with great success
+test c_tests\clangbinfast\tatomic 
+test atomic completed with great success
+test c_tests\clangbinfast\lenum 
+linux file system enumeration completed with great success
 test c_tests\binfast\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -4832,10 +10007,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 11, hour 7, min 12, sec 48
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 11, hour 10, min 12, sec 48
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 11, hour 7, min 12, sec 48
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 11, hour 15, min 12, sec 48
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 12, hour 6, min 9, sec 2
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 9, sec 2
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 9, sec 2
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 9, sec 2
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -5168,6 +10343,7 @@ results are valid
 final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
 test c_tests\binfast\sleeptm 
 clk_tck / number of linux ticks per second: 100
+getrusage user time in ms: 1000, system time 0
 sleepy time ended with great success
 test c_tests\binfast\tatomic 
 test atomic completed with great success
@@ -5217,9 +10393,80 @@ id leaved
 idea veld
 lade vied
 lead vied
+test c_tests\clangbinfast\an 
+a delve id
+a delved i
+a die veld
+a dive led
+a dived le
+a led vied
+add ive le
+add le vie
+addle ive
+addle vie
+aid delve
+aide veld
+ale dived
+ave did le
+ave id led
+ave idled
+dad ive le
+dad le vie
+dale dive
+dale vied
+david eel
+david lee
+dead evil
+dead levi
+dead live
+dead veil
+dead vile
+deal dive
+deal vied
+dee valid
+deed vial
+did leave
+died vale
+died veal
+dive lade
+dive lead
+dived lea
+evade lid
+eve id lad
+id leaved
+idea veld
+lade vied
+lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-155 ms for 1 iterations
+80 ms for 1 iterations
+final move count 6493
+exiting the basic interpreter
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.s, use registers: yes, expression optimization: yes
+parsing input file tp.bas
+created assembler file: tp.asm, use registers: yes, expression optimization: yes
+test c_tests\clangbinfast\ba 
+parsing input file tp.bas
+73 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -5249,7 +10496,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   16.4513ms
+serial runtime:   7.9625ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -5322,7 +10569,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.3909ms
+serial runtime:   2.6727ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -5395,7 +10642,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   3.0561ms
+serial runtime:   1.6184ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -5468,7 +10715,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.3655ms
+serial runtime:   1.2362ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -5543,16 +10790,16 @@ test ntvcm
 moves: 6493
 iterations: 1
 test ntvdm 
-0.1 seconds
+0.0 seconds
 moves: 6493
 iterations: 1
 test rvos 
 starting...
 6493 moves
-194.132004 milliseconds
+113.746002 milliseconds
 test armos 
 starting
-128967 microseconds (-6)
+74725 microseconds (-6)
 1 iterations
 6493 moves
-Wed 12/11/2024  7:13:03.21 
+Thu 12/12/2024  6:09:14.04 

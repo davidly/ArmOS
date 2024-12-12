@@ -48,16 +48,20 @@ goto :allDone
 
 :folderRun
 
-rem ( for %%a in (%_applist%) do ( call :appRun c_tests\clang%%f\%%a ) )
+( for %%a in (%_applist%) do ( call :appRun c_tests\clang%%f\%%a ) )
 ( for %%a in (%_applist%) do ( call :appRun c_tests\%%f\%%a ) )
 
 echo test c_tests\%~1\an
 echo test c_tests\%~1\an >>%outputfile%
 call :anTest c_tests\%~1
+echo test c_tests\clang%~1\an >>%outputfile%
+call :anTest c_tests\clang%~1
 
 echo test c_tests\%~1\ba
 echo test c_tests\%~1\ba >>%outputfile%
 call :baTest c_tests\%~1
+echo test c_tests\clang%~1\ba >>%outputfile%
+call :baTest c_tests\clang%~1
 
 exit /b 0
 
