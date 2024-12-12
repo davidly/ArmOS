@@ -2195,6 +2195,7 @@ void Arm64::trace_state()
             break;
         }
         case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>    ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
+                   // FCMGE <V><d>, <V><n>, #0.0
         {
             uint64_t bits23_10 = opbits( 10, 14 );
             uint64_t n = opbits( 5, 5 );
@@ -2221,6 +2222,11 @@ void Arm64::trace_state()
             {
                 char width = sz ? 'd' : 's';
                 tracer.Trace( "ucvtf %c%llu, %c%llu\n", width, d, width, n );
+            }
+            else if ( 0x2832 == bits23_10 || 0x3832 == bits23_10 ) // FCMGE <V><d>, <V><n>, #0.0
+            {
+                char type = sz ? 'd' : 'f';
+                tracer.Trace( "fcmge %c%llu, %c%llu, #0.0\n", type, d, type, n );
             }
             else
                 unhandled();
@@ -2503,7 +2509,7 @@ void Arm64::trace_state()
             break;
         }
         case 0x1e: // FMOV <Wd>, <Hn>    ;    FMUL                ;    FMOV <Wd>, imm       ;    FCVTZU <Wd>, <Dn>    ;    FRINTA <Dd>, <Dn>
-        case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>    ;    FCVTAS <Xd>, <Dn>
+        case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>    ;    FCVTAS <Xd>, <Dn>    ;    FCVTMU <Xd>, <Dn>
         {
             uint64_t sf = opbits( 31, 1 );
             uint64_t ftype = opbits( 22, 2 );
@@ -2538,6 +2544,11 @@ void Arm64::trace_state()
                 uint64_t scale = opbits( 10, 6 );
                 uint64_t fbits = 64 - scale;
                 tracer.Trace( "fcvtzs %s, %c%llu, #%llu\n", reg_or_zr( d, sf ), t, n, fbits );
+            }
+            else if ( 6 == bits21_19 && 0x40 == bits18_10 ) // FCVTMU <Xd>, <Dn>
+            {
+                char type = ( 0 == ftype ) ? 's' : ( 1 == ftype ) ? 'd' : ( 3 == ftype ) ? 'h' : '?';
+                tracer.Trace( "fcvtmu %s, %c%llu\n", reg_or_zr( d, sf ), type, n );
             }
             else if ( 4 == bits21_19 && 0x100 == bits18_10 ) // FCVTAS <Xd>, <Dn>
             {
@@ -5628,7 +5639,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     unhandled();
                 break;
             }
-            case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>    ;    FADDP <V><d>, <Vn>.<T>
+            case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>    ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
+                       // FCMGE <V><d>, <V><n>, #0.0
             {
                 uint64_t bits23_10 = opbits( 10, 14 );
                 uint64_t n = opbits( 5, 5 );
@@ -5683,6 +5695,19 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         vregs[ d ].d[ 0 ] = (double) vregs[ n ].ui64[ 0 ];
                     else
                         vregs[ d ].f[ 0 ] = (float) vregs[ n ].ui32[ 0 ];
+                }
+                else if ( 0x2832 == bits23_10 || 0x3832 == bits23_10 ) // FCMGE <V><d>, <V><n>, #0.0
+                {
+                    if ( sz )
+                        if ( vregs[ n ].d[ 0 ] >= 0.0 )
+                            vregs[ d ].ui64[ 0 ] = ~0ull;
+                        else
+                            vregs[ d ].ui64[ 0 ] = 0;
+                    else
+                        if ( vregs[ n ].f[ 0 ] >= 0.0f )
+                            vregs[ d ].ui32[ 0 ] = ~0u;
+                        else
+                            vregs[ d ].ui32[ 0 ] = 0;
                 }
                 else
                     unhandled();
@@ -6279,7 +6304,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 break;
             }
             case 0x1e: // FMOV <Wd>, <Hn>    ;    FMUL                ;    FMOV <Wd>, imm       ;    FCVTZU <Wd>, <Dn>    ;    FRINTA <Dd>, <Dn>
-            case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>    ;    FCVTAS <Xd>, <Dn>
+            case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>    ;    FCVTAS <Xd>, <Dn>    ;    FCVTMU <Xd>, <Dn>
             {
                 uint64_t sf = opbits( 31, 1 );
                 uint64_t ftype = opbits( 22, 2 );
@@ -6349,6 +6374,19 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         result = double_to_fixed_uint32( src, fracbits, FPRounding_ZERO );
 
                     regs[ d ] = result;
+                }
+                else if ( 6 == bits21_19 && 0x40 == bits18_10 ) // FCVTMU <Xd>, <Dn>
+                {
+                    if ( !sf && 0 == ftype )
+                        regs[ d ] = double_to_fixed_uint32( (double) vregs[ n ].f[ 0 ], 0, FPRounding_NEGINF );
+                    else if ( sf && 0 == ftype )
+                        regs[ d ] = double_to_fixed_uint64( (double) vregs[ n ].f[ 0 ], 0, FPRounding_NEGINF );
+                    else if ( !sf && 1 == ftype )
+                        regs[ d ] = double_to_fixed_uint32( vregs[ n ].d[ 0 ], 0, FPRounding_NEGINF );
+                    else if ( sf && 1 == ftype )
+                        regs[ d ] = double_to_fixed_uint64( vregs[ n ].d[ 0 ], 0, FPRounding_NEGINF );
+                    else
+                        unhandled();
                 }
                 else if ( 4 == bits21_19 && 0x100 == bits18_10 ) // FCVTAS <Xd>, <Dn>
                 {
