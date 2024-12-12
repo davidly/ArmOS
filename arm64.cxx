@@ -794,6 +794,7 @@ void Arm64::trace_state()
             break;
         }
         case 0x5f: // SHL D<d>, D<n>, #<shift>    ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]    ;    FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
+                   // SSHR D<d>, D<n>, #<shift>
         {
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
@@ -802,12 +803,13 @@ void Arm64::trace_state()
             uint64_t immb = opbits( 16, 3 );
             uint64_t bit23 = opbits( 23, 1 );
             uint64_t bit22 = opbits( 23, 2 );
+            uint64_t bits15_10 = opbits( 10, 6 );
 
             if ( !bit23 && bit22 && 0x15 == opcode ) // SHL D<d>, D<n>, #<shift>
             {
                 uint64_t esize = 8 << 3;
                 uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
-                tracer.Trace( "d%llu, d%llu, #%llu\n", d, n, shift );
+                tracer.Trace( "shl d%llu, d%llu, #%llu\n", d, n, shift );
             }
             else if ( bit23 && ( 4 == opcode || 6 == opcode || 0x24 == opcode || 0x26 == opcode ) ) // FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]    ;    FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
             {
@@ -826,6 +828,12 @@ void Arm64::trace_state()
                     unhandled();
 
                 tracer.Trace( "%s %c%llu, %c%llu, v%llu.%c[%llu]\n", ( 4 == opcode || 6 == opcode ) ? "fmla" : "fmul", v, d, v, n, m, v, Rmhi );
+            }
+            else if ( !bit23 && bit22 && 1 == bits15_10 ) // SSHR D<d>, D<n>, #<shift>
+            {
+                uint64_t esize = 8 << 3;
+                uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
+                tracer.Trace( "sshr d%llu, d%llu, #%llu\n", d, n, shift );
             }
             else
                 unhandled();
@@ -2020,6 +2028,7 @@ void Arm64::trace_state()
                               // EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index> ;  INS <Vd>.<Ts>[<index1>], <Vn>.<Ts>[<index2>]  ;    UADDLV <V><d>, <Vn>.<T>
                               // USHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FNEG <Vd>.<T>, <Vn>.<T>
                               // CMHI <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb> ; UMINV <V><d>, <Vn>.<T>
+                              // FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
         {
             uint64_t Q = opbits( 30, 1 );
             uint64_t m = opbits( 16, 5 );
@@ -2038,7 +2047,13 @@ void Arm64::trace_state()
             uint64_t bits16_10 = opbits( 10, 7 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit21 && 8 == bits20_17 && 0x6a == bits16_10 ) // UMINV <V><d>, <Vn>.<T>
+            if ( !bit23 && bit21 && 0x3f == bits15_10 ) // FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                uint64_t sz = opbits( 22, 1 );
+                pT = ( !sz && !Q ) ? "2s" : ( !sz && Q ) ? "4s" : ( sz && Q ) ? "2d" : "?";
+                tracer.Trace( "v%llu.%s, v%llu.%s, v%llu.%s\n", n, pT, n, pT, m, pT );
+            }
+            else if ( bit21 && 8 == bits20_17 && 0x6a == bits16_10 ) // UMINV <V><d>, <Vn>.<T>
             {
                 char v = ( 0 == size ) ? 'b' : ( 1 == size ) ? 'h' : ( 2 == size ) ? 's' : '?';
                 tracer.Trace( "uminv %c%llu, v%llu.%s\n", v, d, n, pT );
@@ -2220,7 +2235,7 @@ void Arm64::trace_state()
                               // TRN1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    TRN2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   TBL <Vd>.<Ta>, { <Vn>.16B }, <Vm>.<Ta> ; TBL <Vd>.<Ta>, { <Vn>.16B, <Vn+1>.16B, <Vn+2>.16B, <Vn+3>.16B }, <Vm>.<Ta>
                               // ZIP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ZIP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                               // MLA <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>  ;   CMLT <Vd>.<T>, <Vn>.<T>, #0    ;    REV64 <Vd>.<T>, <Vn>.<T>
-                              // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                              // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FMLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   FSUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
 
         {
             uint64_t Q = opbits( 30, 1 );
@@ -2238,7 +2253,21 @@ void Arm64::trace_state()
             uint64_t bits14_10 = opbits( 10, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( 3 == bits23_21 && 7 == bits15_10 ) // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            if ( bit23 && bit21 && 0x35 == bits15_10 ) // FSUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                uint64_t m = opbits( 16, 5 );
+                uint64_t sz = opbits( 22, 1 );
+                const char * pT = ( !sz && !Q ) ? "2s" : ( !sz && Q ) ? "4s" : ( sz && Q ) ? "2d" : "?";
+                tracer.Trace( "fsub v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
+            }
+            else if ( bit23 && bit21 && 0x33 == bits15_10 ) // FMLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                uint64_t m = opbits( 16, 5 );
+                uint64_t sz = opbits( 22, 1 );
+                const char * pT = ( !sz && !Q ) ? "2s" : ( !sz && Q ) ? "4s" : ( sz && Q ) ? "2d" : "?";
+                tracer.Trace( "fmls v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
+            }
+            else if ( 3 == bits23_21 && 7 == bits15_10 ) // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 const char * pT = Q ? "16b" : "8b";
                 uint64_t m = opbits( 16, 5 );
@@ -3292,7 +3321,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     unhandled();
                 break;
             }
-            case 0x5f: // SHL D<d>, D<n>, #<shift>    ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
+            case 0x5f: // SHL D<d>, D<n>, #<shift>    ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]    ;    FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
+                       // SSHR D<d>, D<n>, #<shift>
             {
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
@@ -3301,6 +3331,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t immb = opbits( 16, 3 );
                 uint64_t bit23 = opbits( 23, 1 );
                 uint64_t bit22 = opbits( 23, 2 );
+                uint64_t bits15_10 = opbits( 10, 6 );
     
                 if ( !bit23 && bit22 && 0x15 == opcode ) // SHL D<d>, D<n>, #<shift>
                 {
@@ -3350,6 +3381,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     }
 
                     vregs[ d ] = target;
+                }
+                else if ( !bit23 && bit22 && 1 == bits15_10 ) // SSHR D<d>, D<n>, #<shift>
+                {
+                    uint64_t shift = ( 32 * 2 ) - ( ( immh << 3 ) | immb );
+                    vregs[ d ].ui32[ 0 ] = ( (int32_t) vregs[ n ].ui32[ 0 ] ) >> shift;
                 }
                 else
                     unhandled();
@@ -5135,6 +5171,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                   // EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index> ;  INS <Vd>.<Ts>[<index1>], <Vn>.<Ts>[<index2>]  ;    UADDLV <V><d>, <Vn>.<T>
                                   // USHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FNEG <Vd>.<T>, <Vn>.<T>
                                   // CMHI <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb> ; UMINV <V><d>, <Vn>.<T>
+                                  // FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t Q = opbits( 30, 1 );
                 uint64_t m = opbits( 16, 5 );
@@ -5158,7 +5195,23 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bits15_10 = opbits( 10, 6 );
                 //tracer.Trace( "elements: %llu, size %llu, esize %llu, datasize %llu, ebytes %llu, opcode %llu\n", elements, size, esize, datasize, ebytes, opcode );
 
-                if ( bit21 && 8 == bits20_17 && 0x6a == bits16_10 ) // UMINV <V><d>, <Vn>.<T>
+
+                if ( !bit23 && bit21 && 0x3f == bits15_10 ) // FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                {
+                    uint64_t sz = opbits( 22, 1 );
+                    esize = 32 << sz;
+                    ebytes = esize / 8;
+                    elements = datasize / esize;
+                    if ( 4 == ebytes )
+                        for ( uint64_t e = 0; e < elements; e++ )
+                            vregs[ d ].f[ e ] = ( 0.0 == vregs[ m ].f[ e ] ) ? 0.0f : vregs[ n ].f[ e ] / vregs[ m ].f[ e ];
+                    else if ( 8 == ebytes )
+                        for ( uint64_t e = 0; e < elements; e++ )
+                            vregs[ d ].d[ e ] = ( 0.0 == vregs[ m ].d[ e ] ) ? 0.0 : vregs[ n ].d[ e ] / vregs[ m ].d[ e ];
+                    else
+                        unhandled();
+                }
+                else if ( bit21 && 8 == bits20_17 && 0x6a == bits16_10 ) // UMINV <V><d>, <Vn>.<T>
                 {
                     uint64_t minimum = ~0ull;
                     for ( uint64_t e = 0; e < elements; e++ )
@@ -5644,7 +5697,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                   // TRN1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    TRN2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   TBL <Vd>.<Ta>, { <Vn>.16B }, <Vm>.<Ta> ; TBL <Vd>.<Ta>, { <Vn>.16B, <Vn+1>.16B, <Vn+2>.16B, <Vn+3>.16B }, <Vm>.<Ta>
                                   // ZIP1 <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ZIP2 <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                                   // MLA <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>  ;   CMLT <Vd>.<T>, <Vn>.<T>, #0    ;    REV64 <Vd>.<T>, <Vn>.<T>
-                                  // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                                  // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FMLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   FSUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t Q = opbits( 30, 1 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -5662,7 +5715,41 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bits12_10 = opbits( 10, 3 );
                 uint64_t bits15_10 = opbits( 10, 6 );
 
-                if ( 3 == bits23_21 && 7 == bits15_10 ) // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                if ( bit23 && bit21 && 0x35 == bits15_10 ) // FSUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t esize = 32 << sz;
+                    uint64_t ebytes = esize / 8;
+                    uint64_t elements = datasize / esize;
+
+                    if ( 4 == ebytes )
+                        for ( uint64_t e = 0; e < elements; e++ )
+                            vregs[ d ].f[ e ] = vregs[ n ].f[ e ] - vregs[ m ].f[ e ];
+                    else if ( 8 == ebytes )
+                        for ( uint64_t e = 0; e < elements; e++ )
+                            vregs[ d ].d[ e ] = vregs[ n ].d[ e ] - vregs[ m ].d[ e ];
+                    else
+                        unhandled();
+                }
+                else if ( bit23 && bit21 && 0x33 == bits15_10 ) // FMLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t esize = 32 << sz;
+                    uint64_t ebytes = esize / 8;
+                    uint64_t elements = datasize / esize;
+
+                    if ( 4 == ebytes )
+                        for ( uint64_t e = 0; e < elements; e++ )
+                            vregs[ d ].f[ e ] -= vregs[ n ].f[ e ] * vregs[ m ].f[ e ];
+                    else if ( 8 == ebytes )
+                        for ( uint64_t e = 0; e < elements; e++ )
+                            vregs[ d ].d[ e ] -= vregs[ n ].d[ e ] * vregs[ m ].d[ e ];
+                    else
+                        unhandled();
+                }
+                else if ( 3 == bits23_21 && 7 == bits15_10 ) // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = opbits( 16, 5 );
                     vec16_t target = { 0 };

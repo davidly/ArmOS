@@ -58,6 +58,21 @@ typedef __int128 int128_t;
                     C_##ftype##dim[ i ][ j ] += A_##ftype##dim[ i ][ k ] * B_##ftype##dim[ k ][ j ]; \
         } \
     } \
+    void div_nonsense_##ftype##dim() /* force more instructions to be generated with this nonsense */ \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+        { \
+            for ( int j = 0; j < dim; j++ ) \
+                for ( int k = 0; k < dim; k++ ) \
+                    if ( B_##ftype##dim[ k ][ j ] != 0 ) \
+                    { \
+                        C_##ftype##dim[ i ][ j ] += A_##ftype##dim[ i ][ k ] / B_##ftype##dim[ k ][ j ]; \
+                        C_##ftype##dim[ i ][ j ] -= A_##ftype##dim[ i ][ k ] * B_##ftype##dim[ k ][ j ]; \
+                        C_##ftype##dim[ i ][ j ] -= A_##ftype##dim[ i ][ k ] / B_##ftype##dim[ k ][ j ]; \
+                        C_##ftype##dim[ i ][ j ] += A_##ftype##dim[ i ][ k ] * B_##ftype##dim[ k ][ j ]; \
+                    } \
+        } \
+    } \
     ftype sum_##ftype##dim() \
     { \
         ftype result = (ftype) 0; \
@@ -77,7 +92,12 @@ typedef __int128 int128_t;
         /*print_array_##ftype##dim( C_##ftype##dim );*/ \
         if ( sizeof( ftype ) > 8 ) { \
             return (uint64_t) sum_##ftype##dim(); } \
-        return sum_##ftype##dim(); \
+        ftype sum = sum_##ftype##dim(); \
+        div_nonsense_##ftype##dim(); \
+        ftype nonsense_sum = sum_##ftype##dim(); \
+        if ( sum != nonsense_sum ) \
+            printf( "nonsense: %lf\n", (double) nonsense_sum ); \
+        return sum; \
     }
 
 #define declare_matrix_tests( type ) \
