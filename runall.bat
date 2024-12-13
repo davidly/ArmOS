@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
+if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)

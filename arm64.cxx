@@ -139,7 +139,10 @@ int32_t Arm64::double_to_fixed_int32( double d, uint64_t fracbits, FPRounding ro
 
 uint32_t Arm64::double_to_fixed_uint32( double d, uint64_t fracbits, FPRounding rounding )
 {
-    return (int32_t) round_double( d * ( 1ull << fracbits ), rounding );
+    double val = round_double( d * ( 1ull << fracbits ), rounding );
+    if ( val < 0.0 )
+        val = 0.0;
+    return (uint32_t) val;
 } //double_to_fixed_uint32
 
 int64_t Arm64::double_to_fixed_int64( double d, uint64_t fracbits, FPRounding rounding )
@@ -149,7 +152,10 @@ int64_t Arm64::double_to_fixed_int64( double d, uint64_t fracbits, FPRounding ro
 
 uint64_t Arm64::double_to_fixed_uint64( double d, uint64_t fracbits, FPRounding rounding )
 {
-    return (uint64_t) round_double( d * ( 1ull << fracbits ), rounding );
+    double val = round_double( d * ( 1ull << fracbits ), rounding );
+    if ( val < 0.0 )
+        val = 0.0;
+    return (uint64_t) val;
 } //double_to_fixed_uint64
 
 uint64_t get_bit( uint64_t x, uint64_t bit_number )
