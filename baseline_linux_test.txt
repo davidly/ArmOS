@@ -1,4 +1,4 @@
-Thu Dec 12 06:10:21 PST 2024
+Fri Dec 13 11:24:31 PST 2024
 c_tests/bin0/tcmp
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -5524,260 +5524,260 @@ testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/clangbin0/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/bin1/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/clangbin1/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/bin2/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/clangbin2/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/bin3/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/clangbin3/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/binfast/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/clangbinfast/tstr
 testing strlen
 testing strchr and strrchr
 testing memcpy and memcmp
 testing printf
-69 (69): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-29 (29): nopqrstuvwxyzabcdefghijklmnop
-34 (34): lmnopqrstuvwxyzabcdefghijklmnopqrs
-24 (24): uvwxyzabcdefghijklmnopqr
-14 (14): stuvwxyzabcdef
-31 (31): ijklmnopqrstuvwxyzabcdefghijklm
-67 (67): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-39 (39): wxyzabcdefghijklmnopqrstuvwxyzabcdefghi
-68 (68): klmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-46 (46): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-65 (65): jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv
-65 (65): nopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-67 (67): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-26 (26): qrstuvwxyzabcdefghijklmnop
-18 (18): jklmnopqrstuvwxyza
-66 (66): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
-59 (59): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn
-27 (27): pqrstuvwxyzabcdefghijklmnop
- 9 ( 9): ijklmnopq
-45 (45): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
+59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
+56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
+27 (27): bcdefghijklmnopqrstuvwxyzab
+22 (22): mnopqrstuvwxyzabcdefgh
+68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
+66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
+63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
+38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
+ 4 ( 4): rstu
+19 (19): wxyzabcdefghijklmno
+68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
+ 1 ( 1): t
+13 (13): mnopqrstuvwxy
+34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
+69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
+17 (17): zabcdefghijklmnop
+63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+11 (11): uvwxyzabcde
 tstr completed with great success
 c_tests/bin0/fileops
 current offset: 0
@@ -6310,55 +6310,55 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 34
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 34
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 34
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 34
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/clangbin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 34
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 34
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 34
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 34
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 35
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/clangbin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 35
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 35
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/clangbin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 35
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 35
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/clangbin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 35
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 35
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/clangbinfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 12, hour 14, min 10, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 12, hour 9, min 10, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 12, hour 6, min 10, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 12, hour 14, min 10, sec 35
+before TZ is set: tz: '(null)', year: 2024, month 12, day 13, hour 19, min 24, sec 38
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 13, hour 14, min 24, sec 38
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 13, hour 11, min 24, sec 38
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 13, hour 19, min 24, sec 38
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/clangbin0/tm
@@ -10321,7 +10321,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-574 ms for 1 iterations
+590 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -10370,7 +10370,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-148 ms for 1 iterations
+145 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -10419,7 +10419,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-141 ms for 1 iterations
+140 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -10468,7 +10468,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-147 ms for 1 iterations
+146 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -10517,7 +10517,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-148 ms for 1 iterations
+146 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -10581,19 +10581,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   14.729984ms
+serial runtime:   14.754199ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   4.160696ms
+serial runtime:   4.0716ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   2.826297ms
+serial runtime:   2.8017ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.266897ms
+serial runtime:   2.2215ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -10856,4 +10856,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Thu Dec 12 06:11:30 PST 2024
+Fri Dec 13 11:25:34 PST 2024
