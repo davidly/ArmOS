@@ -2514,7 +2514,7 @@ void Arm64::trace_state()
             }
             break;
         }
-        case 0x1e: // FMOV <Wd>, <Hn>    ;    FMUL                ;    FMOV <Wd>, imm       ;    FCVTZU <Wd>, <Dn>    ;    FRINTA <Dd>, <Dn>
+        case 0x1e: // FMOV <Wd>, <Hn>    ;    FMUL                ;    FMOV <Wd>, imm       ;    FCVTZU <Wd>, <Dn>    ;    FRINTA <Dd>, <Dn>    ;    FMAXNM <Dd>, <Dn>, <Dm>
         case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>    ;    FCVTAS <Xd>, <Dn>    ;    FCVTMU <Xd>, <Dn>
         {
             uint64_t sf = opbits( 31, 1 );
@@ -2526,12 +2526,19 @@ void Arm64::trace_state()
             uint64_t bits21_19 = opbits( 19, 3 );
             uint64_t bits18_16 = opbits( 16, 3 );
             uint64_t bits18_10 = opbits( 10, 9 );
+            uint64_t bits15_10 = opbits( 10, 6 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
             uint64_t rmode = opbits( 19, 2 );
             //tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
 
-            if ( 0x1e == hi8 && 4 == bits21_19 && 0x150 == bits18_10 ) // FRINTM <Dd>, <Dn>
+            if ( 0x1e == hi8 == bit21 && 0x1a == bits15_10 ) // FMAXNM <Dd>, <Dn>, <Dm>
+            {
+                uint64_t m = opbits( 16, 5 );
+                char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
+                tracer.Trace( "fmaxnm %c%llu, %c%llu, %c%llu\n", t, d, t, n, t, m );
+            }
+            else if ( 0x1e == hi8 && 4 == bits21_19 && 0x150 == bits18_10 ) // FRINTM <Dd>, <Dn>
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 tracer.Trace( "frintm %c%llu, %c%llu\n", t, d, t, n );
@@ -6309,7 +6316,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 trace_vregs();
                 break;
             }
-            case 0x1e: // FMOV <Wd>, <Hn>    ;    FMUL                ;    FMOV <Wd>, imm       ;    FCVTZU <Wd>, <Dn>    ;    FRINTA <Dd>, <Dn>
+            case 0x1e: // FMOV <Wd>, <Hn>    ;    FMUL                ;    FMOV <Wd>, imm       ;    FCVTZU <Wd>, <Dn>    ;    FRINTA <Dd>, <Dn>    ;    FMAXNM <Dd>, <Dn>, <Dm>
             case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>    ;    FCVTAS <Xd>, <Dn>    ;    FCVTMU <Xd>, <Dn>
             {
                 uint64_t sf = opbits( 31, 1 );
@@ -6322,10 +6329,21 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t rmode = opbits( 19, 2 );
                 uint64_t bits18_16 = opbits( 16, 3 );
                 uint64_t bits18_10 = opbits( 10, 9 );
+                uint64_t bits15_10 = opbits( 10, 6 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
 
-                if ( 0x1e == hi8 && 4 == bits21_19 && 0x150 == bits18_10 ) // FRINTM <Dd>, <Dn>
+                if ( 0x1e == hi8 == bit21 && 0x1a == bits15_10 ) // FMAXNM <Dd>, <Dn>, <Dm>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    if ( 0 == ftype )
+                        vregs[ d ].f[ 0 ] = get_max( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
+                    else if ( 1 == ftype )
+                        vregs[ d ].d[ 0 ] = get_max( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
+                    else
+                        unhandled();
+                }
+                else if ( 0x1e == hi8 && 4 == bits21_19 && 0x150 == bits18_10 ) // FRINTM <Dd>, <Dn>
                 {
                     if ( 0 == ftype )
                         vregs[ d ].f[ 0 ] = (float) round_double( (double) vregs[ n ].f[ 0 ], FPRounding_NEGINF );
