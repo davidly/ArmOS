@@ -81,6 +81,22 @@ typedef __int128 int128_t;
                 result += C_##ftype##dim[ i ][ j ]; \
         return result; \
     } \
+     __attribute__((noinline)) ftype min_##ftype##dim() \
+    { \
+        ftype result = C_##ftype##dim[ 0 ][ 0 ]; \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+                result = C_##ftype##dim[ i ][ j ] < result ? C_##ftype##dim[ i ][ j ] : result; \
+        return result; \
+    } \
+     __attribute__((noinline)) ftype max_##ftype##dim() \
+    { \
+        ftype result = C_##ftype##dim[ 0 ][ 0 ]; \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+                result = C_##ftype##dim[ i ][ j ] > result ? C_##ftype##dim[ i ][ j ] : result; \
+        return result; \
+    } \
     ftype run_##ftype##dim() \
     { \
         fillA_##ftype##dim(); \
@@ -97,6 +113,7 @@ typedef __int128 int128_t;
         ftype nonsense_sum = sum_##ftype##dim(); \
         if ( sum != nonsense_sum ) \
             printf( "nonsense: %lf\n", (double) nonsense_sum ); \
+        printf( "min %lf max %lf\n", (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
         return sum; \
     }
 
@@ -179,8 +196,8 @@ declare_matrix_tests( uint128_t );
     printf( "matrix %s 19: " format "\n", #type, run_##type##19() ); \
     printf( "matrix %s 20: " format "\n", #type, run_##type##20() );
 
-#define run_this_tests( type, format ) \
-    printf( "matrix %s 8: " format "\n", #type, run_##type##8() );
+#define run_this_test( type, format ) \
+    printf( "matrix %s 12: " format "\n", #type, run_##type##12() );
 
 
 int main( int argc, char * argv[] )
@@ -195,6 +212,8 @@ int main( int argc, char * argv[] )
     run_tests( uint32_t, "%u");
     run_tests( int64_t, "%lld");
     run_tests( uint64_t, "%llu");
+
+    //run_this_test( int8_t, "%d" );    
 
     // these two return incorrect results even on Arm64 hardware
 
