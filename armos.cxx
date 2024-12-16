@@ -1022,6 +1022,7 @@ tcflag_t map_termios_cflag_macos_to_linux( tcflag_t f )
 
 #endif
 
+#if !defined(__APPLE__)
 #if defined(__ARM_32BIT_STATE) || defined(__ARM_64BIT_STATE) || defined(__riscv)
     int linux_swap_riscv64_arm_dir_open_flags( int flags )
     {
@@ -1046,6 +1047,7 @@ tcflag_t map_termios_cflag_macos_to_linux( tcflag_t f )
         tracer.Trace( "  mapped from flags %#x to flags %#x\n", flags, r );
         return r;
     } //linux_swap_riscv64_arm_dir_open_flags
+#endif
 #endif
 
 struct SysCall
@@ -1910,6 +1912,8 @@ void emulator_invoke_svc( CPUClass & cpu )
 
 // if it's rvos running on Arm or armos runnign on risc-v, swap O_DIRECT and O_DIRECTORY
 
+#ifndef __APPLE__
+
 #ifdef RVOS
     #if defined(__ARM_32BIT_STATE) || defined(__ARM_64BIT_STATE)
             flags = linux_swap_riscv64_arm_dir_open_flags( flags );
@@ -1919,6 +1923,9 @@ void emulator_invoke_svc( CPUClass & cpu )
             flags = linux_swap_riscv64_arm_dir_open_flags( flags );
     #endif // __riscv
 #endif
+
+#endif
+
             descriptor = openat( directory, pname, flags, mode );
 #endif
             update_result_errno( cpu, descriptor );
