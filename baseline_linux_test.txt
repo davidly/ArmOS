@@ -1,4 +1,4 @@
-Tue Dec 17 13:47:45 PST 2024
+Tue Dec 17 15:10:01 PST 2024
 c_tests/bin0/tcmp
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -195,8 +195,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -397,8 +407,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -599,8 +619,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -801,8 +831,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -1003,8 +1043,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -1205,8 +1255,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -1407,8 +1467,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -1609,8 +1679,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -1811,8 +1891,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -2013,8 +2103,18 @@ floating point:
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
   lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
+  lt 1 le 1 eq 0 ge 0 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
   lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 1 eq 1 ge 1 gt 0
+  lt 0 le 0 eq 0 ge 1 gt 1
+  lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
   lt 0 le 0 eq 0 ge 1 gt 1
@@ -6310,55 +6410,55 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/clangbin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/clangbin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/clangbin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/clangbin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/clangbinfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 23, min 10, sec 8
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 18, min 10, sec 8
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 15, min 10, sec 8
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 23, min 10, sec 8
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/clangbin0/tm
@@ -12751,7 +12851,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-541 ms for 1 iterations
+545 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12898,7 +12998,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-134 ms for 1 iterations
+135 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -13011,19 +13111,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   13.511208ms
+serial runtime:   13.477109ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   3.655758ms
+serial runtime:   3.757508ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   2.4695ms
+serial runtime:   2.4838ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.041508ms
+serial runtime:   1.998334ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -13286,4 +13386,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Tue Dec 17 13:48:48 PST 2024
+Tue Dec 17 15:11:05 PST 2024
