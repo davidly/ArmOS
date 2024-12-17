@@ -2238,7 +2238,7 @@ void Arm64::trace_state()
             if ( bit23 && bit21 && 0x6e == bits20_10 ) // FCVTZU <V><d>, <V><n>
             {
                 char width = sz ? 'd' : 's';
-                tracer.Trace( "fcvtzu %c%llu, %c%llu\n", sz, d, sz, n );
+                tracer.Trace( "fcvtzu %c%llu, %c%llu\n", width, d, width, n );
             }
             else if ( 7 == bits23_21 && 0xd == bits15_10 ) // CMHI D<d>, D<n>, D<m>
             {
