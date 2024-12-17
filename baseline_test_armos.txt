@@ -1,4 +1,4 @@
-Sun 12/15/2024 14:19:23.91 
+Tue 12/17/2024 10:53:54.84 
 test c_tests\clangbin0\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -636,10 +636,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 19, sec 25
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 19, sec 25
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 19, sec 25
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 19, sec 25
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 53, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 53, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 53, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 53, sec 56
 test c_tests\clangbin0\tm 
 tm has completed with great success
 test c_tests\clangbin0\glob 
@@ -674,9 +674,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\clangbin0\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -692,7 +695,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\clangbin0\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -812,6 +815,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -1814,10 +1857,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 19, sec 32
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 19, sec 32
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 19, sec 32
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 19, sec 32
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 54, sec 5
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 54, sec 5
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 54, sec 5
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 54, sec 5
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -1852,9 +1895,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\bin0\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -1870,7 +1916,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\bin0\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -1990,6 +2036,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -2445,7 +2531,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-381 ms for 1 iterations
+668 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2472,7 +2558,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin0\ba 
 parsing input file tp.bas
-365 ms for 1 iterations
+673 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3134,10 +3220,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 19, sec 42
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 19, sec 42
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 19, sec 42
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 19, sec 42
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 54, sec 18
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 54, sec 18
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 54, sec 18
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 54, sec 18
 test c_tests\clangbin1\tm 
 tm has completed with great success
 test c_tests\clangbin1\glob 
@@ -3172,9 +3258,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\clangbin1\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -3190,7 +3279,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\clangbin1\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -3310,6 +3399,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -4312,10 +4441,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 19, sec 47
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 19, sec 47
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 19, sec 47
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 19, sec 47
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 54, sec 25
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 54, sec 25
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 54, sec 25
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 54, sec 25
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -4350,9 +4479,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\bin1\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -4368,7 +4500,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\bin1\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -4488,6 +4620,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -4848,6 +5020,7 @@ results are valid
 final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
 test c_tests\bin1\sleeptm 
 clk_tck / number of linux ticks per second: 100
+getrusage user time in ms: 984, system time 0
 sleepy time ended with great success
 test c_tests\bin1\tatomic 
 test atomic completed with great success
@@ -4943,7 +5116,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-94 ms for 1 iterations
+148 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -4970,7 +5143,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin1\ba 
 parsing input file tp.bas
-102 ms for 1 iterations
+157 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -5632,10 +5805,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 19, sec 55
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 19, sec 55
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 19, sec 55
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 19, sec 55
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 54, sec 34
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 54, sec 34
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 54, sec 34
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 54, sec 34
 test c_tests\clangbin2\tm 
 tm has completed with great success
 test c_tests\clangbin2\glob 
@@ -5670,9 +5843,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\clangbin2\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -5688,7 +5864,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\clangbin2\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -5808,6 +5984,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -6810,10 +7026,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 20, sec 0
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 20, sec 0
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 20, sec 0
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 20, sec 0
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 54, sec 40
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 54, sec 40
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 54, sec 40
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 54, sec 40
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -6848,9 +7064,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\bin2\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6866,7 +7085,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\bin2\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -6986,6 +7205,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -7441,7 +7700,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-93 ms for 1 iterations
+146 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -7468,7 +7727,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin2\ba 
 parsing input file tp.bas
-90 ms for 1 iterations
+145 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -8130,10 +8389,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 20, sec 8
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 20, sec 8
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 20, sec 8
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 20, sec 8
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 54, sec 48
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 54, sec 48
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 54, sec 48
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 54, sec 48
 test c_tests\clangbin3\tm 
 tm has completed with great success
 test c_tests\clangbin3\glob 
@@ -8168,9 +8427,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\clangbin3\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -8186,7 +8448,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\clangbin3\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -8306,6 +8568,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -9308,10 +9610,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 20, sec 13
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 20, sec 13
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 20, sec 13
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 20, sec 13
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 54, sec 55
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 54, sec 55
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 54, sec 55
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 54, sec 55
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -9346,9 +9648,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\bin3\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -9364,7 +9669,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\bin3\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -9484,6 +9789,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -9939,7 +10284,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-95 ms for 1 iterations
+156 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -9966,7 +10311,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin3\ba 
 parsing input file tp.bas
-111 ms for 1 iterations
+144 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -10628,10 +10973,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbinfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 20, sec 20
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 20, sec 20
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 20, sec 20
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 20, sec 20
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 55, sec 3
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 55, sec 3
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 55, sec 3
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 55, sec 3
 test c_tests\clangbinfast\tm 
 tm has completed with great success
 test c_tests\clangbinfast\glob 
@@ -10666,9 +11011,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\clangbinfast\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -10684,7 +11032,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\clangbinfast\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -10804,6 +11152,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -11806,10 +12194,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 15, hour 14, min 20, sec 26
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 15, hour 17, min 20, sec 26
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 14, min 20, sec 26
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 15, hour 22, min 20, sec 26
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 10, min 55, sec 9
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 13, min 55, sec 9
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 10, min 55, sec 9
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 18, min 55, sec 9
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -11844,9 +12232,12 @@ d1 9.720000 * d2 13.321000 = 129.480120
 double from int128: 1000.000000
 tsimplef completed with great success
 test c_tests\binfast\tf 
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -11862,7 +12253,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 test c_tests\binfast\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -11982,6 +12373,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -12437,7 +12868,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-95 ms for 1 iterations
+156 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -12464,7 +12895,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbinfast\ba 
 parsing input file tp.bas
-89 ms for 1 iterations
+149 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -12494,7 +12925,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   9.6243ms
+serial runtime:   16.7087ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -12567,7 +12998,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   2.8498ms
+serial runtime:   4.2515ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -12640,7 +13071,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   1.9053ms
+serial runtime:   3.0747ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -12713,7 +13144,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   1.6237ms
+serial runtime:   2.4347ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -12788,16 +13219,16 @@ test ntvcm
 moves: 6493
 iterations: 1
 test ntvdm 
-0.0 seconds
+0.1 seconds
 moves: 6493
 iterations: 1
 test rvos 
 starting...
 6493 moves
-125.677010 milliseconds
+203.988007 milliseconds
 test armos 
 starting
-86318 microseconds (-6)
+140461 microseconds (-6)
 1 iterations
 6493 moves
-Sun 12/15/2024 14:20:38.68 
+Tue 12/17/2024 10:55:25.35 
