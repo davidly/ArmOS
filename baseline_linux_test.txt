@@ -1,4 +1,4 @@
-Sun Dec 15 21:33:37 PST 2024
+Tue Dec 17 13:47:45 PST 2024
 c_tests/bin0/tcmp
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -6310,55 +6310,55 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/clangbin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/clangbin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/clangbin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/clangbin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/clangbinfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 16, hour 5, min 33, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 16, hour 0, min 33, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 15, hour 21, min 33, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 16, hour 5, min 33, sec 44
+before TZ is set: tz: '(null)', year: 2024, month 12, day 17, hour 21, min 47, sec 51
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 16, min 47, sec 51
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 13, min 47, sec 51
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 21, min 47, sec 51
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/clangbin0/tm
@@ -6800,9 +6800,12 @@ should tend towards 1.61803398874989484820458683436563811772030
   at 40 iterations: 1.6180339887498949
 done
 c_tests/bin0/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6818,11 +6821,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/clangbin0/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6838,11 +6844,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/bin1/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6858,11 +6867,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/clangbin1/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6878,11 +6890,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/bin2/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6898,11 +6913,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/clangbin2/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6918,11 +6936,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/bin3/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6938,11 +6959,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/clangbin3/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6958,11 +6982,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/binfast/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6978,11 +7005,14 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/clangbinfast/tf
-hello from printf
+float converted by floattoa: -1.23456699
+float converted by floattoa: 1.23456699
+float converted by floattoa: 34.56700000
 float from printf: 45.678000
 division result: 333.333344, square root 18.257420
+float converted with floattoa: -27.108400
 result of 20.2 * -1.342: -27.108400
 result of 20.2 * -1.342 as a double: -27.108400
 pi in radians: 0.523599
@@ -6998,7 +7028,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-stop
+test tf completed with great success
 c_tests/bin0/ttt
 starting...
 done
@@ -7501,6 +7531,46 @@ matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
 min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
+min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
 matrix int8_t 2: 50
@@ -7902,6 +7972,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -8305,6 +8415,46 @@ matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
 min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
+min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
 matrix int8_t 2: 50
@@ -8706,6 +8856,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -9109,6 +9299,46 @@ matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
 min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
+min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
 matrix int8_t 2: 50
@@ -9510,6 +9740,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -9913,6 +10183,46 @@ matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
 min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
+min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
 matrix int8_t 2: 50
@@ -10314,6 +10624,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -10717,6 +11067,46 @@ matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
 min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
+min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
 matrix int8_t 2: 50
@@ -11118,6 +11508,46 @@ min 229.000000 max 6631.000000
 matrix double 19: 376846.000000
 min 251.000000 max 7680.000000
 matrix double 20: 465880.000000
+min 4.000000 max 4.000000
+matrix ldouble_t 1: 4.000000
+min 8.000000 max 18.000000
+matrix ldouble_t 2: 50.000000
+min 13.000000 max 47.000000
+matrix ldouble_t 3: 228.000000
+min 19.000000 max 96.000000
+matrix ldouble_t 4: 706.000000
+min 26.000000 max 170.000000
+matrix ldouble_t 5: 1675.000000
+min 34.000000 max 274.000000
+matrix ldouble_t 6: 3501.000000
+min 43.000000 max 413.000000
+matrix ldouble_t 7: 6440.000000
+min 53.000000 max 592.000000
+matrix ldouble_t 8: 11060.000000
+min 64.000000 max 816.000000
+matrix ldouble_t 9: 17793.000000
+min 76.000000 max 1090.000000
+matrix ldouble_t 10: 27355.000000
+min 89.000000 max 1419.000000
+matrix ldouble_t 11: 40084.000000
+min 103.000000 max 1808.000000
+matrix ldouble_t 12: 57474.000000
+min 118.000000 max 2262.000000
+matrix ldouble_t 13: 79547.000000
+min 134.000000 max 2786.000000
+matrix ldouble_t 14: 107639.000000
+min 151.000000 max 3385.000000
+matrix ldouble_t 15: 142770.000000
+min 169.000000 max 4064.000000
+matrix ldouble_t 16: 186432.000000
+min 188.000000 max 4828.000000
+matrix ldouble_t 17: 238612.000000
+min 208.000000 max 5682.000000
+matrix ldouble_t 18: 302274.000000
+min 229.000000 max 6631.000000
+matrix ldouble_t 19: 376846.000000
+min 251.000000 max 7680.000000
+matrix ldouble_t 20: 465880.000000
 min 4.000000 max 4.000000
 matrix int8_t 1: 4
 min 8.000000 max 18.000000
@@ -12321,7 +12751,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-657 ms for 1 iterations
+541 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12370,7 +12800,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-148 ms for 1 iterations
+133 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12419,7 +12849,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-151 ms for 1 iterations
+129 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12468,7 +12898,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-153 ms for 1 iterations
+134 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12517,7 +12947,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-157 ms for 1 iterations
+134 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12581,19 +13011,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   16.268912ms
+serial runtime:   13.511208ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   4.128668ms
+serial runtime:   3.655758ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   2.997042ms
+serial runtime:   2.4695ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.337868ms
+serial runtime:   2.041508ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -12856,4 +13286,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Sun Dec 15 21:34:40 PST 2024
+Tue Dec 17 13:48:48 PST 2024
