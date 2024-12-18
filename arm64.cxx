@@ -2038,7 +2038,7 @@ void Arm64::trace_state()
                               // USHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FNEG <Vd>.<T>, <Vn>.<T>
                               // CMHI <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>  ;   FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                               // UMAXV <V><d>, <Vn>.<T> ; UMINV <V><d>, <Vn>.<T>    ;    UMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                              // FMINNMV S<d>, <Vn>.4S  ; FMAXNMV S<d>, <Vn>.4S
+                              // FMINNMV S<d>, <Vn>.4S  ; FMAXNMV S<d>, <Vn>.4S     ;    MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
         {
             uint64_t Q = opbits( 30, 1 );
             uint64_t m = opbits( 16, 5 );
@@ -2057,7 +2057,9 @@ void Arm64::trace_state()
             uint64_t bits16_10 = opbits( 10, 7 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( 0x6e == hi8 && ( 5 == bits23_21 || 1 == bits23_21 ) && 8 == bits20_17 && 0x32 == bits16_10 ) // FMINNMV S<d>, <Vn>.4S    ;    FMAXNMV S<d>, <Vn>.4S
+            if ( bit21 && 0x25 == bits15_10 ) // MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                tracer.Trace( "mls v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
+            else if ( 0x6e == hi8 && ( 5 == bits23_21 || 1 == bits23_21 ) && 8 == bits20_17 && 0x32 == bits16_10 ) // FMINNMV S<d>, <Vn>.4S    ;    FMAXNMV S<d>, <Vn>.4S
                 tracer.Trace( "%s s%llu, v%llu.4s\n", 5 == bits23_21 ? "fminnmv" : "fmaxnmv", d, n );
             else if ( !bit23 && bit21 && 0x3f == bits15_10 ) // FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
@@ -5269,7 +5271,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                   // USHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FNEG <Vd>.<T>, <Vn>.<T>
                                   // CMHI <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>  ;   FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                                   // UMAXV <V><d>, <Vn>.<T> ; UMINV <V><d>, <Vn>.<T>    ;    UMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                                  // FMINNMV S<d>, <Vn>.4S  ; FMAXNMV S<d>, <Vn>.4S
+                                  // FMINNMV S<d>, <Vn>.4S  ; FMAXNMV S<d>, <Vn>.4S     ;    MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t Q = opbits( 30, 1 );
                 uint64_t m = opbits( 16, 5 );
@@ -5293,7 +5295,23 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t bits15_10 = opbits( 10, 6 );
                 //tracer.Trace( "elements: %llu, size %llu, esize %llu, datasize %llu, ebytes %llu, opcode %llu\n", elements, size, esize, datasize, ebytes, opcode );
 
-                if ( 0x6e == hi8 && ( 5 == bits23_21 || 1 == bits23_21 ) && 8 == bits20_17 && 0x32 == bits16_10 ) // FMINNMV S<d>, <Vn>.4S    ;    FMAXNMV S<d>, <Vn>.4S
+                if ( bit21 && 0x25 == bits15_10 ) // MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                {
+                    for ( uint64_t e = 0; e < elements; e++ )
+                    {
+                        if ( 1 == ebytes )
+                            vregs[ d ].ui8[ e ] -= ( vregs[ n ].ui8[ e ] * vregs[ m ].ui8[ e ] );
+                        else if ( 2 == ebytes )
+                            vregs[ d ].ui16[ e ] -= ( vregs[ n ].ui16[ e ] * vregs[ m ].ui16[ e ] );
+                        else if ( 4 == ebytes )
+                            vregs[ d ].ui32[ e ] -= ( vregs[ n ].ui32[ e ] * vregs[ m ].ui32[ e ] );
+                        else if ( 8 == ebytes )
+                            vregs[ d ].ui64[ e ] -= ( vregs[ n ].ui64[ e ] * vregs[ m ].ui64[ e ] );
+                        else
+                            unhandled();
+                    }
+                }
+                else if ( 0x6e == hi8 && ( 5 == bits23_21 || 1 == bits23_21 ) && 8 == bits20_17 && 0x32 == bits16_10 ) // FMINNMV S<d>, <Vn>.4S    ;    FMAXNMV S<d>, <Vn>.4S
                 {
                     esize = 32;
                     ebytes = 4;

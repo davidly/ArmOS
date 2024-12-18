@@ -1,4 +1,4 @@
-Tue 12/17/2024 12:31:28.32 
+Wed 12/18/2024  8:06:02.04 
 test c_tests\clangbin0\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -569,28 +569,32 @@ mmap test completed with great success
 test c_tests\clangbin0\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\clangbin0\fileops 
 current offset: 0
@@ -646,10 +650,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 31, sec 30
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 31, sec 30
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 31, sec 30
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 31, sec 30
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 6, sec 4
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 6, sec 4
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 6, sec 4
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 6, sec 4
 test c_tests\clangbin0\tm 
 tm has completed with great success
 test c_tests\clangbin0\glob 
@@ -1800,28 +1804,32 @@ mmap test completed with great success
 test c_tests\bin0\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\bin0\fileops 
 current offset: 0
@@ -1877,10 +1885,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 31, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 31, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 31, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 31, sec 39
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 6, sec 13
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 6, sec 13
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 6, sec 13
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 6, sec 13
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -2551,7 +2559,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-679 ms for 1 iterations
+596 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2578,7 +2586,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin0\ba 
 parsing input file tp.bas
-677 ms for 1 iterations
+625 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3173,28 +3181,32 @@ mmap test completed with great success
 test c_tests\clangbin1\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\clangbin1\fileops 
 current offset: 0
@@ -3250,10 +3262,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 31, sec 52
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 31, sec 52
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 31, sec 52
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 31, sec 52
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 6, sec 25
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 6, sec 25
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 6, sec 25
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 6, sec 25
 test c_tests\clangbin1\tm 
 tm has completed with great success
 test c_tests\clangbin1\glob 
@@ -4404,28 +4416,32 @@ mmap test completed with great success
 test c_tests\bin1\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\bin1\fileops 
 current offset: 0
@@ -4481,10 +4497,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 31, sec 59
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 31, sec 59
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 31, sec 59
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 31, sec 59
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 6, sec 32
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 6, sec 32
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 6, sec 32
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 6, sec 32
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -5155,7 +5171,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-150 ms for 1 iterations
+145 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -5182,7 +5198,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin1\ba 
 parsing input file tp.bas
-155 ms for 1 iterations
+149 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -5777,28 +5793,32 @@ mmap test completed with great success
 test c_tests\clangbin2\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\clangbin2\fileops 
 current offset: 0
@@ -5854,10 +5874,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 32, sec 8
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 32, sec 8
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 32, sec 8
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 32, sec 8
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 6, sec 41
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 6, sec 41
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 6, sec 41
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 6, sec 41
 test c_tests\clangbin2\tm 
 tm has completed with great success
 test c_tests\clangbin2\glob 
@@ -7008,28 +7028,32 @@ mmap test completed with great success
 test c_tests\bin2\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\bin2\fileops 
 current offset: 0
@@ -7085,10 +7109,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 32, sec 14
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 32, sec 14
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 32, sec 14
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 32, sec 14
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 6, sec 47
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 6, sec 47
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 6, sec 47
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 6, sec 47
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -7786,7 +7810,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin2\ba 
 parsing input file tp.bas
-154 ms for 1 iterations
+144 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -8381,28 +8405,32 @@ mmap test completed with great success
 test c_tests\clangbin3\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\clangbin3\fileops 
 current offset: 0
@@ -8458,10 +8486,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 32, sec 22
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 32, sec 22
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 32, sec 22
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 32, sec 22
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 6, sec 55
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 6, sec 55
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 6, sec 55
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 6, sec 55
 test c_tests\clangbin3\tm 
 tm has completed with great success
 test c_tests\clangbin3\glob 
@@ -9612,28 +9640,32 @@ mmap test completed with great success
 test c_tests\bin3\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\bin3\fileops 
 current offset: 0
@@ -9689,10 +9721,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 32, sec 29
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 32, sec 29
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 32, sec 29
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 32, sec 29
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 7, sec 2
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 7, sec 2
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 7, sec 2
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 7, sec 2
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -10268,6 +10300,7 @@ results are valid
 final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
 test c_tests\bin3\sleeptm 
 clk_tck / number of linux ticks per second: 100
+getrusage user time in ms: 1031, system time 0
 sleepy time ended with great success
 test c_tests\bin3\tatomic 
 test atomic completed with great success
@@ -10363,7 +10396,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-155 ms for 1 iterations
+150 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -10390,7 +10423,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin3\ba 
 parsing input file tp.bas
-148 ms for 1 iterations
+144 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -10985,28 +11018,32 @@ mmap test completed with great success
 test c_tests\clangbinfast\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\clangbinfast\fileops 
 current offset: 0
@@ -11062,10 +11099,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbinfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 32, sec 37
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 32, sec 37
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 32, sec 37
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 32, sec 37
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 7, sec 10
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 7, sec 10
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 7, sec 10
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 7, sec 10
 test c_tests\clangbinfast\tm 
 tm has completed with great success
 test c_tests\clangbinfast\glob 
@@ -12216,28 +12253,32 @@ mmap test completed with great success
 test c_tests\binfast\tstr 
 testing strlen
 testing strchr and strrchr
+testing strstr
 testing memcpy and memcmp
 testing printf
-59 (59): lmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-31 (31): tuvwxyzabcdefghijklmnopqrstuvwx
-56 (56): tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw
-27 (27): bcdefghijklmnopqrstuvwxyzab
-22 (22): mnopqrstuvwxyzabcdefgh
-68 (68): cdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
-66 (66): ghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst
-63 (63): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-61 (61): hijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop
-38 (38): qrstuvwxyzabcdefghijklmnopqrstuvwxyzab
- 4 ( 4): rstu
-19 (19): wxyzabcdefghijklmno
-68 (68): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg
- 1 ( 1): t
-13 (13): mnopqrstuvwxy
-34 (34): zabcdefghijklmnopqrstuvwxyzabcdefg
-69 (69): opqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcde
-17 (17): zabcdefghijklmnop
-63 (63): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
-11 (11): uvwxyzabcde
+34 (34): stuvwxyzabcdefghijklmnopqrstuvwxyz
+13 (13): efghijklmnopq
+ 3 ( 3): hij
+50 (50): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklm
+23 (23): yzabcdefghijklmnopqrstu
+16 (16): yzabcdefghijklmn
+21 (21): efghijklmnopqrstuvwxy
+17 (17): lmnopqrstuvwxyzab
+56 (56): zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabc
+24 (24): xyzabcdefghijklmnopqrstu
+55 (55): xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+58 (58): pqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu
+18 (18): nopqrstuvwxyzabcde
+22 (22): tuvwxyzabcdefghijklmno
+49 (49): stuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno
+42 (42): defghijklmnopqrstuvwxyzabcdefghijklmnopqrs
+62 (62): rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): xyzabcdefgh
+45 (45): ijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza
+11 (11): rstuvwxyzab
+testing wcslen
+testing wcschr and wcsrchr
+testing wcsstr xxx
 tstr completed with great success
 test c_tests\binfast\fileops 
 current offset: 0
@@ -12293,10 +12334,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 17, hour 12, min 32, sec 43
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 17, hour 15, min 32, sec 43
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 17, hour 12, min 32, sec 43
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 17, hour 20, min 32, sec 43
+before TZ is set: tz: 'PacificStandardTime+8', year: 2024, month 12, day 18, hour 8, min 7, sec 16
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 11, min 7, sec 16
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 8, min 7, sec 16
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 16, min 7, sec 16
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -12967,7 +13008,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-154 ms for 1 iterations
+150 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -12994,7 +13035,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbinfast\ba 
 parsing input file tp.bas
-152 ms for 1 iterations
+142 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -13024,7 +13065,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   16.8171ms
+serial runtime:   15.4806ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -13097,7 +13138,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.2667ms
+serial runtime:   3.9335ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -13170,7 +13211,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.9605ms
+serial runtime:   2.7725ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -13243,7 +13284,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.4107ms
+serial runtime:   2.2243ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -13324,10 +13365,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-204.338013 milliseconds
+186.633011 milliseconds
 test armos 
 starting
-141863 microseconds (-6)
+125391 microseconds (-6)
 1 iterations
 6493 moves
-Tue 12/17/2024 12:32:59.65 
+Wed 12/18/2024  8:07:31.75 
