@@ -411,36 +411,16 @@ Arm64::ElementComparisonResult Arm64::compare_vector_elements( uint8_t * pl, uin
 const char * get_ld1_vector_T( uint64_t size, uint64_t Q )
 {
     if ( 0 == size )
-    {
-        if ( 0 == Q )
-            return "8b";
-        else
-            return "16b";
-    }
+        return Q ? "16b" : "8b";
 
     if ( 1 == size )
-    {
-        if ( 0 == Q )
-            return "4h";
-        else
-            return "8h";
-    }
+        return Q ? "8h" : "4h";
 
     if ( 2 == size )
-    {
-        if ( 0 == Q )
-            return "2s";
-        else
-            return "4s";
-    }
+        return Q ? "4s" : "2s";
 
     if ( 3 == size )
-    {
-        if ( 0 == Q )
-            return "1d";
-        else
-            return "2d";
-    }
+        return Q ? "2d" : "1d";
 
     return "UNKNOWN";
 } //get_ld1_vector_T
@@ -448,36 +428,16 @@ const char * get_ld1_vector_T( uint64_t size, uint64_t Q )
 const char * get_vector_T( uint64_t imm5, uint64_t Q )
 {
     if ( 1 == ( 1 & imm5 ) )
-    {
-        if ( 0 == Q )
-            return "8b";
-        else
-            return "16b";
-    }
+        return Q ? "16b" : "8b";
 
     if ( 2 == ( 3 & imm5 ) )
-    {
-        if ( 0 == Q )
-            return "4h";
-        else
-            return "8h";
-    }
+        return Q ? "8h" : "4h";
 
     if ( 4 == ( 7 & imm5 ) )
-    {
-        if ( 0 == Q )
-            return "2s";
-        else
-            return "4s";
-    }
+        return Q ? "4s" : "2s";
 
     if ( 8 == ( 0xf & imm5 ) )
-    {
-        if ( 0 == Q )
-            return "RESERVED";
-        else
-            return "2d";
-    }
+        return Q ? "2d" : "RESERVED";
 
     return "RESERVED";
 } //get_vector_T
@@ -485,36 +445,16 @@ const char * get_vector_T( uint64_t imm5, uint64_t Q )
 const char * get_sshr_vector_T( uint64_t immh, uint64_t Q )
 {
     if ( 1 == immh )
-    {
-        if ( 0 == Q )
-            return "8b";
-        else
-            return "16b";
-    }
+        return Q ? "16b" : "8b";
 
     if ( 2 == ( 0xe & immh ) )
-    {
-        if ( 0 == Q )
-            return "4h";
-        else
-            return "8h";
-    }
+        return Q ? "8h" : "4h";
 
     if ( 4 == ( 0xc & immh ) )
-    {
-        if ( 0 == Q )
-            return "2s";
-        else
-            return "4s";
-    }
+        return Q ? "4s" : "2s";
 
     if ( 8 == ( 8 & immh ) )
-    {
-        if ( 0 == Q )
-            return "RESERVED";
-        else
-            return "2d";
-    }
+        return Q ? "2d" : "RESERVED";
 
     return "RESERVED";
 } //get_sshr_vector_T
@@ -700,6 +640,7 @@ uint64_t decode_logical_immediate( uint64_t val, uint64_t bit_width )
     uint64_t pattern = ( 1ull << ( S + 1 ) ) - 1;
     pattern = ror_n( pattern, size, R );
 
+    assert( 32 == bit_width || 64 == bit_width );
     while ( size != bit_width )
     {
         pattern |= ( pattern << size );
@@ -4410,12 +4351,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else
                     unhandled();
 
-                if ( 31 != d )
-                {
-                    if ( !xregs )
-                        result &= 0xffffffff;
-                    regs[ d ] = result;
-                }
+                if ( 31 == d )
+                    break;
+                if ( !xregs )
+                    result &= 0xffffffff;
+                regs[ d ] = result;
                 break;
             }
             case 0x14: case 0x15: case 0x16: case 0x17: // b label
@@ -4565,13 +4505,12 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t t = opbits( 0, 5 );
                 bool xregs = ( 0 != opbits( 30, 1 ) );
                 uint64_t address = pc + ( imm19 << 2 );
-                if ( 31 != t )
-                {
-                    if ( xregs )
-                        regs[ t ] = getui64( address );
-                    else
-                        regs[ t ] = getui32( address );
-                }
+                if ( 31 == t )
+                    break;
+                if ( xregs )
+                    regs[ t ] = getui64( address );
+                else
+                    regs[ t ] = getui32( address );
                 break;
             }
             case 0x3a: // CCMN <Wn>, #<imm>, #<nzcv>, <cond>  ;    CCMN <Wn>, <Wm>, #<nzcv>, <cond>       ;    ADCS <Wd>, <Wn>, <Wm>
@@ -6926,7 +6865,6 @@ uint64_t Arm64::run( uint64_t max_cycles )
                                 result = double_to_fixed_uint32( src, fracbits, FPRounding_ZERO );
                         }
                     }
-
                     regs[ d ] = result;
                 }
                 else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( bit21 ) ) // fmov scalar immediate
@@ -7304,13 +7242,13 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( 0x1f != s )
                         unhandled();
 
-                    if ( 31 != t )
-                    {
-                        if ( 0xc8 == hi8 )
-                            regs[ t ] = getui64( regs[ n ] );
-                        else
-                            regs[ t ] = getui32( regs[ n ] );
-                    }
+                    if ( 31 == t )
+                        break;
+
+                    if ( 0xc8 == hi8 )
+                        regs[ t ] = getui64( regs[ n ] );
+                    else
+                        regs[ t ] = getui32( regs[ n ] );
                 }
                 break;
             }
@@ -7563,53 +7501,39 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 }
                 else if ( 4 == opc || 6 == opc ) // LDRSW <Xt>, [<Xn|SP>], #<simm>    ;    LDRSW <Xt>, [<Xn|SP>, #<simm>]!
                 {
-                    uint64_t bits11_10 = opbits( 10, 2 );
-                    if ( 0 == bits11_10 ) // LDURSB <Wt>, [<Xn|SP>{, #<simm>}]    ;    LDURSB <Xt>, [<Xn|SP>{, #<simm>}]
+                    if ( 31 == t )
+                        break;
+                    int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
+                    uint64_t option = opbits( 10, 2 );
+                    uint64_t address = 0;
+
+                    if ( 0 == option ) // LDURSB <Wt>, [<Xn|SP>{, #<simm>}]    ;    LDURSB <Xt>, [<Xn|SP>{, #<simm>}]
+                        address = regs[ n ] + imm9;
+                    else if ( 1 == option )
+                        address = regs[ n ];
+                    else if ( 3 == option )
                     {
-                        int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
-                        if ( 31 != t )
-                        {
-                            if ( 0x38 == hi8 ) // ldursb
-                                regs[ t ] = sign_extend( getui8( regs[ n ] + imm9 ), 7 );
-                            else if ( 0x78 == hi8 ) // ldursh
-                                    regs[ t ] = sign_extend( getui16( regs[ n ] + imm9 ), 15 );
-                            else if ( 0xb8 == hi8 ) // ldursw
-                                regs[ t ] = sign_extend( getui32( regs[ n ] + imm9 ), 31 );
-                            else
-                                unhandled();
-                            bool isx = ( 0 == opbits( 22, 1 ) );
-                            if ( !isx )
-                                regs[ t ] &= 0xffffffff;
-                        }
+                        regs[ n ] += imm9;
+                        address = regs[ n ];
                     }
                     else
-                    {
-                        int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
-                        uint64_t option = opbits( 10, 2 );
-                        uint64_t address = 0;
+                        unhandled();
     
-                        if ( 1 == option )
-                            address = regs[ n ];
-                        else if ( 3 == option )
-                        {
-                            regs[ n ] += imm9;
-                            address = regs[ n ];
-                        }
-                        else
-                            unhandled();
+                    if ( 0x38 == hi8 )
+                        regs[ t ] = sign_extend( getui8( address ), 7 );
+                    else if ( 0x78 == hi8 )
+                        regs[ t ] = sign_extend( getui16( address ), 15 );
+                    else if ( 0xb8 == hi8 )
+                        regs[ t ] = sign_extend( getui32( address ), 31 );
+                    else
+                        unhandled();
     
-                        if ( 0x38 == hi8 )
-                            regs[ t ] = sign_extend( getui8( address ), 7 );
-                        else if ( 0x78 == hi8 )
-                            regs[ t ] = sign_extend( getui16( address ), 15 );
-                        else if ( 0xb8 == hi8 )
-                            regs[ t ] = sign_extend( getui32( address ), 31 );
-                        else
-                            unhandled();
-    
-                        if ( 1 == option ) // post index
-                            regs[ n ] += imm9;
-                    }
+                    bool isx = ( 0 == opbits( 22, 1 ) );
+                    if ( !isx )
+                        regs[ t ] &= 0xffffffff;
+
+                    if ( 1 == option ) // post index
+                        regs[ n ] += imm9;
                 }
                 else if ( 5 == opc  || 7 == opc ) // hi8 = 0x78
                                                   //     (opc == 7)                  LDRSH <Wt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
@@ -7662,13 +7586,10 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 break;
             }
             case 0x39: // B
-            case 0x79: // H                              ;    LDRSH <Wt>, [<Xn|SP>{, #<pimm>}]
+            case 0x79: // H                              ;    LDRSH <Wt>, [<Xn|SP>{, #<pimm>}]    ;     STR/LDR <Xt>, [<Xn|SP>{, #<pimm>}]
             case 0xb9: // W
             case 0xf9: // X ldr + str unsigned offset    ;    LDRSW <Xt>, [<Xn|SP>{, #<pimm>}]
             {
-                // STR <Xt>, [<Xn|SP>{, #<pimm>}]
-                // LDR <Xt>, [<Xn|SP>{, #<pimm>}]
-    
                 uint64_t opc = opbits( 22, 2 );
                 uint64_t imm12 = opbits( 10, 12 );
                 uint64_t lsl = opbits( 30, 2 );
@@ -7737,7 +7658,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
     
                 break;
             }
-            case 0xff: // call this maximum out so the compiler doesn't do a bounds check at runtime on the switch jump table
+            case 0xff: // call this maximum out so the compiler doesn't do a bounds check at runtime for the switch jump table
             default:
                 unhandled();
         }
