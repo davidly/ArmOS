@@ -1,4 +1,4 @@
-Wed Dec 18 09:12:58 PST 2024
+Fri Dec 20 09:34:12 PST 2024
 c_tests/bin0/tcmp
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -6450,55 +6450,55 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/clangbin0/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/clangbin1/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/clangbin2/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/clangbin3/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/clangbinfast/ttime
-before TZ is set: tz: '(null)', year: 2024, month 12, day 18, hour 17, min 13, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 18, hour 12, min 13, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 18, hour 9, min 13, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 18, hour 17, min 13, sec 6
+before TZ is set: tz: '(null)', year: 2024, month 12, day 20, hour 17, min 34, sec 20
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2024, month 12, day 20, hour 12, min 34, sec 20
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2024, month 12, day 20, hour 9, min 34, sec 20
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2024, month 12, day 20, hour 17, min 34, sec 20
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/clangbin0/tm
@@ -12449,6 +12449,26 @@ c_tests/binfast/lenum
 linux file system enumeration completed with great success
 c_tests/clangbinfast/lenum
 linux file system enumeration completed with great success
+c_tests/bin0/tregex
+regex test completed with great success
+c_tests/clangbin0/tregex
+regex test completed with great success
+c_tests/bin1/tregex
+regex test completed with great success
+c_tests/clangbin1/tregex
+regex test completed with great success
+c_tests/bin2/tregex
+regex test completed with great success
+c_tests/clangbin2/tregex
+regex test completed with great success
+c_tests/bin3/tregex
+regex test completed with great success
+c_tests/clangbin3/tregex
+regex test completed with great success
+c_tests/binfast/tregex
+regex test completed with great success
+c_tests/clangbinfast/tregex
+regex test completed with great success
 c_tests/bin0/an david lee
 a delve id
 a delved i
@@ -12891,7 +12911,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-538 ms for 1 iterations
+583 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12940,7 +12960,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-133 ms for 1 iterations
+144 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12989,7 +13009,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-130 ms for 1 iterations
+144 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -13038,7 +13058,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-135 ms for 1 iterations
+148 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -13087,7 +13107,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-135 ms for 1 iterations
+147 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -13151,19 +13171,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   13.781531ms
+serial runtime:   15.069494ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   3.683166ms
+serial runtime:   4.027799ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   2.629366ms
+serial runtime:   2.712999ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.063324ms
+serial runtime:   2.1758ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -13426,4 +13446,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Wed Dec 18 09:14:02 PST 2024
+Fri Dec 20 09:35:19 PST 2024
