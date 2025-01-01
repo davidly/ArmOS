@@ -1999,10 +1999,7 @@ void Arm64::trace_state()
             uint64_t bits15_10 = opbits( 10, 6 );
 
             if ( bit21 && 0 == bits20_17 && 0x2e == bits16_10 ) // NEG <Vd>.<T>, <Vn>.<T>
-            {
-                const char * pT = get_ld1_vector_T( size, Q );
                 tracer.Trace( "neg v%llu.%s, v%llu.%s\n", d, pT, n, pT );
-            }
             else if ( bit21 && 0x25 == bits15_10 ) // MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 tracer.Trace( "mls v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             else if ( 0x6e == hi8 && ( 5 == bits23_21 || 1 == bits23_21 ) && 8 == bits20_17 && 0x32 == bits16_10 ) // FMINNMV S<d>, <Vn>.4S    ;    FMAXNMV S<d>, <Vn>.4S
