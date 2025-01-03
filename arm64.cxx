@@ -5327,9 +5327,10 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     // copy lowest from N starting with index then as much of M as fit into destination
                     vec16_t target = { 0 };
                     uint64_t targeto = 0;
-                    for ( uint64_t e = imm4; e < 16; e++ )
+                    uint64_t count = Q ? 16 : 8;
+                    for ( uint64_t e = imm4; e < count; e++ )
                         target.ui8[ targeto++ ] = vregs[ n ].ui8[ e ];
-                    for ( uint64_t e = 0; targeto < 16; e++ )
+                    for ( uint64_t e = 0; targeto < count; e++ )
                         target.ui8[ targeto++ ] = vregs[ m ].ui8[ e ];
                     vregs[ d ] = target;
                 }
