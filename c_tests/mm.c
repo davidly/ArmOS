@@ -79,6 +79,18 @@ typedef long double ldouble_t;
         /*print_array_##ftype##dim( FM_##ftype##dim );*/ \
         return sum; \
     } \
+    _perhaps_inline ftype dotsum_nonsense_##ftype##dim() /* find fmods */ \
+    { \
+        ftype dotsum = 0; \
+        ftype negsum = 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+            { \
+                dotsum += ( A_##ftype##dim[ i ][ j ] * B_##ftype##dim[ i ][ j ] ); \
+                negsum += ( -A_##ftype##dim[ i ][ j ] * B_##ftype##dim[ i ][ j ] ); \
+            } \
+        return dotsum; \
+    } \
     _perhaps_inline void div_nonsense_##ftype##dim() /* force more instructions to be generated with this nonsense */ \
     { \
         for ( int i = 0; i < dim; i++ ) \
@@ -130,10 +142,11 @@ typedef long double ldouble_t;
         ftype sum = sum_##ftype##dim(); \
         div_nonsense_##ftype##dim(); \
         ftype fmodsum = fmod_nonsense_##ftype##dim(); \
+        ftype dotsum = dotsum_nonsense_##ftype##dim(); \
         ftype nonsense_sum = sum_##ftype##dim(); \
         if ( sum != nonsense_sum ) \
             printf( "nonsense: %lf\n", (double) nonsense_sum ); \
-        printf( "min, %lf max %lf, fmodsum %.3lf\n", (double) min_##ftype##dim(), (double) max_##ftype##dim(), (double) fmodsum ); \
+        printf( "min, %lf max %lf, fmodsum %.3lf, dotsum %.1lf\n", (double) min_##ftype##dim(), (double) max_##ftype##dim(), (double) fmodsum, (double) dotsum ); \
         return sum; \
     }
 
