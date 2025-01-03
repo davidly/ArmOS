@@ -669,7 +669,7 @@ char get_byte_len( uint64_t l )
     if ( 2 == l )
         return 'h';
     if ( 4 == l )
-        return 'w';
+        return 's';
     if ( 8 == l )
         return 'd';
     if ( 16 == l )
@@ -1445,10 +1445,11 @@ void Arm64::trace_state()
         }
         case 0x3a: // CCMN <Wn>, #<imm>, #<nzcv>, <cond>  ;    CCMN <Wn>, <Wm>, #<nzcv>, <cond>       ;    ADCS <Wd>, <Wn>, <Wm>
         case 0xba: // CCMN <Wn>, <Wm>, #<nzcv>, <cond>    ;    CCMN <Xn>, <Xm>, #<nzcv>, <cond>       ;    ADCS <Xd>, <Xn>, <Xm>
-        case 0x7a: // CCMP <Wn>, <Wm>, #<nzcv>, <cond>    ;    CCMP <Wn>, #<imm>, #<nzcv>, <cond>
-        case 0xfa: // CCMP <Xn>, <Xm>, #<nzcv>, <cond>    ;    CCMP <Xn>, #<imm>, #<nzcv>, <cond>
+        case 0x7a: // CCMP <Wn>, <Wm>, #<nzcv>, <cond>    ;    CCMP <Wn>, #<imm>, #<nzcv>, <cond>     ;    SBCS <Wd>, <Wn>, <Wm>
+        case 0xfa: // CCMP <Xn>, <Xm>, #<nzcv>, <cond>    ;    CCMP <Xn>, #<imm>, #<nzcv>, <cond>     ;    SBCS <Xd>, <Xn>, <Xm>
         {
             uint64_t bits23_21 = opbits( 21, 3 );
+            uint64_t bits15_10 = opbits( 10, 6 );
             uint64_t n = opbits( 5, 5 );
             bool xregs = ( 0 != ( 0x80 & hi8 ) );
 
@@ -1476,7 +1477,13 @@ void Arm64::trace_state()
                 else
                     unhandled();
             }
-            else if ( ( 0x3a == hi8 || 0xba == hi8 ) && 0 == bits23_21 ) // ADCS
+            else if ( ( 0xfa == hi8 || 0x7a == hi8 ) && 0 == bits23_21 && 0 == bits15_10 ) // SBCS <Xd>, <Xn>, <Xm>
+            {
+                uint64_t d = opbits( 0, 5 );
+                uint64_t m = opbits( 16, 5 );
+                tracer.Trace( "sbcs %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+            }
+            else if ( ( 0x3a == hi8 || 0xba == hi8 ) && 0 == bits23_21 && 0 == bits15_10 ) // ADCS <Xd>, <Xn>, <Xm>
             {
                 uint64_t d = opbits( 0, 5 );
                 uint64_t m = opbits( 16, 5 );
@@ -4576,10 +4583,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
             }
             case 0x3a: // CCMN <Wn>, #<imm>, #<nzcv>, <cond>  ;    CCMN <Wn>, <Wm>, #<nzcv>, <cond>       ;    ADCS <Wd>, <Wn>, <Wm>
             case 0xba: // CCMN <Wn>, <Wm>, #<nzcv>, <cond>    ;    CCMN <Xn>, <Xm>, #<nzcv>, <cond>       ;    ADCS <Xd>, <Xn>, <Xm>
-            case 0x7a: // CCMP <Wn>, <Wm>, #<nzcv>, <cond>    ;    CCMP <Wn>, #<imm>, #<nzcv>, <cond>
-            case 0xfa: // CCMP <Xn>, <Xm>, #<nzcv>, <cond>    ;    CCMP <Xn>, #<imm>, #<nzcv>, <cond>
+            case 0x7a: // CCMP <Wn>, <Wm>, #<nzcv>, <cond>    ;    CCMP <Wn>, #<imm>, #<nzcv>, <cond>     ;    SBCS <Wd>, <Wn>, <Wm>
+            case 0xfa: // CCMP <Xn>, <Xm>, #<nzcv>, <cond>    ;    CCMP <Xn>, #<imm>, #<nzcv>, <cond>     ;    SBCS <Xd>, <Xn>, <Xm>
             {
                 uint64_t bits23_21 = opbits( 21, 3 );
+                uint64_t bits15_10 = opbits( 10, 6 );
                 uint64_t n = opbits( 5, 5 );
                 bool xregs = ( 0 != ( 0x80 & hi8 ) );
     
@@ -4622,7 +4630,22 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else
                         set_flags_from_nzcv( nzcv );
                 }
-                else if ( ( 0x3a == hi8 || 0xba == hi8 ) && 0 == bits23_21 ) // ADCS
+                else if ( ( 0xfa == hi8 || 0x7a == hi8 ) && 0 == bits23_21 && 0 == bits15_10 ) // SBCS <Xd>, <Xn>, <Xm>
+                {
+                    uint64_t d = opbits( 0, 5 );
+                    uint64_t m = opbits( 16, 5 );
+                    uint64_t nval = val_reg_or_zr( n );
+                    uint64_t mval = val_reg_or_zr( m );
+
+                    uint64_t result = 0;
+                    if ( xregs )
+                        result = add_with_carry64( nval, ~mval, fC, true );
+                    else
+                        result = add_with_carry32( 0xffffffff & nval, 0xffffffff & ( ~ mval ), fC, true );
+                    if ( 31 != d )
+                        regs[ d ] = result;
+                }
+                else if ( ( 0x3a == hi8 || 0xba == hi8 ) && 0 == bits23_21 && 0 == bits15_10 ) // ADCS <Xd>, <Xn>, <Xm>
                 {
                     uint64_t d = opbits( 0, 5 );
                     uint64_t m = opbits( 16, 5 );
@@ -4637,6 +4660,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     if ( 31 != d )
                         regs[ d ] = result;
                 }
+                else
+                    unhandled();
                 break;
             }
             case 0x71: // SUBS <Wd>, <Wn|WSP>, #<imm>{, <shift>}   ;   CMP <Wn|WSP>, #<imm>{, <shift>}
@@ -5558,9 +5583,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     for ( uint64_t e = 0; e < elements / 2; e++ )
                     {
                         if ( 8 == ebytes )
-                            target.d[ e ] = vregs[ m ].d[ 2 * e ] + vregs[ m ].d[ 2 * e + 1 ];
+                            target.d[ e ] = vregs[ n ].d[ 2 * e ] + vregs[ n ].d[ 2 * e + 1 ];
                         else if ( 4 == ebytes )
-                            target.f[ e ] = vregs[ m ].f[ 2 * e ] + vregs[ m ].f[ 2 * e + 1 ];
+                            target.f[ e ] = vregs[ n ].f[ 2 * e ] + vregs[ n ].f[ 2 * e + 1 ];
                         else
                             unhandled();
                     }
