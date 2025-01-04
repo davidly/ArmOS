@@ -3377,12 +3377,11 @@ void Arm64::unhandled()
     emulator_hard_termination( *this, "opcode not handled:", op );
 } //unhandled
 
-uint64_t Arm64::run( uint64_t max_cycles )
+uint64_t Arm64::run( void )
 {
-    uint64_t start_cycles = cycles_so_far;
-    uint64_t target_cycles = cycles_so_far + max_cycles;
+    uint64_t cycles = 0;
 
-    do
+    for ( ;; )
     {
         #ifndef NDEBUG
             if ( regs[ 31 ] <= ( stack_top - stack_size ) )
@@ -7906,9 +7905,9 @@ uint64_t Arm64::run( uint64_t max_cycles )
         }
 
         pc += 4;
-        cycles_so_far++;
-    } while ( cycles_so_far < target_cycles );
+        cycles++;
+    } //for
 
-    return cycles_so_far - start_cycles;
+    return cycles;
 } //run
 

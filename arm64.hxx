@@ -54,7 +54,7 @@ struct Arm64
         memset( &vec_ones, 0xff, sizeof( vec_ones ) );
     } //Arm64
 
-    uint64_t run( uint64_t max_cycles );
+    uint64_t run( void );
     const char * reg_name( uint64_t reg );
     const char * vreg_name( uint64_t reg );
 
@@ -65,7 +65,6 @@ struct Arm64
     uint64_t fpcr;                  // floating point control register
     bool fN, fZ, fC, fV;            // negative, zero, unsigned carry or overflow, signed overflow.
 
-    uint64_t cycles_so_far;
     uint8_t * mem;
     uint8_t * beyond;
     uint64_t base;
