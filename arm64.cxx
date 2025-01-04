@@ -160,6 +160,7 @@ uint64_t Arm64::double_to_fixed_uint64( double d, uint64_t fracbits, FPRounding 
 
 uint64_t get_bit( uint64_t x, uint64_t bit_number )
 {
+    assert( 64 != bit_number );
     return ( ( x >> bit_number ) & 1 );
 } //get_bit
 
@@ -589,9 +590,9 @@ uint64_t Arm64::adv_simd_expand_imm( uint64_t operand, uint64_t cmode, uint64_t 
                 else
                 {
                     // imm64 = imm8<7>:NOT(imm8<6>):Replicate(imm8<6>,8):imm8<5:0>:Zeros(48);
-                    imm64 = ( get_bits( imm8, 7, 1 ) << 63 ) |
-                            ( ( get_bits( imm8, 6, 1 ) ? 0ull : 1ull ) << 62 ) |
-                            ( replicate_bits( get_bits( imm8, 6, 1 ), 8 ) << ( 62 - 8 ) ) |
+                    imm64 = ( get_bit( imm8, 7 ) << 63 ) |
+                            ( ( get_bit( imm8, 6 ) ? 0ull : 1ull ) << 62 ) |
+                            ( replicate_bits( get_bit( imm8, 6 ), 8 ) << ( 62 - 8 ) ) |
                             ( get_bits( imm8, 0, 6 ) << 48 );
                 }
             }
@@ -628,7 +629,7 @@ uint64_t count_leading_zeroes( uint64_t x, uint64_t bit_width )
 
 uint64_t decode_logical_immediate( uint64_t val, uint64_t bit_width )
 {
-    uint64_t N = get_bits( val, 12, 1 );
+    uint64_t N = get_bit( val, 12 );
     uint64_t immr = get_bits( val, 6, 6 );
     uint64_t imms = get_bits( val, 0, 6 );
 
@@ -684,8 +685,8 @@ uint64_t vfp_expand_imm( uint64_t imm8, uint64_t N )
     uint64_t E = ( 16 == N ) ? 5 : ( 32 == N ) ? 8 : 11;
     uint64_t F = N - E - 1;
     uint64_t sign = ( 0 != ( imm8 & 0x80 ) );
-    uint64_t exp_part_1 = ( get_bits( imm8, 6, 1 ) ? 0 : 1 );
-    uint64_t exp_part_2 = replicate_bits( get_bits( imm8, 6, 1 ), E - 3 );
+    uint64_t exp_part_1 = ( get_bit( imm8, 6 ) ? 0 : 1 );
+    uint64_t exp_part_2 = replicate_bits( get_bit( imm8, 6 ), E - 3 );
     uint64_t exp_part_3 = get_bits( imm8, 4, 2 );
     uint64_t exp = ( exp_part_1 << ( E - 3 + 2 ) ) | ( exp_part_2 << 2 ) | exp_part_3;
     uint64_t frac_shift = F - 4;
@@ -814,7 +815,7 @@ void Arm64::trace_state()
             else if ( 0 == scale )
                 index = ( Q << 3 ) | ( S << 2 ) | size;
             else if ( 1 == scale )
-                index = ( Q << 2 ) | ( S << 1 ) | get_bits( size, 1, 1 );
+                index = ( Q << 2 ) | ( S << 1 ) | get_bit( size, 1 );
             else if ( 2 == scale )
             {
                 if ( 0 == ( size & 1 ) )
@@ -2099,8 +2100,8 @@ void Arm64::trace_state()
                 }
                 else if ( 8 & imm5 )
                 {
-                    index1 = get_bits( imm5, 4, 1 );
-                    index2 = get_bits( imm4, 3, 1 );
+                    index1 = get_bit( imm5, 4 );
+                    index2 = get_bit( imm4, 3 );
                     T = 'D';
                 }
 
@@ -2461,7 +2462,7 @@ void Arm64::trace_state()
                 else if ( imm5 & 8 )
                 {
                     T = 'D';
-                    index = get_bits( imm5, 4, 1 );
+                    index = get_bit( imm5, 4 );
                 }
                 else
                     unhandled();
@@ -2532,7 +2533,7 @@ void Arm64::trace_state()
             {
                 uint64_t size = lowest_set_bit_nz( imm5 & 0xf );
                 uint64_t index = get_bits( imm5, size + 1, 4 - ( size + 1 ) + 1 );
-                uint64_t indsize = 64ull << get_bits( imm5, 4, 1 );
+                uint64_t indsize = 64ull << get_bit( imm5, 4 );
                 uint64_t esize = 8ull << size;
                 uint64_t datasize = 64ull << Q;
                 uint64_t elements = datasize / esize;
@@ -3525,7 +3526,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( 0 == scale )
                     index = ( Q << 3 ) | ( S << 2 ) | size;
                 else if ( 1 == scale )
-                    index = ( Q << 2 ) | ( S << 1 ) | get_bits( size, 1, 1 );
+                    index = ( Q << 2 ) | ( S << 1 ) | get_bit( size, 1 );
                 else if ( 2 == scale )
                 {
                     if ( 0 == ( size & 1 ) )
@@ -3865,7 +3866,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     {
                         if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
                         {
-                            uint64_t amount = get_bits( cmode, 1, 1 ) * 8;
+                            uint64_t amount = get_bit( cmode, 1 ) * 8;
                             val <<= amount;
                             uint16_t invval = (uint16_t) ~val;
                             for ( uint64_t o = 0; o < ( Q ? 8 : 4 ); o++ )
@@ -4101,7 +4102,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t ebytes = esize / 8;
                         assert( 1 == count_bits( ebytes ) );
                         uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
-                        uint64_t datasize = 64 << Q;
+                        uint64_t datasize = 64ull << Q;
                         uint64_t elements = datasize / esize;
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
@@ -4118,7 +4119,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
                         assert( 1 == count_bits( ebytes ) );
-                        uint64_t datasize = 64 << Q;
+                        uint64_t datasize = 64ull << Q;
                         uint64_t elements = datasize / esize;
                         uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
                         vec16_t target = { 0 };
@@ -5061,7 +5062,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     fZ = ( 0 == result );
                     fV = fC = 0;
-                    fN = xregs ? get_bits( result, 63, 1 ) : get_bits( result, 31, 1 );
+                    fN = xregs ? get_bit( result, 63 ) : get_bit( result, 31 );
                 }
 
                 if ( 31 != d )
@@ -5073,7 +5074,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 uint64_t d = opbits( 0, 5 );
                 uint64_t immhi = opbits( 5, 19 );
                 uint64_t immlo = opbits( 29, 2 );
-                int64_t offset = sign_extend( immhi << 2 | immlo, 20 );
+                int64_t offset = sign_extend( ( immhi << 2 ) | immlo, 20 );
                 if ( 31 != d )
                     regs[ d ] = pc + offset;
                 break;
@@ -5432,7 +5433,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( !bit23 && bit21 && 0x3f == bits15_10 ) // FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t sz = opbits( 22, 1 );
-                    esize = 32 << sz;
+                    esize = 32ull << sz;
                     ebytes = esize / 8;
                     elements = datasize / esize;
                     if ( 4 == ebytes )
@@ -5556,7 +5557,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( bit23 && bit21 && 0 == bits20_17 && 0x3e == bits16_10 ) // FNEG <Vd>.<T>, <Vn>.<T>
                 {
                     uint64_t sz = opbits( 22, 1 );
-                    esize = 32 << sz;
+                    esize = 32ull << sz;
                     ebytes = esize / 8;
                     elements = datasize / esize;
                     vec16_t target = { 0 };
@@ -5659,8 +5660,8 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     }
                     else if ( 8 & imm5 )
                     {
-                        index1 = get_bits( imm5, 4, 1 );
-                        index2 = get_bits( imm4, 3, 1 );
+                        index1 = get_bit( imm5, 4 );
+                        index2 = get_bit( imm4, 3 );
                         byte_width = 8;
                     }
     
@@ -5711,7 +5712,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                         uint64_t result = 0;
                         for ( uint64_t b = 0; b < 64; b++ )
                         {
-                            uint64_t bbit = ( get_bits( dval, b, 1 ) ) ? get_bits( nval, b, 1 ) : get_bits( mval, b, 1 );
+                            uint64_t bbit = ( get_bit( dval, b ) ) ? get_bit( nval, b ) : get_bit( mval, b );
                             result = plaster_bit( result, b, bbit );
                         }
                         //tracer.Trace( "  bsl writing %#llx at offset %llu\n", result, 8 * x );
@@ -6078,7 +6079,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 if ( !bit23 && bit21 && 1 == bits20_16 && 0x1e == bits15_10 ) // FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
                 {
                     uint64_t sz = opbits( 22, 1 );
-                    uint64_t esize = 16 << sz;
+                    uint64_t esize = 16ull << sz;
                     uint64_t ebytes = esize / 8;
                     datasize = 64;
                     uint64_t elements = datasize / esize;
@@ -6104,7 +6105,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( bit23 && bit21 && 1 == bits20_16 && 0x2e == bits15_10 ) // FCVTZS <Vd>.<T>, <Vn>.<T>
                 {
                     uint64_t sz = opbits( 22, 1 );
-                    uint64_t esize = 32 << sz;
+                    uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
                     vec16_t target = { 0 };
@@ -6255,7 +6256,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t sz = opbits( 22, 1 );
-                    uint64_t esize = 32 << sz;
+                    uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
 
@@ -6272,7 +6273,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t sz = opbits( 22, 1 );
-                    uint64_t esize = 32 << sz;
+                    uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
 
@@ -6509,7 +6510,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                 else if ( !bit23 && bit21 && 1 == bits20_16 && bit15 && 0x16 == bits14_10 ) // SCVTF <Vd>.<T>, <Vn>.<T>
                 {
                     uint64_t sz = opbits( 22, 1 );
-                    uint64_t esize = 32 << sz;
+                    uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
                     for ( uint64_t e = 0; e < elements; e++ )
@@ -6542,7 +6543,7 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     else if ( imm5 & 8 )
                     {
                         target_bytes = 8;
-                        index = get_bits( imm5, 4, 1 );
+                        index = get_bit( imm5, 4 );
                     }
                     else
                         unhandled();
@@ -7604,11 +7605,11 @@ uint64_t Arm64::run( uint64_t max_cycles )
                     uint64_t nvalue = val_reg_or_zr( n );
                     uint64_t result = ( nvalue & op2 );
                     if ( xregs )
-                        fN = get_bits( result, 63, 1 );
+                        fN = get_bit( result, 63 );
                     else
                     {
                         result &= 0xffffffff;
-                        fN = get_bits( result, 31, 1 );
+                        fN = get_bit( result, 31 );
                     }
 
                     fZ = ( 0 == result );
