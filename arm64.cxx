@@ -729,8 +729,8 @@ void Arm64::trace_state()
             uint64_t opcode = opbits( 10, 6 );
             uint64_t immh = opbits( 19, 4 );
             uint64_t immb = opbits( 16, 3 );
-            uint64_t bit23 = opbits( 23, 1 );
-            uint64_t bit22 = opbits( 23, 2 );
+            uint64_t bit23 = opbit( 23 );
+            uint64_t bit22 = opbit( 22 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
             if ( !bit23 && bit22 && 0x15 == opcode ) // SHL D<d>, D<n>, #<shift>
@@ -742,10 +742,10 @@ void Arm64::trace_state()
             else if ( bit23 && ( 4 == opcode || 6 == opcode || 0x24 == opcode || 0x26 == opcode ) ) // FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]    ;    FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
             {
                 uint64_t m = opbits( 16, 5 );
-                uint64_t sz = opbits( 22, 1 );
-                uint64_t L = opbits( 21, 1 );
-                uint64_t M = opbits( 20, 1 );
-                uint64_t H = opbits( 11, 1 );
+                uint64_t sz = opbit( 22 );
+                uint64_t L = opbit( 21 );
+                uint64_t M = opbit( 20 );
+                uint64_t H = opbit( 11 );
                 char v = sz ? 'd' : 's';
                 uint64_t Rmhi = M;
                 if ( 0 == sz )
@@ -771,12 +771,12 @@ void Arm64::trace_state()
                               // LD1R { <Vt>.<T> }, [<Xn|SP>], <imm>   ;    LD1R { <Vt>.<T> }, [<Xn|SP>], <Xm>
                               // ST1 { <Vt>.B }[<index>], [<Xn|SP>]    ;    ST1 { <Vt>.B }[<index>], [<Xn|SP>], #1
         {
-            uint64_t R = opbits( 21, 1 );
+            uint64_t R = opbit( 21 );
             if ( R )
                 unhandled();
-            uint64_t post_index = opbits( 23, 1 );
+            uint64_t post_index = opbit( 23 );
             uint64_t opcode = opbits( 13, 3 );
-            uint64_t bit13 = opbits( 13, 1 );
+            uint64_t bit13 = opbit( 13 );
             if ( bit13 )
                 unhandled();
             uint64_t size = opbits( 10, 2 );
@@ -784,9 +784,9 @@ void Arm64::trace_state()
             uint64_t m = opbits( 16, 5 );
             uint64_t t = opbits( 0, 5 );
             uint64_t replicate = ( 6 == opcode );
-            uint64_t S = opbits( 12, 1 );
-            uint64_t Q = opbits( 30, 1 );
-            uint64_t L = opbits( 22, 1 );
+            uint64_t S = opbit( 12 );
+            uint64_t Q = opbit( 30 );
+            uint64_t L = opbit( 22 );
             uint64_t index = 0;
             uint64_t scale = get_bits( opcode, 1, 2 );
             if ( 3 == scale )
@@ -827,11 +827,11 @@ void Arm64::trace_state()
         case 0x48: // LDAXRH <Wt>, [<Xn|SP>{, #0}]    ;    LDARH <Wt>, [<Xn|SP>{, #0}]    ;    STLXRH <Ws>, <Wt>, [<Xn|SP>{, #0}]    ;    STLRH <Wt>, [<Xn|SP>{, #0}]
                    // STXRH <Ws>, <Wt>, [<Xn|SP>{, #0}] ;  LDXRH <Wt>, [<Xn|SP>{, #0}]
         {
-            uint64_t bit23 = opbits( 23, 1 );
-            uint64_t L = opbits( 22, 1 );
-            uint64_t bit21 = opbits( 21, 1 );
+            uint64_t bit23 = opbit( 23 );
+            uint64_t L = opbit( 21 );
+            uint64_t bit21 = opbit( 21 );
             uint64_t s = opbits( 16, 5 );
-            uint64_t oO = opbits( 15, 1 );
+            uint64_t oO = opbit( 15 );
             uint64_t t2 = opbits( 10, 5 );
             uint64_t n = opbits( 5, 5 );
             uint64_t t = opbits( 0, 5 );
@@ -859,8 +859,8 @@ void Arm64::trace_state()
         case 0x1f: // fmadd, vnmadd, fmsub, fnmsub
         {
             uint64_t ftype = opbits( 22, 2 );
-            uint64_t bit21 = opbits( 21, 1 );
-            uint64_t bit15 = opbits( 15, 1 );
+            uint64_t bit21 = opbit( 21 );
+            uint64_t bit15 = opbit( 15 );
             uint64_t m = opbits( 16, 5 );
             uint64_t a = opbits( 10, 5 );
             uint64_t n = opbits( 5, 5 );
@@ -884,7 +884,7 @@ void Arm64::trace_state()
         case 0xfd: // LDR <Dt>, [<Xn|SP>{, #<pimm>}]  ;    STR <Dt>, [<Xn|SP>{, #<pimm>}]   ;    STR <Dt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
         {
             uint64_t bits11_10 = opbits( 10, 2 );
-            uint64_t bit21 = opbits( 21, 1 );
+            uint64_t bit21 = opbit( 21 );
             bool unsignedOffset = ( 0xd == ( hi8 & 0xf ) );
             bool preIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 3 == bits11_10 ) );
             bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bits11_10 ) );
@@ -894,7 +894,7 @@ void Arm64::trace_state()
             int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
             uint64_t size = opbits( 30, 2 );
             uint64_t opc = opbits( 22, 2 );
-            bool is_ldr = opbits( 22, 1 );
+            bool is_ldr = opbit( 22 );
             uint64_t t = opbits( 0, 5 );
             uint64_t n = opbits( 5, 5 );
             uint64_t byte_len = 1ull << size;
@@ -917,7 +917,7 @@ void Arm64::trace_state()
                     uint64_t option = opbits( 13, 3 );
                     uint64_t m = opbits( 16, 5 );
                     uint64_t shift = 0;
-                    uint64_t S = opbits( 12, 1 );
+                    uint64_t S = opbit( 12 );
                     if ( 0 != S )
                     {
                         if ( 0 == size )
@@ -961,7 +961,7 @@ void Arm64::trace_state()
                     uint64_t option = opbits( 13, 3 );
                     uint64_t m = opbits( 16, 5 );
                     uint64_t shift = 0;
-                    uint64_t S = opbits( 12, 1 );
+                    uint64_t S = opbit( 12 );
                     if ( 0 != S )
                     {
                         if ( 0 == size )
@@ -1002,8 +1002,8 @@ void Arm64::trace_state()
             uint64_t t2 = opbits( 10, 5 );
             uint64_t n = opbits( 5, 5 );
             uint64_t t1 = opbits( 0, 5 );
-            uint64_t L = opbits( 22, 1 );
-            uint64_t bit23 = opbits( 23, 1 );
+            uint64_t L = opbit( 22 );
+            uint64_t bit23 = opbit( 23 );
 
             bool preIndex = ( ( 0xd == ( hi8 & 0xf ) ) && bit23 );
             bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && bit23 );
@@ -1048,13 +1048,13 @@ void Arm64::trace_state()
             uint64_t abc = opbits( 16, 3 );
             uint64_t defgh = opbits( 5, 5 );
             uint64_t val = ( abc << 5 ) | defgh;
-            uint64_t Q = opbits( 30, 1 );
-            uint64_t bit29 = opbits( 29, 1 );
+            uint64_t Q = opbit( 30 );
+            uint64_t bit29 = opbit( 29 );
             uint64_t o2 = opbits( 11,1 );
-            uint64_t bit10 = opbits( 10, 1 );
-            uint64_t bit11 = opbits( 11, 1 );
-            uint64_t bit12 = opbits( 12, 1 );
-            uint64_t bit23 = opbits( 23, 1 );
+            uint64_t bit10 = opbit( 10 );
+            uint64_t bit11 = opbit( 11 );
+            uint64_t bit12 = opbit( 12 );
+            uint64_t bit23 = opbit( 23 );
             uint64_t d = opbits( 0, 5 );
             uint64_t bits23_19 = opbits( 19, 5 );
             uint64_t imm = adv_simd_expand_imm( bit29, cmode, val );
@@ -1087,9 +1087,9 @@ void Arm64::trace_state()
                     else
                         unhandled();
                 }
-                else if ( 0 == bit12 || ( 0xc == ( cmode & 0xe ) ) ) // movi
+                else if ( !bit12 || ( 0xc == ( cmode & 0xe ) ) ) // movi
                 {
-                    if ( !bit29) // movi
+                    if ( !bit29 ) // movi
                     {
                         if ( 0xe == cmode )
                         {
@@ -1119,14 +1119,14 @@ void Arm64::trace_state()
                     }
                     else // movi
                     {
-                        uint64_t a = opbits( 18, 1 );
-                        uint64_t b = opbits( 17, 1 );
-                        uint64_t c = opbits( 16, 1 );
-                        uint64_t bitd = opbits( 9, 1 );
-                        uint64_t e = opbits( 8, 1 );
-                        uint64_t f = opbits( 7, 1 );
-                        uint64_t g = opbits( 6, 1 );
-                        uint64_t h = opbits( 5, 1 );
+                        uint64_t a = opbit( 18 );
+                        uint64_t b = opbit( 17 );
+                        uint64_t c = opbit( 16 );
+                        uint64_t bitd = opbit( 9 );
+                        uint64_t e = opbit( 8 );
+                        uint64_t f = opbit( 7 );
+                        uint64_t g = opbit( 6 );
+                        uint64_t h = opbit( 5 );
     
                         imm = a ? ( 0xffull << 56 ) : 0;
                         imm |= b ? ( 0xffull << 48 ) : 0;
@@ -1210,9 +1210,9 @@ void Arm64::trace_state()
                 {
                     uint64_t size = bits23_22;
                     uint64_t n = opbits( 5, 5 );
-                    uint64_t L = opbits( 21, 1 );
-                    uint64_t M = opbits( 20, 1 );
-                    uint64_t H = opbits( 11, 1 );
+                    uint64_t L = opbit( 21 );
+                    uint64_t M = opbit( 20 );
+                    uint64_t H = opbit( 11 );
                     uint64_t index = 0;
                     uint64_t rmhi = 0;
                     char TS = '?';
@@ -1259,9 +1259,9 @@ void Arm64::trace_state()
                 {
                     uint64_t n = opbits( 5, 5 );
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t sz = opbits( 22, 1 );
-                    uint64_t L = opbits( 21, 1 );
-                    uint64_t H = opbits( 11, 1 );
+                    uint64_t sz = opbit( 22 );
+                    uint64_t L = opbit( 21 );
+                    uint64_t H = opbit( 11 );
                     uint64_t szL = ( sz << 1 ) | L;
                     uint64_t index = ( 0 == sz ) ? ( ( H << 1 ) | L ) : ( 2 == szL ) ? H : 0;
                     uint64_t Qsz = ( Q << 1 ) | sz;
@@ -1341,9 +1341,9 @@ void Arm64::trace_state()
                 {
                     uint64_t n = opbits( 5, 5 );
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t sz = opbits( 22, 1 );
-                    uint64_t L = opbits( 21, 1 );
-                    uint64_t H = opbits( 11, 1 );
+                    uint64_t sz = opbit( 22 );
+                    uint64_t L = opbit( 21 );
+                    uint64_t H = opbit( 11 );
                     uint64_t index = ( !sz ) ? ( ( H << 1 ) | L ) : H;
                     const char * pT = ( Q && sz ) ? "2D" : ( !Q && !sz ) ? "2S" : ( Q && !sz ) ? "4S" : "?";
                     tracer.Trace( "fmul v%llu.%s, v%llu.%s, v%llu.%c[%llu]\n", d, pT, n, pT, m, sz ? 'D' : 'S', index );
@@ -1359,8 +1359,8 @@ void Arm64::trace_state()
             uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
             uint64_t bits23_21 = opbits( 21, 3 );
             uint64_t bits15_10 = opbits( 10, 6 );
-            uint64_t bit11 = opbits( 11, 1 );
-            uint64_t bit10 = opbits( 10, 1 );
+            uint64_t bit11 = opbit( 11 );
+            uint64_t bit10 = opbit( 10 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
 
@@ -1419,7 +1419,7 @@ void Arm64::trace_state()
         {
             uint64_t imm19 = opbits( 5, 19 );
             uint64_t t = opbits( 0, 5 );
-            bool xregs = ( 0 != opbits( 30, 1 ) );
+            bool xregs = ( 0 != opbit( 30 ) );
             tracer.Trace( "ldr %s, =%#llx\n", reg_or_zr( t, xregs ), pc + ( imm19 << 2 ) );
             break;
         }
@@ -1435,7 +1435,7 @@ void Arm64::trace_state()
 
             if ( 2 == bits23_21 )
             {
-                uint64_t o3 = opbits( 4, 1 );
+                uint64_t o3 = opbit( 4 );
                 if ( 0 != o3 )
                     unhandled();
 
@@ -1477,7 +1477,7 @@ void Arm64::trace_state()
         case 0xb1: // ADDS <Xd>, <Xn|SP>, #<imm>{, <shift>}   ;    CMN <Xn|SP>, #<imm>{, <shift>}
         {
             uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
-            bool shift12 = opbits( 22, 1 );
+            bool shift12 = opbit( 22 );
             uint64_t imm12 = opbits( 10, 12 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
@@ -1497,7 +1497,7 @@ void Arm64::trace_state()
         case 0xcb: // SUB <Xd|SP>, <Xn|SP>, <R><m>{, <extend> {#<amount>}}      ;    SUB <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
         case 0xeb: // SUBS <Xd>, <Xn|SP>, <R><m>{, <extend> {#<amount>}}        ;    SUBS <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
         {
-            uint64_t extended = opbits( 21, 1 );
+            uint64_t extended = opbit( 21 );
             uint64_t issub = ( 0 != ( 0x40 & hi8 ) );
             const char * opname = issub ? "sub" : "add";
             uint64_t setflags = ( 0 != ( 0x20 & hi8 ) );
@@ -1535,8 +1535,8 @@ void Arm64::trace_state()
         case 0x91: // add <xd|SP>, <xn|SP>, #imm [,<shift>]
         case 0xd1: // sub <xd|SP>, <xn|SP>, #imm [,<shift>]
         {
-            bool sf = ( 0 != opbits( 31, 1 ) );
-            bool sh = ( 0 != opbits( 22, 1 ) );
+            bool sf = ( 0 != opbit( 31 ) );
+            bool sh = ( 0 != opbit( 22 ) );
             uint64_t imm12 = opbits( 10, 12 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
@@ -1564,7 +1564,7 @@ void Arm64::trace_state()
                 break;
             }
     
-            uint64_t l = opbits( 21, 1 );
+            uint64_t l = opbit( 21 );
             uint64_t op0 = opbits( 19, 2 );
             uint64_t op1 = opbits( 16, 3 );
             uint64_t op2 = opbits( 5, 3 );
@@ -1618,13 +1618,13 @@ void Arm64::trace_state()
         case 0x9b: // MADD <Xd>, <Xn>, <Xm>, <Xa>    ;    MSUB <Xd>, <Xn>, <Xm>, <Xa>    ;    UMULH <Xd>, <Xn>, <Xm>    ;    UMADDL <Xd>, <Wn>, <Wm>, <Xa>
                    // SMADDL <Xd>, <Wn>, <Wm>, <Xa>  ;    SMULH <Xd>, <Xn>, <Xm>         ;    UMSUBL <Xd>, <Wn>, <Wm>, <Xa>
         {
-            bool xregs = ( 0 != opbits( 31, 1 ) );
+            bool xregs = ( 0 != opbit( 31 ) );
             uint64_t m = opbits( 16, 5 );
             uint64_t a = opbits( 10, 5 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
             uint64_t bits23_21 = opbits( 21, 3 );
-            bool bit15 = ( 1 == opbits( 15, 1 ) );
+            bool bit15 = ( 1 == opbit( 15 ) );
 
             if ( 0x9b == hi8 && 5 == bits23_21 && bit15 ) // UMSUBL <Xd>, <Wn>, <Wm>, <Xa>
                 tracer.Trace( "umsubl x%llu, w%llu, w%llu, x%llu\n", d, n, m, a );
@@ -1649,8 +1649,8 @@ void Arm64::trace_state()
         case 0x71: // SUBS <Wd>, <Wn|WSP>, #<imm>{, <shift>}   ;   CMP <Wn|WSP>, #<imm>{, <shift>}
         case 0xf1: // SUBS <Xd>, <Xn|SP>, #<imm>{, <shift>}    ;   cmp <xn|SP>, #imm [,<shift>]    ;     
         {
-            bool sf = ( 0 != opbits( 31, 1 ) );
-            bool sh = ( 0 != opbits( 22, 1 ) );
+            bool sf = ( 0 != opbit( 31 ) );
+            bool sh = ( 0 != opbit( 22 ) );
             uint64_t imm12 = opbits( 10, 12 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
@@ -1677,7 +1677,7 @@ void Arm64::trace_state()
         case 0x68: // ldp 32-bit sign extended                LDPSW <Xt1>, <Xt2>, [<Xn|SP>], #<imm>
         case 0x69: // ldp 32-bit sign extended                LDPSW <Xt1>, <Xt2>, [<Xn|SP>, #<imm>]!  ;    LDPSW <Xt1>, <Xt2>, [<Xn|SP>{, #<imm>}]
         {
-            bool xregs = ( 0 != opbits( 31, 1 ) );
+            bool xregs = ( 0 != opbit( 31 ) );
             uint64_t t1 = opbits( 0, 5 );
             uint64_t t2 = opbits( 10, 5 );
             uint64_t n = opbits( 5, 5 );
@@ -1690,7 +1690,7 @@ void Arm64::trace_state()
             bool preIndex = ( 3 == variant );
             bool signedOffset = ( 2 == variant );
 
-            if ( 0 == opbits( 22, 1 ) ) // bit 22 is 0 for stp
+            if ( 0 == opbit( 22 ) ) // bit 22 is 0 for stp
             {
                 if ( 0x68 == hi8 || 0x69 == hi8 ) // these are ldpsw variants
                     unhandled();
@@ -1724,7 +1724,7 @@ void Arm64::trace_state()
         case 0xaa: // ORR <Xd>, <Xn>, <Xm>{, <shift> #<amount>}    ;    ORN <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
         {
             uint64_t shift = opbits( 22, 2 );
-            uint64_t N = opbits( 21, 1 );
+            uint64_t N = opbit( 21 );
             uint64_t m = opbits( 16, 5 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
@@ -1764,7 +1764,7 @@ void Arm64::trace_state()
             uint64_t imms = opbits( 10, 6 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
-            uint64_t bit23 = opbits( 23, 1 );
+            uint64_t bit23 = opbit( 23 );
             if ( bit23 && ( 0x13 == ( 0x7f & hi8 ) ) )
             {
                 uint64_t m = opbits( 16, 5 );
@@ -1784,7 +1784,7 @@ void Arm64::trace_state()
         case 0xea: // ANDS <Xd>, <Xn>, <Xm>{, <shift> #<amount>}    ;    BICS <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
         {
             uint64_t shift = opbits( 22, 2 );
-            uint64_t N = opbits( 21, 1 );
+            uint64_t N = opbit( 21 );
             uint64_t m = opbits( 16, 5 );
             uint64_t imm6 = opbits( 10, 6 );
             uint64_t n = opbits( 5, 5 );
@@ -1831,7 +1831,7 @@ void Arm64::trace_state()
         case 0x12: // MOVN <Wd>, #<imm>{, LSL #<shift>}   ;    AND <Wd|WSP>, <Wn>, #<imm>
         case 0x92: // MOVN <Xd>, #<imm16>, LSL #<shift>   ;    AND <Xd|SP>, <Xn>, #<imm>    ;    MOV <Xd>, #<imm>
         {
-            uint64_t bit23 = opbits( 23, 1 );
+            uint64_t bit23 = opbit( 23 );
             bool xregs = ( 0 != ( hi8 & 0x80 ) );
             if ( bit23 ) // MOVN
             {
@@ -1910,7 +1910,7 @@ void Arm64::trace_state()
         case 0xd2: // MOVZ <Xd>, #<imm>{, LSL #<shift>}    ;    EOR <Xd|SP>, <Xn>, #<imm>    
         {
             bool xregs = ( 0 != ( hi8 & 0x80 ) );
-            uint64_t bit23 = opbits( 23, 1 );
+            uint64_t bit23 = opbit( 23 );
 
             if ( bit23 ) // movz xd, imm16
             {
@@ -1969,15 +1969,15 @@ void Arm64::trace_state()
                               // NEG <Vd>.<T>, <Vn>.<T> ; EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index>            ;    FCVTZU <Vd>.<T>, <Vn>.<T>
                               // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
         {
-            uint64_t Q = opbits( 30, 1 );
+            uint64_t Q = opbit( 30 );
             uint64_t m = opbits( 16, 5 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
             uint64_t size = opbits( 22, 2 );
-            uint64_t bit23 = opbits( 23, 1 );
-            uint64_t bit21 = opbits( 21, 1 );
-            uint64_t bit15 = opbits( 15, 1 );
-            uint64_t bit10 = opbits( 10, 1 );
+            uint64_t bit23 = opbit( 23 );
+            uint64_t bit21 = opbit( 21 );
+            uint64_t bit15 = opbit( 15 );
+            uint64_t bit10 = opbit( 10 );
             uint64_t bits23_21 = opbits( 21, 3 );
             const char * pT = get_ld1_vector_T( size, Q );
             uint64_t opcode = opbits( 10, 6 );
@@ -1993,13 +1993,13 @@ void Arm64::trace_state()
             }
             else if ( !bit23 && bit21 && 0 == bits20_17 && 0x76 == bits16_10 ) // UCVTF <Vd>.<T>, <Vn>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 const char * pTA = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
                 tracer.Trace( "ucvtf v%llu.%s, v%llu.%s\n", d, pTA, n, pTA );
             }
             else if ( bit23 && bit21 && 0 == bits20_17 && 0x6e == bits16_10 ) // FCVTZU <Vd>.<T>, <Vn>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 const char * pTA = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
                 tracer.Trace( "fcvtzu v%llu.%s, v%llu.%s\n", d, pTA, n, pTA );
             }
@@ -2017,7 +2017,7 @@ void Arm64::trace_state()
                 tracer.Trace( "%s s%llu, v%llu.4s\n", 5 == bits23_21 ? "fminnmv" : "fmaxnmv", d, n );
             else if ( !bit23 && bit21 && 0x3f == bits15_10 ) // FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 pT = ( !sz && !Q ) ? "2s" : ( !sz && Q ) ? "4s" : ( sz && Q ) ? "2d" : "?";
                 tracer.Trace( "v%llu.%s, v%llu.%s, v%llu.%s\n", n, pT, n, pT, m, pT );
             }
@@ -2036,14 +2036,14 @@ void Arm64::trace_state()
             }
             else if ( bit23 && bit21 && 0 == bits20_17 && 0x3e == bits16_10 ) // FNEG <Vd>.<T>, <Vn>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 uint64_t ty = ( sz << 1 ) | Q;
                 pT = ( 0 == ty ) ? "2s" : ( 1 == ty ) ? "4s" : ( 3 == ty ) ? "2d" : "?";
                 tracer.Trace( "fneg v%llu.%s, v%llu.%s\n", d, pT, n, pT );
             }
             else if ( !bit23 && bit21 && 0x35 == opcode ) // FADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 uint64_t ty = ( sz << 1 ) | Q;
                 pT = ( 0 == ty ) ? "2s" : ( 1 == ty ) ? "4s" : ( 3 == ty ) ? "2d" : "?";
                 tracer.Trace( "faddp v%llu.%s, v%llu,%s, v%llu.%s\n", d, pT, n, pT, m, pT );
@@ -2118,7 +2118,7 @@ void Arm64::trace_state()
             }
             else if ( bit21 && 0x37 == opcode )
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 pT = ( 0 == sz ) ? ( 0 == Q ? "2S" : "4S" ) : ( 0 == Q ? "?" : "2D" );
                 tracer.Trace( "fmul v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             }
@@ -2157,13 +2157,13 @@ void Arm64::trace_state()
             }
             else if ( 0x386e == bits23_10 || 0x286e == bits23_10 ) // FCVTZS <V><d>, <V><n>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 char width = sz ? 'd' : 's';
                 tracer.Trace( "fcvtzs %c%llu, %c%llu\n", width, d, width, n );
             }
             else if ( 0x0876 == ( bits23_10 & 0x2fff ) ) // SCVTF <V><d>, <V><n>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 char width = sz ? 'd' : 's';
                 tracer.Trace( "scvtf %c%llu, %c%llu\n", width, d, width, n );
             }
@@ -2191,9 +2191,9 @@ void Arm64::trace_state()
             uint64_t bits15_10 = opbits( 10, 6 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
-            uint64_t bit23 = opbits( 23, 1 );
-            uint64_t sz = opbits( 22, 1 );
-            uint64_t bit21 = opbits( 21, 1 );
+            uint64_t bit23 = opbit( 23 );
+            uint64_t sz = opbit( 22 );
+            uint64_t bit21 = opbit( 21 );
             uint64_t opcode = opbits( 10, 6 );
 
             if ( bit23 && bit21 && 0x6e == bits20_10 ) // FCVTZU <V><d>, <V><n>
@@ -2251,14 +2251,14 @@ void Arm64::trace_state()
                               // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                               // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
         {
-            uint64_t Q = opbits( 30, 1 );
+            uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
-            uint64_t bit15 = opbits( 15, 1 );
+            uint64_t bit15 = opbit( 15 );
             uint64_t bits14_11 = opbits( 11, 4 );
-            uint64_t bit10 = opbits( 10, 1 );
+            uint64_t bit10 = opbit( 10 );
             uint64_t bits12_10 = opbits( 10, 3 );
-            uint64_t bit21 = opbits( 21, 1 );
-            uint64_t bit23 = opbits( 23, 1 );
+            uint64_t bit21 = opbit( 21 );
+            uint64_t bit23 = opbit( 23 );
             uint64_t bits23_21 = opbits( 21, 3 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
@@ -2268,7 +2268,7 @@ void Arm64::trace_state()
 
             if ( !bit23 && bit21 && 1 == bits20_16 && 0x1e == bits15_10 ) // FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 const char * pTA = sz ? "2d" : "4s";
                 const char * pTB = sz ? Q ? "4s" : "2s" : Q ? "8h" : "4h";
                 tracer.Trace( "fcvtl%s v%llu.%s, v%llu.%s\n", Q ? "2" : "", d, pTA, n, pTB );
@@ -2281,13 +2281,13 @@ void Arm64::trace_state()
             }
             else if ( bit23 && bit21 && 1 == bits20_16 && 0x2e == bits15_10 ) // FCVTZS <Vd>.<T>, <Vn>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 const char * pT = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
                 tracer.Trace( "fcvtzs v%llu.%s, v%llu.%s\n", d, pT, n, pT );
             }
             else if ( !bit23 && bit21 && 1 == bits20_16 && 0x1a == bits15_10 ) // FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 const char * pTA = sz ? "2d" : "4s";
                 const char * pTB = sz ? Q ? "8h" : "4h" : Q ? "4s" : "2s";
                 tracer.Trace( "fcvtn%s v%llu.%s, v%llu.%s  # rmode %s\n", Q ? "2" : "", d, pTB, n, pTA, get_rmode_text( get_bits( fpcr, 22, 2 ) ) );
@@ -2295,7 +2295,7 @@ void Arm64::trace_state()
             else if ( bit21 && 0x31 == bits15_10 ) // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 const char * pT = ( !sz && !Q ) ? "2s" : ( !sz && Q ) ? "4s" : ( sz && Q ) ? "2d" : "?";
                 tracer.Trace( "%s v%llu,%s, v%llu.%s, v%llu.%s\n", bit23 ? "fminnm" : "fmaxnm", d, pT, n, pT, m, pT );
             }
@@ -2316,14 +2316,14 @@ void Arm64::trace_state()
             else if ( bit23 && bit21 && 0x35 == bits15_10 ) // FSUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 const char * pT = ( !sz && !Q ) ? "2s" : ( !sz && Q ) ? "4s" : ( sz && Q ) ? "2d" : "?";
                 tracer.Trace( "fsub v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             }
             else if ( bit23 && bit21 && 0x33 == bits15_10 ) // FMLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 const char * pT = ( !sz && !Q ) ? "2s" : ( !sz && Q ) ? "4s" : ( sz && Q ) ? "2d" : "?";
                 tracer.Trace( "fmls v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             }
@@ -2398,7 +2398,7 @@ void Arm64::trace_state()
             }
             else if ( !bit23 && bit21 && bit15 && 0xa == bits14_11 && bit10 ) // FADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 uint64_t ty = ( sz << 1 ) | Q;
                 const char * pT = ( 0 == ty ) ? "2s" : ( 1 == ty ) ? "4s" : ( 3 == ty ) ? "2d" : "?";
                 uint64_t m = opbits( 16, 5 );
@@ -2406,7 +2406,7 @@ void Arm64::trace_state()
             }
             else if ( !bit23 && bit21 && bit15 && 9 == bits14_11 && bit10 ) // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 uint64_t ty = ( sz << 1 ) | Q;
                 const char * pT = ( 0 == ty ) ? "2s" : ( 1 == ty ) ? "4s" : ( 3 == ty ) ? "2d" : "?";
                 uint64_t m = opbits( 16, 5 );
@@ -2414,7 +2414,7 @@ void Arm64::trace_state()
             }
             else if ( !bit23 && bit21 && 1 == bits20_16 && bit15 && 0x16 == bits14_10 ) // SCVTF <Vd>.<T>, <Vn>.<T>
             {
-                uint64_t sz = opbits( 22, 1 );
+                uint64_t sz = opbit( 22 );
                 uint64_t ty = ( sz << 1 ) | Q;
                 const char * pT = ( 0 == ty ) ? "2s" : ( 1 == ty ) ? "4s" : ( 3 == ty ) ? "2d" : "?";
                 tracer.Trace( "scvtf v%llu.%s, v%llu.%s\n", d, pT, n, pT );
@@ -2470,7 +2470,7 @@ void Arm64::trace_state()
             else if ( !bit21 && !bit15 && ( 0x3 == bits14_11 || 0xb == bits14_11 ) && !bit10 ) // 
             {
                 uint64_t size = opbits( 22, 2 );
-                uint64_t part = opbits( 14, 1 );
+                uint64_t part = opbit( 14 );
                 uint64_t m = imm5;
                 const char * pT = get_ld1_vector_T( size, Q );
                 tracer.Trace( "uzp%c v%llu.%s, v%llu.%s, v%llu.%s\n", ( 1 == part ) ? '2' : '1', d, pT, n, pT, m, pT );
@@ -2566,12 +2566,12 @@ void Arm64::trace_state()
                    // FMAX <Dd>, <Dn>, <Dm> ; FMINNM <Dd>, <Dn>, <Dm>  ; FMIN <Dd>, <Dn>, <Dm> ; FRINTZ <Dd>, <Dn>    ;    FRINTP <Dd>, <Dn>
         case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>    ;    FCVTAS <Xd>, <Dn>    ;    FCVTMU <Xd>, <Dn>
         {
-            uint64_t sf = opbits( 31, 1 );
+            uint64_t sf = opbit( 31 );
             uint64_t ftype = opbits( 22, 2 );
-            uint64_t bit21 = opbits( 21, 1 );
-            uint64_t bit11 = opbits( 11, 1 );
-            uint64_t bit10 = opbits( 10, 1 );
-            uint64_t bit4 = opbits( 4, 1 );
+            uint64_t bit21 = opbit( 21 );
+            uint64_t bit11 = opbit( 11 );
+            uint64_t bit10 = opbit( 10 );
+            uint64_t bit4 = opbit( 4 );
             uint64_t bits21_19 = opbits( 19, 3 );
             uint64_t bits18_16 = opbits( 16, 3 );
             uint64_t bits18_10 = opbits( 10, 9 );
@@ -2809,7 +2809,7 @@ void Arm64::trace_state()
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 tracer.Trace( "fcvtzs %s, %c%llu\n", reg_or_zr( d, sf ), t, n );
             }
-            else if ( bit21 && ( 1 == ( bits18_10 & 3 ) ) && ( 0 == opbits( 4, 1 ) ) ) // fccmp
+            else if ( bit21 && ( 1 == ( bits18_10 & 3 ) ) && ( 0 == opbit( 4 ) ) ) // fccmp
             {
                 char t = ( 0 == ftype ) ? 's' : ( 3 == ftype ) ? 'h' : ( 1 == ftype ) ? 'd' : '?';
                 uint64_t m = opbits( 16, 5 );
@@ -2841,10 +2841,10 @@ void Arm64::trace_state()
                    // LD4 { <Vt>.<T>, <Vt2>.<T>, <Vt3>.<T>, <Vt4>.<T> }, [<Xn|SP>], <imm>
                    // LD4 { <Vt>.<T>, <Vt2>.<T>, <Vt3>.<T>, <Vt4>.<T> }, [<Xn|SP>], <Xm>
         {
-            uint64_t Q = opbits( 30, 1 );
-            uint64_t L = opbits( 22, 1 ); // load vs. store
+            uint64_t Q = opbit( 30 );
+            uint64_t L = opbit( 22 ); // load vs. store
             const char * pname = L ? "ld" : "st";
-            uint64_t post_index = opbits( 23, 1 );
+            uint64_t post_index = opbit( 23 );
             uint64_t opcode = opbits( 12, 4 );
             uint64_t size = opbits( 10, 2 );
             uint64_t bits23_21 = opbits( 21, 3 );
@@ -2925,9 +2925,9 @@ void Arm64::trace_state()
             uint64_t t2 = opbits( 10, 5 );
             uint64_t s = opbits( 16, 5 );
             uint64_t L = opbits( 21, 2 );
-            uint64_t oO = opbits( 15, 1 );
-            uint64_t bit23 = opbits( 23, 1 );
-            uint64_t bit30 = opbits( 30, 1 );
+            uint64_t oO = opbit( 15 );
+            uint64_t bit23 = opbit( 23 );
+            uint64_t bit30 = opbit( 30 );
 
             if ( 0x1f != t2 )
                 unhandled();
@@ -2951,10 +2951,10 @@ void Arm64::trace_state()
         {
             uint64_t n = opbits( 5, 5 );
             uint64_t theop = opbits( 21, 2 );
-            uint64_t bit23 = opbits( 23, 1 );
+            uint64_t bit23 = opbit( 23 );
             uint64_t op2 = opbits( 12, 9 );
-            uint64_t A = opbits( 11, 1 );
-            uint64_t M = opbits( 10, 1 );
+            uint64_t A = opbit( 11 );
+            uint64_t M = opbit( 10 );
             if ( 0 != bit23 )
                 unhandled();
             if ( 0x1f0 != op2 )
@@ -2976,7 +2976,7 @@ void Arm64::trace_state()
         case 0xf2: // MOVK <Xd>, #<imm>{, LSL #<shift>}       ;  ANDS <Xd>, <Xn>, #<imm>
         {
             uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
-            uint64_t bit23 = opbits( 23, 1 ); // 1 for MOVK, 0 for ANDS
+            uint64_t bit23 = opbit( 23 ); // 1 for MOVK, 0 for ANDS
             if ( bit23 ) // MOVK
             {
                 uint64_t hw = ( ( op >> 21 ) & 3 );
@@ -3013,7 +3013,7 @@ void Arm64::trace_state()
             uint64_t opc = opbits( 21, 3 );
             uint64_t n = opbits( 5, 5 );
             uint64_t t = opbits( 0, 5 );
-            bool xregs = ( 0 != opbits( 30, 1 ) );
+            bool xregs = ( 0 != opbit( 30 ) );
 
             const char * suffix = "";
             if ( 0x38 == hi8 )
@@ -3042,7 +3042,7 @@ void Arm64::trace_state()
             else if ( 1 == opc ) // STR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
             {
                 uint64_t m = opbits( 16, 5 );
-                uint64_t shift = opbits( 12, 1 );
+                uint64_t shift = opbit( 12 );
                 uint64_t option = opbits( 13, 3 );
                 tracer.Trace( "str%s %s, [ %s, x%llu, %s #%u]\n", suffix, reg_or_zr( t, xregs ), reg_or_sp( n, true ), m, extend_type( option ), ( 3 == option ) ? 0 : ( 0 == shift ) ? 0 : xregs ? 3 : 2 );
             }
@@ -3063,7 +3063,7 @@ void Arm64::trace_state()
             else if ( 3 == opc ) // LDR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
             {
                 uint64_t m = opbits( 16, 5 );
-                uint64_t shift = opbits( 12, 1 );
+                uint64_t shift = opbit( 12 );
                 uint64_t option = opbits( 13, 3 );
                 tracer.Trace( "ldr%s %s, [%s, %s, %s #%u]\n", suffix, reg_or_zr( t, xregs ), reg_or_sp( n, true ), reg_or_zr2( m, true ),
                               extend_type( option ), ( 3 == option ) ? 0 : ( 0 == shift ) ? 0 : xregs ? 3 : 2 );
@@ -3073,13 +3073,13 @@ void Arm64::trace_state()
                 uint64_t bits11_10 = opbits( 10, 2 );
                 if ( 0 == bits11_10 ) // LDURSB <Wt>, [<Xn|SP>{, #<simm>}]    ;    LDURSB <Xt>, [<Xn|SP>{, #<simm>}]
                 {
-                    bool isx = ( 0 == opbits( 22, 1 ) );
+                    bool isx = ( 0 == opbit( 22 ) );
                     int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
                     tracer.Trace( "ldurs%s %s, [%s, #%lld]\n", suffix, reg_or_zr( t, isx ), reg_or_sp( n, true ), imm9 );
                 }
                 else
                 {
-                    uint64_t preindex = opbits( 11, 1 ); // 1 for pre, 0 for post increment
+                    uint64_t preindex = opbit( 11 ); // 1 for pre, 0 for post increment
                     int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
                     xregs = ( 4 == opc );
                     if ( preindex )
@@ -3100,7 +3100,7 @@ void Arm64::trace_state()
                                               //     (opc == 5 && option = many) LDRSW <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
             {
                 uint64_t m = opbits( 16, 5 );
-                uint64_t shift = opbits( 12, 1 );
+                uint64_t shift = opbit( 12 );
                 uint64_t option = opbits( 13, 3 );
                 bool mIsX = ( 1 == ( option & 1 ) );
                 bool tIsX = ( 5 == opc );
@@ -3416,8 +3416,8 @@ uint64_t Arm64::run( void )
                 uint64_t opcode = opbits( 10, 6 );
                 uint64_t immh = opbits( 19, 4 );
                 uint64_t immb = opbits( 16, 3 );
-                uint64_t bit23 = opbits( 23, 1 );
-                uint64_t bit22 = opbits( 23, 2 );
+                uint64_t bit23 = opbit( 23 );
+                uint64_t bit22 = opbit( 22 );
                 uint64_t bits15_10 = opbits( 10, 6 );
     
                 if ( !bit23 && bit22 && 0x15 == opcode ) // SHL D<d>, D<n>, #<shift>
@@ -3430,11 +3430,11 @@ uint64_t Arm64::run( void )
                 else if ( bit23 && ( 4 == opcode || 6 == opcode || 0x24 == opcode || 0x26 == opcode ) ) // FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]    ;    FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
                 {
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t sz = opbits( 22, 1 );
-                    uint64_t L = opbits( 21, 1 );
-                    uint64_t M = opbits( 20, 1 );
-                    uint64_t H = opbits( 11, 1 );
-                    uint64_t Q = opbits( 20, 1 );
+                    uint64_t sz = opbit( 22 );
+                    uint64_t L = opbit( 21 );
+                    uint64_t M = opbit( 20 );
+                    uint64_t H = opbit( 11 );
+                    uint64_t Q = opbit( 20 );
                     uint64_t Rmhi = M;
                     if ( 0 == sz )
                         Rmhi = ( H << 1 ) | L;
@@ -3481,21 +3481,21 @@ uint64_t Arm64::run( void )
                                   // LD1R { <Vt>.<T> }, [<Xn|SP>], <imm>   ;    LD1R { <Vt>.<T> }, [<Xn|SP>], <Xm>
                                   // ST1 { <Vt>.B }[<index>], [<Xn|SP>]    ;    ST1 { <Vt>.B }[<index>], [<Xn|SP>], #1
             {
-                uint64_t R = opbits( 21, 1 );
+                uint64_t R = opbit( 21 );
                 if ( R )
                     unhandled();
-                uint64_t post_index = opbits( 23, 1 );
+                uint64_t post_index = opbit( 23 );
                 uint64_t opcode = opbits( 13, 3 );
-                uint64_t bit13 = opbits( 13, 1 );
+                uint64_t bit13 = opbit( 13 );
                 if ( bit13 )
                     unhandled();
                 uint64_t size = opbits( 10, 2 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t m = opbits( 16, 5 );
                 uint64_t t = opbits( 0, 5 );
-                uint64_t S = opbits( 12, 1 );
-                uint64_t Q = opbits( 30, 1 );
-                uint64_t L = opbits( 22, 1 );
+                uint64_t S = opbit( 12 );
+                uint64_t Q = opbit( 30 );
+                uint64_t L = opbit( 22 );
                 uint64_t index = 0;
                 uint64_t replicate = ( 6 == opcode );
                 uint64_t scale = get_bits( opcode, 1, 2 );
@@ -3568,14 +3568,14 @@ uint64_t Arm64::run( void )
             case 0x48: // LDAXRH <Wt>, [<Xn|SP>{, #0}]    ;    LDARH <Wt>, [<Xn|SP>{, #0}]    ;    STLXRH <Ws>, <Wt>, [<Xn|SP>{, #0}]    ;    STLRH <Wt>, [<Xn|SP>{, #0}]
                        // STXRH <Ws>, <Wt>, [<Xn|SP>{, #0}] ;  LDXRH <Wt>, [<Xn|SP>{, #0}]
             {
-                uint64_t bit23 = opbits( 23, 1 );
-                uint64_t L = opbits( 22, 1 );
-                uint64_t bit21 = opbits( 21, 1 );
+                uint64_t bit23 = opbit( 23 );
+                uint64_t L = opbit( 22 );
+                uint64_t bit21 = opbit( 21 );
                 uint64_t s = opbits( 16, 5 );
                 uint64_t t2 = opbits( 10, 5 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t t = opbits( 0, 5 );
-                bool is16 = opbits( 30, 1 );
+                bool is16 = opbit( 30 );
     
                 if ( 0 != bit21 || 0x1f != t2 )
                     unhandled();
@@ -3612,8 +3612,8 @@ uint64_t Arm64::run( void )
                 uint64_t a = opbits( 10, 5 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
-                uint64_t subtract = opbits( 15, 1 );
-                uint64_t negate = opbits( 21, 1 );
+                uint64_t subtract = opbit( 15 );
+                uint64_t negate = opbit( 21 );
 
                 if ( 0 == ftype ) // float
                 {
@@ -3668,17 +3668,16 @@ uint64_t Arm64::run( void )
             case 0xfd: // LDR <Dt>, [<Xn|SP>{, #<pimm>}]  ;    STR <Dt>, [<Xn|SP>{, #<pimm>}]
             {
                 uint64_t bits11_10 = opbits( 10, 2 );
-                uint64_t bit21 = opbits( 21, 1 );
+                uint64_t bit21 = opbit( 21 );
                 bool unsignedOffset = ( 0xd == ( hi8 & 0xf ) );
                 bool preIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 3 == bits11_10 ) );
                 bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bits11_10 ) );
                 bool signedUnscaledOffset = ( ( 0xc == ( hi8 & 0xf ) ) && ( 0 == bits11_10 ) );
                 bool shiftExtend = ( ( 0xc == ( hi8 & 0xf ) ) && ( bit21 ) && ( 2 == bits11_10 ) );
-                uint64_t imm12 = opbits( 10, 12 );
                 int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
                 uint64_t size = opbits( 30, 2 );
                 uint64_t opc = opbits( 22, 2 );
-                bool is_ldr = opbits( 22, 1 );
+                bool is_ldr = opbit( 22 );
                 uint64_t t = opbits( 0, 5 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t address = regs[ n ];
@@ -3687,8 +3686,8 @@ uint64_t Arm64::run( void )
                 if ( ( is_ldr && ( 3 == opc ) ) || ( !is_ldr && ( 2 == opc ) ) )
                     byte_len = 16;
 
-                //tracer.Trace( "hi8 %#x, str/ldr %d, preindex %d, postindex %d, signedUnscaledOffset %d, shiftExtend %d, imm9 %lld, imm12 %llu, n %llu, t %llu, byte_len %llu\n",
-                //              hi8, is_ldr, preIndex, postIndex, signedUnscaledOffset, shiftExtend, imm9, imm12, n, t, byte_len );
+                //tracer.Trace( "hi8 %#x, str/ldr %d, preindex %d, postindex %d, signedUnscaledOffset %d, shiftExtend %d, imm9 %lld, n %llu, t %llu, byte_len %llu\n",
+                //              hi8, is_ldr, preIndex, postIndex, signedUnscaledOffset, shiftExtend, imm9, n, t, byte_len );
     
                 if ( preIndex )
                 {
@@ -3696,7 +3695,10 @@ uint64_t Arm64::run( void )
                      address = regs[ n ];
                 }
                 else if ( unsignedOffset )
+                {
+                    uint64_t imm12 = opbits( 10, 12 );
                     address += ( imm12 * byte_len );
+                }
                 else if ( signedUnscaledOffset )
                     address += imm9;
                 else if ( shiftExtend )
@@ -3704,7 +3706,7 @@ uint64_t Arm64::run( void )
                     uint64_t option = opbits( 13, 3 );
                     uint64_t m = opbits( 16, 5 );
                     uint64_t shift = 0;
-                    uint64_t S = opbits( 12, 1 );
+                    uint64_t S = opbit( 12 );
                     //tracer.Trace( "option %#llx, S %llu, size %llu, opc %#llx\n", option, S, size, opc );
                     if ( 0 != S )
                     {
@@ -3777,8 +3779,8 @@ uint64_t Arm64::run( void )
                 uint64_t t2 = opbits( 10, 5 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t t1 = opbits( 0, 5 );
-                uint64_t L = opbits( 22, 1 );
-                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t L = opbit( 22 );
+                uint64_t bit23 = opbit( 23 );
     
                 bool preIndex = ( ( 0xd == ( hi8 & 0xf ) ) && bit23 );
                 bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && bit23 );
@@ -3824,15 +3826,15 @@ uint64_t Arm64::run( void )
                 uint64_t abc = opbits( 16, 3 );
                 uint64_t defgh = opbits( 5, 5 );
                 uint64_t val = ( abc << 5 ) | defgh;
-                uint64_t Q = opbits( 30, 1 );
-                uint64_t bit29 = opbits( 29, 1 );
-                uint64_t bit10 = opbits( 10, 1 );
-                uint64_t bit11 = opbits( 11, 1 );
-                uint64_t bit12 = opbits( 12, 1 );
-                uint64_t bit13 = opbits( 13, 1 );
-                uint64_t bit14 = opbits( 14, 1 );
-                uint64_t bit15 = opbits( 15, 1 );
-                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t Q = opbit( 30 );
+                uint64_t bit29 = opbit( 29 );
+                uint64_t bit10 = opbit( 10 );
+                uint64_t bit11 = opbit( 11 );
+                uint64_t bit12 = opbit( 12 );
+                uint64_t bit13 = opbit( 13 );
+                uint64_t bit14 = opbit( 14 );
+                uint64_t bit15 = opbit( 15 );
+                uint64_t bit23 = opbit( 23 );
                 uint64_t d = opbits( 0, 5 );
                 uint64_t bits23_19 = opbits( 19, 5 );
                 uint64_t imm = adv_simd_expand_imm( bit29, cmode, val );
@@ -3868,7 +3870,7 @@ uint64_t Arm64::run( void )
                         else
                             unhandled();
                     }
-                    else if ( !bit12|| ( 0xc == ( cmode & 0xe ) ) ) // movi
+                    else if ( !bit12 || ( 0xc == ( cmode & 0xe ) ) ) // movi
                     {
                         if ( !bit29)
                         {
@@ -3903,14 +3905,14 @@ uint64_t Arm64::run( void )
                         }
                         else
                         {
-                            uint64_t a = opbits( 18, 1 );
-                            uint64_t b = opbits( 17, 1 );
-                            uint64_t c = opbits( 16, 1 );
-                            uint64_t dbit = opbits( 9, 1 );
-                            uint64_t e = opbits( 8, 1 );
-                            uint64_t f = opbits( 7, 1 );
-                            uint64_t g = opbits( 6, 1 );
-                            uint64_t h = opbits( 5, 1 );
+                            uint64_t a = opbit( 18 );
+                            uint64_t b = opbit( 17 );
+                            uint64_t c = opbit( 16 );
+                            uint64_t dbit = opbit( 9 );
+                            uint64_t e = opbit( 8 );
+                            uint64_t f = opbit( 7 );
+                            uint64_t g = opbit( 6 );
+                            uint64_t h = opbit( 5 );
         
                             imm = a ? ( 0xffull << 56 ) : 0;
                             imm |= b ? ( 0xffull << 48 ) : 0;
@@ -4021,9 +4023,9 @@ uint64_t Arm64::run( void )
                     {
                         uint64_t size = bits23_22;
                         uint64_t n = opbits( 5, 5 );
-                        uint64_t L = opbits( 21, 1 );
-                        uint64_t M = opbits( 20, 1 );
-                        uint64_t H = opbits( 11, 1 );
+                        uint64_t L = opbit( 21 );
+                        uint64_t M = opbit( 20 );
+                        uint64_t H = opbit( 11 );
                         uint64_t index = 0;
                         uint64_t rmhi = 0;
                         uint64_t indx_val_size = 0;
@@ -4117,9 +4119,9 @@ uint64_t Arm64::run( void )
                     {
                         uint64_t n = opbits( 5, 5 );
                         uint64_t m = opbits( 16, 5 );
-                        uint64_t sz = opbits( 22, 1 );
-                        uint64_t L = opbits( 21, 1 );
-                        uint64_t H = opbits( 11, 1 );
+                        uint64_t sz = opbit( 22 );
+                        uint64_t L = opbit( 21 );
+                        uint64_t H = opbit( 11 );
                         uint64_t szL = ( sz << 1 ) | L;
                         uint64_t index = ( 0 == sz ) ? ( ( H << 1 ) | L ) : ( 2 == szL ) ? H : 0;
                         uint64_t esize = 32ull << sz;
@@ -4266,9 +4268,9 @@ uint64_t Arm64::run( void )
                     {
                         uint64_t n = opbits( 5, 5 );
                         uint64_t m = opbits( 16, 5 );
-                        uint64_t sz = opbits( 22, 1 );
-                        uint64_t L = opbits( 21, 1 );
-                        uint64_t H = opbits( 11, 1 );
+                        uint64_t sz = opbit( 22 );
+                        uint64_t L = opbit( 21 );
+                        uint64_t H = opbit( 11 );
     
                         uint64_t index = ( !sz ) ? ( ( H << 1 ) | L ) : H;
                         uint64_t esize = 32ull << sz;
@@ -4307,13 +4309,13 @@ uint64_t Arm64::run( void )
             {
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
                 uint64_t opc = opbits( 10, 2 ); // 2 or 3 for container size
-                uint64_t data_size = ( 32ull << opbits( 31, 1 ) );
+                uint64_t data_size = ( 32ull << opbit( 31 ) );
                 uint64_t container_size = ( 8ull << opc );
                 uint64_t containers = data_size / container_size;
                 uint64_t bits23_21 = opbits( 21, 3 );
                 uint64_t bits15_10 = opbits( 10, 6 );
-                uint64_t bit11 = opbits( 11, 1 );
-                uint64_t bit10 = opbits( 10, 1 );
+                uint64_t bit11 = opbit( 11 );
+                uint64_t bit10 = opbit( 10 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
                 uint64_t result = 0;
@@ -4550,7 +4552,7 @@ uint64_t Arm64::run( void )
             {
                 uint64_t imm19 = opbits( 5, 19 );
                 uint64_t t = opbits( 0, 5 );
-                bool xregs = ( 0 != opbits( 30, 1 ) );
+                bool xregs = ( 0 != opbit( 30 ) );
                 uint64_t address = pc + ( imm19 << 2 );
                 if ( 31 == t )
                     break;
@@ -4572,7 +4574,7 @@ uint64_t Arm64::run( void )
     
                 if ( 2 == bits23_21 )
                 {
-                    uint64_t o3 = opbits( 4, 1 );
+                    uint64_t o3 = opbit( 4 );
                     if ( 0 != o3 )
                         unhandled();
         
@@ -4653,7 +4655,7 @@ uint64_t Arm64::run( void )
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
                 bool is_sub = ( 0 != ( 0x40 & hi8 ) );
-                bool shift12 = opbits( 22, 1 );
+                bool shift12 = opbit( 22 );
                 if ( shift12 )
                     imm12 <<= 12;
 
@@ -4687,7 +4689,7 @@ uint64_t Arm64::run( void )
             case 0xcb: // SUB <Xd|SP>, <Xn|SP>, <R><m>{, <extend> {#<amount>}}      ;    SUB <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
             case 0xeb: // SUBS <Xd>, <Xn|SP>, <R><m>{, <extend> {#<amount>}}        ;    SUBS <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
             {
-                uint64_t extended = opbits( 21, 1 );
+                uint64_t extended = opbit( 21 );
                 uint64_t issub = ( 0 != ( 0x40 & hi8 ) );
                 uint64_t setflags = ( 0 != ( 0x20 & hi8 ) );
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
@@ -4751,8 +4753,8 @@ uint64_t Arm64::run( void )
             case 0x91: // add <xd|SP>, <xn|SP>, #imm [,<shift>]
             case 0xd1: // sub <xd|SP>, <xn|SP>, #imm [,<shift>]
             {
-                bool sf = ( 0 != opbits( 31, 1 ) );
-                bool sh = ( 0 != opbits( 22, 1 ) );
+                bool sf = ( 0 != opbit( 31 ) );
+                bool sh = ( 0 != opbit( 22 ) );
                 uint64_t imm12 = opbits( 10, 12 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
@@ -4786,7 +4788,7 @@ uint64_t Arm64::run( void )
             case 0x68: // ldp 32-bit sign extended                LDPSW <Xt1>, <Xt2>, [<Xn|SP>], #<imm>
             case 0x69: // ldp 32-bit sign extended                LDPSW <Xt1>, <Xt2>, [<Xn|SP>, #<imm>]!  ;    LDPSW <Xt1>, <Xt2>, [<Xn|SP>{, #<imm>}]
             {
-                bool xregs = ( 0 != opbits( 31, 1 ) );
+                bool xregs = ( 0 != opbit( 31 ) );
                 uint64_t t1 = opbits( 0, 5 );
                 uint64_t t2 = opbits( 10, 5 );
                 uint64_t n = opbits( 5, 5 );
@@ -4800,7 +4802,7 @@ uint64_t Arm64::run( void )
                 bool signedOffset = ( 2 == variant );
                 uint64_t address = regs[ n ];
 
-                if ( 0 == opbits( 22, 1 ) ) // bit 22 is 0 for stp
+                if ( 0 == opbit( 22 ) ) // bit 22 is 0 for stp
                 {
                     if ( preIndex )
                         address += imm7;
@@ -4888,7 +4890,7 @@ uint64_t Arm64::run( void )
             case 0xaa: // ORR <Xd>, <Xn>, <Xm>{, <shift> #<amount>}    ;    ORN <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
             {
                 uint64_t shift = opbits( 22, 2 );
-                uint64_t N = opbits( 21, 1 );
+                uint64_t N = opbit( 21 );
                 uint64_t m = opbits( 16, 5 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
@@ -4935,8 +4937,8 @@ uint64_t Arm64::run( void )
                 uint64_t imms = opbits( 10, 6 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
-                uint64_t bit23 = opbits( 23, 1 );
-                bool xregs = ( 0 != opbits( 31, 1 ) );
+                uint64_t bit23 = opbit( 23 );
+                bool xregs = ( 0 != opbit( 31 ) );
 
                 if ( 31 == d )
                     break;
@@ -5008,7 +5010,7 @@ uint64_t Arm64::run( void )
             case 0xea: // ANDS <Xd>, <Xn>, <Xm>{, <shift> #<amount>}    ;    BICS <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
             {
                 uint64_t shift = opbits( 22, 2 );
-                uint64_t N = opbits( 21, 1 ); // BICS -- complement
+                uint64_t N = opbit( 21 ); // BICS -- complement
                 uint64_t m = opbits( 16, 5 );
                 uint64_t imm6 = opbits( 10, 6 );
                 uint64_t n = opbits( 5, 5 );
@@ -5118,7 +5120,7 @@ uint64_t Arm64::run( void )
             case 0x12: // MOVN <Wd>, #<imm>{, LSL #<shift>}   ;    AND <Wd|WSP>, <Wn>, #<imm>
             case 0x92: // MOVN <Xd>, #<imm16>, LSL #<shift>   ;    AND <Xd|SP>, <Xn>, #<imm>    ;    MOV <Xd>, #<imm>
             {
-                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t bit23 = opbit( 23 );
                 bool xregs = ( 0 != ( hi8 & 0x80 ) );
                 if ( bit23 ) // MOVN
                 {
@@ -5172,7 +5174,7 @@ uint64_t Arm64::run( void )
             }
             case 0xd4: // SVC
             {
-                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t bit23 = opbit( 23 );
                 uint64_t hw = opbits( 21, 2 );
 
                 if ( !bit23 && ( 0 == hw ) )
@@ -5202,7 +5204,7 @@ uint64_t Arm64::run( void )
                 if ( ( 0xd5033 == upper20 ) && ( 0xbf == lower8 ) ) // dmb -- no memory barries are needed due to just one thread and core
                     break;
     
-                uint64_t l = opbits( 21, 1 );
+                uint64_t l = opbit( 21 );
                 uint64_t op0 = opbits( 19, 2 );
                 uint64_t op1 = opbits( 16, 3 );
                 uint64_t op2 = opbits( 5, 3 );
@@ -5279,16 +5281,16 @@ uint64_t Arm64::run( void )
                                   // NEG <Vd>.<T>, <Vn>.<T> ; EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index>            ;    FCVTZU <Vd>.<T>, <Vn>.<T>
                                   // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
             {
-                uint64_t Q = opbits( 30, 1 );
+                uint64_t Q = opbit( 30 );
                 uint64_t m = opbits( 16, 5 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
                 uint64_t size = opbits( 22, 2 );
                 uint64_t opc2 = opbits( 22, 2 );
-                uint64_t bit23 = opbits( 23, 1 );
-                uint64_t bit21 = opbits( 21, 1 );
-                uint64_t bit15 = opbits( 15, 1 );
-                uint64_t bit10 = opbits( 10, 1 );
+                uint64_t bit23 = opbit( 23 );
+                uint64_t bit21 = opbit( 21 );
+                uint64_t bit15 = opbit( 15 );
+                uint64_t bit10 = opbit( 10 );
                 uint64_t opcode = opbits( 10, 6 );
                 uint64_t esize = 8ull << size;
                 uint64_t ebytes = esize / 8;
@@ -5321,7 +5323,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( !bit23 && bit21 && 0 == bits20_17 && 0x76 == bits16_10 ) // UCVTF <Vd>.<T>, <Vn>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     esize = 32ull << sz;
                     ebytes = esize / 8;
                     elements = datasize / esize;
@@ -5335,7 +5337,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( bit23 && bit21 && 0 == bits20_17 && 0x6e == bits16_10 ) // FCVTZU <Vd>.<T>, <Vn>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     esize = 32ull << sz;
                     ebytes = esize / 8;
                     elements = datasize / esize;
@@ -5410,7 +5412,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( !bit23 && bit21 && 0x3f == bits15_10 ) // FDIV <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     esize = 32ull << sz;
                     ebytes = esize / 8;
                     elements = datasize / esize;
@@ -5534,7 +5536,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( bit23 && bit21 && 0 == bits20_17 && 0x3e == bits16_10 ) // FNEG <Vd>.<T>, <Vn>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     esize = 32ull << sz;
                     ebytes = esize / 8;
                     elements = datasize / esize;
@@ -5553,7 +5555,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( !bit23 && bit21 && 0x35 == opcode ) // FADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     esize = sz ? 64 : 32;
                     ebytes = esize / 8;
                     elements = datasize / esize;
@@ -5699,7 +5701,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( bit21 && 0x37 == opcode ) // FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     esize = 32ull << sz;
                     ebytes = esize / 8;
                     elements = datasize / esize;
@@ -5875,7 +5877,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( 0x386e == bits23_10 || 0x286e == bits23_10 ) // FCVTZS <V><d>, <V><n>. round towards zero fp to signed integer
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     if ( sz )
                     {
                         int64_t nval = double_to_fixed_int64( vregs[ n ].d[ 0 ], 0, FPRounding_ZERO );
@@ -5891,7 +5893,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( 0x0876 == ( bits23_10 & 0x2fff ) ) // SCVTF <Vd>.<T>, <Vn>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     if ( sz )
                         vregs[ d ].d[ 0 ] = (double) (int64_t) vregs[ n ].ui64[ 0 ];
                     else
@@ -5929,9 +5931,9 @@ uint64_t Arm64::run( void )
                 uint64_t bits15_10 = opbits( 10, 6 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
-                uint64_t bit23 = opbits( 23, 1 );
-                uint64_t sz = opbits( 22, 1 );
-                uint64_t bit21 = opbits( 21, 1 );
+                uint64_t bit23 = opbit( 23 );
+                uint64_t sz = opbit( 22 );
+                uint64_t bit21 = opbit( 21 );
                 uint64_t opcode = opbits( 10, 6 );
 
                 if ( bit23 && bit21 && 0x6e == bits20_10 ) // FCVTZU <V><d>, <V><n>
@@ -6038,13 +6040,13 @@ uint64_t Arm64::run( void )
                                   // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                                   // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
             {
-                uint64_t Q = opbits( 30, 1 );
+                uint64_t Q = opbit( 30 );
                 uint64_t imm5 = opbits( 16, 5 );
-                uint64_t bit15 = opbits( 15, 1 );
+                uint64_t bit15 = opbit( 15 );
                 uint64_t bits14_11 = opbits( 11, 4 );
-                uint64_t bit10 = opbits( 10, 1 );
-                uint64_t bit21 = opbits( 21, 1 );
-                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t bit10 = opbit( 10 );
+                uint64_t bit21 = opbit( 21 );
+                uint64_t bit23 = opbit( 23 );
                 uint64_t bits23_21 = opbits( 21, 3 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
@@ -6056,7 +6058,7 @@ uint64_t Arm64::run( void )
 
                 if ( !bit23 && bit21 && 1 == bits20_16 && 0x1e == bits15_10 ) // FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t esize = 16ull << sz;
                     uint64_t ebytes = esize / 8;
                     datasize = 64;
@@ -6082,7 +6084,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( bit23 && bit21 && 1 == bits20_16 && 0x2e == bits15_10 ) // FCVTZS <Vd>.<T>, <Vn>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
@@ -6100,7 +6102,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( !bit23 && bit21 && 1 == bits20_16 && 0x1a == bits15_10 ) // FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t esize = 16ull << sz;
                     datasize = 64;
                     uint64_t elements = datasize / esize;
@@ -6116,7 +6118,7 @@ uint64_t Arm64::run( void )
                 else if ( bit21 && 0x31 == bits15_10 ) // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
@@ -6233,7 +6235,7 @@ uint64_t Arm64::run( void )
                 else if ( bit23 && bit21 && 0x35 == bits15_10 ) // FSUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
@@ -6250,7 +6252,7 @@ uint64_t Arm64::run( void )
                 else if ( bit23 && bit21 && 0x33 == bits15_10 ) // FMLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
@@ -6379,7 +6381,7 @@ uint64_t Arm64::run( void )
                     uint64_t esize = 8ull << size;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
-                    uint64_t part = opbits( 14, 1 );
+                    uint64_t part = opbit( 14 );
                     uint64_t pairs = elements / 2;
                     uint64_t base_amount = part * pairs;
                     vec16_t target = { 0 };
@@ -6427,7 +6429,7 @@ uint64_t Arm64::run( void )
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
                     uint64_t pairs = elements / 2;
-                    uint64_t part = opbits( 14, 1 ); // TRN1 vs TRN2
+                    uint64_t part = opbit( 14 ); // TRN1 vs TRN2
                     vec16_t target = { 0 };
                     uint8_t * ptarget = (uint8_t *) &target;
 
@@ -6442,7 +6444,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( !bit23 && bit21 && bit15 && 0xa == bits14_11 && bit10 ) // FADD <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t m = opbits( 16, 5 );
                     uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
@@ -6464,7 +6466,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( !bit23 && bit21 && bit15 && 9 == bits14_11 && bit10 ) // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t m = opbits( 16, 5 );
                     uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
@@ -6487,7 +6489,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( !bit23 && bit21 && 1 == bits20_16 && bit15 && 0x16 == bits14_10 ) // SCVTF <Vd>.<T>, <Vn>.<T>
                 {
-                    uint64_t sz = opbits( 22, 1 );
+                    uint64_t sz = opbit( 22 );
                     uint64_t esize = 32ull << sz;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
@@ -6566,7 +6568,7 @@ uint64_t Arm64::run( void )
                     uint64_t esize = 8ull << size;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
-                    uint64_t part = opbits( 14, 1 ); // UZP2 is 1, UZP1 is 0
+                    uint64_t part = opbit( 14 ); // UZP2 is 1, UZP1 is 0
                     vec16_t target = { 0 };
                     uint8_t * ptarget = (uint8_t *) &target;
                     uint64_t second_offset = elements / 2 * ebytes;
@@ -6799,12 +6801,12 @@ uint64_t Arm64::run( void )
                        // FMAX <Dd>, <Dn>, <Dm> ; FMINNM <Dd>, <Dn>, <Dm>  ; FMIN <Dd>, <Dn>, <Dm> ; FRINTZ <Dd>, <Dn>    ;    FRINTP <Dd>, <Dn>
             case 0x9e: // FMOV <Xd>, <Hn>    ;    UCVTF <Hd>, <Dn>    ;    FCVTZU <Xd>, <Dn>    ;    FCVTAS <Xd>, <Dn>    ;    FCVTMU <Xd>, <Dn>
             {
-                uint64_t sf = opbits( 31, 1 );
+                uint64_t sf = opbit( 31 );
                 uint64_t ftype = opbits( 22, 2 );
-                uint64_t bit21 = opbits( 21, 1 );
-                uint64_t bit11 = opbits( 11, 1 );
-                uint64_t bit10 = opbits( 10, 1 );
-                uint64_t bit4 = opbits( 4, 1 );
+                uint64_t bit21 = opbit( 21 );
+                uint64_t bit11 = opbit( 11 );
+                uint64_t bit10 = opbit( 10 );
+                uint64_t bit4 = opbit( 4 );
                 uint64_t bits21_19 = opbits( 19, 3 );
                 uint64_t rmode = opbits( 19, 2 );
                 uint64_t bits18_16 = opbits( 16, 3 );
@@ -7278,7 +7280,7 @@ uint64_t Arm64::run( void )
                     else
                         unhandled();
                 }
-                else if ( bit21 && ( 1 == ( bits18_10 & 3 ) ) && ( 0 == opbits( 4, 1 ) ) ) // fccmp
+                else if ( bit21 && ( 1 == ( bits18_10 & 3 ) ) && ( 0 == opbit( 4 ) ) ) // fccmp
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t cond = opbits( 12, 4 );
@@ -7328,9 +7330,9 @@ uint64_t Arm64::run( void )
                        // LD4 { <Vt>.<T>, <Vt2>.<T>, <Vt3>.<T>, <Vt4>.<T> }, [<Xn|SP>], <imm>
                        // LD4 { <Vt>.<T>, <Vt2>.<T>, <Vt3>.<T>, <Vt4>.<T> }, [<Xn|SP>], <Xm>
             {
-                uint64_t Q = opbits( 30, 1 );
-                uint64_t L = opbits( 22, 1 ); // load vs. store
-                uint64_t post_index = opbits( 23, 1 );
+                uint64_t Q = opbit( 30 );
+                uint64_t L = opbit( 22 ); // load vs. store
+                uint64_t post_index = opbit( 23 );
                 uint64_t opcode = opbits( 12, 4 );
                 uint64_t size = opbits( 10, 2 );
                 uint64_t bits23_21 = opbits( 21, 3 );
@@ -7440,14 +7442,14 @@ uint64_t Arm64::run( void )
                 uint64_t t2 = opbits( 10, 5 );
                 uint64_t s = opbits( 16, 5 );
                 uint64_t L = opbits( 21, 2 );
-                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t bit23 = opbit( 23 );
     
                 if ( 0x1f != t2 )
                     unhandled();
 
                 if ( 0 == L ) // stxr, stlr
                 {
-                    uint64_t bit30 = opbits( 30, 1 );
+                    uint64_t bit30 = opbit( 30 );
                     uint64_t tval = val_reg_or_zr( t );
                     if ( bit30 )
                         setui64( regs[ n ], tval );
@@ -7476,10 +7478,10 @@ uint64_t Arm64::run( void )
             {
                 uint64_t n = opbits( 5, 5 );
                 uint64_t theop = opbits( 21, 2 );
-                uint64_t bit23 = opbits( 23, 1 );
+                uint64_t bit23 = opbit( 23 );
                 uint64_t op2 = opbits( 12, 9 );
-                uint64_t A = opbits( 11, 1 );
-                uint64_t M = opbits( 10, 1 );
+                uint64_t A = opbit( 11 );
+                uint64_t M = opbit( 10 );
                 if ( 0 != bit23 )
                     unhandled();
                 if ( 0x1f0 != op2 )
@@ -7509,12 +7511,12 @@ uint64_t Arm64::run( void )
                 uint64_t d = opbits( 0, 5 );
                 if ( 31 == d )
                     break;
-                bool xregs = ( 0 != opbits( 31, 1 ) );
+                bool xregs = ( 0 != opbit( 31 ) );
                 uint64_t m = opbits( 16, 5 );
                 uint64_t a = opbits( 10, 5 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t bits23_21 = opbits( 21, 3 );
-                bool bit15 = ( 1 == opbits( 15, 1 ) );
+                bool bit15 = ( 1 == opbit( 15 ) );
                 uint64_t aval = val_reg_or_zr( a );
                 uint64_t nval = val_reg_or_zr( n );
                 uint64_t mval = val_reg_or_zr( m );
@@ -7545,7 +7547,7 @@ uint64_t Arm64::run( void )
                         regs[ d ] = aval + ( ( 0xffffffff & nval ) * ( 0xffffffff & mval ) );
                     else if ( 1 == bits23_21 && !bit15 ) // smaddl
                         regs[ d ] = aval + ( (int64_t) (int32_t) ( 0xffffffff & nval ) * (int64_t) (int32_t) ( 0xffffffff & mval ) );
-                    else if ( 0 == bits23_21 && !bit15) // madd
+                    else if ( 0 == bits23_21 && !bit15 ) // madd
                         regs[ d ] = aval + ( nval * mval );
                     else
                         unhandled();
@@ -7554,7 +7556,7 @@ uint64_t Arm64::run( void )
                 {
                     if ( 0 == bits23_21 && bit15 ) // msub
                         regs[ d ] = (uint32_t) aval - (uint32_t) ( 0xffffffff & ( (uint32_t) nval * (uint32_t) mval ) );
-                    else if ( 0 == bits23_21 && !bit15) // madd
+                    else if ( 0 == bits23_21 && !bit15 ) // madd
                         regs[ d ] = (uint32_t) aval + (uint32_t) ( 0xffffffff & ( (uint32_t) nval * mval ) );
                     else
                         unhandled();
@@ -7566,7 +7568,7 @@ uint64_t Arm64::run( void )
             {
                 uint64_t d = opbits( 0, 5 );
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
-                uint64_t bit23 = opbits( 23, 1 ); // 1 for MOVK, 0 for ANDS
+                uint64_t bit23 = opbit( 23 ); // 1 for MOVK, 0 for ANDS
                 if ( bit23 )  // MOVK <Xd>, #<imm>{, LSL #<shift>}
                 {
                     uint64_t hw = opbits( 21, 2 );
@@ -7649,7 +7651,7 @@ uint64_t Arm64::run( void )
                 else if ( 1 == opc ) // str (register) STR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
                 {
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t shift = opbits( 12, 1 );
+                    uint64_t shift = opbit( 12 );
                     if ( 1 == shift )
                         shift = ( hi8 >> 6 );
                     uint64_t option = opbits( 13, 3 );
@@ -7701,7 +7703,7 @@ uint64_t Arm64::run( void )
                 else if ( 3 == opc ) // ldr (register) LDR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
                 {
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t shift = opbits( 12, 1 );
+                    uint64_t shift = opbit( 12 );
                     if ( 1 == shift )
                         shift = ( hi8 >> 6 );
 
@@ -7748,7 +7750,7 @@ uint64_t Arm64::run( void )
                     else
                         unhandled();
     
-                    bool isx = ( 0 == opbits( 22, 1 ) );
+                    bool isx = ( 0 == opbit( 22 ) );
                     if ( !isx )
                         regs[ t ] &= 0xffffffff;
 
@@ -7767,7 +7769,7 @@ uint64_t Arm64::run( void )
                                                   //     (opc == 5 && option = many) LDRSW <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
                 {
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t shift = opbits( 12, 1 );
+                    uint64_t shift = opbit( 12 );
                     if ( 1 == shift )
                         shift = ( hi8 >> 6 );
                     uint64_t option = opbits( 13, 3 );
@@ -7778,7 +7780,7 @@ uint64_t Arm64::run( void )
 
                     if ( 0xb8 == hi8 )
                     {
-                        uint64_t offset = extend_reg( m, option, opbits( 12, 1 ) ? 2 : 0 );
+                        uint64_t offset = extend_reg( m, option, opbit( 12 ) ? 2 : 0 );
                         regs[ t ] = sign_extend( getui32( address + offset ), 31 );
                     }
                     else if ( 0x38 == hi8 )
