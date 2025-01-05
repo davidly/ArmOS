@@ -55,8 +55,6 @@ struct Arm64
     } //Arm64
 
     uint64_t run( void );
-    const char * reg_name( uint64_t reg );
-    const char * vreg_name( uint64_t reg );
 
     uint64_t regs[ 32 ];            // x0 through x31. x31 is sp. XZR references to x31 are handled in code
     vec16_t vregs[ 32 ];            // v0 through v31
@@ -75,17 +73,17 @@ struct Arm64
     vec16_t vec_zeroes;
     vec16_t vec_ones;
 
-    uint64_t getoffset( uint64_t address )
+    uint64_t getoffset( uint64_t address ) const
     {
         return address - base;
     } //getoffset
 
-    uint64_t get_vm_address( uint64_t offset )
+    uint64_t get_vm_address( uint64_t offset ) const
     {
         return base + offset;
     } //get_vm_address
 
-    uint64_t host_to_vm_address( void * p )
+    uint64_t host_to_vm_address( void * p ) const
     {
         return (uint64_t) ( (uint8_t *) p - mem + base );
     } //host_to_vm_address
@@ -111,7 +109,7 @@ struct Arm64
         #endif
     } //getmem
 
-    bool is_address_valid( uint64_t offset )
+    bool is_address_valid( uint64_t offset ) const
     {
         uint8_t * r = membase + offset;
         return ( ( r < beyond ) && ( r >= mem ) );  
@@ -142,25 +140,23 @@ struct Arm64
 
     void unhandled( void );
 
-    __inline_perf uint64_t opbits( uint64_t lowbit, uint64_t len )
+    __inline_perf uint64_t opbits( uint64_t lowbit, uint64_t len ) const
     {
         uint64_t val = ( op >> lowbit );
         assert( 64 != len ); // the next line of code wouldn't work but there are no callers that do this
         return ( val & ( ( 1ull << len ) - 1 ) );
     } //opbits
 
-    uint64_t openai_add_with_carry64( uint64_t x, uint64_t y, bool carry, bool setflags );
     uint64_t add_with_carry64( uint64_t x, uint64_t y, bool carry, bool setflags );
     uint32_t add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags );
     uint64_t sub64( uint64_t x, uint64_t y, bool setflags );
     uint32_t sub32( uint32_t x, uint32_t y, bool setflags );
-    bool check_conditional( uint64_t cond );
+    bool check_conditional( uint64_t cond ) const;
     uint64_t shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount );
     uint32_t shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount );
-    uint64_t reg_or_sp_value( uint64_t x );
     uint64_t extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift, bool fullm = true );
-    uint64_t val_reg_or_zr( uint64_t r );
-    const char * render_flags();
+    uint64_t val_reg_or_zr( uint64_t r ) const;
+    const char * render_flags() const;
     ElementComparisonResult compare_vector_elements( uint8_t * pl, uint8_t * pr, uint64_t width, bool unsigned_compare );
     uint8_t * vreg_ptr( uint64_t reg, uint64_t offset ) { return offset + (uint8_t *) & ( vregs[ reg ] ); }
     void zero_vreg( uint64_t reg ) { vregs[ reg ] = vec_zeroes; }

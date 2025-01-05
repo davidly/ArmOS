@@ -31,10 +31,10 @@ using namespace std::chrono;
 #pragma GCC diagnostic ignored "-Wformat="
 #endif
 
-static uint32_t g_State = 0;
+static uint64_t g_State = 0;
 
-const uint32_t stateTraceInstructions = 1;
-const uint32_t stateEndEmulation = 2;
+const uint64_t stateTraceInstructions = 1;
+const uint64_t stateEndEmulation = 2;
 
 bool Arm64::trace_instructions( bool t )
 {
@@ -56,7 +56,7 @@ void Arm64::set_flags_from_nzcv( uint64_t nzcv )
     fV = ( 0 != ( nzcv & 1 ) );
 } //set_flags_from_nzcv
 
-uint64_t count_bits( uint64_t x )
+static uint64_t count_bits( uint64_t x )
 {
     uint64_t count = 0;
     while ( 0 != x )
@@ -96,7 +96,7 @@ Arm64::FPRounding Arm64::fp_decode_rmode( uint64_t rmode ) // rmode is what is s
     return FPRounding_TIEEVEN; // keep the compiler happy
 } //fp_decode_rmode
 
-const char * get_rmode_text( uint64_t rmode )
+static const char * get_rmode_text( uint64_t rmode )
 {
     if ( 0 == rmode )
         return "FPRounding_TIEEVEN";
@@ -158,20 +158,20 @@ uint64_t Arm64::double_to_fixed_uint64( double d, uint64_t fracbits, FPRounding 
     return (uint64_t) val;
 } //double_to_fixed_uint64
 
-uint64_t get_bit( uint64_t x, uint64_t bit_number )
+static uint64_t get_bit( uint64_t x, uint64_t bit_number )
 {
     assert( 64 != bit_number );
     return ( ( x >> bit_number ) & 1 );
 } //get_bit
 
-uint64_t plaster_bit( uint64_t x, uint64_t bit_number, uint64_t bit_val )
+static uint64_t plaster_bit( uint64_t x, uint64_t bit_number, uint64_t bit_val )
 {
     uint64_t mask = ~ ( 1ull << bit_number );
     uint64_t plastered_bit = ( bit_val << bit_number );
     return ( ( x & mask ) | plastered_bit );
 } //plaster_bit
 
-uint64_t gen_bitmask( uint64_t n )
+static uint64_t gen_bitmask( uint64_t n )
 {
   if ( 0 == n )
       return 0;
@@ -179,13 +179,13 @@ uint64_t gen_bitmask( uint64_t n )
   return ( ~0ull ) >> ( 64ull - n );
 } //gen_bitmask
 
-uint64_t get_elem_bits( uint64_t val, uint64_t c, uint64_t container_size )
+static uint64_t get_elem_bits( uint64_t val, uint64_t c, uint64_t container_size )
 {
     uint64_t mask = gen_bitmask( container_size );
     return ( val & ( mask << ( c * 8 ) ) );
 } //get_elem_bits
 
-uint64_t get_bits( uint64_t x, uint64_t lowbit, uint64_t len )
+static uint64_t get_bits( uint64_t x, uint64_t lowbit, uint64_t len )
 {
     uint64_t val = ( x >> lowbit );
     if ( 64 == len ) // this actually happens
@@ -193,7 +193,7 @@ uint64_t get_bits( uint64_t x, uint64_t lowbit, uint64_t len )
     return ( val & ( ( 1ull << len ) - 1 ) );
 } //get_bits
 
-uint64_t reverse_bytes( uint64_t val, uint64_t n )
+static uint64_t reverse_bytes( uint64_t val, uint64_t n )
 {
     uint64_t result = 0;
 
@@ -212,7 +212,7 @@ uint64_t reverse_bytes( uint64_t val, uint64_t n )
     return result;
 } //reverse_bytes
 
-uint64_t one_bits( uint64_t bits )
+static uint64_t one_bits( uint64_t bits )
 {
     if ( 64 == bits )
         return ~0ull;
@@ -220,19 +220,14 @@ uint64_t one_bits( uint64_t bits )
     return ( ( 1ull << bits ) - 1 );
 } //one_bits
 
-uint64_t zero_extend( uint64_t x, uint64_t bits )
-{
-    return ( x & one_bits( bits ) );
-} //zero_extend
-
-uint64_t replicate_bits( uint64_t val, uint64_t len )
+static uint64_t replicate_bits( uint64_t val, uint64_t len )
 {
     if ( 0 != val )
         return one_bits( len );
     return 0;
 } //replicate_bits
 
-int64_t sign_extend( uint64_t x, uint64_t high_bit )
+static int64_t sign_extend( uint64_t x, uint64_t high_bit )
 {
     assert( high_bit < 63 );
     x &= ( 1ull << ( high_bit + 1 ) ) - 1; // clear bits above the high bit since they may contain noise
@@ -240,7 +235,7 @@ int64_t sign_extend( uint64_t x, uint64_t high_bit )
     return ( x ^ m ) - m;
 } //sign_extend
 
-uint32_t sign_extend32( uint32_t x, uint32_t high_bit )
+static uint32_t sign_extend32( uint32_t x, uint32_t high_bit )
 {
     assert( high_bit < 31 );
     x &= ( 1u << ( high_bit + 1 ) ) - 1; // clear bits above the high bit since they may contain noise
@@ -248,7 +243,7 @@ uint32_t sign_extend32( uint32_t x, uint32_t high_bit )
     return ( x ^ m ) - m;
 } //sign_extend32
 
-uint64_t plaster_bits( uint64_t val, uint64_t bits, uint64_t low_position, uint64_t len )
+static uint64_t plaster_bits( uint64_t val, uint64_t bits, uint64_t low_position, uint64_t len )
 {
     uint64_t low_ones = ( low_position > 0 ) ? one_bits( low_position ) : 0;
     uint64_t high_ones = one_bits( 64 - low_position - len );
@@ -257,7 +252,7 @@ uint64_t plaster_bits( uint64_t val, uint64_t bits, uint64_t low_position, uint6
     return ( with_hole | ( bits << low_position ) );
 } //plaster_bits
 
-uint64_t lowest_set_bit_nz( uint64_t x )
+static uint64_t lowest_set_bit_nz( uint64_t x )
 {
     uint64_t mask = 1;
     for ( uint64_t i = 0; i < 64; i++ )
@@ -271,7 +266,7 @@ uint64_t lowest_set_bit_nz( uint64_t x )
     return 64;
 } //lowest_set_bit_nz
 
-uint64_t highest_set_bit_nz( uint64_t x )
+static uint64_t highest_set_bit_nz( uint64_t x )
 {
     uint64_t mask = 1ull << 63;
     for ( uint64_t i = 64; i > 0; i-- )
@@ -285,12 +280,7 @@ uint64_t highest_set_bit_nz( uint64_t x )
     return 0;
 } //highest_set_bit_nz
 
-uint64_t low_bits( uint64_t x, uint64_t num )
-{
-    return ( x & one_bits( num ) );
-} //low_bits
-
-const char * Arm64::render_flags()
+const char * Arm64::render_flags() const
 {
     static char ac[ 5 ] = {0};
 
@@ -302,7 +292,7 @@ const char * Arm64::render_flags()
     return ac;
 } //render_flags
 
-const char * reg_or_sp( uint64_t x, bool xregs )
+static const char * reg_or_sp( uint64_t x, bool xregs )
 {
     assert( x <= 31 );
     static char ac[ 10 ];
@@ -313,7 +303,7 @@ const char * reg_or_sp( uint64_t x, bool xregs )
     return ac;
 } //reg_or_sp
 
-const char * reg_or_sp2( uint64_t x, bool xregs )
+static const char * reg_or_sp2( uint64_t x, bool xregs )
 {
     assert( x <= 31 );
     static char ac[ 10 ];
@@ -324,18 +314,7 @@ const char * reg_or_sp2( uint64_t x, bool xregs )
     return ac;
 } //reg_or_sp2
 
-const char * reg_or_sp3( uint64_t x, bool xregs )
-{
-    assert( x <= 31 );
-    static char ac[ 10 ];
-    if ( 31 == x )
-        strcpy( ac, "sp" );
-    else
-        snprintf( ac, _countof( ac ), "%c%llu", xregs ? 'x' : 'w', x );
-    return ac;
-} //reg_or_sp3
-
-const char * reg_or_zr( uint64_t x, bool xregs )
+static const char * reg_or_zr( uint64_t x, bool xregs )
 {
     assert( x <= 31 );
     static char ac[ 10 ];
@@ -346,7 +325,7 @@ const char * reg_or_zr( uint64_t x, bool xregs )
     return ac;
 } //reg_or_zr
 
-const char * reg_or_zr2( uint64_t x, bool xregs )
+static const char * reg_or_zr2( uint64_t x, bool xregs )
 {
     assert( x <= 31 );
     static char ac[ 10 ];
@@ -357,7 +336,7 @@ const char * reg_or_zr2( uint64_t x, bool xregs )
     return ac;
 } //reg_or_zr2
 
-const char * reg_or_zr3( uint64_t x, bool xregs )
+static const char * reg_or_zr3( uint64_t x, bool xregs )
 {
     assert( x <= 31 );
     static char ac[ 10 ];
@@ -368,7 +347,7 @@ const char * reg_or_zr3( uint64_t x, bool xregs )
     return ac;
 } //reg_or_zr3
 
-const char * reg_or_zr4( uint64_t x, bool xregs )
+static const char * reg_or_zr4( uint64_t x, bool xregs )
 {
     assert( x <= 31 );
     static char ac[ 10 ];
@@ -379,7 +358,7 @@ const char * reg_or_zr4( uint64_t x, bool xregs )
     return ac;
 } //reg_or_zr4
 
-uint64_t Arm64::val_reg_or_zr( uint64_t r )
+uint64_t Arm64::val_reg_or_zr( uint64_t r ) const
 {
     if ( 31 == r )
         return 0;
@@ -409,7 +388,7 @@ Arm64::ElementComparisonResult Arm64::compare_vector_elements( uint8_t * pl, uin
     return ecr_eq;
 } //compare_vector_elements
 
-const char * get_ld1_vector_T( uint64_t size, uint64_t Q )
+static const char * get_ld1_vector_T( uint64_t size, uint64_t Q )
 {
     if ( 0 == size )
         return Q ? "16b" : "8b";
@@ -426,7 +405,7 @@ const char * get_ld1_vector_T( uint64_t size, uint64_t Q )
     return "UNKNOWN";
 } //get_ld1_vector_T
 
-const char * get_vector_T( uint64_t imm5, uint64_t Q )
+static const char * get_vector_T( uint64_t imm5, uint64_t Q )
 {
     if ( 1 == ( 1 & imm5 ) )
         return Q ? "16b" : "8b";
@@ -443,7 +422,7 @@ const char * get_vector_T( uint64_t imm5, uint64_t Q )
     return "RESERVED";
 } //get_vector_T
 
-const char * get_sshr_vector_T( uint64_t immh, uint64_t Q )
+static const char * get_sshr_vector_T( uint64_t immh, uint64_t Q )
 {
     if ( 1 == immh )
         return Q ? "16b" : "8b";
@@ -483,7 +462,7 @@ uint64_t Arm64::extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift, bo
     return x;
 } //extend_reg
 
-const char * shift_type( uint64_t x )
+static const char * shift_type( uint64_t x )
 {
     if ( 0 == x )
         return "lsl";
@@ -497,7 +476,7 @@ const char * shift_type( uint64_t x )
     return "UNKNOWN_SHIFT";
 } //shift_type
 
-const char * extend_type( uint64_t x )
+static const char * extend_type( uint64_t x )
 {
     if ( 0 == x )
         return "UXTB";
@@ -615,7 +594,7 @@ static inline uint64_t ror_n( uint64_t elt, uint64_t size, uint64_t amount )
     return ( ( elt >> amount ) | ( elt << ( size - amount ) ) );
 } //ror_n
 
-uint64_t count_leading_zeroes( uint64_t x, uint64_t bit_width )
+static uint64_t count_leading_zeroes( uint64_t x, uint64_t bit_width )
 {
     uint64_t count = 0;
     while ( x )
@@ -627,7 +606,7 @@ uint64_t count_leading_zeroes( uint64_t x, uint64_t bit_width )
     return bit_width - count;
 } //count_leading_zeroes
 
-uint64_t decode_logical_immediate( uint64_t val, uint64_t bit_width )
+static uint64_t decode_logical_immediate( uint64_t val, uint64_t bit_width )
 {
     uint64_t N = get_bit( val, 12 );
     uint64_t immr = get_bits( val, 6, 6 );
@@ -655,7 +634,7 @@ uint64_t decode_logical_immediate( uint64_t val, uint64_t bit_width )
 
 static const char * conditions[16] = { "eq", "ne", "cs", "cc", "mi", "pl", "vs", "vc", "hi", "ls", "ge", "lt", "gt", "le", "al", "nv" };
 
-const char * get_cond( uint64_t x )
+static const char * get_cond( uint64_t x )
 {
     if ( x <= 15 )
         return conditions[ x ];
@@ -663,7 +642,7 @@ const char * get_cond( uint64_t x )
     return "UNKNOWN_CONDITION";
 } //get_cond
 
-char get_byte_len( uint64_t l )
+static char get_byte_len( uint64_t l )
 {
     if ( 1 == l )
         return 'b';
@@ -679,7 +658,7 @@ char get_byte_len( uint64_t l )
     return '?';
 } //get_byte_len
 
-uint64_t vfp_expand_imm( uint64_t imm8, uint64_t N )
+static uint64_t vfp_expand_imm( uint64_t imm8, uint64_t N )
 {
     assert( 16 == N || 32 == N || 64 == N );
     uint64_t E = ( 16 == N ) ? 5 : ( 32 == N ) ? 8 : 11;
@@ -697,7 +676,7 @@ uint64_t vfp_expand_imm( uint64_t imm8, uint64_t N )
     return result;
 } //vfp_expand_imm
 
-char get_fcvt_precision( uint64_t x )
+static char get_fcvt_precision( uint64_t x )
 {
     return ( 0 == x ) ? 's' : ( 1 == x ) ? 'd' : ( 3 == x ) ? 'h' : '?';
 } //get_fcvt_precision
@@ -756,7 +735,7 @@ void Arm64::trace_state()
 
             if ( !bit23 && bit22 && 0x15 == opcode ) // SHL D<d>, D<n>, #<shift>
             {
-                uint64_t esize = 8 << 3;
+                uint64_t esize = 8ull << 3;
                 uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                 tracer.Trace( "shl d%llu, d%llu, #%llu\n", d, n, shift );
             }
@@ -780,7 +759,7 @@ void Arm64::trace_state()
             }
             else if ( !bit23 && bit22 && 1 == bits15_10 ) // SSHR D<d>, D<n>, #<shift>
             {
-                uint64_t esize = 8 << 3;
+                uint64_t esize = 8ull << 3;
                 uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
                 tracer.Trace( "sshr d%llu, d%llu, #%llu\n", d, n, shift );
             }
@@ -1325,7 +1304,7 @@ void Arm64::trace_state()
                     uint64_t immb = opbits( 16, 3 );
                     uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                     if ( 0x7f == hi8 )
-                        esize = 8 << 3;
+                        esize = 8ull << 3;
                     uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                     const char * pTA = ( 1 == immh ) ? "8H" : ( 2 == ( 0xe & immh ) ) ? "4S" : "2D";
                     uint64_t sizeb = immh >> 1;
@@ -1340,7 +1319,7 @@ void Arm64::trace_state()
                     uint64_t immb = opbits( 16, 3 );
                     uint64_t esize = 8ull << highest_set_bit_nz( immh );
                     if ( 0x7f == hi8 )
-                        esize = 8 << 3;
+                        esize = 8ull << 3;
                     uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
                     tracer.Trace( "immh %llx, Q %llx\n", immh, Q );
                     uint64_t p_type = 0;
@@ -2723,7 +2702,7 @@ void Arm64::trace_state()
             else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && bit21 && 0 == opbits( 5, 5 ) ) // fmov scalar immediate
             {
                 //tracer.Trace( "ftype %llu, bit21 %llu, rmode %llu, bits18_10 %#llx\n", ftype, bit21, rmode, bits18_10 );
-                uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8 << ( ftype ^ 2 ) );
+                uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8ull << ( ftype ^ 2 ) );
                 char width = ( 3 == ftype ) ? 'H' : ( 0 == ftype ) ? 'S' : ( 1 == ftype ) ? 'D' : '?';
                 uint64_t imm8 = opbits( 13, 8 );
                 //tracer.Trace( "imm8: %llu == %#llx\n", imm8, imm8 );
@@ -3298,7 +3277,7 @@ uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount 
     return val;
 } //shift_reg32
 
-bool Arm64::check_conditional( uint64_t cond )
+bool Arm64::check_conditional( uint64_t cond ) const
 {
     assert( cond <= 15 );
 
@@ -3443,7 +3422,7 @@ uint64_t Arm64::run( void )
     
                 if ( !bit23 && bit22 && 0x15 == opcode ) // SHL D<d>, D<n>, #<shift>
                 {
-                    uint64_t esize = 8 << 3;
+                    uint64_t esize = 8ull << 3;
                     uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                     vregs[ d ].ui64[ 0 ] = ( vregs[ n ].ui64[ 0 ] << shift );
                     vregs[ d ].ui64[ 1 ] = 0;
@@ -3491,7 +3470,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( !bit23 && bit22 && 1 == bits15_10 ) // SSHR D<d>, D<n>, #<shift>
                 {
-                    uint64_t shift = ( 32 * 2 ) - ( ( immh << 3 ) | immb );
+                    uint64_t shift = ( 32ull * 2 ) - ( ( immh << 3 ) | immb );
                     vregs[ d ].ui32[ 0 ] = ( (int32_t) vregs[ n ].ui32[ 0 ] ) >> shift;
                 }
                 else
@@ -4259,7 +4238,7 @@ uint64_t Arm64::run( void )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         if ( 0x7f == hi8 )
-                            esize = 8 << 3;
+                            esize = 8ull << 3;
                         uint64_t ebytes = esize / 8;
                         assert( 1 == count_bits( ebytes ) );
                         uint64_t datasize = 64ull << Q;
@@ -7110,7 +7089,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( ( 0x1e == hi8 ) && ( 4 == ( bits18_10 & 7 ) ) && ( bit21 ) ) // fmov scalar immediate
                 {
-                    uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8 << ( ftype ^ 2 ) );
+                    uint64_t fltsize = ( 2 == ftype ) ? 64 : ( 8ull << ( ftype ^ 2 ) );
                     assert( fltsize <= 64 );
                     uint64_t imm8 = opbits( 13, 8 );
                     uint64_t val = vfp_expand_imm( imm8, fltsize );
