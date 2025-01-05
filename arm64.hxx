@@ -147,6 +147,11 @@ struct Arm64
         return ( val & ( ( 1ull << len ) - 1 ) );
     } //opbits
 
+    __inline_perf uint64_t opbit( uint64_t bit ) const
+    {
+        return ( 1 & ( op >> bit ) );
+    } //opbit
+
     uint64_t add_with_carry64( uint64_t x, uint64_t y, bool carry, bool setflags );
     uint32_t add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags );
     uint64_t sub64( uint64_t x, uint64_t y, bool setflags );
