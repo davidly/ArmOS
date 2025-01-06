@@ -17,7 +17,12 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>
+#include <bitset>
 #include <chrono>
+
+#ifdef _WIN32
+#include <intrin.h>
+#endif
 
 #include <djl_128.hxx>
 #include <djltrace.hxx>
@@ -58,6 +63,11 @@ void Arm64::set_flags_from_nzcv( uint64_t nzcv )
 
 static uint64_t count_bits( uint64_t x )
 {
+#ifdef _M_AMD64
+        return __popcnt64( x ); // less portable, but faster. Not on Q9650 CPU and other older Intel CPUs. use code below instead if needed.
+#elif defined( __aarch64__ )
+        return std::bitset<64>( x ).count();
+#else
     uint64_t count = 0;
     while ( 0 != x )
     {
@@ -66,7 +76,29 @@ static uint64_t count_bits( uint64_t x )
         x >>= 1;
     }
     return count;
+#endif
 } //count_bits
+
+static uint32_t count_leading_zeroes32( uint32_t x )
+{
+#ifdef _WIN32 // if targeting older CPUs you may need to rebuild with the manual code below
+    DWORD lz = 0;
+    if ( _BitScanReverse( &lz, x ) )
+        return 31 - lz;
+    return 32;
+#elif defined( __GNUC__ ) || defined( __clang__ )
+    return __builtin_clz( x );
+#else
+    uint32_t count = 0;
+    while ( x )
+    {
+        count++;
+        x >>= 1;
+    }
+
+    return 32 - count;
+#endif
+} //count_leading_zeroes32
 
 Arm64::FPRounding Arm64::fp_decode_rm( uint64_t rm )
 {
@@ -587,25 +619,13 @@ static inline uint64_t ror_n( uint64_t elt, uint64_t size, uint64_t amount )
     return ( ( elt >> amount ) | ( elt << ( size - amount ) ) );
 } //ror_n
 
-static uint64_t count_leading_zeroes( uint64_t x, uint64_t bit_width )
-{
-    uint64_t count = 0;
-    while ( x )
-    {
-        count++;
-        x >>= 1;
-    }
-
-    return bit_width - count;
-} //count_leading_zeroes
-
 static uint64_t decode_logical_immediate( uint64_t val, uint64_t bit_width )
 {
     uint64_t N = get_bit( val, 12 );
     uint64_t immr = get_bits( val, 6, 6 );
     uint64_t imms = get_bits( val, 0, 6 );
 
-    uint64_t lzero_count = count_leading_zeroes( ( N << 6 ) | ( ( ~imms ) & 0x3f ), 32 );
+    uint64_t lzero_count = count_leading_zeroes32( (uint32_t) ( ( N << 6 ) | ( ( ~imms ) & 0x3f ) ) );
     uint64_t len = 31 - lzero_count;
     uint64_t size = ( 1ull << len );
     uint64_t R = ( immr & ( size - 1 ) );
