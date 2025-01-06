@@ -164,13 +164,6 @@ static uint64_t get_bit( uint64_t x, uint64_t bit_number )
     return ( ( x >> bit_number ) & 1 );
 } //get_bit
 
-static uint64_t plaster_bit( uint64_t x, uint64_t bit_number, uint64_t bit_val )
-{
-    uint64_t mask = ~ ( 1ull << bit_number );
-    uint64_t plastered_bit = ( bit_val << bit_number );
-    return ( ( x & mask ) | plastered_bit );
-} //plaster_bit
-
 static uint64_t gen_bitmask( uint64_t n )
 {
   if ( 0 == n )
@@ -3325,6 +3318,9 @@ void Arm64::set_flags_from_double( double result )
     }
 } //set_flags_from_double
 
+#ifdef _WIN32
+__declspec(noinline)
+#endif
 void Arm64::force_trace_vregs()
 {
     for ( uint64_t i = 0; i < _countof( vregs ); i++ )
@@ -3358,7 +3354,7 @@ void Arm64::unhandled()
 
 uint64_t Arm64::run( void )
 {
-    uint64_t cycles = 0;
+    cycles = 0;
 
     for ( ;; )
     {
@@ -3719,12 +3715,8 @@ uint64_t Arm64::run( void )
                                else if ( 1 != opc )
                                    unhandled();
                             }
-                            else if ( 1 == size && 1 == opc )
-                                shift = 1;
-                            else if ( 2 == size && 1 == opc )
-                                shift = 2;
-                            else if ( 3 == size && 1 == opc )
-                                shift = 3;
+                            else if ( 1 == opc && size <= 3 )
+                                shift = size;
                             else
                                 unhandled();
                         }
@@ -3737,12 +3729,8 @@ uint64_t Arm64::run( void )
                                else if ( 0 != opc )
                                    unhandled();
                             }
-                            else if ( 1 == size && 0 == opc )
-                                shift = 1;
-                            else if ( 2 == size && 0 == opc )
-                                shift = 2;
-                            else if ( 3 == size && 0 == opc )
-                                shift = 3;
+                            else if ( 0 == opc && size <= 3 )
+                                shift = size;
                             else
                                 unhandled();
                         }
@@ -4946,32 +4934,26 @@ uint64_t Arm64::run( void )
                 if ( bit23 && ( 0x13 == ( 0x7f & hi8 ) ) ) // EXTR. rotate right preserving bits shifted out in the high bits
                 {
                     uint64_t m = opbits( 16, 5 );
-                    uint64_t result = 0;
 
                     if ( xregs )
                     {
                         uint64_t nval = val_reg_or_zr( n );
                         uint64_t mval = val_reg_or_zr( m );
-                        result = ( mval >> imms ) | ( nval << ( 64 - imms ) );
+                        regs[ d ] = ( mval >> imms ) | ( nval << ( 64 - imms ) );
                     }
                     else
                     {
                         uint32_t nval = 0xffffffff & val_reg_or_zr( n );
                         uint32_t mval = 0xffffffff & val_reg_or_zr( m );
-                        result = ( mval >> imms ) | ( nval << ( 32 - imms ) );
+                        regs[ d ] = ( mval >> imms ) | ( nval << ( 32 - imms ) );
                     }
-
-                    regs[ d ] = result;
                 }
                 else // others
                 {
                     uint64_t immr = opbits( 16, 6 );
-                    uint64_t regsize = ( 0 != ( 0x80 & hi8 ) ) ? 64 : 32;
+                    uint64_t regsize = xregs ? 64 : 32;
                     uint64_t src = val_reg_or_zr( n );
-                    uint64_t dval = regs[ d ];
-                    uint64_t result = 0;
-                    if ( 0x33 == hi8 || 0xb3 == hi8 ) // restore original bits for BFM
-                        result = dval;
+                    uint64_t result = ( 0x33 == hi8 || 0xb3 == hi8 ) ? regs[ d ] : 0;   // restore original bits for BFM
                     uint64_t dpos = 0;
     
                     if ( imms >= immr )
@@ -5683,20 +5665,13 @@ uint64_t Arm64::run( void )
                 else if ( bit21 && 7 == opcode && 1 == opc2 ) // BSL
                 {
                     elements = Q ? 2 : 1;
-                    for ( uint64_t x = 0; x < elements; x++ )
+                    for ( uint64_t e = 0; e < elements; e++ )
                     {
-                        uint64_t dval = vregs[ d ].ui64[ x ];
-                        uint64_t nval = vregs[ n ].ui64[ x ];
-                        uint64_t mval = vregs[ m ].ui64[ x ];
+                        uint64_t dval = vregs[ d ].ui64[ e ];
+                        uint64_t nval = vregs[ n ].ui64[ e ];
+                        uint64_t mval = vregs[ m ].ui64[ e ];
                         //tracer.Trace( "x: %llu, dval %#llx, nval %#llx, mval %#llx\n", x, dval, nval, mval );
-                        uint64_t result = 0;
-                        for ( uint64_t b = 0; b < 64; b++ )
-                        {
-                            uint64_t bbit = ( get_bit( dval, b ) ) ? get_bit( nval, b ) : get_bit( mval, b );
-                            result = plaster_bit( result, b, bbit );
-                        }
-                        //tracer.Trace( "  bsl writing %#llx at offset %llu\n", result, 8 * x );
-                        vregs[ d ].ui64[ x ] = result;
+                        vregs[ d ].ui64[ e ] = ( dval & nval ) | ( ( ~ dval ) & mval );
                     }
                 }
                 else if ( bit21 && 0x37 == opcode ) // FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>

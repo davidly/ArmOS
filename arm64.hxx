@@ -70,6 +70,7 @@ struct Arm64
     uint64_t stack_size;
     uint64_t stack_top;
     uint64_t mem_size;
+    uint64_t cycles;
     vec16_t vec_zeroes;
     vec16_t vec_ones;
 
@@ -136,7 +137,7 @@ struct Arm64
   private:
     enum FPRounding { FPRounding_TIEEVEN, FPRounding_POSINF, FPRounding_NEGINF,  FPRounding_ZERO, FPRounding_TIEAWAY, FPRounding_ODD };
     enum ElementComparisonResult { ecr_lt, ecr_eq, ecr_gt };
-    uint64_t op; // opcode of the current instruction being execuetd
+    uint64_t op; // opcode of the current instruction being executed. only need uint32_t, but faster like this given usage.
 
     void unhandled( void );
 
