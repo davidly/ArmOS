@@ -383,7 +383,7 @@ static const char * reg_or_zr4( uint64_t x, bool xregs )
     return ac;
 } //reg_or_zr4
 
-uint64_t Arm64::val_reg_or_zr( uint64_t r ) const
+__inline_perf uint64_t Arm64::val_reg_or_zr( uint64_t r ) const
 {
     if ( 31 == r )
         return 0;
@@ -1464,7 +1464,7 @@ void Arm64::trace_state()
                 }
                 else if ( 2 == o2 ) // immediate
                 {
-                    uint64_t imm5 = ( ( op >> 16 ) & 0x1f ); // unsigned
+                    uint64_t imm5 = opbits( 16, 5 ); // unsigned
                     tracer.Trace( "%s %c%llu, #%llx, #%llu, %s\n", is_ccmn ? "ccmn" : "ccmp", width, n, imm5, nzcv, get_cond( cond ) );
                 }
                 else
@@ -1821,7 +1821,7 @@ void Arm64::trace_state()
         {
             uint64_t d = ( op & 0x1f );
             int64_t imm = ( ( op >> 3 ) & 0x1ffffc );  // 19 bits with bottom two bits 0 at the bottom
-            imm |= ( ( op >> 29 ) & 3 );               // two low bits
+            imm |= opbits( 29, 2 );               // two low bits
             imm = sign_extend( imm, 20 );
             imm <<= 12;
             imm += ( pc & ( ~0xfff ) );
@@ -1936,8 +1936,8 @@ void Arm64::trace_state()
             {
                 uint64_t N_immr_imms = opbits( 10, 13 );
                 uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
-                uint64_t n = ( ( op >> 5 ) & 0x1f );
-                uint64_t d = ( op & 0x1f );
+                uint64_t n = opbits( 5, 5 );
+                uint64_t d = opbits( 0, 5 );
                 tracer.Trace( "eor %s, %s, #%#llx\n", reg_or_sp( d, xregs ), reg_or_sp2( n, xregs ), op2 );
             }
             break;
@@ -1948,21 +1948,21 @@ void Arm64::trace_state()
             bool xregs = ( 0 != ( hi8 & 0x80 ) );
             uint64_t t = opbits( 0, 5 );
             bool zero_check = ( 0 == ( hi8 & 1 ) );
-            int64_t imm19 = ( ( op >> 3 ) & 0x1ffffc );
+            int64_t imm19 = ( ( op >> 3 ) & 0x1ffffc ); // two low bits are 0
             imm19 = sign_extend( imm19, 20 );
             tracer.Trace( "cb%sz %s, %#llx\n", zero_check ? "" : "n", reg_or_zr( t, xregs ), pc + imm19 );
             break;
         }
         case 0xd4: // svc
         {
-            uint8_t bit23 = ( op >> 23 ) & 1;
-            uint8_t hw = ( op >> 21 ) & 3;
+            uint64_t bit23 = opbit( 23 );
+            uint64_t hw = opbits( 21, 2 );
 
             if ( !bit23 && ( 0 == hw ) )
             {
-                uint64_t imm16 = ( op >> 5 ) & 0xffff;
-                uint8_t op2 = (uint8_t) ( ( op >> 2 ) & 7 );
-                uint8_t ll = (uint8_t) ( op & 3 );
+                uint64_t imm16 = opbits( 5, 16 );
+                uint64_t op2 = opbits( 2, 3 );
+                uint64_t ll = opbits( 0, 2 );
                 if ( ( 0 == op2 ) && ( 1 == ll ) ) // svc imm16 supervisor call
                     tracer.Trace( "svc %#llx\n", imm16 );
                 else
@@ -2992,18 +2992,18 @@ void Arm64::trace_state()
             uint64_t bit23 = opbit( 23 ); // 1 for MOVK, 0 for ANDS
             if ( bit23 ) // MOVK
             {
-                uint64_t hw = ( ( op >> 21 ) & 3 );
+                uint64_t hw = opbits( 21, 2 );
                 uint64_t pos = ( hw << 4 );
-                uint64_t imm16 = ( ( op >> 5 ) & 0xffff );
-                uint64_t d = ( op & 0x1f );
+                uint64_t imm16 = opbits( 5, 16 );
+                uint64_t d = opbits( 0, 5 );
                 tracer.Trace( "movk %s, #%#llx, LSL #%llu\n", reg_or_zr( d, xregs ), imm16, pos );
             }
             else // ANDS
             {
                 uint64_t N_immr_imms = opbits( 10, 13 );
                 uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
-                uint64_t n = ( ( op >> 5 ) & 0x1f );
-                uint64_t d = ( op & 0x1f );
+                uint64_t n = opbits( 5, 5 );
+                uint64_t d = opbits( 0, 5 );
                 tracer.Trace( "ands %s, %s, #%#llx\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), op2 );
             }
             break;
@@ -3221,12 +3221,12 @@ uint64_t Arm64::add_with_carry64( uint64_t x, uint64_t y, bool carry, bool setfl
     return result;
 } //add_with_carry64
 
-uint64_t Arm64::sub64( uint64_t x, uint64_t y, bool setflags )
+__inline_perf uint64_t Arm64::sub64( uint64_t x, uint64_t y, bool setflags )
 {
     return add_with_carry64( x, ~y, true, setflags );
 } //sub64
 
-__inline_perf uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags )
+uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags )
 {
     uint64_t unsigned_sum = (uint64_t) x + (uint64_t) y + (uint64_t) carry;
     uint32_t result = (uint32_t) ( unsigned_sum & 0xffffffff );
@@ -3250,8 +3250,8 @@ __inline_perf uint32_t Arm64::sub32( uint32_t x, uint32_t y, bool setflags )
 
 uint64_t Arm64::shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount )
 {
-    uint64_t val = ( 31 == reg ) ? 0 : regs[ reg ];
-    amount &= 0x7f;
+    uint64_t val = val_reg_or_zr( reg );
+    amount &= 0x3f;
     if ( 0 == amount )
         return val;
 
@@ -3272,7 +3272,7 @@ uint64_t Arm64::shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount 
 uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount )
 {
     uint32_t val = ( 31 == reg ) ? 0 : ( regs[ reg ] & 0xffffffff );
-    amount &= 0x3f;
+    amount &= 0x1f;
     if ( 0 == amount )
         return val;
 
@@ -3353,7 +3353,7 @@ void Arm64::force_trace_vregs()
     }
 } //trace_vregs
 
-void Arm64::trace_vregs()
+__inline_perf void Arm64::trace_vregs()
 {
     if ( !tracer.IsEnabled() ) // can happen when an app enables instruction tracing via a syscall but overall tracing is turned off. 
         return;
@@ -4598,7 +4598,7 @@ uint64_t Arm64::run( void )
                             op2 = val_reg_or_zr( m );
                         }
                         else if ( 2 == o2 ) // immediate
-                            op2 = ( ( op >> 16 ) & 0x1f );
+                            op2 = opbits( 16, 5 );
                         else
                             unhandled();
     
@@ -5031,11 +5031,7 @@ uint64_t Arm64::run( void )
                 {
                     op2 = shift_reg32( m, shift, imm6 );
                     if ( N )
-                    {
-                        uint32_t val = op2 & 0xffffffff;
-                        val = ~val;
-                        op2 = val;
-                    }
+                        op2 = 0xffffffff & ( ~op2 );
                 }
 
                 uint64_t result = ( regs[ n ] & op2 );
@@ -5043,7 +5039,7 @@ uint64_t Arm64::run( void )
                 if ( set_flags )
                 {
                     fZ = ( 0 == result );
-                    fV = fC = 0;
+                    fV = fC = false;
                     fN = xregs ? get_bit( result, 63 ) : get_bit( result, 31 );
                 }
 
@@ -5052,23 +5048,21 @@ uint64_t Arm64::run( void )
                 break;
             }
             case 0x10: case 0x30: case 0x50: case 0x70: // ADR <Xd>, <label>
-            {
-                uint64_t d = opbits( 0, 5 );
-                uint64_t immhi = opbits( 5, 19 );
-                uint64_t immlo = opbits( 29, 2 );
-                int64_t offset = sign_extend( ( immhi << 2 ) | immlo, 20 );
-                if ( 31 != d )
-                    regs[ d ] = pc + offset;
-                break;
-            }
             case 0x90: case 0xb0: case 0xd0: case 0xf0: // ADRP <Xd>, <label>
             {
-                uint64_t d = ( op & 0x1f );
+                uint64_t d = opbits( 0, 5 );
+                if ( 31 == d )
+                    break;
                 int64_t imm = ( ( op >> 3 ) & 0x1ffffc );  // 19 bits with bottom two bits 0
-                imm |= ( ( op >> 29 ) & 3 );               // two low bits
+                imm |= opbits( 29, 2 );  // two low bits
                 imm = sign_extend( imm, 20 );
-                imm <<= 12;
-                imm += ( pc & ( ~0xfff ) );
+                if ( get_bit( hi8, 7 ) ) // adrp
+                {
+                    imm <<= 12;
+                    imm += ( pc & ( ~0xfff ) );
+                }
+                else // adr
+                    imm += pc;
                 regs[ d ] = imm;
                 break;
             }
@@ -5076,22 +5070,22 @@ uint64_t Arm64::run( void )
             case 0xd2: // MOVZ <Xd>, #<imm>{, LSL #<shift>}    ;    EOR <Xd|SP>, <Xn>, #<imm>    
             {
                 bool xregs = ( 0 != ( hi8 & 0x80 ) );
-                uint8_t bit23 = ( op >> 23 ) & 1;
+                uint64_t d = opbits( 0, 5 );
+                uint64_t bit23 = opbit( 23 );
 
                 if ( bit23 ) // movz xd, imm16
                 {
-                    uint64_t d = opbits( 0, 5 );
+                    if ( 31 == d )
+                        break;
                     uint64_t imm16 = opbits( 5, 16 );
                     uint64_t hw = opbits( 21, 2 );
-                    if ( 31 != d )
-                        regs[ d ] = ( imm16 << ( hw * 16 ) );
+                    regs[ d ] = ( imm16 << ( hw * 16 ) );
                 }
                 else // EOR
                 {
                     uint64_t N_immr_imms = opbits( 10, 13 );
                     uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
-                    uint64_t n = ( ( op >> 5 ) & 0x1f );
-                    uint64_t d = ( op & 0x1f );
+                    uint64_t n = opbits( 5, 5 );
                     uint64_t nvalue = val_reg_or_zr( n );
                     regs[ d ] = nvalue ^ op2;
                     if ( !xregs )
@@ -5122,11 +5116,13 @@ uint64_t Arm64::run( void )
             case 0x12: // MOVN <Wd>, #<imm>{, LSL #<shift>}   ;    AND <Wd|WSP>, <Wn>, #<imm>
             case 0x92: // MOVN <Xd>, #<imm16>, LSL #<shift>   ;    AND <Xd|SP>, <Xn>, #<imm>    ;    MOV <Xd>, #<imm>
             {
+                uint64_t d = opbits( 0, 5 );
                 uint64_t bit23 = opbit( 23 );
                 bool xregs = ( 0 != ( hi8 & 0x80 ) );
                 if ( bit23 ) // MOVN
                 {
-                    uint64_t d = opbits( 0, 5 );
+                    if ( 31 == d )
+                        break;
                     uint64_t imm16 = opbits( 5, 16 );
                     uint64_t hw = opbits( 21, 2 );
                     hw *= 16;
@@ -5139,9 +5135,7 @@ uint64_t Arm64::run( void )
                             unhandled();
                         imm16 &= 0xffffffff;
                     }
-        
-                    if ( 31 != d )
-                        regs[ d ] = imm16;
+                    regs[ d ] = imm16;
                 }
                 else // AND
                 {
@@ -5149,8 +5143,9 @@ uint64_t Arm64::run( void )
                     uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
                     uint64_t n = opbits( 5, 5 );
                     uint64_t nval = val_reg_or_zr( n );
-                    uint64_t d = opbits( 0, 5 );
                     regs[ d ] = ( nval & op2 );
+                    if ( !xregs )
+                        regs[ d ] &= 0xffffffff;
                 }
                 break;
             }
@@ -5167,7 +5162,7 @@ uint64_t Arm64::run( void )
 
                 if ( zero_check == ( 0 == val ) )
                 {
-                    int64_t imm19 = ( ( op >> 3 ) & 0x1ffffc );
+                    int64_t imm19 = ( ( op >> 3 ) & 0x1ffffc ); // two low bits are 0
                     imm19 = sign_extend( imm19, 20 );
                     pc += imm19;
                     continue;
@@ -5181,8 +5176,8 @@ uint64_t Arm64::run( void )
 
                 if ( !bit23 && ( 0 == hw ) )
                 {
-                    uint8_t op2 = (uint8_t) ( ( op >> 2 ) & 7 );
-                    uint8_t ll = (uint8_t) ( op & 3 );
+                    uint64_t op2 = opbits( 2, 3 );
+                    uint64_t ll = opbits( 0, 2 );
                     if ( ( 0 == op2 ) && ( 1 == ll ) ) // svc imm16 supervisor call
                         emulator_invoke_svc( *this );
                     else
@@ -7566,11 +7561,12 @@ uint64_t Arm64::run( void )
                 uint64_t bit23 = opbit( 23 ); // 1 for MOVK, 0 for ANDS
                 if ( bit23 )  // MOVK <Xd>, #<imm>{, LSL #<shift>}
                 {
+                    if ( 31 == d )
+                        break;
                     uint64_t hw = opbits( 21, 2 );
                     uint64_t pos = ( hw << 4 );
                     uint64_t imm16 = opbits( 5, 16 );
-                    if ( 31 != d )
-                        regs[ d ] = plaster_bits( regs[ d ], imm16, pos, 16 );
+                    regs[ d ] = plaster_bits( regs[ d ], imm16, pos, 16 );
                 }
                 else // ANDS <Xd>, <Xn>, #<imm>
                 {
@@ -7588,7 +7584,7 @@ uint64_t Arm64::run( void )
                     }
 
                     fZ = ( 0 == result );
-                    fC = fV = 0;
+                    fC = fV = false;
                     if ( 31 != d )
                         regs[ d ] = result;
                 }
