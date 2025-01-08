@@ -270,11 +270,7 @@ static uint32_t sign_extend32( uint32_t x, uint32_t high_bit )
 
 static uint64_t plaster_bits( uint64_t val, uint64_t bits, uint64_t low_position, uint64_t len )
 {
-    uint64_t low_ones = ( low_position > 0 ) ? one_bits( low_position ) : 0;
-    uint64_t high_ones = one_bits( 64 - low_position - len );
-    high_ones <<= ( low_position + len );
-    uint64_t with_hole = ( val & high_ones ) | ( val & low_ones );
-    return ( with_hole | ( bits << low_position ) );
+    return ( ( val & ( ~( one_bits( len ) << low_position ) ) ) | ( bits << low_position ) );
 } //plaster_bits
 
 static uint64_t lowest_set_bit_nz( uint64_t x )
@@ -3353,7 +3349,7 @@ void Arm64::force_trace_vregs()
     }
 } //trace_vregs
 
-__inline_perf void Arm64::trace_vregs()
+void Arm64::trace_vregs()
 {
     if ( !tracer.IsEnabled() ) // can happen when an app enables instruction tracing via a syscall but overall tracing is turned off. 
         return;
