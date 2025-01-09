@@ -5806,7 +5806,7 @@ uint64_t Arm64::run( void )
                             uint64_t result = a * b;
                             uint64_t output_offset = e * ebytes * 2;
                             assert( ( output_offset + ebytes * 2 ) <= sizeof( target ) );
-                            tracer.Trace( "  umullX read a %#llx, b %#llx, from offset %#llx, ebytes %#llx, output offset: %#llx, result %#llx\n", a, b, offset, ebytes, output_offset, result );
+                            //tracer.Trace( "  umullX read a %#llx, b %#llx, from offset %#llx, ebytes %#llx, output offset: %#llx, result %#llx\n", a, b, offset, ebytes, output_offset, result );
                             mcpy( ptarget + output_offset, &result, ebytes * 2 );
                         }
                     }
