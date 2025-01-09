@@ -2295,7 +2295,7 @@ void Arm64::trace_state()
                               // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FMLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   FSUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                               // SMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    SMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMINV <V><d>, <Vn>.<T>         ;    SMAXV <V><d>, <Vn>.<T>
                               // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
-                              // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
+                              // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
@@ -2312,7 +2312,14 @@ void Arm64::trace_state()
             uint64_t bits14_10 = opbits( 10, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( !bit23 && bit21 && 1 == bits20_16 && 0x1e == bits15_10 ) // FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
+            if ( bit21 && 0x11 == bits15_10 ) // SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                uint64_t m = opbits( 16, 5 );
+                uint64_t size = opbits( 22, 2 );
+                const char * pT = get_ld1_vector_T( size, Q );
+                tracer.Trace( "sshl v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
+            }
+            else if ( !bit23 && bit21 && 1 == bits20_16 && 0x1e == bits15_10 ) // FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
             {
                 uint64_t sz = opbit( 22 );
                 const char * pTA = sz ? "2d" : "4s";
@@ -6084,7 +6091,7 @@ uint64_t Arm64::run( void )
                                   // BIC <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FMLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   FSUB <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                                   // SMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    SMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMINV <V><d>, <Vn>.<T>         ;    SMAXV <V><d>, <Vn>.<T>
                                   // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
-                                  // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
+                                  // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -6102,7 +6109,53 @@ uint64_t Arm64::run( void )
                 uint64_t bits12_10 = opbits( 10, 3 );
                 uint64_t bits15_10 = opbits( 10, 6 );
 
-                if ( !bit23 && bit21 && 1 == bits20_16 && 0x1e == bits15_10 ) // FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
+                if ( bit21 && 0x11 == bits15_10 ) // SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    uint64_t size = opbits( 22, 2 );
+                    uint64_t esize = 8ull << size;
+                    uint64_t ebytes = esize / 8;
+                    uint64_t elements = datasize / esize;
+                    vec16_t target = { 0 };
+
+
+                    for ( uint64_t e = 0; e < elements; e++ )
+                    {
+                        int8_t shift = (int8_t) vregs[ m ].ui8[ e ];
+
+                        if ( 1 == ebytes )
+                        {
+                            if ( shift >= 0 )
+                                target.ui8[ e ] = vregs[ n ].ui8[ e ] << shift;
+                            else
+                                target.ui8[ e ] = ( (int8_t) vregs[ n ].ui8[ e ] ) >> ( -shift );
+                        }
+                        else if ( 2 == ebytes )
+                        {
+                            if ( shift >= 0 )
+                                target.ui16[ e ] = vregs[ n ].ui16[ e ] << shift;
+                            else
+                                target.ui16[ e ] = ( (int16_t) vregs[ n ].ui16[ e ] ) >> ( -shift );
+                        }
+                        else if ( 4 == ebytes )
+                        {
+                            if ( shift >= 0 )
+                                target.ui32[ e ] = vregs[ n ].ui32[ e ] << shift;
+                            else
+                                target.ui32[ e ] = ( (int32_t) vregs[ n ].ui32[ e ] ) >> ( -shift );
+                        }
+                        else if ( 8 == ebytes )
+                        {
+                            if ( shift >= 0 )
+                                target.ui64[ e ] = vregs[ n ].ui64[ e ] << shift;
+                            else
+                                target.ui64[ e ] = ( (int64_t) vregs[ n ].ui64[ e ] ) >> ( -shift );
+                        }
+                    }
+
+                    vregs[ d ] = target;
+                }
+                else if ( !bit23 && bit21 && 1 == bits20_16 && 0x1e == bits15_10 ) // FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>
                 {
                     uint64_t sz = opbit( 22 );
                     uint64_t esize = 16ull << sz;
