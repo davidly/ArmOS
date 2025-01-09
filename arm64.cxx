@@ -61,6 +61,25 @@ void Arm64::set_flags_from_nzcv( uint64_t nzcv )
     fV = ( 0 != ( nzcv & 1 ) );
 } //set_flags_from_nzcv
 
+static __inline_perf void mcpy( void * d, const void * s, const size_t c ) // memcpy but optimized for small sizes
+{
+    assert( 1 == c || 2 == c || 4 == c || 8 == c || 16 == c );
+
+    // I tried various permutations and this was fastest for msft c++, clang, and g++. loops fail with the latter two
+    if ( 1 == c )
+        * ( (uint8_t *) d ) = * ( (uint8_t *) s );
+    else if ( 2 == c )
+        * ( (uint16_t *) d ) = * ( (uint16_t *) s );
+    else if ( 4 == c )
+        * ( (uint32_t *) d ) = * ( (uint32_t *) s );
+    else
+    {
+        * ( (uint64_t *) d ) = * ( (uint64_t *) s );
+        if ( 16 == c )
+            * ( (uint64_t *) d + 1 ) = * ( (uint64_t *) s + 1 );
+    }
+} //mcpy
+
 static uint64_t count_bits( uint64_t x )
 {
 #ifdef _M_AMD64
@@ -394,8 +413,8 @@ Arm64::ElementComparisonResult Arm64::compare_vector_elements( uint8_t * pl, uin
     {
         assert( 1 == width || 2 == width || 4 == width || 8 == width );
         uint64_t l = 0, r = 0;
-        memcpy( &l, pl, width );
-        memcpy( &r, pr, width );
+        mcpy( &l, pl, width );
+        mcpy( &r, pr, width );
         if ( l < r )
             return ecr_lt;
         else if ( l == r )
@@ -1161,11 +1180,11 @@ void Arm64::trace_state()
                     double dval = 0.0;
                     tracer.Trace( "imm6: %#llx\n", imm );
                     if ( bit29 )
-                        memcpy( &dval, &imm, sizeof( dval ) );
+                        mcpy( &dval, &imm, sizeof( dval ) );
                     else
                     {
                         float float_val;
-                        memcpy( &float_val, &imm, sizeof( float_val ) );
+                        mcpy( &float_val, &imm, sizeof( float_val ) );
                         dval = (double) float_val;
                     }
                     tracer.Trace( "fmov v%llu.%s, #%lf\n", d, bit29 ? "2D" : Q ? "4S" : "2S", dval );
@@ -2718,11 +2737,11 @@ void Arm64::trace_state()
                 uint64_t val = vfp_expand_imm( imm8, fltsize );
                 double dval = 0.0;
                 if ( 1 == ftype )
-                    memcpy( &dval, &val, sizeof( dval ) );
+                    mcpy( &dval, &val, sizeof( dval ) );
                 else if ( 0 == ftype )
                 {
                     float float_val;
-                    memcpy( &float_val, &val, sizeof( float_val ) );
+                    mcpy( &float_val, &val, sizeof( float_val ) );
                     dval = (double) float_val;
                 }
                 tracer.Trace( "fmov %c%llu, #%lf // %#llx\n", width, d, dval, val );
@@ -3543,7 +3562,7 @@ uint64_t Arm64::run( void )
                     {
                         uint64_t eaddr = nval + offs;
                         uint64_t element = 0;
-                        memcpy( &element, getmem( eaddr ), ebytes );
+                        mcpy( &element, getmem( eaddr ), ebytes );
                         element = replicate_bytes( element, ebytes );
                         vregs[ t ].ui64[ 0 ] = element;
                         vregs[ t ].ui64[ 1 ] = Q ? element : 0 ;
@@ -3557,9 +3576,9 @@ uint64_t Arm64::run( void )
                     {
                         uint64_t eaddr = nval + offs;
                         if ( L )
-                            memcpy( vreg_ptr( t, index * ebytes ), getmem( eaddr ), ebytes );
+                            mcpy( vreg_ptr( t, index * ebytes ), getmem( eaddr ), ebytes );
                         else
-                            memcpy( getmem( eaddr ), vreg_ptr( t, index * ebytes ), ebytes );
+                            mcpy( getmem( eaddr ), vreg_ptr( t, index * ebytes ), ebytes );
                         offs += ebytes;
                         t = ( ( t + 1 ) % 32 );
                     }
@@ -3682,10 +3701,11 @@ uint64_t Arm64::run( void )
                 uint64_t bits11_10 = opbits( 10, 2 );
                 uint64_t bit21 = opbit( 21 );
                 bool unsignedOffset = ( 0xd == ( hi8 & 0xf ) );
-                bool preIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 3 == bits11_10 ) );
-                bool postIndex = ( ( 0xc == ( hi8 & 0xf ) ) && ( 1 == bits11_10 ) );
-                bool signedUnscaledOffset = ( ( 0xc == ( hi8 & 0xf ) ) && ( 0 == bits11_10 ) );
-                bool shiftExtend = ( ( 0xc == ( hi8 & 0xf ) ) && ( bit21 ) && ( 2 == bits11_10 ) );
+                bool endsWithC = ( 0xc == ( hi8 & 0xf ) );
+                bool preIndex = ( endsWithC && 3 == bits11_10 );
+                bool postIndex = ( endsWithC && 1 == bits11_10 );
+                bool signedUnscaledOffset = ( endsWithC && 0 == bits11_10 );
+                bool shiftExtend = ( endsWithC && bit21 && 2 == bits11_10 );
                 int64_t imm9 = sign_extend( opbits( 12, 9 ), 8 );
                 uint64_t size = opbits( 30, 2 );
                 uint64_t opc = opbits( 22, 2 );
@@ -3695,7 +3715,7 @@ uint64_t Arm64::run( void )
                 uint64_t address = regs[ n ];
                 uint64_t byte_len = 1ull << size;
 
-                if ( ( is_ldr && ( 3 == opc ) ) || ( !is_ldr && ( 2 == opc ) ) )
+                if ( ( is_ldr && 3 == opc ) || ( !is_ldr && 2 == opc ) )
                     byte_len = 16;
 
                 //tracer.Trace( "hi8 %#x, str/ldr %d, preindex %d, postindex %d, signedUnscaledOffset %d, shiftExtend %d, imm9 %lld, n %llu, t %llu, byte_len %llu\n",
@@ -3760,10 +3780,10 @@ uint64_t Arm64::run( void )
                 if ( is_ldr )
                 {
                     zero_vreg( t );
-                    memcpy( vreg_ptr( t, 0 ), getmem( address ), byte_len );
+                    mcpy( vreg_ptr( t, 0 ), getmem( address ), byte_len );
                 }
                 else
-                    memcpy( getmem( address ), vreg_ptr( t, 0 ), byte_len );
+                    mcpy( getmem( address ), vreg_ptr( t, 0 ), byte_len );
     
                 if ( postIndex )
                      regs[ n ] += imm9;
@@ -3802,13 +3822,13 @@ uint64_t Arm64::run( void )
                 {
                     zero_vreg( t1 );
                     zero_vreg( t2 );
-                    memcpy( vreg_ptr( t1, 0 ), getmem( address ), byte_len );
-                    memcpy( vreg_ptr( t2, 0 ), getmem( address + byte_len ), byte_len );
+                    mcpy( vreg_ptr( t1, 0 ), getmem( address ), byte_len );
+                    mcpy( vreg_ptr( t2, 0 ), getmem( address + byte_len ), byte_len );
                 }
                 else // stp
                 {
-                    memcpy( getmem( address ), vreg_ptr( t1, 0 ), byte_len );
-                    memcpy( getmem( address + byte_len ), vreg_ptr( t2, 0 ), byte_len );
+                    mcpy( getmem( address ), vreg_ptr( t1, 0 ), byte_len );
+                    mcpy( getmem( address + byte_len ), vreg_ptr( t2, 0 ), byte_len );
                 }
 
                 if ( postIndex )
@@ -4011,12 +4031,12 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t nval = 0;
-                            memcpy( &nval, vreg_ptr( n, e * ebytes ), ebytes );
+                            mcpy( &nval, vreg_ptr( n, e * ebytes ), ebytes );
                             nval >>= shift;
                             uint64_t dval = 0;
-                            memcpy( &dval, vreg_ptr( d, e * ebytes ), ebytes );
+                            mcpy( &dval, vreg_ptr( d, e * ebytes ), ebytes );
                             dval += nval;
-                            memcpy( ptarget + e * ebytes, &dval, ebytes );
+                            mcpy( ptarget + e * ebytes, &dval, ebytes );
                         }
 
                         vregs[ d ] = target;
@@ -4055,7 +4075,7 @@ uint64_t Arm64::run( void )
                         uint64_t elements = datasize / esize;
                         vec16_t target = { 0 };
                         uint64_t element2 = 0;
-                        memcpy( &element2, vreg_ptr( m, index * indx_val_size ), indx_val_size );
+                        mcpy( &element2, vreg_ptr( m, index * indx_val_size ), indx_val_size );
                         bool accumulate = ( 0x2f == hi8 || 0x6f == hi8 );
 
                         vec16_t & vn = vregs[ n ];
@@ -4091,9 +4111,9 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t nval = 0;
-                            memcpy( &nval, vreg_ptr( n, e * ebytes ), ebytes );
+                            mcpy( &nval, vreg_ptr( n, e * ebytes ), ebytes );
                             nval <<= shift;
-                            memcpy( vreg_ptr( d, e * ebytes ), &nval, ebytes );
+                            mcpy( vreg_ptr( d, e * ebytes ), &nval, ebytes );
                         }
                     }
                     else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 == opcode && !bit11 && bit10 ) // SSHR <Vd>.<T>, <Vn>.<T>, #<shift>
@@ -4112,9 +4132,9 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t elem = 0;
-                            memcpy( &elem, vreg_ptr( n, e * ebytes ), ebytes );
+                            mcpy( &elem, vreg_ptr( n, e * ebytes ), ebytes );
                             elem >>= shift;
-                            memcpy( ptarget + e * ebytes, &elem, ebytes );
+                            mcpy( ptarget + e * ebytes, &elem, ebytes );
                         }
 
                         vregs[ d ] = target;
@@ -4170,12 +4190,12 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t v = 0;
-                            memcpy( &v, vreg_ptr( n, ( Q ? 8 : 0 ) + e * ebytes ), ebytes );
+                            mcpy( &v, vreg_ptr( n, ( Q ? 8 : 0 ) + e * ebytes ), ebytes );
                             v = sign_extend( v, esize - 1 );
                             v <<= shift;
                             //tracer.Trace( "e %llu, v after shift: %#llx\n", e, v );
                             assert( ( ( 1 + e ) * 2 * ebytes ) <= sizeof( target ) );
-                            memcpy( ptarget + e * 2 * ebytes, &v, 2 * ebytes );
+                            mcpy( ptarget + e * 2 * ebytes, &v, 2 * ebytes );
                         }
 
                         vregs[ d ] = target;
@@ -4198,10 +4218,10 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t v = 0;
-                            memcpy( &v, vreg_ptr( n, 2 * e * ebytes ), 2 * ebytes );
+                            mcpy( &v, vreg_ptr( n, 2 * e * ebytes ), 2 * ebytes );
                             v >>= shift;
                             assert( ( ( 1 + e ) * ebytes ) <= sizeof( target ) );
-                            memcpy( ptarget + e * ebytes, &v, ebytes );
+                            mcpy( ptarget + e * ebytes, &v, ebytes );
                         }
 
                         if ( part )
@@ -4230,10 +4250,10 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t v = 0;
-                            memcpy( &v, vreg_ptr( n, ( part ? 8 : 0 ) + e * ebytes ), ebytes );
+                            mcpy( &v, vreg_ptr( n, ( part ? 8 : 0 ) + e * ebytes ), ebytes );
                             v <<= shift;
                             assert( ( ( 1 + e ) * 2 * ebytes ) <= sizeof( target ) );
-                            memcpy( ptarget + 2 * e * ebytes, &v, ebytes * 2 );
+                            mcpy( ptarget + 2 * e * ebytes, &v, ebytes * 2 );
                         }
 
                         vregs[ d ] = target;
@@ -4260,10 +4280,10 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t v = 0;
-                            memcpy( &v, vreg_ptr( n, e * ebytes ), ebytes );
+                            mcpy( &v, vreg_ptr( n, e * ebytes ), ebytes );
                             v >>= shift;
                             assert( ( ( e * ebytes ) + ebytes ) <= sizeof( target ) );
-                            memcpy( ptarget + e * ebytes, &v, ebytes );
+                            mcpy( ptarget + e * ebytes, &v, ebytes );
                         }
 
                         vregs[ d ] = target;
@@ -5518,12 +5538,12 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         uint64_t nval = 0;
-                        memcpy( &nval, vreg_ptr( n, e * ebytes2 ), ebytes2 );
+                        mcpy( &nval, vreg_ptr( n, e * ebytes2 ), ebytes2 );
                         uint64_t mval = 0;
-                        memcpy( &mval, vreg_ptr( m, ( Q ? 8 : 0 ) + e * ebytes ), ebytes );
+                        mcpy( &mval, vreg_ptr( m, ( Q ? 8 : 0 ) + e * ebytes ), ebytes );
                         uint64_t sum = nval + mval;
                         assert( ( e * ebytes2 + ebytes2 ) <= sizeof( target ) );
-                        memcpy( ptarget + e * ebytes2, &sum, ebytes2 );
+                        mcpy( ptarget + e * ebytes2, &sum, ebytes2 );
                     }
                     vregs[ d ] = target;
                 }
@@ -5582,13 +5602,13 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         uint64_t a = 0;
-                        memcpy( &a, pn + ( e * ebytes ), ebytes );
+                        mcpy( &a, pn + ( e * ebytes ), ebytes );
                         int8_t shift = vregs[ m ].ui8[ e * ebytes ];
                         if ( shift < 0 )
                             a >>= -shift;
                         else
                             a <<= shift;
-                        memcpy( ptarget + ( e * ebytes ), &a, ebytes );
+                        mcpy( ptarget + ( e * ebytes ), &a, ebytes );
                     }
                     vregs[ d ] = target;
                 }
@@ -5599,7 +5619,7 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         uint64_t a = 0;
-                        memcpy( &a, vreg_ptr( n, e * ebytes), ebytes );
+                        mcpy( &a, vreg_ptr( n, e * ebytes), ebytes );
                         sum += a;
                     }
 
@@ -5638,7 +5658,7 @@ uint64_t Arm64::run( void )
                         byte_width = 8;
                     }
     
-                    memcpy( vreg_ptr( d, index1 * byte_width ), vreg_ptr( n, index2 * byte_width ), byte_width );
+                    mcpy( vreg_ptr( d, index1 * byte_width ), vreg_ptr( n, index2 * byte_width ), byte_width );
                 }
                 else if ( bit21 && ( 0x29 == opcode || 0x2b == opcode ) ) // UMAXP / UMINP
                 {
@@ -5652,24 +5672,24 @@ uint64_t Arm64::run( void )
                         uint8_t * pn = (uint8_t *) &ncopy;
                         uint64_t a = 0;
                         uint64_t b = 0;;
-                        memcpy( &a, pn + ( e * ebytes ), ebytes );
-                        memcpy( &b, pn + ( ( e + 1 ) * ebytes ), ebytes );
+                        mcpy( &a, pn + ( e * ebytes ), ebytes );
+                        mcpy( &b, pn + ( ( e + 1 ) * ebytes ), ebytes );
                         uint64_t c = ( 0x2b == opcode ) ? get_min( a, b ) : get_max( a, b );
                         //tracer.Trace( "    writing %#llx + %#llx = %#llx to offset %llu\n", a, b, c, ( e / 2 * ebytes ) );
                         assert( ( ( e / 2 * ebytes ) + ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + ( e / 2 * ebytes ), &c, ebytes );
+                        mcpy( ptarget + ( e / 2 * ebytes ), &c, ebytes );
                     }
                     for ( uint64_t e = 0; e < elements; e += 2 )
                     {
                         uint8_t * pm = (uint8_t *) &mcopy;
                         uint64_t a = 0;
                         uint64_t b = 0;;
-                        memcpy( &a, pm + ( e * ebytes ), ebytes );
-                        memcpy( &b, pm + ( ( e + 1 ) * ebytes ), ebytes );
+                        mcpy( &a, pm + ( e * ebytes ), ebytes );
+                        mcpy( &b, pm + ( ( e + 1 ) * ebytes ), ebytes );
                         uint64_t c = ( 0x2b == opcode ) ? get_min( a, b ) : get_max( a, b );
                         //tracer.Trace( "    writing %#llx + %#llx = %#llx to offset %llu\n", a, b, c, ( ( ( elements + e ) / 2 ) * ebytes ) );
                         assert( ( ( ( ( elements + e ) / 2 ) * ebytes ) + ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + ( ( ( elements + e ) / 2 ) * ebytes ), &c, ebytes );
+                        mcpy( ptarget + ( ( ( elements + e ) / 2 ) * ebytes ), &c, ebytes );
                     }
                     vregs[ d ] = target;
                 }
@@ -5728,6 +5748,7 @@ uint64_t Arm64::run( void )
                 else if ( bit21 )
                 {
                     vec16_t target = { 0 };
+                    uint8_t * ptarget = (uint8_t *) &target;
 
                     if ( 7 == opcode ) // EOR (0 == opc2), BIT (2 == opc1), BSL (1 == opc2), and BIF (3 == opc2)
                     {
@@ -5756,24 +5777,22 @@ uint64_t Arm64::run( void )
                     }
                     else if ( 0x21 == opcode ) // SUB
                     {
-                        uint8_t * ptarget = (uint8_t *) &target;
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t offset = ( e * ebytes );
                             uint64_t a = 0;
                             uint64_t b = 0;
-                            memcpy( &a, vreg_ptr( n, offset ), ebytes );
-                            memcpy( &b, vreg_ptr( m, offset ), ebytes );
+                            mcpy( &a, vreg_ptr( n, offset ), ebytes );
+                            mcpy( &b, vreg_ptr( m, offset ), ebytes );
                             uint64_t result = a - b;
                             assert( ( offset + ebytes ) <= sizeof( target ) );
-                            memcpy( ptarget + offset, &result, ebytes );
+                            mcpy( ptarget + offset, &result, ebytes );
                         }
                     }
                     else if ( 0x30 == opcode ) // UMULL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                     {
                         datasize = 64;
                         elements = datasize / esize;
-                        uint8_t * ptarget = (uint8_t *) &target;
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t offset = ( e * ebytes );
@@ -5782,39 +5801,37 @@ uint64_t Arm64::run( void )
                             if ( Q )
                                 offset += 8; // {2}
                             assert( ebytes <= sizeof( a ) );
-                            memcpy( &a, vreg_ptr( n, offset ), ebytes );
-                            memcpy( &b, vreg_ptr( m, offset ), ebytes );
+                            mcpy( &a, vreg_ptr( n, offset ), ebytes );
+                            mcpy( &b, vreg_ptr( m, offset ), ebytes );
                             uint64_t result = a * b;
                             uint64_t output_offset = e * ebytes * 2;
                             assert( ( output_offset + ebytes * 2 ) <= sizeof( target ) );
-                            //tracer.Trace( "  umullX read a %#llx, b %#llx, from offset %#llx, ebytes %#llx, output offset: %#llx\n", a, b, offset, ebytes, output_offset );
-                            memcpy( ptarget + output_offset, &result, ebytes * 2 );
+                            tracer.Trace( "  umullX read a %#llx, b %#llx, from offset %#llx, ebytes %#llx, output offset: %#llx, result %#llx\n", a, b, offset, ebytes, output_offset, result );
+                            mcpy( ptarget + output_offset, &result, ebytes * 2 );
                         }
                     }
                     else if ( 0x25 == opcode ) // MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                     {
-                        uint8_t * ptarget = (uint8_t *) &target;
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t offset = ( e * ebytes );
                             uint64_t a = 0;
                             uint64_t b = 0;
                             uint64_t c = 0;
-                            memcpy( &a, vreg_ptr( n, offset ), ebytes );
-                            memcpy( &b, vreg_ptr( m, offset ), ebytes );
-                            memcpy( &c, vreg_ptr( d, offset ), ebytes );
+                            mcpy( &a, vreg_ptr( n, offset ), ebytes );
+                            mcpy( &b, vreg_ptr( m, offset ), ebytes );
+                            mcpy( &c, vreg_ptr( d, offset ), ebytes );
     
                             if ( 2 == size ) // S datatype not yet implemented
                                 unhandled();
     
                             uint64_t result = c - ( a * b );
                             assert( ( offset + ebytes ) <= sizeof( target ) );
-                            memcpy( ptarget + offset, &result, ebytes );
+                            mcpy( ptarget + offset, &result, ebytes );
                          }
                     }
                     else if ( 0x23 == opcode || 0x0d == opcode || 0x0f == opcode ) // vector comparisons
                     {
-                        uint8_t * ptarget = (uint8_t *) &target;
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             uint64_t offset = ( e * ebytes );
@@ -5825,9 +5842,9 @@ uint64_t Arm64::run( void )
 
                             assert( ( offset + ebytes ) <= sizeof( target ) );
                             if ( copy_ones )
-                                memcpy( ptarget + offset, &vec_ones, ebytes );
+                                mcpy( ptarget + offset, &vec_ones, ebytes );
                             else
-                                memcpy( ptarget + offset, &vec_zeroes, ebytes );
+                                mcpy( ptarget + offset, &vec_zeroes, ebytes );
                         }
                     }
                     else
@@ -5898,7 +5915,7 @@ uint64_t Arm64::run( void )
                     uint64_t esize = 8ull << size;
                     uint64_t ebytes = esize / 8;
                     uint64_t val = 0;
-                    memcpy( &val, vreg_ptr( n, index * ebytes ), ebytes );
+                    mcpy( &val, vreg_ptr( n, index * ebytes ), ebytes );
                     vregs[ d ].ui64[ 0 ] = val;
                     vregs[ d ].ui64[ 1 ] = 0;
                     trace_vregs();
@@ -6349,14 +6366,14 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         int64_t nval = 0;
-                        memcpy( &nval, vreg_ptr( n, ( part ? 8 : 0 ) + e * ebytes ), ebytes );
+                        mcpy( &nval, vreg_ptr( n, ( part ? 8 : 0 ) + e * ebytes ), ebytes );
                         nval = sign_extend( nval, esize - 1 );
                         int64_t mval = 0;
-                        memcpy( &mval, vreg_ptr( m, (part ? 8 : 0 ) + e * ebytes ), ebytes );
+                        mcpy( &mval, vreg_ptr( m, (part ? 8 : 0 ) + e * ebytes ), ebytes );
                         mval = sign_extend( mval, esize - 1 );
                         int64_t result = nval * mval;
                         assert( ( e * ebytes * 2 + ebytes * 2 ) <= sizeof( target ) );
-                        memcpy( ptarget + e * ebytes * 2, &result, ebytes * 2 );
+                        mcpy( ptarget + e * ebytes * 2, &result, ebytes * 2 );
                     }
                     vregs[ d ] = target;
                 }
@@ -6376,9 +6393,9 @@ uint64_t Arm64::run( void )
                     for ( uint64_t p = 0; p < pairs; p++ )
                     {
                         assert( ( ( ( 2 * p ) * ebytes ) + ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + 2 * p * ebytes, vreg_ptr( n, ( base_amount + p ) * ebytes ), ebytes );
+                        mcpy( ptarget + 2 * p * ebytes, vreg_ptr( n, ( base_amount + p ) * ebytes ), ebytes );
                         assert( ( ( ( 2 * p + 1 ) * ebytes ) + ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + ( 2 * p + 1 ) * ebytes, vreg_ptr( m, ( base_amount + p ) * ebytes ), ebytes );
+                        mcpy( ptarget + ( 2 * p + 1 ) * ebytes, vreg_ptr( m, ( base_amount + p ) * ebytes ), ebytes );
                     }
                     vregs[ d ] = target;
                 }
@@ -6422,9 +6439,9 @@ uint64_t Arm64::run( void )
                     for ( uint64_t p = 0; p < pairs; p++ )
                     {
                         assert( ( ( ( 2 * p ) * ebytes ) + ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + ( ( 2 * p ) * ebytes ), vreg_ptr( n, ( 2 * p + part ) * ebytes ), ebytes );
+                        mcpy( ptarget + ( ( 2 * p ) * ebytes ), vreg_ptr( n, ( 2 * p + part ) * ebytes ), ebytes );
                         assert( ( ( ( 2 * p + 1 ) * ebytes ) + ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + ( ( 2 * p + 1 ) * ebytes ), vreg_ptr( m, ( 2 * p + part ) * ebytes ), ebytes );
+                        mcpy( ptarget + ( ( 2 * p + 1 ) * ebytes ), vreg_ptr( m, ( 2 * p + part ) * ebytes ), ebytes );
                     }
                     vregs[ d ] = target;
                 }
@@ -6517,7 +6534,7 @@ uint64_t Arm64::run( void )
                     uint64_t src = regs[ n ];
                     if ( 8 != ( imm5 & 0xf ) )
                         src &= 0xffffffff;
-                    memcpy( vreg_ptr( d, index * target_bytes ), &src, target_bytes );
+                    mcpy( vreg_ptr( d, index * target_bytes ), &src, target_bytes );
                 }
                 else if ( !bit21 && !bit15 && ( 7 == bits14_11 || 5 == bits14_11 ) && bit10 )
                 {
@@ -6531,7 +6548,7 @@ uint64_t Arm64::run( void )
                     // tracer.Trace( "mov, size %llu, esize %llu, ebytes %llu, datasize %llu, index %llu\n", size, esize, ebytes, datasize, index );
 
                     uint64_t val = 0;
-                    memcpy( &val, vreg_ptr( n, ebytes * index ), ebytes );
+                    mcpy( &val, vreg_ptr( n, ebytes * index ), ebytes );
                     if ( 5 == bits14_11 )
                         val = sign_extend( val, esize - 1 );
                     if ( 31 != d )
@@ -6562,9 +6579,9 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements / 2; e++ )
                     {
                         assert( ( ( e * ebytes ) + ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + e * ebytes, vreg_ptr( n, ( e * 2 + part ) * ebytes ), ebytes ); // odd or even from n into lower half of d
+                        mcpy( ptarget + e * ebytes, vreg_ptr( n, ( e * 2 + part ) * ebytes ), ebytes ); // odd or even from n into lower half of d
                         assert( ( second_offset + ( e * ebytes ) + ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + second_offset + e * ebytes, vreg_ptr( m, ( e * 2 + part ) * ebytes ), ebytes ); // odd or even from m into upper half of d
+                        mcpy( ptarget + second_offset + e * ebytes, vreg_ptr( m, ( e * 2 + part ) * ebytes ), ebytes ); // odd or even from m into upper half of d
                     }
                     vregs[ d ] = target;
                 }
@@ -6588,7 +6605,7 @@ uint64_t Arm64::run( void )
                     uint64_t ebytes = esize / 8;
                     memset( pmem, 0, sizeof( vregs[ d ] ) );
                     for ( uint64_t e = 0; e < elements; e++ )
-                        memcpy( pmem + ( e * ebytes ), &val, ebytes );
+                        mcpy( pmem + ( e * ebytes ), &val, ebytes );
                     //tracer.TraceBinaryData( & vregs[ d ], sizeof( vregs[ d ] ), 4 );
                 }
                 else if ( 0 == bits23_21 && !bit15 && 0 == bits14_11 && bit10 ) // DUP <Vd>.<T>, <Vn>.<Ts>[<index>]
@@ -6600,9 +6617,9 @@ uint64_t Arm64::run( void )
                     uint64_t elements = datasize / esize;
                     uint64_t element = 0;
                     //tracer.Trace( "index %llu, indbytes %llu, ebytes: %llu, elements %llu\n", index, indbytes, ebytes, elements );
-                    memcpy( &element, vreg_ptr( n, index * ebytes ), ebytes );
+                    mcpy( &element, vreg_ptr( n, index * ebytes ), ebytes );
                     for ( uint64_t e = 0; e < elements; e++ )
-                        memcpy( vreg_ptr( d, e * ebytes ), &element, ebytes );
+                        mcpy( vreg_ptr( d, e * ebytes ), &element, ebytes );
                 }
                 else if ( bit21 && bit15 && 3 == bits14_11 && !bit10 && 0 == bits20_16 )  // CMEQ <Vd>.<T>, <Vn>.<T>, #
                 {
@@ -6616,9 +6633,9 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         if ( 0 == memcmp( pn + ( e * ebytes ), &vec_zeroes, ebytes ) )
-                            memcpy( pd + ( e * ebytes ), &vec_ones, ebytes );
+                            mcpy( pd + ( e * ebytes ), &vec_ones, ebytes );
                         else
-                            memcpy( pd + ( e * ebytes ), &vec_zeroes, ebytes );
+                            mcpy( pd + ( e * ebytes ), &vec_zeroes, ebytes );
                     }
                 }
                 else if ( bit21 && !bit15 && 6 == bits14_11 && bit10 ) // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
@@ -6636,15 +6653,15 @@ uint64_t Arm64::run( void )
                         uint8_t * pn = vreg_ptr( n, 0 );
                         int64_t a = 0;
                         int64_t b = 0;;
-                        memcpy( &a, pn + ( e * ebytes ), ebytes );
+                        mcpy( &a, pn + ( e * ebytes ), ebytes );
                         if ( 8 != ebytes )
                             a = sign_extend( a, esize - 1 );
                         uint8_t * pm = vreg_ptr( m, 0 );
-                        memcpy( &b, pm + ( e * ebytes ), ebytes );
+                        mcpy( &b, pm + ( e * ebytes ), ebytes );
                         if ( 8 != ebytes )
                             b = sign_extend( b, esize - 1 );
                         assert( ( ( e + 1 ) * ebytes ) <= sizeof( vec16_t ) );
-                        memcpy( vreg_ptr( d, e * ebytes ), ( a > b ) ? &ones : &zeroes, ebytes );
+                        mcpy( vreg_ptr( d, e * ebytes ), ( a > b ) ? &ones : &zeroes, ebytes );
                     }
                 }
                 else if ( bit21 && bit15 && 7 == bits14_11 && bit10 ) // ADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
@@ -6663,24 +6680,24 @@ uint64_t Arm64::run( void )
                         uint8_t * pn = vreg_ptr( n, 0 );
                         uint64_t a = 0;
                         uint64_t b = 0;;
-                        memcpy( &a, pn + ( e * ebytes ), ebytes );
-                        memcpy( &b, pn + ( ( e + 1 ) * ebytes ), ebytes );
+                        mcpy( &a, pn + ( e * ebytes ), ebytes );
+                        mcpy( &b, pn + ( ( e + 1 ) * ebytes ), ebytes );
                         uint64_t c = a + b;
                         //tracer.Trace( "    writing %#llx + %#llx = %#llx to offset %llu\n", a, b, c, ( e / 2 * ebytes ) );
                         assert( ( ( 1 + ( e / 2 ) ) * ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + ( e / 2 * ebytes ), &c, ebytes );
+                        mcpy( ptarget + ( e / 2 * ebytes ), &c, ebytes );
                     }
                     for ( uint64_t e = 0; e < elements; e += 2 )
                     {
                         uint8_t * pm = vreg_ptr( m, 0 );
                         uint64_t a = 0;
                         uint64_t b = 0;;
-                        memcpy( &a, pm + ( e * ebytes ), ebytes );
-                        memcpy( &b, pm + ( ( e + 1 ) * ebytes ), ebytes );
+                        mcpy( &a, pm + ( e * ebytes ), ebytes );
+                        mcpy( &b, pm + ( ( e + 1 ) * ebytes ), ebytes );
                         uint64_t c = a + b;
                         //tracer.Trace( "    writing %#llx + %#llx = %#llx to offset %llu\n", a, b, c, ( ( ( elements + e ) / 2 ) * ebytes ) );
                         assert( ( ( 1 + ( ( elements + e ) / 2 ) ) * ebytes ) <= sizeof( target ) );
-                        memcpy( ptarget + ( ( ( elements + e ) / 2 ) * ebytes ), &c, ebytes );
+                        mcpy( ptarget + ( ( ( elements + e ) / 2 ) * ebytes ), &c, ebytes );
                     }
                     vregs[ d ] = target;
                 }
@@ -6742,11 +6759,11 @@ uint64_t Arm64::run( void )
                     {
                         uint64_t v = 0;
                         assert( ( ( x + 1 ) * ebytes ) <= 16 );
-                        memcpy( &v, vreg_ptr( n, x * ebytes ), ebytes );
+                        mcpy( &v, vreg_ptr( n, x * ebytes ), ebytes );
                         total += v;
                     }
                     zero_vreg( d );
-                    memcpy( vreg_ptr( d, 0 ), &total, ebytes );
+                    mcpy( vreg_ptr( d, 0 ), &total, ebytes );
                 }
                 else if ( bit21 && 1 == bits20_16 && !bit15 && 5 == bits14_11 && !bit10 ) // xtn, xtn2 XTN{2} <Vd>.<Tb>, <Vn>.<Ta>
                 {
@@ -6766,7 +6783,7 @@ uint64_t Arm64::run( void )
                     for ( uint64_t x = 0; x < elements; x++ )
                     {
                         assert( ( ( x * target_ebytes ) + target_ebytes ) <= sizeof( result ) );
-                        memcpy( ( (uint8_t *) &result ) + x * target_ebytes, psrc + x * source_ebytes, target_ebytes );
+                        mcpy( ( (uint8_t *) &result ) + x * target_ebytes, psrc + x * source_ebytes, target_ebytes );
                     }
 
                     if ( Q )
@@ -7082,7 +7099,7 @@ uint64_t Arm64::run( void )
                     uint64_t imm8 = opbits( 13, 8 );
                     uint64_t val = vfp_expand_imm( imm8, fltsize );
                     zero_vreg( d );
-                    memcpy( & vregs[ d ], & val, fltsize / 8 );
+                    mcpy( & vregs[ d ], & val, fltsize / 8 );
                 }
                 else if ( ( 0x1e == hi8 ) && ( 2 == ( bits18_10 & 0x3f ) ) && ( bit21 ) ) // fmul (scalar)
                 {
@@ -7381,9 +7398,9 @@ uint64_t Arm64::run( void )
                             {
                                 uint64_t eaddr = address + offs;
                                 if ( L ) // LD
-                                    memcpy( vreg_ptr( tt, e * ebytes ), getmem( eaddr ), ebytes );
+                                    mcpy( vreg_ptr( tt, e * ebytes ), getmem( eaddr ), ebytes );
                                 else // ST
-                                    memcpy( getmem( eaddr ), vreg_ptr( tt, e * ebytes ), ebytes );
+                                    mcpy( getmem( eaddr ), vreg_ptr( tt, e * ebytes ), ebytes );
                                 offs += ebytes;
                                 tt = ( tt + 1 ) % 32;
                             }
