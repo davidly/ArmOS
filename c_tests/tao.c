@@ -1,0 +1,182 @@
+/* test array operations. */
+
+#define LINT_ARGS
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <cmath>
+
+#define _perhaps_inline __attribute__((noinline))
+//#define _perhaps_inline
+
+typedef unsigned __int128 uint128_t;
+typedef __int128 int128_t;
+typedef long double ldouble_t;
+
+#define array_operations_test( ftype, dim ) \
+    ftype A_##ftype##dim[ dim ]; \
+    _perhaps_inline void fillA_##ftype##dim( ftype start ) \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] = start + i; \
+    } \
+    _perhaps_inline void shift_left_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] <<= 1; \
+    } \
+    _perhaps_inline void shift_right_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] >>= 1; \
+    } \
+    _perhaps_inline void and_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] &= ( ~0x33 ); \
+    } \
+    _perhaps_inline void or_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] |= 0x55; \
+    } \
+    _perhaps_inline void eor_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] ^= 0x99; \
+    } \
+    _perhaps_inline void print_array_##ftype##dim() \
+    { \
+        printf( "array:" ); \
+        for ( int i = 0; i < dim; i++ ) \
+            printf( " %.0Lf", (long double) A_##ftype##dim[ i ] ); \
+        printf( "\n" ); \
+    } \
+    _perhaps_inline ftype sum_##ftype##dim() \
+    { \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            result += A_##ftype##dim[ i ]; \
+        return result; \
+    } \
+    _perhaps_inline ftype min_##ftype##dim() \
+    { \
+        ftype result = A_##ftype##dim[ 0 ]; \
+        for ( int i = 0; i < dim; i++ ) \
+            result = A_##ftype##dim[ i ] < result ? A_##ftype##dim[ i ] : result; \
+        return result; \
+    } \
+    _perhaps_inline ftype max_##ftype##dim() \
+    { \
+        ftype result = A_##ftype##dim[ 0 ]; \
+        for ( int i = 0; i < dim; i++ ) \
+            result = A_##ftype##dim[ i ] > result ? A_##ftype##dim[ i ] : result; \
+        return result; \
+    } \
+    ftype run_##ftype##dim() \
+    { \
+        fillA_##ftype##dim( -10 ); \
+        /* printf( "initial: " ); print_array_##ftype##dim(); */ \
+        shift_left_##ftype##dim(); \
+        /* printf( "left: " ); print_array_##ftype##dim(); */ \
+        shift_right_##ftype##dim(); \
+        /* printf( "right: " ); print_array_##ftype##dim(); */ \
+        and_##ftype##dim(); \
+        /* printf( "and: " ); print_array_##ftype##dim(); */ \
+        or_##ftype##dim(); \
+        /* printf( "or: " ); print_array_##ftype##dim(); */ \
+        eor_##ftype##dim(); \
+        /* printf( "eor: " ); print_array_##ftype##dim(); */ \
+        ftype sum = sum_##ftype##dim(); \
+        printf( "type %s size %d, sum %.0lf, min, %.0lf max %.0lf\n", #ftype, dim, (double) sum, (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
+        return sum; \
+    }
+
+#define declare_array_operations_tests( type ) \
+    array_operations_test( type, 1 ); \
+    array_operations_test( type, 2 ); \
+    array_operations_test( type, 3 ); \
+    array_operations_test( type, 4 ); \
+    array_operations_test( type, 5 ); \
+    array_operations_test( type, 6 ); \
+    array_operations_test( type, 7 ); \
+    array_operations_test( type, 8 ); \
+    array_operations_test( type, 9 ); \
+    array_operations_test( type, 10 ); \
+    array_operations_test( type, 11 ); \
+    array_operations_test( type, 12 ); \
+    array_operations_test( type, 13 ); \
+    array_operations_test( type, 14 ); \
+    array_operations_test( type, 15 ); \
+    array_operations_test( type, 16 ); \
+    array_operations_test( type, 17 ); \
+    array_operations_test( type, 18 ); \
+    array_operations_test( type, 19 ); \
+    array_operations_test( type, 20 );
+
+declare_array_operations_tests( int8_t );
+declare_array_operations_tests( uint8_t );
+declare_array_operations_tests( int16_t );
+declare_array_operations_tests( uint16_t );
+declare_array_operations_tests( int32_t );
+declare_array_operations_tests( uint32_t );
+declare_array_operations_tests( int64_t );
+declare_array_operations_tests( uint64_t );
+declare_array_operations_tests( int128_t );
+declare_array_operations_tests( uint128_t );
+
+#define run_tests( type ) \
+    run_##type##1(); \
+    run_##type##2(); \
+    run_##type##3(); \
+    run_##type##4(); \
+    run_##type##5(); \
+    run_##type##6(); \
+    run_##type##7(); \
+    run_##type##8(); \
+    run_##type##9(); \
+    run_##type##10(); \
+    run_##type##11(); \
+    run_##type##12(); \
+    run_##type##13(); \
+    run_##type##14(); \
+    run_##type##15(); \
+    run_##type##16(); \
+    run_##type##17(); \
+    run_##type##18(); \
+    run_##type##19(); \
+    run_##type##20();
+
+#define run_this_test( type ) \
+    run_##type##8();
+
+int main( int argc, char * argv[] )
+{
+//    for ( int i = 0; i < 400; i++ )
+    {
+#if 1
+    run_tests( int8_t );
+    run_tests( uint8_t );
+    run_tests( int16_t );
+    run_tests( uint16_t );
+    run_tests( int32_t );
+    run_tests( uint32_t );
+    run_tests( int64_t );
+    run_tests( uint64_t );
+    run_tests( int128_t );
+    run_tests( uint128_t );
+#else    
+    run_this_test( int8_t );    
+#endif    
+    }
+
+    // these two return incorrect results even on Arm64 hardware
+
+    //run_tests( int128_t, "%lld");
+    //run_tests( uint128_t, "%llu");
+
+    printf( "array operations test completed with great success\n" );
+    return 0;
+} //main

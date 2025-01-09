@@ -1071,6 +1071,7 @@ void Arm64::trace_state()
             // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>   ;    SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>  ;   SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
             // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ; SSHR <Vd>.<T>, <Vn>.<T>, #<shift>    ;    SHL <Vd>.<T>, <Vn>.<T>, #<shift>
             // MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ; URSRA <Vd>.<T>, <Vn>.<T>, #<shift>    ;    USRA <Vd>.<T>, <Vn>.<T>, #<shift>
+            // ORR <Vd>.<T>, #<imm8>{, LSL #<amount>}
         {
             uint64_t cmode = opbits( 12, 4 );
             uint64_t abc = opbits( 16, 3 );
@@ -1090,7 +1091,24 @@ void Arm64::trace_state()
 
             if ( 0 == bits23_19 )
             {
-                if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 &&
+                if ( ( 0x0f == hi8 || 0x4f == hi8 ) && ( 9 == ( 0xd & cmode ) || 1 == ( 9 & cmode ) ) && bit12 && !bit11 && bit10 ) // ORR <Vd>.<T>, #<imm8>{, LSL #<amount>}
+                {
+                    if ( 9 == ( 0xd & cmode ) ) // 16-bit variant
+                    {
+                        const char * pT = Q ? "8h" : "4h";
+                        uint64_t amount = ( cmode & 2 ) ? 8 : 0;
+                        tracer.Trace( "orr v%llu.%s, #%#llx, LSL #%llu\n", d, pT, val, amount );
+                    }
+                    else if ( 1 == ( 9 & cmode ) ) // 32-bit variant
+                    {
+                        const char * pT = Q ? "4s" : "2s";
+                        uint64_t amount = 8 * get_bits( cmode, 1, 2 );
+                        tracer.Trace( "orr v%llu.%s, #%#llx, LSL #%llu\n", d, pT, val, amount );
+                    }
+                    else
+                        unhandled();
+                }
+                else if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 &&
                      ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xf ) ) ) ) // mvni
                 {
                     if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
@@ -3094,7 +3112,7 @@ void Arm64::trace_state()
                 uint64_t shift = opbit( 12 );
                 uint64_t option = opbits( 13, 3 );
                 tracer.Trace( "ldr%s %s, [%s, %s, %s #%u]\n", suffix, reg_or_zr( t, xregs ), reg_or_sp( n, true ), reg_or_zr2( m, true ),
-                              extend_type( option ), ( 3 == option ) ? 0 : ( 0 == shift ) ? 0 : xregs ? 3 : 2 );
+                              extend_type( option ), ( 0 == shift ) ? 0 : xregs ? 3 : 2 );
             }
             else if ( 4 == opc || 6 == opc ) // LDRSW <Xt>, [<Xn|SP>], #<simm>    ;    LDRSW <Xt>, [<Xn|SP>, #<simm>]!
             {
@@ -3844,7 +3862,10 @@ uint64_t Arm64::run( void )
                 // BIC <Vd>.<T>, #<imm8>{, LSL #<amount>}    ;    MOVI <Vd>.<T>, #<imm8>{, LSL #0}    ;    MVNI <Vd>.<T>, #<imm8>, MSL #<amount>
                 // USHR <Vd>.<T>, <Vn>.<T>, #<shift>         ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
                 // FMOV <Vd>.<T>, #<imm>                     ;    FMOV <Vd>.<T>, #<imm>               ;    FMOV <Vd>.2D, #<imm>
-                // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>   ;    SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>
+                // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>   ;    SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>  ;   SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
+                // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ; SSHR <Vd>.<T>, <Vn>.<T>, #<shift>    ;    SHL <Vd>.<T>, <Vn>.<T>, #<shift>
+                // MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ; URSRA <Vd>.<T>, <Vn>.<T>, #<shift>    ;    USRA <Vd>.<T>, <Vn>.<T>, #<shift>
+                // ORR <Vd>.<T>, #<imm8>{, LSL #<amount>}
             {
                 uint64_t cmode = opbits( 12, 4 );
                 uint64_t abc = opbits( 16, 3 );
@@ -3865,8 +3886,26 @@ uint64_t Arm64::run( void )
 
                 if ( 0 == bits23_19 )
                 {
-                    if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 && // MOVI <Vd>.<T>, #<imm8>{, LSL #0}    ;    MVNI <Vd>.<T>, #<imm8>, MSL #<amount>
-                         ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xf ) ) ) ) // mvni
+                    if ( ( 0x0f == hi8 || 0x4f == hi8 ) && ( 9 == ( 0xd & cmode ) || 1 == ( 9 & cmode ) ) && bit12 && !bit11 && bit10 ) // ORR <Vd>.<T>, #<imm8>{, LSL #<amount>}
+                    {
+                        if ( 9 == ( 0xd & cmode ) ) // 16-bit variant
+                        {
+                            uint64_t elements = Q ? 8 : 4;
+                            for ( uint64_t e = 0; e < elements; e++ )
+                                vregs[ d ].ui16[ e ] |= (uint16_t) imm;
+                        }
+                        else if ( 1 == ( 9 & cmode ) ) // 32-bit variant
+                        {
+                            uint64_t elements = Q ? 4 : 2;
+                            for ( uint64_t e = 0; e < elements; e++ )
+                                vregs[ d ].ui32[ e ] |= (uint32_t) imm;
+                        }
+                        else
+                            unhandled();
+
+                    }
+                    else if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 && // MOVI <Vd>.<T>, #<imm8>{, LSL #0}    ;    MVNI <Vd>.<T>, #<imm8>, MSL #<amount>
+                              ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xf ) ) ) ) // mvni
                     {
                         if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
                         {
@@ -4127,15 +4166,19 @@ uint64_t Arm64::run( void )
                         uint64_t elements = datasize / esize;
                         uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
                         vec16_t target = { 0 };
-                        uint8_t * ptarget = (uint8_t *) &target;
 
-                        for ( uint64_t e = 0; e < elements; e++ )
-                        {
-                            uint64_t elem = 0;
-                            mcpy( &elem, vreg_ptr( n, e * ebytes ), ebytes );
-                            elem >>= shift;
-                            mcpy( ptarget + e * ebytes, &elem, ebytes );
-                        }
+                        if ( 1 == ebytes )
+                            for ( uint64_t e = 0; e < elements; e++ )
+                                target.ui8[ e ] = ( (int8_t) vregs[ n ].ui8[ e ] ) >> shift;
+                        else if ( 2 == ebytes )
+                            for ( uint64_t e = 0; e < elements; e++ )
+                                target.ui16[ e ] = ( (int16_t) vregs[ n ].ui16[ e ] ) >> shift;
+                        else if ( 4 == ebytes )
+                            for ( uint64_t e = 0; e < elements; e++ )
+                                target.ui32[ e ] = ( (int32_t) vregs[ n ].ui32[ e ] ) >> shift;
+                        else if ( 8 == ebytes )
+                            for ( uint64_t e = 0; e < elements; e++ )
+                                target.ui64[ e ] = ( (int64_t) vregs[ n ].ui64[ e ] ) >> shift;
 
                         vregs[ d ] = target;
                     }

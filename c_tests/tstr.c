@@ -149,10 +149,14 @@ int main( int argc, char * argv[] )
             printf( "strrchr failed to find char: iteration %d, len %d, start %d, end %d\n", i, len, start, end );
             exit( 1 );
         }
-
         if ( pbang != ( ac + end ) )
         {
             printf( "strrchr offset incorrect: iteration %d, len %d, start %d, end %d\n", i, len, start, end );
+            exit( 1 );
+        }
+        if ( strchr( ac + start, '$' ) )
+        {
+            printf( "strrchr somehow found $: iteration %d, len %d, start %d, end %d\n", i, len, start, end );
             exit( 1 );
         }
         ac[ end ] = orig;
@@ -181,6 +185,11 @@ int main( int argc, char * argv[] )
         if ( memcmp( p, pattern, len ) )
         {
             printf( "strstr found the wrong pattern iteration %d, start %d, offset %d, len %d, pattern %s\n", i, start, offset, len, pattern );
+            exit( 1 );
+        }
+        if ( strstr( ac + start, "gfe" ) )
+        {
+            printf( "strstr somehow found gfe. iteration %d, start %d, offset %d\n", i, start, offset );
             exit( 1 );
         }
     }
