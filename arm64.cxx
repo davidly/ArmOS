@@ -2013,7 +2013,7 @@ void Arm64::trace_state()
                               // UMAXV <V><d>, <Vn>.<T> ; UMINV <V><d>, <Vn>.<T>    ;    UMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                               // FMINNMV S<d>, <Vn>.4S  ; FMAXNMV S<d>, <Vn>.4S     ;    MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>     ;    UCVTF <Vd>.<T>, <Vn>.<T>
                               // NEG <Vd>.<T>, <Vn>.<T> ; EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index>            ;    FCVTZU <Vd>.<T>, <Vn>.<T>
-                              // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                              // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>           ;    USUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
         {
             uint64_t Q = opbit( 30 );
             uint64_t m = opbits( 16, 5 );
@@ -2032,7 +2032,12 @@ void Arm64::trace_state()
             uint64_t bits16_10 = opbits( 10, 7 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit21 && 0x20 == bits15_10 ) // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+            if ( bit21 && 0xc == bits15_10 ) // USUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+            {
+                const char * pTA = ( 0 == size ) ? "8h" : ( 1 == size ) ? "4s" : ( 2 == size ) ? "2d" : "reserved";
+                tracer.Trace( "usubw%s v%llu.%s, v%llu.%s, v%llu.%s\n", Q ? "2" : "", d, pTA, n, pTA, m, pT );
+            }
+            else if ( bit21 && 0x20 == bits15_10 ) // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
             {
                 const char * pTA = ( 0 == size ) ? "8h" : ( 1 == size ) ? "4s" : ( 2 == size ) ? "2d" : "reserved";
                 tracer.Trace( "umlal%s v%llu.%s, v%llu.%s, v%llu.%s\n", Q ? "2" : "", d, pTA, n, pT, m, pT );
@@ -4243,7 +4248,7 @@ uint64_t Arm64::run( void )
                         uint64_t elements = datasize / esize;
                         vec16_t target = { 0 };
                         uint8_t * ptarget = (uint8_t *) &target;
-                        tracer.Trace( "sshl{2} shift %llu, ebytes %llu, elements %llu\n", shift, ebytes, elements );
+                        //tracer.Trace( "sshl{2} shift %llu, ebytes %llu, elements %llu\n", shift, ebytes, elements );
 
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
@@ -5350,7 +5355,7 @@ uint64_t Arm64::run( void )
                                   // UMAXV <V><d>, <Vn>.<T> ; UMINV <V><d>, <Vn>.<T>    ;    UMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                                   // FMINNMV S<d>, <Vn>.4S  ; FMAXNMV S<d>, <Vn>.4S     ;    MLS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>     ;    UCVTF <Vd>.<T>, <Vn>.<T>
                                   // NEG <Vd>.<T>, <Vn>.<T> ; EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index>            ;    FCVTZU <Vd>.<T>, <Vn>.<T>
-                                  // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                                  // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>           ;    USUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t m = opbits( 16, 5 );
@@ -5374,7 +5379,25 @@ uint64_t Arm64::run( void )
                 uint64_t bits15_10 = opbits( 10, 6 );
                 //tracer.Trace( "elements: %llu, size %llu, esize %llu, datasize %llu, ebytes %llu, opcode %llu\n", elements, size, esize, datasize, ebytes, opcode );
 
-                if ( bit21 && 0x20 == bits15_10 ) // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                if ( bit21 && 0xc == bits15_10 ) // USUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>. Note: the official docs confuse the first and second operands wrt PART
+                {
+                    datasize = 64;
+                    elements = datasize / esize;
+                    vec16_t target = vregs[ d ];
+                    for ( uint64_t e = 0; e < elements; e++ )
+                    {
+                        if ( 1 == ebytes )
+                            target.ui16[ e ] = vregs[ n ].ui16[ e ] - (uint16_t) vregs[ m ].ui8[ e + ( Q ? 8 : 0 ) ];
+                        else if ( 2 == ebytes )
+                            target.ui32[ e ] = vregs[ n ].ui32[ e ] - (uint32_t) vregs[ m ].ui16[ e + ( Q ? 4 : 0 ) ];
+                        else if ( 4 == ebytes )
+                            target.ui64[ e ] = vregs[ n ].ui64[ e ] - (uint64_t) vregs[ m ].ui32[ e + ( Q ? 2 : 0 )];
+                        else
+                            unhandled();
+                    }
+                    vregs[ d ] = target;
+                }
+                else if ( bit21 && 0x20 == bits15_10 ) // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                 {
                     datasize = 64;
                     elements = datasize / esize;
@@ -6151,10 +6174,9 @@ uint64_t Arm64::run( void )
 
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
-                        int8_t shift = (int8_t) vregs[ m ].ui8[ e ];
-
                         if ( 1 == ebytes )
                         {
+                            int8_t shift = (int8_t) vregs[ m ].ui8[ e ];
                             if ( shift >= 0 )
                                 target.ui8[ e ] = vregs[ n ].ui8[ e ] << shift;
                             else
@@ -6162,6 +6184,7 @@ uint64_t Arm64::run( void )
                         }
                         else if ( 2 == ebytes )
                         {
+                            int8_t shift = (int8_t) ( 0xff & vregs[ m ].ui16[ e ] );
                             if ( shift >= 0 )
                                 target.ui16[ e ] = vregs[ n ].ui16[ e ] << shift;
                             else
@@ -6169,6 +6192,7 @@ uint64_t Arm64::run( void )
                         }
                         else if ( 4 == ebytes )
                         {
+                            int8_t shift = (int8_t) ( 0xff & vregs[ m ].ui32[ e ] );
                             if ( shift >= 0 )
                                 target.ui32[ e ] = vregs[ n ].ui32[ e ] << shift;
                             else
@@ -6176,6 +6200,7 @@ uint64_t Arm64::run( void )
                         }
                         else if ( 8 == ebytes )
                         {
+                            int8_t shift = (int8_t) ( 0xff & vregs[ m ].ui64[ e ] );
                             if ( shift >= 0 )
                                 target.ui64[ e ] = vregs[ n ].ui64[ e ] << shift;
                             else

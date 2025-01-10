@@ -17,35 +17,71 @@ typedef long double ldouble_t;
 
 #define array_operations_test( ftype, dim ) \
     ftype A_##ftype##dim[ dim ]; \
+    ftype B_##ftype##dim[ dim ]; \
     _perhaps_inline void fillA_##ftype##dim( ftype start ) \
     { \
         for ( int i = 0; i < dim; i++ ) \
             A_##ftype##dim[ i ] = start + i; \
+    } \
+    _perhaps_inline void fillB_##ftype##dim( ftype val ) \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            B_##ftype##dim[ i ] = val; \
     } \
     _perhaps_inline void shift_left_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
             A_##ftype##dim[ i ] <<= 1; \
     } \
+    _perhaps_inline void shift_left_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( 1 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] <<= B_##ftype##dim[ i ]; \
+    } \
     _perhaps_inline void shift_right_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
             A_##ftype##dim[ i ] >>= 1; \
+    } \
+    _perhaps_inline void shift_right_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( 1 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] >>= B_##ftype##dim[ i ]; \
     } \
     _perhaps_inline void and_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
             A_##ftype##dim[ i ] &= ( ~0x33 ); \
     } \
+    _perhaps_inline void and_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( ~0x33 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] &= B_##ftype##dim[ i ]; \
+    } \
     _perhaps_inline void or_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
             A_##ftype##dim[ i ] |= 0x55; \
     } \
+    _perhaps_inline void or_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( 0x55 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] |= B_##ftype##dim[ i ]; \
+    } \
     _perhaps_inline void eor_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
             A_##ftype##dim[ i ] ^= 0x99; \
+    } \
+    _perhaps_inline void eor_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( 0x99 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] ^= B_##ftype##dim[ i ]; \
     } \
     _perhaps_inline void print_array_##ftype##dim() \
     { \
@@ -91,6 +127,24 @@ typedef long double ldouble_t;
         /* printf( "eor: " ); print_array_##ftype##dim(); */ \
         ftype sum = sum_##ftype##dim(); \
         printf( "type %s size %d, sum %.0lf, min, %.0lf max %.0lf\n", #ftype, dim, (double) sum, (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
+        fillA_##ftype##dim( -10 ); \
+        /* printf( "initial_n: " ); print_array_##ftype##dim(); */ \
+        shift_left_n_##ftype##dim(); \
+        /* printf( "left n: " ); print_array_##ftype##dim(); */ \
+        shift_right_n_##ftype##dim(); \
+        /* printf( "right_n: " ); print_array_##ftype##dim(); */ \
+        and_n_##ftype##dim(); \
+        /* printf( "and_n: " ); print_array_##ftype##dim(); */ \
+        or_n_##ftype##dim(); \
+        /* printf( "or_n: " ); print_array_##ftype##dim(); */ \
+        eor_n_##ftype##dim(); \
+        /* printf( "eor_n: " ); print_array_##ftype##dim(); */ \
+        ftype sum_n = sum_##ftype##dim(); \
+        if ( sum != sum_n ) \
+        { \
+            printf( "ERROR! n sum differs. type %s size %d, sum %.0lf, min, %.0lf max %.0lf\n", #ftype, dim, (double) sum_n, (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
+            exit( 1 ); \
+        } \
         return sum; \
     }
 
@@ -150,7 +204,7 @@ declare_array_operations_tests( uint128_t );
     run_##type##20();
 
 #define run_this_test( type ) \
-    run_##type##8();
+    run_##type##16();
 
 int main( int argc, char * argv[] )
 {
@@ -168,7 +222,7 @@ int main( int argc, char * argv[] )
     run_tests( int128_t );
     run_tests( uint128_t );
 #else    
-    run_this_test( int8_t );    
+    run_this_test( uint8_t );    
 #endif    
     }
 
