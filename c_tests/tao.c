@@ -28,6 +28,11 @@ typedef long double ldouble_t;
         for ( int i = 0; i < dim; i++ ) \
             B_##ftype##dim[ i ] = val; \
     } \
+    _perhaps_inline void randomizeB_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            B_##ftype##dim[ i ] = rand(); \
+    } \
     _perhaps_inline void shift_left_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
@@ -90,6 +95,41 @@ typedef long double ldouble_t;
             printf( " %.0Lf", (long double) A_##ftype##dim[ i ] ); \
         printf( "\n" ); \
     } \
+    _perhaps_inline ftype count_A_GE_B_##ftype##dim() \
+    { \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            result += ( A_##ftype##dim[ i ] >= B_##ftype##dim[ i ] ); \
+        return result; \
+    } \
+    _perhaps_inline ftype count_A_GT_B_##ftype##dim() \
+    { \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            result += ( A_##ftype##dim[ i ] > B_##ftype##dim[ i ] ); \
+        return result; \
+    } \
+    _perhaps_inline ftype count_A_EQ_B_##ftype##dim() \
+    { \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            result += ( A_##ftype##dim[ i ] == B_##ftype##dim[ i ] ); \
+        return result; \
+    } \
+    _perhaps_inline ftype count_A_LE_B_##ftype##dim() \
+    { \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            result += ( A_##ftype##dim[ i ] <= B_##ftype##dim[ i ] ); \
+        return result; \
+    } \
+    _perhaps_inline ftype count_A_LT_B_##ftype##dim() \
+    { \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            result += ( A_##ftype##dim[ i ] < B_##ftype##dim[ i ] ); \
+        return result; \
+    } \
     _perhaps_inline ftype sum_##ftype##dim() \
     { \
         ftype result = (ftype) 0; \
@@ -143,6 +183,27 @@ typedef long double ldouble_t;
         if ( sum != sum_n ) \
         { \
             printf( "ERROR! n sum differs. type %s size %d, sum %.0lf, min, %.0lf max %.0lf\n", #ftype, dim, (double) sum_n, (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
+            exit( 1 ); \
+        } \
+        randomizeB_##ftype##dim(); \
+        ftype aGEb = count_A_GE_B_##ftype##dim(); \
+        ftype aGTb = count_A_GT_B_##ftype##dim(); \
+        ftype aEQb = count_A_EQ_B_##ftype##dim(); \
+        ftype aLTb = count_A_LT_B_##ftype##dim(); \
+        ftype aLEb = count_A_LE_B_##ftype##dim(); \
+        if ( aGEb != ( aGTb + aEQb ) ) \
+        { \
+            printf( "ERROR! aGEb %.0lf != GT %.0lf + EQ %.0lf\n", (double) aGEb, (double) aGTb, (double) aEQb ); \
+            exit( 1 ); \
+        } \
+        if ( aLEb != ( aLTb + aEQb ) ) \
+        { \
+            printf( "ERROR! aLEb %.0lf != LT %.0lf + EQ %.0lf\n", (double) aLEb, (double) aLTb, (double) aEQb ); \
+            exit( 1 ); \
+        } \
+        if ( dim != ( aLTb + aGEb ) ) \
+        { \
+            printf( "ERROR! aLTb %.0lf + GE %.0lf != dim %u\n", (double) aLTb, (double) aGEb, dim ); \
             exit( 1 ); \
         } \
         return sum; \

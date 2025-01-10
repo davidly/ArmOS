@@ -2301,6 +2301,7 @@ void Arm64::trace_state()
                               // SMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    SMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMINV <V><d>, <Vn>.<T>         ;    SMAXV <V><d>, <Vn>.<T>
                               // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                               // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+                              // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
@@ -2557,6 +2558,13 @@ void Arm64::trace_state()
             {
                 uint64_t size = opbits( 22, 2 );
                 tracer.Trace( "cmeq v%llu.%s, v%llu.%s, #0\n", d, get_ld1_vector_T( size, Q ), n, get_ld1_vector_T( size, Q ) );
+            }
+            else if ( bit21 && !bit15 && 7 == bits14_11 && bit10 ) // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                uint64_t m = opbits( 16, 5 );
+                uint64_t size = opbits( 22, 2 );
+                const char * pT = get_ld1_vector_T( size, Q );
+                tracer.Trace( "cmge v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             }
             else if ( bit21 && !bit15 && 6 == bits14_11 && bit10 ) // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
@@ -6789,7 +6797,8 @@ uint64_t Arm64::run( void )
                             mcpy( pd + ( e * ebytes ), &vec_zeroes, ebytes );
                     }
                 }
-                else if ( bit21 && !bit15 && 6 == bits14_11 && bit10 ) // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                else if ( ( bit21 && !bit15 && 7 == bits14_11 && bit10 ) || // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                          ( bit21 && !bit15 && 6 == bits14_11 && bit10 ) )  // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
@@ -6812,7 +6821,12 @@ uint64_t Arm64::run( void )
                         if ( 8 != ebytes )
                             b = sign_extend( b, esize - 1 );
                         assert( ( ( e + 1 ) * ebytes ) <= sizeof( vec16_t ) );
-                        mcpy( vreg_ptr( d, e * ebytes ), ( a > b ) ? &ones : &zeroes, ebytes );
+                        bool use_ones;
+                        if ( 6 == bits14_11 )
+                            use_ones = ( a > b );
+                        else if ( 7 == bits14_11 )
+                            use_ones = ( a >= b );
+                        mcpy( vreg_ptr( d, e * ebytes ), use_ones ? &ones : &zeroes, ebytes );
                     }
                 }
                 else if ( bit21 && bit15 && 7 == bits14_11 && bit10 ) // ADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
