@@ -6821,11 +6821,13 @@ uint64_t Arm64::run( void )
                         if ( 8 != ebytes )
                             b = sign_extend( b, esize - 1 );
                         assert( ( ( e + 1 ) * ebytes ) <= sizeof( vec16_t ) );
-                        bool use_ones;
+                        bool use_ones = true;
                         if ( 6 == bits14_11 )
                             use_ones = ( a > b );
                         else if ( 7 == bits14_11 )
                             use_ones = ( a >= b );
+                        else
+                            unhandled();
                         mcpy( vreg_ptr( d, e * ebytes ), use_ones ? &ones : &zeroes, ebytes );
                     }
                 }
