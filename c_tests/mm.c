@@ -144,9 +144,12 @@ typedef long double ldouble_t;
         ftype fmodsum = fmod_nonsense_##ftype##dim(); \
         ftype dotsum = dotsum_nonsense_##ftype##dim(); \
         ftype nonsense_sum = sum_##ftype##dim(); \
+        printf( "%s dim %d: sum %lf, min, %lf max %lf, fmodsum %.3lf, dotsum %.1lf\n", #ftype, dim, (double) sum, (double) min_##ftype##dim(), (double) max_##ftype##dim(), (double) fmodsum, (double) dotsum ); \
         if ( sum != nonsense_sum ) \
-            printf( "nonsense: %lf\n", (double) nonsense_sum ); \
-        printf( "min, %lf max %lf, fmodsum %.3lf, dotsum %.1lf\n", (double) min_##ftype##dim(), (double) max_##ftype##dim(), (double) fmodsum, (double) dotsum ); \
+        { \
+            printf( "nonsense differs: %lf\n", (double) nonsense_sum ); \
+            exit( 1 ); \
+        } \
         return sum; \
     }
 
@@ -186,7 +189,7 @@ declare_matrix_tests( uint64_t );
 declare_matrix_tests( int128_t );
 declare_matrix_tests( uint128_t );
 
-#define silent_run_tests( type, format ) \
+#define run_tests( type, format ) \
     run_##type##1(); \
     run_##type##2(); \
     run_##type##3(); \
@@ -208,7 +211,7 @@ declare_matrix_tests( uint128_t );
     run_##type##19(); \
     run_##type##20();
 
-#define run_tests( type, format ) \
+#define loud_run_tests( type, format ) \
     printf( "matrix %s 1: " format "\n", #type, run_##type##1() ); \
     printf( "matrix %s 2: " format "\n", #type, run_##type##2() ); \
     printf( "matrix %s 3: " format "\n", #type, run_##type##3() ); \
@@ -235,21 +238,24 @@ declare_matrix_tests( uint128_t );
 
 int main( int argc, char * argv[] )
 {
+    for ( int i = 0; i < 1; i++ )
+    {
 #if 1
-    run_tests( float, "%f");
-    run_tests( double, "%lf");
-    run_tests( ldouble_t, "%Lf");
-    run_tests( int8_t, "%d");
-    run_tests( uint8_t, "%u");
-    run_tests( int16_t, "%d");
-    run_tests( uint16_t, "%u");
-    run_tests( int32_t, "%d");
-    run_tests( uint32_t, "%u");
-    run_tests( int64_t, "%lld");
-    run_tests( uint64_t, "%llu");
+        run_tests( float, "%f");
+        run_tests( double, "%lf");
+        run_tests( ldouble_t, "%Lf");
+        run_tests( int8_t, "%d");
+        run_tests( uint8_t, "%u");
+        run_tests( int16_t, "%d");
+        run_tests( uint16_t, "%u");
+        run_tests( int32_t, "%d");
+        run_tests( uint32_t, "%u");
+        run_tests( int64_t, "%lld");
+        run_tests( uint64_t, "%llu");
 #else    
-    run_this_test( float, "%f" );    
+        run_this_test( float, "%f" );    
 #endif    
+    }
 
     // these two return incorrect results even on Arm64 hardware
 
