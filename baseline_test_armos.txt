@@ -1,4 +1,4 @@
-Sat 01/11/2025  9:48:19.25 
+Sat 01/11/2025 13:48:07.47 
 test c_tests\clangbin0\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -650,10 +650,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 48, sec 20
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 48, sec 20
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 48, sec 20
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 48, sec 20
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 48, sec 9
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 48, sec 9
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 48, sec 9
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 48, sec 9
 test c_tests\clangbin0\tm 
 tm has completed with great success
 test c_tests\clangbin0\glob 
@@ -709,7 +709,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-operation my sin: long double -0.57079631090164184570 is not the same as long double nan
+test tf completed with great success
 test c_tests\clangbin0\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -1869,10 +1869,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 48, sec 28
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 48, sec 28
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 48, sec 28
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 48, sec 28
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 48, sec 16
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 48, sec 16
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 48, sec 16
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 48, sec 16
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -2527,7 +2527,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-321 ms for 1 iterations
+314 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2554,7 +2554,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin0\ba 
 parsing input file tp.bas
-296 ms for 1 iterations
+304 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3230,10 +3230,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 48, sec 38
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 48, sec 38
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 48, sec 38
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 48, sec 38
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 48, sec 27
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 48, sec 27
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 48, sec 27
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 48, sec 27
 test c_tests\clangbin1\tm 
 tm has completed with great success
 test c_tests\clangbin1\glob 
@@ -3289,7 +3289,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-operation tan: long double -0.57079631090164184570 is not the same as long double 0.00000000000000000000
+test tf completed with great success
 test c_tests\clangbin1\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -4449,10 +4449,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 48, sec 44
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 48, sec 44
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 48, sec 44
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 48, sec 44
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 48, sec 33
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 48, sec 33
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 48, sec 33
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 48, sec 33
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -5107,7 +5107,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-82 ms for 1 iterations
+83 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -5810,10 +5810,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 48, sec 52
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 48, sec 52
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 48, sec 52
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 48, sec 52
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 48, sec 41
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 48, sec 41
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 48, sec 41
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 48, sec 41
 test c_tests\clangbin2\tm 
 tm has completed with great success
 test c_tests\clangbin2\glob 
@@ -5869,7 +5869,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-operation tan: long double -0.57079631090164184570 is not the same as long double 0.00000000000000000000
+test tf completed with great success
 test c_tests\clangbin2\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -7029,10 +7029,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 48, sec 58
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 48, sec 58
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 48, sec 58
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 48, sec 58
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 48, sec 47
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 48, sec 47
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 48, sec 47
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 48, sec 47
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -7687,7 +7687,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-79 ms for 1 iterations
+80 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -7714,7 +7714,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin2\ba 
 parsing input file tp.bas
-81 ms for 1 iterations
+80 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -8390,10 +8390,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 49, sec 6
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 49, sec 6
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 49, sec 6
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 49, sec 6
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 48, sec 55
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 48, sec 55
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 48, sec 55
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 48, sec 55
 test c_tests\clangbin3\tm 
 tm has completed with great success
 test c_tests\clangbin3\glob 
@@ -8449,7 +8449,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-operation tan: long double -0.57079631090164184570 is not the same as long double 0.00000000000000000000
+test tf completed with great success
 test c_tests\clangbin3\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -9609,10 +9609,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 49, sec 12
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 49, sec 12
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 49, sec 12
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 49, sec 12
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 49, sec 1
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 49, sec 1
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 49, sec 1
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 49, sec 1
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -10267,7 +10267,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-84 ms for 1 iterations
+86 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -10294,7 +10294,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin3\ba 
 parsing input file tp.bas
-80 ms for 1 iterations
+79 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -10970,10 +10970,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbinfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 49, sec 20
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 49, sec 20
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 49, sec 20
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 49, sec 20
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 49, sec 10
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 49, sec 10
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 49, sec 10
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 49, sec 10
 test c_tests\clangbinfast\tm 
 tm has completed with great success
 test c_tests\clangbinfast\glob 
@@ -11029,7 +11029,7 @@ logf of 0.3: -1.203973
 log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
-operation tan: long double -0.57079631090164184570 is not the same as long double 0.00000000000000000000
+test tf completed with great success
 test c_tests\clangbinfast\td 
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -12189,10 +12189,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 9, min 49, sec 26
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 12, min 49, sec 26
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 9, min 49, sec 26
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 17, min 49, sec 26
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 11, hour 13, min 49, sec 16
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 11, hour 16, min 49, sec 16
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 11, hour 13, min 49, sec 16
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 11, hour 21, min 49, sec 16
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -12269,7 +12269,7 @@ log10 of 300: 2.477121
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,
 pi has mantissa: 0.785398, exponent 2
 r should be 1.0: 1.000000
-  r high point 3187071009115104228782838925952666189789578010509155762176.000000
+  r high point 3187071009115100744291401655542800324833597909202670452736.000000
 stop
 test c_tests\binfast\terrno 
 errno opening a file for read that doesn't exist: 2 (2 file not found expected)
@@ -12874,7 +12874,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbinfast\ba 
 parsing input file tp.bas
-85 ms for 1 iterations
+79 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -12904,7 +12904,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   7.989ms
+serial runtime:   8.0266ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -12977,7 +12977,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   2.5525ms
+serial runtime:   2.5388ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -13050,7 +13050,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   1.6343ms
+serial runtime:   1.6599ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -13123,7 +13123,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   1.2955ms
+serial runtime:   1.3258ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -13204,10 +13204,10 @@ iterations: 1
 test rvos 
 starting...
 6493 moves
-65.622002 milliseconds
+64.630005 milliseconds
 test armos 
 starting
-70828 microseconds (-6)
+70715 microseconds (-6)
 1 iterations
 6493 moves
-Sat 01/11/2025  9:49:38.97 
+Sat 01/11/2025 13:49:28.55 
