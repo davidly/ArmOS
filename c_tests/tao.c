@@ -93,6 +93,50 @@ template <class T> T __abs( T x )
         for ( int i = 0; i < dim; i++ ) \
             A_##ftype##dim[ i ] ^= B_##ftype##dim[ i ]; \
     } \
+    _perhaps_inline void add_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] += ( i + 2 ); \
+    } \
+    _perhaps_inline void add_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( 2 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] += B_##ftype##dim[ i ]; \
+    } \
+    _perhaps_inline void sub_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] -= ( i + 2 ); \
+    } \
+    _perhaps_inline void sub_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( 2 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] -= B_##ftype##dim[ i ]; \
+    } \
+    _perhaps_inline void mul_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] *= ( i + 2 ); \
+    } \
+    _perhaps_inline void mul_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( 2 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] *= B_##ftype##dim[ i ]; \
+    } \
+    _perhaps_inline void div_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] /= ( i + 2 ); \
+    } \
+    _perhaps_inline void div_n_##ftype##dim() \
+    { \
+        fillB_##ftype##dim( 2 ); \
+        for ( int i = 0; i < dim; i++ ) \
+            A_##ftype##dim[ i ] /= B_##ftype##dim[ i ]; \
+    } \
     _perhaps_inline void print_array_##ftype##dim() \
     { \
         printf( "array:" ); \
@@ -177,6 +221,14 @@ template <class T> T __abs( T x )
         /* printf( "or: " ); print_array_##ftype##dim(); */ \
         eor_##ftype##dim(); \
         /* printf( "eor: " ); print_array_##ftype##dim(); */ \
+        add_##ftype##dim(); \
+        /* printf( "add: " ); print_array_##ftype##dim(); */ \
+        sub_##ftype##dim(); \
+        /* printf( "sub: " ); print_array_##ftype##dim(); */ \
+        mul_##ftype##dim(); \
+        /* printf( "eor: " ); print_array_##ftype##dim(); */ \
+        div_##ftype##dim(); \
+        /* printf( "eor: " ); print_array_##ftype##dim(); */ \
         ftype sum = sum_##ftype##dim(); \
         ftype magnitude = magnitude_##ftype##dim(); \
         printf( "type %s size %d, sum %.0lf, magnitude %.0lf min, %.0lf max %.0lf\n", #ftype, dim, (double) sum, (double) magnitude, \
@@ -193,6 +245,14 @@ template <class T> T __abs( T x )
         /* printf( "or_n: " ); print_array_##ftype##dim(); */ \
         eor_n_##ftype##dim(); \
         /* printf( "eor_n: " ); print_array_##ftype##dim(); */ \
+        add_n_##ftype##dim(); \
+        /* printf( "add_n: " ); print_array_##ftype##dim(); */ \
+        sub_n_##ftype##dim(); \
+        /* printf( "sub_n: " ); print_array_##ftype##dim(); */ \
+        mul_n_##ftype##dim(); \
+        /* printf( "mul_n: " ); print_array_##ftype##dim(); */ \
+        div_n_##ftype##dim(); \
+        /* printf( "div_n: " ); print_array_##ftype##dim(); */ \
         ftype sum_n = sum_##ftype##dim(); \
         if ( sum != sum_n ) \
         { \
