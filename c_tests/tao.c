@@ -15,6 +15,11 @@ typedef unsigned __int128 uint128_t;
 typedef __int128 int128_t;
 typedef long double ldouble_t;
 
+template <class T> T __abs( T x )
+{
+    return ( x < 0 ) ? -x : x;
+}
+
 #define array_operations_test( ftype, dim ) \
     ftype A_##ftype##dim[ dim ]; \
     ftype B_##ftype##dim[ dim ]; \
@@ -26,7 +31,7 @@ typedef long double ldouble_t;
     _perhaps_inline void fillB_##ftype##dim( ftype val ) \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            B_##ftype##dim[ i ] = val; \
+            B_##ftype##dim[ i ] = val + i; \
     } \
     _perhaps_inline void randomizeB_##ftype##dim() \
     { \
@@ -36,7 +41,7 @@ typedef long double ldouble_t;
     _perhaps_inline void shift_left_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            A_##ftype##dim[ i ] <<= 1; \
+            A_##ftype##dim[ i ] <<= ( 1 + i ); \
     } \
     _perhaps_inline void shift_left_n_##ftype##dim() \
     { \
@@ -47,7 +52,7 @@ typedef long double ldouble_t;
     _perhaps_inline void shift_right_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            A_##ftype##dim[ i ] >>= 1; \
+            A_##ftype##dim[ i ] >>= ( 1 + i ); \
     } \
     _perhaps_inline void shift_right_n_##ftype##dim() \
     { \
@@ -58,7 +63,7 @@ typedef long double ldouble_t;
     _perhaps_inline void and_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            A_##ftype##dim[ i ] &= ( ~0x33 ); \
+            A_##ftype##dim[ i ] &= ( i + ~0x33 ); \
     } \
     _perhaps_inline void and_n_##ftype##dim() \
     { \
@@ -69,7 +74,7 @@ typedef long double ldouble_t;
     _perhaps_inline void or_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            A_##ftype##dim[ i ] |= 0x55; \
+            A_##ftype##dim[ i ] |= ( i + 0x55 ); \
     } \
     _perhaps_inline void or_n_##ftype##dim() \
     { \
@@ -80,7 +85,7 @@ typedef long double ldouble_t;
     _perhaps_inline void eor_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            A_##ftype##dim[ i ] ^= 0x99; \
+            A_##ftype##dim[ i ] ^= ( i + 0x99 ); \
     } \
     _perhaps_inline void eor_n_##ftype##dim() \
     { \
@@ -137,6 +142,13 @@ typedef long double ldouble_t;
             result += A_##ftype##dim[ i ]; \
         return result; \
     } \
+    _perhaps_inline ftype magnitude_##ftype##dim() \
+    { \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            result += __abs( A_##ftype##dim[ i ] ); \
+        return result; \
+    } \
     _perhaps_inline ftype min_##ftype##dim() \
     { \
         ftype result = A_##ftype##dim[ 0 ]; \
@@ -166,7 +178,9 @@ typedef long double ldouble_t;
         eor_##ftype##dim(); \
         /* printf( "eor: " ); print_array_##ftype##dim(); */ \
         ftype sum = sum_##ftype##dim(); \
-        printf( "type %s size %d, sum %.0lf, min, %.0lf max %.0lf\n", #ftype, dim, (double) sum, (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
+        ftype magnitude = magnitude_##ftype##dim(); \
+        printf( "type %s size %d, sum %.0lf, magnitude %.0lf min, %.0lf max %.0lf\n", #ftype, dim, (double) sum, (double) magnitude, \
+                (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
         fillA_##ftype##dim( -10 ); \
         /* printf( "initial_n: " ); print_array_##ftype##dim(); */ \
         shift_left_n_##ftype##dim(); \
@@ -182,7 +196,15 @@ typedef long double ldouble_t;
         ftype sum_n = sum_##ftype##dim(); \
         if ( sum != sum_n ) \
         { \
-            printf( "ERROR! n sum differs. type %s size %d, sum %.0lf, min, %.0lf max %.0lf\n", #ftype, dim, (double) sum_n, (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
+            printf( "ERROR! n sum differs. type %s size %d, sum_n %.0lf, magnitude %.0lf, min, %.0lf max %.0lf\n", \
+                    #ftype, dim, (double) sum_n, (double) magnitude, (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
+            exit( 1 ); \
+        } \
+        ftype magnitude_n = magnitude_##ftype##dim(); \
+        if ( magnitude != magnitude_n ) \
+        { \
+            printf( "ERROR! n magnitude differs. type %s size %d, sum %.0lf, magnitude_n %.0lf, min, %.0lf max %.0lf\n", \
+                    #ftype, dim, (double) sum, (double) magnitude_n, (double) min_##ftype##dim(), (double) max_##ftype##dim() ); \
             exit( 1 ); \
         } \
         randomizeB_##ftype##dim(); \
@@ -230,6 +252,7 @@ typedef long double ldouble_t;
     array_operations_test( type, 18 ); \
     array_operations_test( type, 19 ); \
     array_operations_test( type, 20 );
+
 
 declare_array_operations_tests( int8_t );
 declare_array_operations_tests( uint8_t );

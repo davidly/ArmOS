@@ -53,6 +53,11 @@ bool Arm64::trace_instructions( bool t )
 
 void Arm64::end_emulation() { g_State |= stateEndEmulation; }
 
+template <class T> T __abs( T x )
+{
+    return ( x < 0 ) ? -x : x;
+} //__abs
+
 void Arm64::set_flags_from_nzcv( uint64_t nzcv )
 {
     fN = ( 0 != ( nzcv & 8 ) );
@@ -2301,7 +2306,7 @@ void Arm64::trace_state()
                               // SMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    SMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMINV <V><d>, <Vn>.<T>         ;    SMAXV <V><d>, <Vn>.<T>
                               // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                               // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
-                              // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                              // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ABS <Vd>.<T>, <Vn>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
@@ -2318,7 +2323,13 @@ void Arm64::trace_state()
             uint64_t bits14_10 = opbits( 10, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit21 && 4 == bits15_10 ) // SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+            if ( bit21 && 0 == bits20_16 && 0x2e == bits15_10 ) // ABS <Vd>.<T>, <Vn>.<T>
+            {
+                uint64_t size = opbits( 22, 2 );
+                const char * pT = get_ld1_vector_T( size, Q );
+                tracer.Trace( "abs v%llu.%s, v%llu.%s\n", d, pT, n, pT );
+            }
+            else if ( bit21 && 4 == bits15_10 ) // SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t size = opbits( 22, 2 );
@@ -6131,6 +6142,7 @@ uint64_t Arm64::run( void )
                                   // SMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    SMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;   SMINV <V><d>, <Vn>.<T>         ;    SMAXV <V><d>, <Vn>.<T>
                                   // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                                   // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+                                  // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ABS <Vd>.<T>, <Vn>.<T>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -6148,7 +6160,27 @@ uint64_t Arm64::run( void )
                 uint64_t bits12_10 = opbits( 10, 3 );
                 uint64_t bits15_10 = opbits( 10, 6 );
 
-                if ( bit21 && 4 == bits15_10 ) // SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+                if ( bit21 && 0 == bits20_16 && 0x2e == bits15_10 ) // ABS <Vd>.<T>, <Vn>.<T>
+                {
+                    uint64_t size = opbits( 22, 2 );
+                    uint64_t esize = 8ull << size;
+                    uint64_t ebytes = esize / 8;
+                    uint64_t elements = datasize / esize;
+                    for ( uint64_t e = 0; e < elements; e++ )
+                    {
+                        if ( 1 == ebytes )
+                            vregs[ d ].ui8[ e ] = __abs( (int8_t) vregs[ n ].ui8[ e ] );
+                        else if ( 2 == ebytes )
+                            vregs[ d ].ui16[ e ] = __abs( (int16_t) vregs[ n ].ui16[ e ] );
+                        else if ( 4 == ebytes )
+                            vregs[ d ].ui32[ e ] = __abs( (int32_t) vregs[ n ].ui32[ e ] );
+                        else if ( 8 == ebytes )
+                            vregs[ d ].ui64[ e ] = __abs( (int64_t) vregs[ n ].ui64[ e ] );
+                        else
+                            unhandled();
+                    }
+                }
+                else if ( bit21 && 4 == bits15_10 ) // SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
