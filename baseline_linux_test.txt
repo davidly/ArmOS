@@ -1,4 +1,4 @@
-Sun Jan 12 08:42:31 PST 2025
+Sun Jan 12 09:18:48 PST 2025
 c_tests/bin0/tcmp
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -6450,55 +6450,55 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/clangbin0/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/bin1/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/clangbin1/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/bin2/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/clangbin2/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/bin3/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/clangbin3/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/binfast/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/clangbinfast/ttime
-before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 16, min 42, sec 39
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 11, min 42, sec 39
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 8, min 42, sec 39
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 16, min 42, sec 39
+before TZ is set: tz: '(null)', year: 2025, month 1, day 12, hour 17, min 18, sec 56
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 12, hour 12, min 18, sec 56
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 12, hour 9, min 18, sec 56
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 12, hour 17, min 18, sec 56
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/clangbin0/tm
@@ -9810,46 +9810,46 @@ uint64_t dim 19: sum 376846.000000, min, 229.000000 max 6631.000000, fmodsum 408
 uint64_t dim 20: sum 465880.000000, min, 251.000000 max 7680.000000, fmodsum 449.000, dotsum 19421.0
 matrix multiply test completed with great success
 c_tests/bin0/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -10012,46 +10012,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/clangbin0/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -10214,46 +10214,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/bin1/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -10416,46 +10416,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/clangbin1/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -10618,46 +10618,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/bin2/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -10820,46 +10820,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/clangbin2/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -11022,46 +11022,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/bin3/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -11224,46 +11224,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/clangbin3/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -11426,46 +11426,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/binfast/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -11628,46 +11628,46 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 c_tests/clangbinfast/tao
-type int8_t size 1, sum 76, magnitude 76 min, 76 max 76
-type int8_t size 2, sum -103, magnitude -103 min, 76 max 77
-type int8_t size 3, sum -35, magnitude -35 min, 68 max 77
-type int8_t size 4, sum 34, magnitude 34 min, 68 max 77
-type int8_t size 5, sum -26, magnitude 94 min, -60 max 77
-type int8_t size 6, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 7, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 8, sum -21, magnitude -29 min, -60 max 77
-type int8_t size 9, sum -25, magnitude -25 min, -60 max 77
-type int8_t size 10, sum -29, magnitude -21 min, -60 max 77
-type int8_t size 11, sum -33, magnitude -17 min, -60 max 77
-type int8_t size 12, sum -93, magnitude 43 min, -60 max 77
-type int8_t size 13, sum 103, magnitude 103 min, -60 max 77
-type int8_t size 14, sum 43, magnitude -93 min, -60 max 77
-type int8_t size 15, sum -17, magnitude -33 min, -60 max 77
-type int8_t size 16, sum -69, magnitude 19 min, -60 max 77
-type int8_t size 17, sum -121, magnitude 71 min, -60 max 77
-type int8_t size 18, sum 83, magnitude 123 min, -60 max 77
-type int8_t size 19, sum 31, magnitude -81 min, -60 max 77
-type int8_t size 20, sum -29, magnitude -21 min, -60 max 77
-type uint8_t size 1, sum 204, magnitude 204 min, 204 max 204
-type uint8_t size 2, sum 153, magnitude 153 min, 204 max 205
-type uint8_t size 3, sum 93, magnitude 93 min, 196 max 205
-type uint8_t size 4, sum 34, magnitude 34 min, 196 max 205
-type uint8_t size 5, sum 230, magnitude 230 min, 196 max 205
-type uint8_t size 6, sum 171, magnitude 171 min, 196 max 205
-type uint8_t size 7, sum 111, magnitude 111 min, 196 max 205
-type uint8_t size 8, sum 107, magnitude 107 min, 196 max 252
-type uint8_t size 9, sum 103, magnitude 103 min, 196 max 252
-type uint8_t size 10, sum 99, magnitude 99 min, 196 max 252
-type uint8_t size 11, sum 95, magnitude 95 min, 196 max 252
-type uint8_t size 12, sum 35, magnitude 35 min, 196 max 252
-type uint8_t size 13, sum 231, magnitude 231 min, 196 max 252
-type uint8_t size 14, sum 171, magnitude 171 min, 196 max 252
-type uint8_t size 15, sum 111, magnitude 111 min, 196 max 252
-type uint8_t size 16, sum 59, magnitude 59 min, 196 max 252
-type uint8_t size 17, sum 7, magnitude 7 min, 196 max 252
-type uint8_t size 18, sum 211, magnitude 211 min, 196 max 252
-type uint8_t size 19, sum 159, magnitude 159 min, 196 max 252
-type uint8_t size 20, sum 99, magnitude 99 min, 196 max 252
+type int8_t size 1, sum -52, magnitude 52 min, -52 max -52
+type int8_t size 2, sum -60, magnitude 60 min, -52 max -8
+type int8_t size 3, sum -56, magnitude 64 min, -52 max 4
+type int8_t size 4, sum -39, magnitude 81 min, -52 max 17
+type int8_t size 5, sum -56, magnitude 98 min, -52 max 17
+type int8_t size 6, sum -60, magnitude 102 min, -52 max 17
+type int8_t size 7, sum -56, magnitude 106 min, -52 max 17
+type int8_t size 8, sum -60, magnitude 110 min, -52 max 17
+type int8_t size 9, sum -64, magnitude 114 min, -52 max 17
+type int8_t size 10, sum -68, magnitude 118 min, -52 max 17
+type int8_t size 11, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 12, sum -72, magnitude 122 min, -52 max 17
+type int8_t size 13, sum -77, magnitude 127 min, -52 max 17
+type int8_t size 14, sum -69, magnitude -121 min, -52 max 17
+type int8_t size 15, sum -65, magnitude -117 min, -52 max 17
+type int8_t size 16, sum -71, magnitude -111 min, -52 max 17
+type int8_t size 17, sum -67, magnitude -107 min, -52 max 17
+type int8_t size 18, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 19, sum -66, magnitude -106 min, -52 max 17
+type int8_t size 20, sum -66, magnitude -106 min, -52 max 17
+type uint8_t size 1, sum 76, magnitude 76 min, 76 max 76
+type uint8_t size 2, sum 110, magnitude 110 min, 34 max 76
+type uint8_t size 3, sum 114, magnitude 114 min, 4 max 76
+type uint8_t size 4, sum 157, magnitude 157 min, 4 max 76
+type uint8_t size 5, sum 182, magnitude 182 min, 4 max 76
+type uint8_t size 6, sum 196, magnitude 196 min, 4 max 76
+type uint8_t size 7, sum 200, magnitude 200 min, 4 max 76
+type uint8_t size 8, sum 224, magnitude 224 min, 4 max 76
+type uint8_t size 9, sum 245, magnitude 245 min, 4 max 76
+type uint8_t size 10, sum 8, magnitude 8 min, 4 max 76
+type uint8_t size 11, sum 25, magnitude 25 min, 4 max 76
+type uint8_t size 12, sum 43, magnitude 43 min, 4 max 76
+type uint8_t size 13, sum 56, magnitude 56 min, 4 max 76
+type uint8_t size 14, sum 64, magnitude 64 min, 4 max 76
+type uint8_t size 15, sum 68, magnitude 68 min, 4 max 76
+type uint8_t size 16, sum 76, magnitude 76 min, 4 max 76
+type uint8_t size 17, sum 80, magnitude 80 min, 4 max 76
+type uint8_t size 18, sum 81, magnitude 81 min, 1 max 76
+type uint8_t size 19, sum 93, magnitude 93 min, 1 max 76
+type uint8_t size 20, sum 93, magnitude 93 min, 0 max 76
 type int16_t size 1, sum -180, magnitude 180 min, -180 max -180
 type int16_t size 2, sum -359, magnitude 359 min, -180 max -179
 type int16_t size 3, sum -547, magnitude 547 min, -188 max -179
@@ -12731,7 +12731,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-464 ms for 1 iterations
+481 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12780,7 +12780,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-119 ms for 1 iterations
+121 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12829,7 +12829,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-116 ms for 1 iterations
+117 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12878,7 +12878,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-120 ms for 1 iterations
+122 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12927,7 +12927,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-120 ms for 1 iterations
+123 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -12991,19 +12991,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   11.489201ms
+serial runtime:   11.967701ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   3.2333ms
+serial runtime:   3.2802ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   2.2446ms
+serial runtime:   2.2576ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   1.7827ms
+serial runtime:   1.7751ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -13266,4 +13266,4 @@ element count after dedup: 58175
 rust_tests/bin3/mysort
 element count in vector: 58175
 element count after dedup: 58175
-Sun Jan 12 08:43:37 PST 2025
+Sun Jan 12 09:19:55 PST 2025
