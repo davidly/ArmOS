@@ -21,6 +21,11 @@ typedef unsigned __int128 uint128_t;
 typedef __int128 int128_t;
 typedef long double ldouble_t;
 
+template <class T> T do_abs( T x )
+{
+    return ( x < 0 ) ? -x : x;
+}
+
 #define matrix_test( ftype, dim ) \
     ftype A_##ftype##dim[ dim ][ dim ]; \
     ftype B_##ftype##dim[ dim ][ dim ]; \
@@ -114,6 +119,14 @@ typedef long double ldouble_t;
                 result += C_##ftype##dim[ i ][ j ]; \
         return result; \
     } \
+    _perhaps_inline ftype magnitude_##ftype##dim() \
+    { \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+                result += do_abs( C_##ftype##dim[ i ][ j ] ); \
+        return result; \
+    } \
     _perhaps_inline ftype min_##ftype##dim() \
     { \
         ftype result = C_##ftype##dim[ 0 ][ 0 ]; \
@@ -140,11 +153,13 @@ typedef long double ldouble_t;
         /*print_array_##ftype##dim( B_##ftype##dim );*/ \
         /*print_array_##ftype##dim( C_##ftype##dim );*/ \
         ftype sum = sum_##ftype##dim(); \
+        ftype magnitude = magnitude_##ftype##dim(); \
         div_nonsense_##ftype##dim(); \
         ftype fmodsum = fmod_nonsense_##ftype##dim(); \
         ftype dotsum = dotsum_nonsense_##ftype##dim(); \
         ftype nonsense_sum = sum_##ftype##dim(); \
-        printf( "%s dim %d: sum %lf, min, %lf max %lf, fmodsum %.3lf, dotsum %.1lf\n", #ftype, dim, (double) sum, (double) min_##ftype##dim(), (double) max_##ftype##dim(), (double) fmodsum, (double) dotsum ); \
+        printf( "%s dim %d: sum %lf, magnitude %lf, min, %lf max %lf, fmodsum %.3lf, dotsum %.1lf\n", \
+                #ftype, dim, (double) sum, (double) magnitude, (double) min_##ftype##dim(), (double) max_##ftype##dim(), (double) fmodsum, (double) dotsum ); \
         if ( sum != nonsense_sum ) \
         { \
             printf( "nonsense differs: %lf\n", (double) nonsense_sum ); \
@@ -238,7 +253,8 @@ declare_matrix_tests( uint128_t );
 
 int main( int argc, char * argv[] )
 {
-    for ( int i = 0; i < 1; i++ )
+    int loop_count = ( argc > 1 ) ? atoi( argv[ 1 ] ) : 1;
+    for ( int i = 0; i < loop_count; i++ )
     {
 #if 1
         run_tests( float, "%f");

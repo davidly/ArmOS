@@ -53,10 +53,10 @@ bool Arm64::trace_instructions( bool t )
 
 void Arm64::end_emulation() { g_State |= stateEndEmulation; }
 
-template <class T> T __abs( T x )
+template <class T> T do_abs( T x )
 {
     return ( x < 0 ) ? -x : x;
-} //__abs
+} //do_abs
 
 void Arm64::set_flags_from_nzcv( uint64_t nzcv )
 {
@@ -2330,6 +2330,7 @@ void Arm64::trace_state()
                               // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                               // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                               // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ABS <Vd>.<T>, <Vn>.<T>            ;   SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+                              // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
@@ -2346,7 +2347,19 @@ void Arm64::trace_state()
             uint64_t bits14_10 = opbits( 10, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit21 && 0xc == bits15_10 ) // SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+            if ( bit23 && bit21 && 0 == bits20_16 && 0x3e == bits15_10 ) // FABS <Vd>.<T>, <Vn>.<T>
+            {
+                uint64_t sz = opbit( 22 );
+                const char * pT = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
+                tracer.Trace( "fabs v%llu.%s, v%llu.%s, #0.0\n", d, pT, n, pT );
+            }
+            else if ( bit23 && bit21 && 0 == bits20_16 && 0x3a == bits15_10 ) // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0
+            {
+                uint64_t sz = opbit( 22 );
+                const char * pT = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
+                tracer.Trace( "fcmlt v%llu.%s, v%llu.%s, #0.0\n", d, pT, n, pT );
+            }
+            else if ( bit21 && 0xc == bits15_10 ) // SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t size = opbits( 22, 2 );
@@ -6202,6 +6215,7 @@ uint64_t Arm64::run( void )
                                   // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                                   // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                                   // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ABS <Vd>.<T>, <Vn>.<T>            ;   SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+                                  // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -6219,7 +6233,41 @@ uint64_t Arm64::run( void )
                 uint64_t bits12_10 = opbits( 10, 3 );
                 uint64_t bits15_10 = opbits( 10, 6 );
 
-                if ( bit21 && 0xc == bits15_10 ) // SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
+                if ( bit23 && bit21 && 0 == bits20_16 && 0x3e == bits15_10 ) // FABS <Vd>.<T>, <Vn>.<T>
+                {
+                    uint64_t sz = opbit( 22 );
+                    uint64_t esize = 32ull << sz;
+                    uint64_t ebytes = esize / 8;
+                    uint64_t elements = datasize / esize;
+
+                    for ( uint64_t e = 0; e < elements; e++ )
+                    {
+                        if ( 4 == ebytes )
+                            vregs[ d ].f[ e ] = do_abs( vregs[ n ].f[ e ] );
+                        else if ( 8 == ebytes )
+                            vregs[ d ].d[ e ] = do_abs( vregs[ n ].d[ e ] );
+                        else
+                            unhandled();
+                    }
+                }
+                else if ( bit23 && bit21 && 0 == bits20_16 && 0x3a == bits15_10 ) // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0
+                {
+                    uint64_t sz = opbit( 22 );
+                    uint64_t esize = 32ull << sz;
+                    uint64_t ebytes = esize / 8;
+                    uint64_t elements = datasize / esize;
+
+                    for ( uint64_t e = 0; e < elements; e++ )
+                    {
+                        if ( 4 == ebytes )
+                            vregs[ d ].ui32[ e ] = ( vregs[ n ].f[ e ] < 0 ) ? ~0 : 0;
+                        else if ( 8 == ebytes )
+                            vregs[ d ].ui64[ e ] = ( vregs[ n ].d[ e ] < 0 ) ? ~0 : 0;
+                        else
+                            unhandled();
+                    }
+                }
+                else if ( bit21 && 0xc == bits15_10 ) // SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
@@ -6250,13 +6298,13 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         if ( 1 == ebytes )
-                            vregs[ d ].ui8[ e ] = __abs( (int8_t) vregs[ n ].ui8[ e ] );
+                            vregs[ d ].ui8[ e ] = do_abs( (int8_t) vregs[ n ].ui8[ e ] );
                         else if ( 2 == ebytes )
-                            vregs[ d ].ui16[ e ] = __abs( (int16_t) vregs[ n ].ui16[ e ] );
+                            vregs[ d ].ui16[ e ] = do_abs( (int16_t) vregs[ n ].ui16[ e ] );
                         else if ( 4 == ebytes )
-                            vregs[ d ].ui32[ e ] = __abs( (int32_t) vregs[ n ].ui32[ e ] );
+                            vregs[ d ].ui32[ e ] = do_abs( (int32_t) vregs[ n ].ui32[ e ] );
                         else if ( 8 == ebytes )
-                            vregs[ d ].ui64[ e ] = __abs( (int64_t) vregs[ n ].ui64[ e ] );
+                            vregs[ d ].ui64[ e ] = do_abs( (int64_t) vregs[ n ].ui64[ e ] );
                         else
                             unhandled();
                     }

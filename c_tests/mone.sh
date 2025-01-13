@@ -5,6 +5,14 @@ do
     mkdir bin"$optflag" 2>/dev/null
     mkdir clangbin"$optflag" 2>/dev/null
 
-    g++ $1.c -o bin"$optflag"/$1 -O"$optflag" -static -fsigned-char -Wno-format -Wno-format-security
-    clang-18 -x c++ $1.c -o clangbin"$optflag"/$1 -O"$optflag" -static -fsigned-char -Wno-format -Wno-format-security -std=c++14 -lm -lstdc++
+    _clangbuild="clang-18 -x c++ $1.c -o clangbin"$optflag"/$1 -O"$optflag" -static -fsigned-char -Wno-format -Wno-format-security -std=c++14 -lm -lstdc++"
+    _gnubuild="g++ $1.c -o bin"$optflag"/$1 -O"$optflag" -static -fsigned-char -Wno-format -Wno-format-security"
+
+    if [ "$optflag" != "fast" ]; then
+        $_clangbuild &
+        $_gnubuild &
+    else    
+        $_clangbuild
+        $_gnubuild
+    fi
 done
