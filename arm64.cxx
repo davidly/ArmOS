@@ -269,12 +269,12 @@ static uint64_t one_bits( uint64_t bits )
     return ( ( 1ull << bits ) - 1 );
 } //one_bits
 
-static uint64_t replicate_bits( uint64_t val, uint64_t len )
+static uint64_t replicate_bit( uint64_t val, uint64_t len )
 {
     if ( 0 != val )
         return one_bits( len );
     return 0;
-} //replicate_bits
+} //replicate_bit
 
 static int64_t sign_extend( uint64_t x, uint64_t high_bit )
 {
@@ -412,22 +412,34 @@ __inline_perf uint64_t Arm64::val_reg_or_zr( uint64_t r ) const
 
 Arm64::ElementComparisonResult Arm64::compare_vector_elements( uint8_t * pl, uint8_t * pr, uint64_t width, bool unsigned_compare )
 {
-    assert( width >= 1 && width <= 16 );
+    assert( width >= 1 && width <= 8 );
 
     if ( unsigned_compare )
     {
-        assert( 1 == width || 2 == width || 4 == width || 8 == width );
-        uint64_t l = 0, r = 0;
-        mcpy( &l, pl, width );
-        mcpy( &r, pr, width );
-        if ( l < r )
-            return ecr_lt;
-        else if ( l == r )
-            return ecr_eq;
-        return ecr_gt;
+        if ( 1 == width )
+            return ( *pl < *pr ) ? ecr_lt : ( *pl == *pr ) ? ecr_eq : ecr_gt;
+        if ( 2 == width )
+            return ( * (uint16_t *) pl < * (uint16_t *) pr ) ? ecr_lt : ( * (uint16_t *) pl == * (uint16_t *) pr ) ? ecr_eq : ecr_gt;
+        if ( 4 == width )
+            return ( * (uint32_t *) pl < * (uint32_t *) pr ) ? ecr_lt : ( * (uint32_t *) pl == * (uint32_t *) pr ) ? ecr_eq : ecr_gt;
+        if ( 8 == width )
+            return ( * (uint64_t *) pl < * (uint64_t *) pr ) ? ecr_lt : ( * (uint64_t *) pl == * (uint64_t *) pr ) ? ecr_eq : ecr_gt;
+        else
+            unhandled();
     }
     else
-        unhandled();
+    {
+        if ( 1 == width )
+            return ( * (int8_t *) pl < * (int8_t *) pr ) ? ecr_lt : ( * (int8_t *) pl == * (int8_t *) pr ) ? ecr_eq : ecr_gt;
+        if ( 2 == width )
+            return ( * (int16_t *) pl < * (int16_t *) pr ) ? ecr_lt : ( * (int16_t *) pl == * (int16_t *) pr ) ? ecr_eq : ecr_gt;
+        if ( 4 == width )
+            return ( * (int32_t *) pl < * (int32_t *) pr ) ? ecr_lt : ( * (int32_t *) pl == * (int32_t *) pr ) ? ecr_eq : ecr_gt;
+        if ( 8 == width )
+            return ( * (int64_t *) pl < * (int64_t *) pr ) ? ecr_lt : ( * (int64_t *) pl == * (int64_t *) pr ) ? ecr_eq : ecr_gt;
+        else
+            unhandled();
+    }
 
     assert( false );
     return ecr_eq;
@@ -488,7 +500,7 @@ uint64_t Arm64::extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift, bo
 {
     uint64_t x = ( 31 == m ) ? 0 : regs[ m ];
     if ( !fullm )
-        x &= 0xffffffff;
+        x = (uint32_t) x;
 
     switch( extend_type )
     {
@@ -606,7 +618,7 @@ uint64_t Arm64::adv_simd_expand_imm( uint64_t operand, uint64_t cmode, uint64_t 
 
                     uint64_t a = get_bit( imm8, 7 );
                     uint64_t b = !get_bit( imm8, 6 );
-                    uint64_t c = replicate_bits( get_bit( imm8, 6 ), 5 );
+                    uint64_t c = replicate_bit( get_bit( imm8, 6 ), 5 );
                     uint64_t d = get_bits( imm8, 0, 6 );
                     uint32_t imm32 = (uint32_t) ( ( ( a << 12 ) | ( b << 11 ) | ( c << 6 ) | d ) << 19 );
                     imm64 = replicate_bytes( imm32, 4 );
@@ -616,7 +628,7 @@ uint64_t Arm64::adv_simd_expand_imm( uint64_t operand, uint64_t cmode, uint64_t 
                     // imm64 = imm8<7>:NOT(imm8<6>):Replicate(imm8<6>,8):imm8<5:0>:Zeros(48);
                     imm64 = ( get_bit( imm8, 7 ) << 63 ) |
                             ( ( get_bit( imm8, 6 ) ? 0ull : 1ull ) << 62 ) |
-                            ( replicate_bits( get_bit( imm8, 6 ), 8 ) << ( 62 - 8 ) ) |
+                            ( replicate_bit( get_bit( imm8, 6 ), 8 ) << ( 62 - 8 ) ) |
                             ( get_bits( imm8, 0, 6 ) << 48 );
                 }
             }
@@ -661,7 +673,7 @@ static uint64_t decode_logical_immediate( uint64_t val, uint64_t bit_width )
     }
 
     if ( 32 == bit_width )
-        pattern &= 0xffffffff;
+        pattern = (uint32_t) pattern;
     return pattern;
 } //decode_logical_immediate
 
@@ -698,7 +710,7 @@ static uint64_t vfp_expand_imm( uint64_t imm8, uint64_t N )
     uint64_t F = N - E - 1;
     uint64_t sign = ( 0 != ( imm8 & 0x80 ) );
     uint64_t exp_part_1 = ( get_bit( imm8, 6 ) ? 0 : 1 );
-    uint64_t exp_part_2 = replicate_bits( get_bit( imm8, 6 ), E - 3 );
+    uint64_t exp_part_2 = replicate_bit( get_bit( imm8, 6 ), E - 3 );
     uint64_t exp_part_3 = get_bits( imm8, 4, 2 );
     uint64_t exp = ( exp_part_1 << ( E - 3 + 2 ) ) | ( exp_part_2 << 2 ) | exp_part_3;
     uint64_t frac_shift = F - 4;
@@ -1898,7 +1910,7 @@ void Arm64::trace_state()
                 {
                     if ( hw > 16 )
                         unhandled();
-                    imm16 &= 0xffffffff;
+                    imm16 = (uint32_t) imm16;
                     width = 'w';
                 }
     
@@ -3051,7 +3063,7 @@ void Arm64::trace_state()
             }
             break;
         }
-        case 0xd6: // BLR <Xn>    ;   RET    ;    BR <Xn>
+        case 0xd6: // BLR <Xn>    ;    BR <Xn>    ;    RET {<Xn>}
         {
             uint64_t n = opbits( 5, 5 );
             uint64_t theop = opbits( 21, 2 );
@@ -3320,7 +3332,7 @@ __inline_perf uint64_t Arm64::sub64( uint64_t x, uint64_t y, bool setflags )
 uint32_t Arm64::add_with_carry32( uint32_t x, uint32_t y, bool carry, bool setflags )
 {
     uint64_t unsigned_sum = (uint64_t) x + (uint64_t) y + (uint64_t) carry;
-    uint32_t result = (uint32_t) ( unsigned_sum & 0xffffffff );
+    uint32_t result = (uint32_t) unsigned_sum;
 
     if ( setflags )
     {
@@ -3362,7 +3374,7 @@ uint64_t Arm64::shift_reg64( uint64_t reg, uint64_t shift_type, uint64_t amount 
 
 uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount )
 {
-    uint32_t val = ( 31 == reg ) ? 0 : ( regs[ reg ] & 0xffffffff );
+    uint32_t val = ( 31 == reg ) ? 0 : (uint32_t) regs[ reg ];
     amount &= 0x1f;
     if ( 0 == amount )
         return val;
@@ -3385,7 +3397,7 @@ bool Arm64::check_conditional( uint64_t cond ) const
 {
     assert( cond <= 15 );
 
-    switch ( cond )
+    switch ( cond & 0xf ) // do the reduant mask so the msft compiler doesn't add a conditional
     {
         case 0: { return fZ; }                          // EQ = Zero / Equal
         case 1: { return !fZ; }                         // NE = Not Equal
@@ -3401,6 +3413,7 @@ bool Arm64::check_conditional( uint64_t cond ) const
         case 11: { return ( fN != fV ); }               // LT = Signed Less Than
         case 12: { return ( ( fN == fV ) && !fZ ); }    // GT = Signed Greater Than
         case 13: { return ( ( fN != fV ) || fZ ); }     // LE = Signed Less Than or Equal
+        case 14: case 15:
         default: { return true; }                       // AL = Always true. not used in practice. 14 and 15
     }
 } //check_conditional
@@ -4450,44 +4463,36 @@ uint64_t Arm64::run( void )
                 {
                     if ( bit11 )
                         unhandled();
-                    uint64_t m = opbits( 16, 5 );
-                    uint64_t mval = val_reg_or_zr( m );
                     uint64_t cond = opbits( 12, 4 );
                     if ( check_conditional( cond ) )
                         result = val_reg_or_zr( n );
                     else
-                        result = bit10 ? ( (uint64_t) ( - (int64_t) mval ) ) : ~ ( mval );
+                    {
+                        uint64_t m = opbits( 16, 5 );
+                        uint64_t mval = val_reg_or_zr( m );
+                        if ( bit10 ) // csneg
+                            result = ( (uint64_t) ( - (int64_t) mval ) ); // works for !xregs 32-bit result as well
+                        else // csinv
+                            result = ~ mval;
+                    }
                 }
                 else if ( 6 == bits23_21 )
                 {
                     if ( 0 == bits15_10 ) // rbit
                     {
-                        if ( xregs )
+                        uint64_t limit = xregs ? 64 : 32;
+                        for ( uint64_t bit = 0; bit < limit; bit++ )
                         {
-                            for ( uint64_t bit = 0; bit < 64; bit++ )
-                            {
-                                result <<= 1;
-                                if ( nval & 1 )
-                                    result |= 1;
-                                nval >>= 1;
-                            }
-                        }
-                        else
-                        {
-                            for ( uint64_t bit = 0; bit < 32; bit++ )
-                            {
-                                result <<= 1;
-                                if ( nval & 1 )
-                                    result |= 1;
-                                nval >>= 1;
-                            }
+                            result <<= 1;
+                            if ( nval & 1 )
+                                result |= 1;
+                            nval >>= 1;
                         }
                     }
                     else if ( 2 == bits15_10 || 3 == bits15_10 ) // rev
                     {
                         for ( uint64_t c = 0; c < containers; c++ )
                         {
-                            //tracer.Trace( "in rev top level loop, c: %llu, container_size %llu\n", c, container_size );
                             uint64_t container = get_elem_bits( nval, c, container_size );
                             result |= get_elem_bits( reverse_bytes( container, 8 ), c, container_size );
                         }
@@ -4495,7 +4500,7 @@ uint64_t Arm64::run( void )
                     else if ( 4 == bits15_10 ) // clz
                     {
                         if ( ! xregs )
-                            nval &= 0xffffffff;
+                            nval = (uint32_t) nval;
                         while ( nval )
                         {
                             result++;
@@ -4519,7 +4524,7 @@ uint64_t Arm64::run( void )
                         if ( xregs )
                             result = add_with_carry64( nval, ~mval, fC, false );
                         else
-                            result = add_with_carry32( 0xffffffff & nval, 0xffffffff & ( ~ mval ), fC, false );
+                            result = add_with_carry32( (uint32_t) nval, (uint32_t) ( ~ mval ), fC, false );
                     }
                     else
                         unhandled();
@@ -4530,7 +4535,7 @@ uint64_t Arm64::run( void )
                 if ( 31 == d )
                     break;
                 if ( !xregs )
-                    result &= 0xffffffff;
+                    result = (uint32_t) result;
                 regs[ d ] = result;
                 break;
             }
@@ -4584,12 +4589,12 @@ uint64_t Arm64::run( void )
                     uint64_t result = 0;
                     if ( xregs )
                     {
-                        shift = shift % 64;
+                        shift = shift & 0x3f;
                         result = ( ( (int64_t) nval ) >> shift );
                     }
                     else
                     {
-                        shift = ( shift & 0xffffffff ) % 32;
+                        shift = ( (uint32_t) shift ) & 0x1f;
                         result = (uint32_t) ( ( (int32_t) nval ) >> shift );
                     }
 
@@ -4600,7 +4605,7 @@ uint64_t Arm64::run( void )
                     if ( xregs )
                         regs[ d ] = ( 0 == mval ) ? 0 : ( nval / mval );
                     else
-                        regs[ d ] = ( 0xffffffff & ( ( 0 == mval ) ? 0 : ( (uint32_t) nval / (uint32_t) mval ) ) );
+                        regs[ d ] = ( (uint32_t) ( ( 0 == mval ) ? 0 : ( (uint32_t) nval / (uint32_t) mval ) ) );
                 }
                 else if ( 3 == bits11_10 && 6 == bits23_21 && 0 == bits15_12 ) // SDIV <Xd>, <Xn>, <Xm>
                 {
@@ -4611,8 +4616,8 @@ uint64_t Arm64::run( void )
                     }
                     else
                     {
-                        if ( 0 != ( 0xffffffff & ( mval ) ) )
-                            regs[ d ] = ( ( 0 == mval ) ? 0 : ( (int32_t) ( 0xffffffff & nval ) / (int32_t) ( 0xffffffff & mval ) ) );
+                        if ( 0 != ( (uint32_t) mval ) )
+                            regs[ d ] = ( ( 0 == mval ) ? 0 : ( (int32_t) ( (uint32_t) nval ) / (int32_t) ( (uint32_t) mval ) ) );
                     }
                 }
                 else if ( 1 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // lsrv
@@ -4622,8 +4627,8 @@ uint64_t Arm64::run( void )
                         shift = shift % 64;
                     else
                     {
-                        nval &= 0xffffffff;
-                        shift = ( shift & 0xffffffff ) % 32;
+                        nval = (uint32_t) nval;
+                        shift = ( (uint32_t) shift ) & 0x1f;
                     }
                     regs[ d ] = ( nval >> shift );
                 }
@@ -4637,8 +4642,8 @@ uint64_t Arm64::run( void )
                     }
                     else
                     {
-                        shift = ( shift & 0xffffffff ) % 32;
-                        regs[ d ] = 0xffffffff & ( nval << shift );
+                        shift = ( (uint32_t) shift ) & 0x1f;
+                        regs[ d ] = (uint32_t) ( nval << shift );
                     }
                 }
                 else if ( 0 == bits11_10 && 0 == bits23_21 && 0 == bits15_12 && 0 == bits11_10 ) // addc
@@ -4646,7 +4651,7 @@ uint64_t Arm64::run( void )
                     if ( xregs )
                         regs[ d ] = add_with_carry64( nval, mval, fC, false );
                     else
-                        regs[ d ] = add_with_carry32( nval & 0xffffffff, mval & 0xffffffff, fC, false );
+                        regs[ d ] = add_with_carry32( (uint32_t) nval, (uint32_t) mval, fC, false );
                 }
                 else if ( 3 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // RORV <Xd>, <Xn>, <Xm>
                 {
@@ -4659,7 +4664,7 @@ uint64_t Arm64::run( void )
                     unhandled();
 
                 if ( !xregs )
-                    regs[ d ] &= 0xffffffff;
+                    regs[ d ] = (uint32_t) regs[ d ];
                 break;
             }
             case 0x54: // b.cond
@@ -4726,14 +4731,14 @@ uint64_t Arm64::run( void )
                             if ( xregs )
                                 op2 = - (int64_t) op2;
                             else
-                                op2 = (uint32_t) ( - (int32_t) ( op2 & 0xffffffff ) );
+                                op2 = (uint32_t) ( - (int32_t) (uint32_t) op2 );
                         }
     
                         uint64_t op1 = val_reg_or_zr( n );
                         if ( xregs )
                             sub64( op1, op2, true );
                         else
-                            sub32( op1 & 0xffffffff, op2 & 0xffffffff, true );
+                            sub32( (uint32_t) op1, (uint32_t) op2, true );
                     }
                     else
                         set_flags_from_nzcv( nzcv );
@@ -4749,7 +4754,7 @@ uint64_t Arm64::run( void )
                     if ( xregs )
                         result = add_with_carry64( nval, ~mval, fC, true );
                     else
-                        result = add_with_carry32( 0xffffffff & nval, 0xffffffff & ( ~ mval ), fC, true );
+                        result = add_with_carry32( (uint32_t) nval, (uint32_t) ( ~ mval ), fC, true );
                     if ( 31 != d )
                         regs[ d ] = result;
                 }
@@ -4764,7 +4769,7 @@ uint64_t Arm64::run( void )
                     if ( xregs )
                         result = add_with_carry64( nval, mval, fC, true );
                     else
-                        result = add_with_carry32( 0xffffffff & nval, 0xffffffff & mval, fC, true );
+                        result = add_with_carry32( (uint32_t) nval, (uint32_t) mval, fC, true );
                     if ( 31 != d )
                         regs[ d ] = result;
                 }
@@ -4798,9 +4803,9 @@ uint64_t Arm64::run( void )
                 else
                 {
                     if ( is_sub )
-                        result = sub32( 0xffffffff & regs[ n ], 0xffffffff & imm12, true );
+                        result = sub32( (uint32_t) regs[ n ], (uint32_t) imm12, true );
                     else
-                        result = add_with_carry32( regs[ n ] & 0xffffffff, imm12 & 0xffffffff, false, true );
+                        result = add_with_carry32( (uint32_t) regs[ n ], (uint32_t) imm12, false, true );
                 }
 
                 if ( 31 != d )
@@ -4842,8 +4847,6 @@ uint64_t Arm64::run( void )
                         offset = shift_reg32( m, shift, imm6 );
                     if ( 31 == n )
                         nvalue = 0;
-
-                    //tracer.Trace( "shifted m %llx with resulting value %llx\n", val_reg_or_zr( m ), offset );
                 }
 
                 uint64_t result = 0;
@@ -4852,14 +4855,14 @@ uint64_t Arm64::run( void )
                     if ( xregs )
                         result = sub64( nvalue, offset, setflags );
                     else
-                        result = sub32( nvalue & 0xffffffff, offset & 0xffffffff, setflags );
+                        result = sub32( (uint32_t) nvalue, (uint32_t) offset, setflags );
                 }
                 else
                 {
                     if ( xregs )
                         result = add_with_carry64( nvalue, offset, false, setflags );
                     else
-                        result = add_with_carry32( nvalue & 0xffffffff, offset & 0xffffffff, false, setflags );
+                        result = add_with_carry32( (uint32_t) nvalue, (uint32_t) offset, false, setflags );
                 }
 
                 if ( ( !setflags ) || ( 31 != d ) )
@@ -4887,21 +4890,20 @@ uint64_t Arm64::run( void )
                 uint64_t d = opbits( 0, 5 );
                 uint64_t op1 = regs[ n ];
                 uint64_t op2 = sh ? ( imm12 << 12 ) : imm12;
-                bool isadd = ( 0x91 == hi8 || 0x11 == hi8 );
                 uint64_t result;
-                if ( isadd )
-                {
-                    if ( sf )
-                        result = add_with_carry64( op1, op2, false, false );
-                    else
-                        result = add_with_carry32( op1 & 0xffffffff, op2 & 0xffffffff, false, false );
-                }
-                else
+                if ( hi8 & 0x40 ) // sub
                 {
                     if ( sf )
                         result = sub64( op1, op2, false );
                     else
-                        result = sub32( op1 & 0xffffffff, op2 & 0xffffffff, false );
+                        result = sub32( (uint32_t) op1, (uint32_t) op2, false );
+                }
+                else
+                {
+                    if ( sf )
+                        result = add_with_carry64( op1, op2, false, false );
+                    else
+                        result = add_with_carry32( (uint32_t) op1, (uint32_t) op2, false, false );
                 }
                 regs[ d ] = result;
                 break;
@@ -4944,8 +4946,8 @@ uint64_t Arm64::run( void )
                     }
                     else
                     {
-                        setui32( address + ( signedOffset ? imm7 : 0 ), 0xffffffff & t1val );
-                        setui32( address + 4 + ( signedOffset ? imm7 : 0 ), 0xffffffff & t2val );
+                        setui32( address + ( signedOffset ? imm7 : 0 ), (uint32_t) t1val );
+                        setui32( address + 4 + ( signedOffset ? imm7 : 0 ), (uint32_t) t2val );
                     }
 
                     if ( postIndex )
@@ -4973,7 +4975,6 @@ uint64_t Arm64::run( void )
                     else
                     {
                         bool se = ( 0 != ( hi8 & 0x40 ) );
-
                         if ( 31 != t1 )
                         {
                             regs[ t1 ] = getui32( address + ( signedOffset ? imm7 : 0 ) );
@@ -5008,7 +5009,7 @@ uint64_t Arm64::run( void )
 
                 regs[ d ] = nvalue | op2;
                 if ( !xregs )
-                    regs[ d ] &= 0xffffffff;
+                    regs[ d ] = (uint32_t) regs[ d ];
                 break;
             }
             case 0x4a: // EOR <Wd>, <Wn>, <Wm>{, <shift> #<amount>}    ;    EON <Wd>, <Wn>, <Wm>{, <shift> #<amount>}
@@ -5051,7 +5052,7 @@ uint64_t Arm64::run( void )
                 }
 
                 if ( !xregs )
-                    regs[ d ] &= 0xffffffff;
+                    regs[ d ] = (uint32_t) regs[ d ];
                 break;
             }
             case 0x33: // BFM <Wd>, <Wn>, #<immr>, #<imms>       // original bits intact
@@ -5082,8 +5083,8 @@ uint64_t Arm64::run( void )
                     }
                     else
                     {
-                        uint32_t nval = 0xffffffff & val_reg_or_zr( n );
-                        uint32_t mval = 0xffffffff & val_reg_or_zr( m );
+                        uint32_t nval = (uint32_t) val_reg_or_zr( n );
+                        uint32_t mval = (uint32_t) val_reg_or_zr( m );
                         regs[ d ] = ( mval >> imms ) | ( nval << ( 32 - imms ) );
                     }
                 }
@@ -5119,7 +5120,7 @@ uint64_t Arm64::run( void )
                     }
     
                     if ( 0 == ( hi8 & 0x80 ) )
-                        result &= 0xffffffff;
+                        result = (uint32_t) result;
                     regs[ d ] = result;
                     //tracer.Trace( "  source %#llx changed to result %#llx\n", s, result );
                 }
@@ -5150,7 +5151,7 @@ uint64_t Arm64::run( void )
                 {
                     op2 = shift_reg32( m, shift, imm6 );
                     if ( N )
-                        op2 = 0xffffffff & ( ~op2 );
+                        op2 = (uint32_t) ( ~op2 );
                 }
 
                 uint64_t result = ( regs[ n ] & op2 );
@@ -5208,7 +5209,7 @@ uint64_t Arm64::run( void )
                     uint64_t nvalue = val_reg_or_zr( n );
                     regs[ d ] = nvalue ^ op2;
                     if ( !xregs )
-                        regs[ d ] &= 0xffffffff;
+                        regs[ d ] = (uint32_t) regs[ d ];
                 }
                 break;
             }
@@ -5252,7 +5253,7 @@ uint64_t Arm64::run( void )
                     {
                         if ( hw > 16 )
                             unhandled();
-                        imm16 &= 0xffffffff;
+                        imm16 = (uint32_t) imm16;
                     }
                     regs[ d ] = imm16;
                 }
@@ -5264,7 +5265,7 @@ uint64_t Arm64::run( void )
                     uint64_t nval = val_reg_or_zr( n );
                     regs[ d ] = ( nval & op2 );
                     if ( !xregs )
-                        regs[ d ] &= 0xffffffff;
+                        regs[ d ] = (uint32_t) regs[ d ];
                 }
                 break;
             }
@@ -5277,7 +5278,7 @@ uint64_t Arm64::run( void )
                 uint64_t val = val_reg_or_zr( t );
                 bool zero_check = ( 0 == ( hi8 & 1 ) );
                 if ( 0 == ( 0x80 & hi8 ) )
-                    val &= 0xffffffff;
+                    val = (uint32_t) val;
 
                 if ( zero_check == ( 0 == val ) )
                 {
@@ -5359,10 +5360,7 @@ uint64_t Arm64::run( void )
                         // branch target identification (ignore)
                     }
                     else if ( ( 1 == op0 ) && ( 7 == n ) && ( 3 == op1 ) && ( 4 == m ) && ( 1 == op2 ) )
-                    {
-                        // dc zva <Xt>
-                        memset( getmem( regs[ t ] ), 0, 4 * 32 );
-                    }
+                        memset( getmem( regs[ t ] ), 0, 4 * 32 ); // dc zva <Xt>
                     else if ( ( 0 == op0 ) && ( 2 == n ) && ( 3 == op1 ) && ( 0 == m ) && ( 7 == op2 ) ) // xpaclri
                     {
                         // do nothing
@@ -5382,7 +5380,6 @@ uint64_t Arm64::run( void )
                     else
                         unhandled();
                 }
-    
                 break;
             }
             case 0x2e: case 0x6e: // CMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    CMHS <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    UMAXP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
@@ -5821,33 +5818,37 @@ uint64_t Arm64::run( void )
                 else if ( bit21 && ( 0x29 == opcode || 0x2b == opcode ) ) // UMAXP / UMINP
                 {
                     vec16_t target = { 0 };
-                    uint8_t * ptarget = (uint8_t *) &target;
-                    vec16_t ncopy = vregs[ n ];
-                    vec16_t mcopy = vregs[ m ];
-
-                    for ( uint64_t e = 0; e < elements; e += 2 )
+                    bool is_min = ( 0x2b == opcode );
+                    vec16_t & nref = vregs[ n ];
+                    vec16_t & mref = vregs[ m ];
+                    if ( 1 == ebytes )
                     {
-                        uint8_t * pn = (uint8_t *) &ncopy;
-                        uint64_t a = 0;
-                        uint64_t b = 0;;
-                        mcpy( &a, pn + ( e * ebytes ), ebytes );
-                        mcpy( &b, pn + ( ( e + 1 ) * ebytes ), ebytes );
-                        uint64_t c = ( 0x2b == opcode ) ? get_min( a, b ) : get_max( a, b );
-                        //tracer.Trace( "    writing %#llx + %#llx = %#llx to offset %llu\n", a, b, c, ( e / 2 * ebytes ) );
-                        assert( ( ( e / 2 * ebytes ) + ebytes ) <= sizeof( target ) );
-                        mcpy( ptarget + ( e / 2 * ebytes ), &c, ebytes );
+                        for ( uint64_t e = 0; e < elements; e += 2 )
+                        {
+                            target.ui8[ e / 2 ] = is_min ? get_min( nref.ui8[ e ], nref.ui8[ e + 1 ] ) : get_max( nref.ui8[ e ], nref.ui8[ e + 1 ] );
+                            target.ui8[ ( elements + e ) / 2 ] = is_min ? get_min( mref.ui8[ e ], mref.ui8[ e + 1 ] ) : get_max( mref.ui8[ e ], mref.ui8[ e + 1 ] );
+                        }
                     }
-                    for ( uint64_t e = 0; e < elements; e += 2 )
+                    else if ( 2 == ebytes )
                     {
-                        uint8_t * pm = (uint8_t *) &mcopy;
-                        uint64_t a = 0;
-                        uint64_t b = 0;;
-                        mcpy( &a, pm + ( e * ebytes ), ebytes );
-                        mcpy( &b, pm + ( ( e + 1 ) * ebytes ), ebytes );
-                        uint64_t c = ( 0x2b == opcode ) ? get_min( a, b ) : get_max( a, b );
-                        //tracer.Trace( "    writing %#llx + %#llx = %#llx to offset %llu\n", a, b, c, ( ( ( elements + e ) / 2 ) * ebytes ) );
-                        assert( ( ( ( ( elements + e ) / 2 ) * ebytes ) + ebytes ) <= sizeof( target ) );
-                        mcpy( ptarget + ( ( ( elements + e ) / 2 ) * ebytes ), &c, ebytes );
+                        for ( uint64_t e = 0; e < elements; e += 2 )
+                        {
+                            target.ui16[ e / 2 ] = is_min ? get_min( nref.ui16[ e ], nref.ui16[ e + 1 ] ) : get_max( nref.ui16[ e ], nref.ui16[ e + 1 ] );
+                            target.ui16[ ( elements + e ) / 2 ] = is_min ? get_min( mref.ui16[ e ], mref.ui16[ e + 1 ] ) : get_max( mref.ui16[ e ], mref.ui16[ e + 1 ] );
+                        }
+                    }
+                    else if ( 4 == ebytes )
+                    {
+                        for ( uint64_t e = 0; e < elements; e += 2 )
+                        {
+                            target.ui32[ e / 2 ] = is_min ? get_min( nref.ui32[ e ], nref.ui32[ e + 1 ] ) : get_max( nref.ui32[ e ], nref.ui32[ e + 1 ] );
+                            target.ui32[ ( elements + e ) / 2 ] = is_min ? get_min( mref.ui32[ e ], mref.ui32[ e + 1 ] ) : get_max( mref.ui32[ e ], mref.ui32[ e + 1 ] );
+                        }
+                    }
+                    else if ( 8 == ebytes )
+                    {
+                        target.ui64[ 0 ] = is_min ? get_min( nref.ui64[ 0 ], nref.ui64[ 1 ] ) : get_max( nref.ui64[ 0 ], nref.ui64[ 1 ] );
+                        target.ui64[ 1 ] = is_min ? get_min( mref.ui64[ 0 ], mref.ui64[ 1 ] ) : get_max( mref.ui64[ 0 ], mref.ui64[ 1 ] );
                     }
                     vregs[ d ] = target;
                 }
@@ -6802,7 +6803,7 @@ uint64_t Arm64::run( void )
 
                     uint64_t src = regs[ n ];
                     if ( 8 != ( imm5 & 0xf ) )
-                        src &= 0xffffffff;
+                        src = (uint32_t) src;
                     mcpy( vreg_ptr( d, index * target_bytes ), &src, target_bytes );
                 }
                 else if ( !bit21 && !bit15 && ( 7 == bits14_11 || 5 == bits14_11 ) && bit10 )
@@ -6821,7 +6822,7 @@ uint64_t Arm64::run( void )
                     if ( 5 == bits14_11 )
                         val = sign_extend( val, esize - 1 );
                     if ( 31 != d )
-                        regs[ d ] = Q ? val : ( val & 0xffffffff );
+                        regs[ d ] = Q ? val : (uint32_t) val;
                 }
                 else if ( 1 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // AND <Vd>.<T>, 
                 {
@@ -6907,38 +6908,27 @@ uint64_t Arm64::run( void )
                             mcpy( pd + ( e * ebytes ), &vec_zeroes, ebytes );
                     }
                 }
-                else if ( ( bit21 && !bit15 && 7 == bits14_11 && bit10 ) || // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                          ( bit21 && !bit15 && 6 == bits14_11 && bit10 ) )  // CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                else if ( bit21 && !bit15 && ( 7 == bits14_11 || 6 == bits14_11 ) && bit10 ) // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>  ;  CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t size = opbits( 22, 2 );
                     uint64_t esize = 8ull << size;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
-                    uint64_t zeroes = 0;
-                    uint64_t ones = ~0ull;
-
+                    vec16_t & dref = vregs[ d ];
+                    vec16_t & nref = vregs[ n ];
+                    vec16_t & mref = vregs[ m ];
+                    bool is_gt = ( 6 == bits14_11 );
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
-                        uint8_t * pn = vreg_ptr( n, 0 );
-                        int64_t a = 0;
-                        int64_t b = 0;;
-                        mcpy( &a, pn + ( e * ebytes ), ebytes );
-                        if ( 8 != ebytes )
-                            a = sign_extend( a, esize - 1 );
-                        uint8_t * pm = vreg_ptr( m, 0 );
-                        mcpy( &b, pm + ( e * ebytes ), ebytes );
-                        if ( 8 != ebytes )
-                            b = sign_extend( b, esize - 1 );
-                        assert( ( ( e + 1 ) * ebytes ) <= sizeof( vec16_t ) );
-                        bool use_ones = true;
-                        if ( 6 == bits14_11 )
-                            use_ones = ( a > b );
-                        else if ( 7 == bits14_11 )
-                            use_ones = ( a >= b );
+                        if ( 1 == ebytes )
+                            dref.ui8[ e ] = is_gt ? ( (int8_t) nref.ui8[ e ] > (int8_t) mref.ui8[ e ] ? ~0 : 0 ) : ( (int8_t) nref.ui8[ e ] >= (int8_t) mref.ui8[ e ] ? ~0 : 0 );
+                        else if ( 2 == ebytes )
+                            dref.ui16[ e ] = is_gt ? ( (int16_t) nref.ui16[ e ] > (int16_t) mref.ui16[ e ] ? ~0 : 0 ) : ( (int16_t) nref.ui16[ e ] >= (int16_t) mref.ui16[ e ] ? ~0 : 0 );
+                        else if ( 4 == ebytes )
+                            dref.ui32[ e ] = is_gt ? ( (int32_t) nref.ui32[ e ] > (int32_t) mref.ui32[ e ] ? ~0 : 0 ) : ( (int32_t) nref.ui32[ e ] >= (int32_t) mref.ui32[ e ] ? ~0 : 0 );
                         else
-                            unhandled();
-                        mcpy( vreg_ptr( d, e * ebytes ), use_ones ? &ones : &zeroes, ebytes );
+                            dref.ui64[ e ] = is_gt ? ( (int64_t) nref.ui64[ e ] > (int64_t) mref.ui64[ e ] ? ~0 : 0 ) : ( (int64_t) nref.ui64[ e ] >= (int64_t) mref.ui64[ e ] ? ~0 : 0 );
                     }
                 }
                 else if ( bit21 && bit15 && 7 == bits14_11 && bit10 ) // ADDP <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
@@ -6951,30 +6941,36 @@ uint64_t Arm64::run( void )
                     //tracer.Trace( "elements: %llu, ebytes %llu\n", elements, ebytes );
 
                     vec16_t target = { 0 };
-                    uint8_t * ptarget = (uint8_t *) &target;
-                    for ( uint64_t e = 0; e < elements; e += 2 )
+                    vec16_t & nref = vregs[ n ];
+                    vec16_t & mref = vregs[ m ];
+                    if ( 1 == ebytes )
                     {
-                        uint8_t * pn = vreg_ptr( n, 0 );
-                        uint64_t a = 0;
-                        uint64_t b = 0;;
-                        mcpy( &a, pn + ( e * ebytes ), ebytes );
-                        mcpy( &b, pn + ( ( e + 1 ) * ebytes ), ebytes );
-                        uint64_t c = a + b;
-                        //tracer.Trace( "    writing %#llx + %#llx = %#llx to offset %llu\n", a, b, c, ( e / 2 * ebytes ) );
-                        assert( ( ( 1 + ( e / 2 ) ) * ebytes ) <= sizeof( target ) );
-                        mcpy( ptarget + ( e / 2 * ebytes ), &c, ebytes );
+                        for ( uint64_t e = 0; e < elements; e += 2 )
+                        {
+                            target.ui8[ e / 2 ] = nref.ui8[ e ] + nref.ui8[ e + 1 ];
+                            target.ui8[ ( elements + e ) / 2 ] = mref.ui8[ e ] + mref.ui8[ e + 1 ];
+                        }
                     }
-                    for ( uint64_t e = 0; e < elements; e += 2 )
+                    else if ( 2 == ebytes )
                     {
-                        uint8_t * pm = vreg_ptr( m, 0 );
-                        uint64_t a = 0;
-                        uint64_t b = 0;;
-                        mcpy( &a, pm + ( e * ebytes ), ebytes );
-                        mcpy( &b, pm + ( ( e + 1 ) * ebytes ), ebytes );
-                        uint64_t c = a + b;
-                        //tracer.Trace( "    writing %#llx + %#llx = %#llx to offset %llu\n", a, b, c, ( ( ( elements + e ) / 2 ) * ebytes ) );
-                        assert( ( ( 1 + ( ( elements + e ) / 2 ) ) * ebytes ) <= sizeof( target ) );
-                        mcpy( ptarget + ( ( ( elements + e ) / 2 ) * ebytes ), &c, ebytes );
+                        for ( uint64_t e = 0; e < elements; e += 2 )
+                        {
+                            target.ui16[ e / 2 ] = nref.ui16[ e ] + nref.ui16[ e + 1 ];
+                            target.ui16[ ( elements + e ) / 2 ] = mref.ui16[ e ] + mref.ui16[ e + 1 ];
+                        }
+                    }
+                    else if ( 4 == ebytes )
+                    {
+                        for ( uint64_t e = 0; e < elements; e += 2 )
+                        {
+                            target.ui32[ e / 2 ] = nref.ui32[ e ] + nref.ui32[ e + 1 ];
+                            target.ui32[ ( elements + e ) / 2 ] = mref.ui32[ e ] + mref.ui32[ e + 1 ];
+                        }
+                    }
+                    else if ( 8 == ebytes )
+                    {
+                        target.ui64[ 0 ] = nref.ui64[ 0 ] + nref.ui64[ 1 ];
+                        target.ui64[ 1 ] = mref.ui64[ 0 ] + mref.ui64[ 1 ];
                     }
                     vregs[ d ] = target;
                 }
@@ -7253,7 +7249,7 @@ uint64_t Arm64::run( void )
                             if ( 7 == opcode )
                             {
                                 zero_vreg( d );
-                                vregs[ d ].ui32[ 0 ] = nval & 0xffffffff;
+                                vregs[ d ].ui32[ 0 ] = (uint32_t) nval;
                             }
                             else if ( 6 == opcode )
                                 regs[ d ] = vregs[ n ].ui32[ 0 ];
@@ -7500,7 +7496,7 @@ uint64_t Arm64::run( void )
                 {
                     uint64_t nval = val_reg_or_zr( n );
                     if ( !sf )
-                        nval = sign_extend( nval &= 0xffffffff, 31 );
+                        nval = sign_extend( (uint32_t) nval, 31 );
 
                     zero_vreg( d );
                     if ( 0 == ftype )
@@ -7585,7 +7581,7 @@ uint64_t Arm64::run( void )
                 {
                     uint64_t val = val_reg_or_zr( n );
                     if ( 0 == sf )
-                        val &= 0xffffffff;
+                        val = (uint32_t) val;
 
                     zero_vreg( d );
 
@@ -7734,7 +7730,7 @@ uint64_t Arm64::run( void )
                     if ( bit30 )
                         setui64( regs[ n ], tval );
                     else
-                        setui32( regs[ n ], tval & 0xffffffff );
+                        setui32( regs[ n ], (uint32_t) tval );
 
                     if ( !bit23 && 31 != s ) // stxr
                         regs[ s ] = 0; // success
@@ -7754,7 +7750,7 @@ uint64_t Arm64::run( void )
                 }
                 break;
             }
-            case 0xd6: // BLR <Xn>
+            case 0xd6: // BLR <Xn>    ;    BR <Xn>    ;    RET {<Xn>}
             {
                 uint64_t n = opbits( 5, 5 );
                 uint64_t theop = opbits( 21, 2 );
@@ -7762,14 +7758,10 @@ uint64_t Arm64::run( void )
                 uint64_t op2 = opbits( 12, 9 );
                 uint64_t A = opbit( 11 );
                 uint64_t M = opbit( 10 );
-                if ( 0 != bit23 )
-                    unhandled();
-                if ( 0x1f0 != op2 )
-                    unhandled();
-                if ( A || M )
+                if ( bit23 || 0x1f0 != op2  || A || M )
                     unhandled();
 
-                if ( 0 == theop ) // br
+                if ( 0 == theop || 2 == theop ) // br, ret
                     pc = regs[ n ];
                 else if ( 1 == theop ) // blr
                 {
@@ -7777,8 +7769,6 @@ uint64_t Arm64::run( void )
                     pc = regs[ n ];
                     regs[ 30 ] = location; // hard-coded to register 30
                 }
-                else if ( 2 == theop ) // ret
-                    pc = regs[ n ];
                 else
                     unhandled();
 
@@ -7835,9 +7825,9 @@ uint64_t Arm64::run( void )
                 else
                 {
                     if ( 0 == bits23_21 && bit15 ) // msub
-                        regs[ d ] = (uint32_t) aval - (uint32_t) ( 0xffffffff & ( (uint32_t) nval * (uint32_t) mval ) );
+                        regs[ d ] = (uint32_t) aval - ( (uint32_t) nval * (uint32_t) mval );
                     else if ( 0 == bits23_21 && !bit15 ) // madd
-                        regs[ d ] = (uint32_t) aval + (uint32_t) ( 0xffffffff & ( (uint32_t) nval * mval ) );
+                        regs[ d ] = (uint32_t) aval + ( (uint32_t) nval * (uint32_t) mval );
                     else
                         unhandled();
                 }
@@ -7869,7 +7859,7 @@ uint64_t Arm64::run( void )
                         fN = get_bit( result, 63 );
                     else
                     {
-                        result &= 0xffffffff;
+                        result = (uint32_t) result;
                         fN = get_bit( result, 31 );
                     }
 
@@ -7922,7 +7912,7 @@ uint64_t Arm64::run( void )
                     else if ( 0x78 == hi8 )
                         setui16( address, val & 0xffff );
                     else if ( 0xb8 == hi8 )
-                        setui32( address, val & 0xffffffff );
+                        setui32( address, (uint32_t) val );
                     else
                         setui64( address, val );
 
@@ -7946,7 +7936,7 @@ uint64_t Arm64::run( void )
                     else if ( 0x78 == hi8 )
                         setui16( address, val & 0xffff );
                     else if ( 0xb8 == hi8 )
-                        setui32( address, val & 0xffffffff );
+                        setui32( address, (uint32_t) val );
                     else
                         setui64( address, val );
                 }
@@ -8033,7 +8023,7 @@ uint64_t Arm64::run( void )
     
                     bool isx = ( 0 == opbit( 22 ) );
                     if ( !isx )
-                        regs[ t ] &= 0xffffffff;
+                        regs[ t ] = (uint32_t) regs[ t ];
 
                     if ( 1 == option ) // post index
                         regs[ n ] += imm9;
@@ -8070,7 +8060,7 @@ uint64_t Arm64::run( void )
                         if ( 3 == option )
                         {
                             uint64_t mval = val_reg_or_zr( m );
-                            offset = ( ( mIsX ? mval : ( mval & 0xffffffff ) ) << shift );
+                            offset = mIsX ? mval : ( ( (uint32_t) mval ) << shift );
                         }
                         else
                             offset = extend_reg( m, option, shift );
@@ -8106,11 +8096,11 @@ uint64_t Arm64::run( void )
                     uint64_t val = val_reg_or_zr( t );
 
                     if ( 0x39 == hi8 )
-                        setui8( address, val & 0xff );
+                        setui8( address, (uint8_t) val );
                     else if ( 0x79 == hi8 )
-                        setui16( address, val & 0xffff );
+                        setui16( address, (uint16_t) val );
                     else if ( 0xb9 == hi8 )
-                        setui32( address, val & 0xffffffff );
+                        setui32( address, (uint32_t) val );
                     else
                         setui64( address, val );
                 }
@@ -8152,16 +8142,13 @@ uint64_t Arm64::run( void )
                     else if ( 0x79 == hi8 )
                         regs[ t ] = sign_extend32( getui16( address ), 15 );
                     else if ( 0xb9 == hi8 )
-                        regs[ t ] = sign_extend32( getui32( address ), 31 );
+                        regs[ t ] = getui32( address );
                     else
                         unhandled();
                 }
-                else
-                    unhandled();
-    
                 break;
             }
-            case 0xff: // call this maximum out so the compiler doesn't do a bounds check at runtime for the switch jump table
+            case 0xff: // call this maximum out so the msft compiler doesn't do a bounds check at runtime for the switch jump table
             default:
                 unhandled();
         }
