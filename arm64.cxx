@@ -4466,18 +4466,20 @@ uint64_t Arm64::run( void )
                         {
                             for ( uint64_t bit = 0; bit < 64; bit++ )
                             {
-                                uint64_t thebit = ( nval & ( 1ull << bit ) );
-                                thebit >>= bit;
-                                result |= ( thebit << ( 63ull - bit ) );
+                                result <<= 1;
+                                if ( nval & 1 )
+                                    result |= 1;
+                                nval >>= 1;
                             }
                         }
                         else
                         {
                             for ( uint64_t bit = 0; bit < 32; bit++ )
                             {
-                                uint64_t thebit = ( nval & ( 1ull << bit ) );
-                                thebit >>= bit;
-                                result |= ( thebit << ( 31ull - bit ) );
+                                result <<= 1;
+                                if ( nval & 1 )
+                                    result |= 1;
+                                nval >>= 1;
                             }
                         }
                     }
@@ -4492,17 +4494,17 @@ uint64_t Arm64::run( void )
                     }
                     else if ( 4 == bits15_10 ) // clz
                     {
-                        int64_t cur = ( xregs ? 63 : 31 );
-                        while ( cur >= 0 )
+                        if ( ! xregs )
+                            nval &= 0xffffffff;
+                        while ( nval )
                         {
-                            if ( ! ( nval & ( 1ull << cur ) ) )
-                            {
-                                result++;
-                                cur--;
-                            }
-                            else
-                                break;
+                            result++;
+                            nval >>= 1;
                         }
+                        if ( xregs )
+                            result = 64 - result;
+                        else
+                            result = 32 - result;
                     }
                     else
                         unhandled();
