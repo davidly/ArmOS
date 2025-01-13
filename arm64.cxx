@@ -2212,15 +2212,24 @@ void Arm64::trace_state()
             break;
         }
         case 0x5e: // SCVTF <V><d>, <V><n>    ;    ADDP D<d>, <Vn>.2D    ;    DUP <V><d>, <Vn>.<T>[<index>]    ;    FCVTZS <V><d>, <V><n>
-                   // CMGT D<d>, D<n>, D<m>   ;    CMGT D<d>, D<n>, #0   ;    ADD D<d>, D<n>, D<m>
+                   // CMGT D<d>, D<n>, D<m>   ;    CMGT D<d>, D<n>, #0   ;    ADD D<d>, D<n>, D<m>             ;    FCMLT <V><d>, <V><n>, #0.0
         {
             uint64_t bits23_10 = opbits( 10, 14 );
+            uint64_t bit23 = opbit( 23 );
+            uint64_t bit21 = opbit( 21 );
             uint64_t bits23_21 = opbits( 21, 3 );
+            uint64_t bits20_16 = opbits( 16, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
 
-            if ( 7 == bits23_21 && 0x21 == bits15_10 ) // ADD D<d>, D<n>, D<m>
+            if ( bit23 && bit21 && 0 == bits20_16 && 0x3a == bits15_10 ) // FCMLT <V><d>, <V><n>, #0.0
+            {
+                uint64_t sz = opbit( 22 );
+                char width = sz ? 'd' : 's';
+                tracer.Trace( "%c%llu, %c%llu, #0.0\n", width, d, width, n );
+            }
+            else if ( 7 == bits23_21 && 0x21 == bits15_10 ) // ADD D<d>, D<n>, D<m>
             {
                 uint64_t m = opbits( 16, 5 );
                 tracer.Trace( "add d%llu, d%llu, d%llu\n", d, n, m );
@@ -6028,15 +6037,26 @@ uint64_t Arm64::run( void )
                 break;
             }
             case 0x5e: // SCVTF <V><d>, <V><n>    ;    ADDP D<d>, <Vn>.2D    ;    DUP <V><d>, <Vn>.<T>[<index>]    ;    FCVTZS <V><d>, <V><n>
-                       // CMGT D<d>, D<n>, D<m>   ;    CMGT D<d>, D<n>, #0   ;    ADD D<d>, D<n>, D<m>
+                       // CMGT D<d>, D<n>, D<m>   ;    CMGT D<d>, D<n>, #0   ;    ADD D<d>, D<n>, D<m>             ;    FCMLT <V><d>, <V><n>, #0.0
             {
                 uint64_t bits23_10 = opbits( 10, 14 );
+                uint64_t bit23 = opbit( 23 );
+                uint64_t bit21 = opbit( 21 );
                 uint64_t bits23_21 = opbits( 21, 3 );
+                uint64_t bits20_16 = opbits( 16, 5 );
                 uint64_t bits15_10 = opbits( 10, 6 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
 
-                if ( 7 == bits23_21 && 0x21 == bits15_10 ) // ADD D<d>, D<n>, D<m>
+                if ( bit23 && bit21 && 0 == bits20_16 && 0x3a == bits15_10 ) // FCMLT <V><d>, <V><n>, #0.0
+                {
+                    uint64_t sz = opbit( 22 );
+                    if ( sz )
+                        vregs[ d ].ui64[ 0 ] = ( vregs[ n ].d[ 0 ] < 0.0 ) ? ~0 : 0;
+                    else
+                        vregs[ d ].ui32[ 0 ] = ( vregs[ n ].f[ 0 ] < 0.0 ) ? ~0 : 0;
+                }
+                else if ( 7 == bits23_21 && 0x21 == bits15_10 ) // ADD D<d>, D<n>, D<m>
                 {
                     uint64_t m = opbits( 16, 5 );
                     vregs[ d ].ui64[ 0 ] = vregs[ n ].ui64[ 0 ] + vregs[ m ].ui64[ 0 ];
