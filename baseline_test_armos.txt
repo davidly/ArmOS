@@ -1,4 +1,4 @@
-Tue 01/14/2025  9:42:51.60 
+Tue 01/14/2025 10:41:53.47 
 test c_tests\clangbin0\tcmp 
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -650,10 +650,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 42, sec 53
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 42, sec 53
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 42, sec 53
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 42, sec 53
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 41, sec 55
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 41, sec 55
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 41, sec 55
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 41, sec 55
 test c_tests\clangbin0\tm 
 tm has completed with great success
 test c_tests\clangbin0\glob 
@@ -1173,42 +1173,14 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\clangbin0\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\clangbin0\sleeptm 
 clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
@@ -1869,10 +1841,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin0\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 43, sec 4
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 43, sec 4
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 43, sec 4
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 43, sec 4
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 1
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 1
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 1
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 1
 test c_tests\bin0\tm 
 tm has completed with great success
 test c_tests\bin0\glob 
@@ -2392,42 +2364,14 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\bin0\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\bin0\sleeptm 
 clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
@@ -2527,7 +2471,7 @@ lade vied
 lead vied
 test c_tests\bin0\ba 
 parsing input file tp.bas
-621 ms for 1 iterations
+321 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -2554,7 +2498,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin0\ba 
 parsing input file tp.bas
-646 ms for 1 iterations
+314 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -3230,10 +3174,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 43, sec 18
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 43, sec 18
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 43, sec 18
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 43, sec 18
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 10
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 10
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 10
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 10
 test c_tests\clangbin1\tm 
 tm has completed with great success
 test c_tests\clangbin1\glob 
@@ -3753,42 +3697,14 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\clangbin1\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\clangbin1\sleeptm 
 clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
@@ -4449,10 +4365,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin1\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 43, sec 25
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 43, sec 25
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 43, sec 25
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 43, sec 25
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 15
 test c_tests\bin1\tm 
 tm has completed with great success
 test c_tests\bin1\glob 
@@ -4972,45 +4888,16 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\bin1\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\bin1\sleeptm 
 clk_tck / number of linux ticks per second: 100
-getrusage user time in ms: 1031, system time 0
 sleepy time ended with great success
 test c_tests\bin1\tatomic 
 test atomic completed with great success
@@ -5108,7 +4995,7 @@ lade vied
 lead vied
 test c_tests\bin1\ba 
 parsing input file tp.bas
-162 ms for 1 iterations
+86 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -5135,7 +5022,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin1\ba 
 parsing input file tp.bas
-161 ms for 1 iterations
+85 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -5811,10 +5698,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 43, sec 35
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 43, sec 35
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 43, sec 35
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 43, sec 35
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 23
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 23
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 23
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 23
 test c_tests\clangbin2\tm 
 tm has completed with great success
 test c_tests\clangbin2\glob 
@@ -6334,45 +6221,16 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\clangbin2\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\clangbin2\sleeptm 
 clk_tck / number of linux ticks per second: 100
-getrusage user time in ms: 1000, system time 0
 sleepy time ended with great success
 test c_tests\clangbin2\tatomic 
 test atomic completed with great success
@@ -7031,10 +6889,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin2\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 43, sec 43
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 43, sec 43
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 43, sec 43
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 43, sec 43
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 28
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 28
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 28
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 28
 test c_tests\bin2\tm 
 tm has completed with great success
 test c_tests\bin2\glob 
@@ -7554,42 +7412,14 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\bin2\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\bin2\sleeptm 
 clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
@@ -7689,7 +7519,7 @@ lade vied
 lead vied
 test c_tests\bin2\ba 
 parsing input file tp.bas
-158 ms for 1 iterations
+83 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -7716,7 +7546,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin2\ba 
 parsing input file tp.bas
-154 ms for 1 iterations
+82 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -8392,10 +8222,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 43, sec 52
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 43, sec 52
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 43, sec 52
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 43, sec 52
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 35
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 35
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 35
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 35
 test c_tests\clangbin3\tm 
 tm has completed with great success
 test c_tests\clangbin3\glob 
@@ -8915,42 +8745,14 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\clangbin3\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\clangbin3\sleeptm 
 clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
@@ -9611,10 +9413,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\bin3\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 44, sec 0
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 44, sec 0
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 44, sec 0
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 44, sec 0
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 41
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 41
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 41
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 41
 test c_tests\bin3\tm 
 tm has completed with great success
 test c_tests\bin3\glob 
@@ -10134,42 +9936,14 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\bin3\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\bin3\sleeptm 
 clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
@@ -10269,7 +10043,7 @@ lade vied
 lead vied
 test c_tests\bin3\ba 
 parsing input file tp.bas
-159 ms for 1 iterations
+92 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -10296,7 +10070,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbin3\ba 
 parsing input file tp.bas
-152 ms for 1 iterations
+82 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -10972,10 +10746,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\clangbinfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 44, sec 9
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 44, sec 9
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 44, sec 9
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 44, sec 9
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 48
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 48
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 48
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 48
 test c_tests\clangbinfast\tm 
 tm has completed with great success
 test c_tests\clangbinfast\glob 
@@ -11495,42 +11269,14 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\clangbinfast\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\clangbinfast\sleeptm 
 clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
@@ -12191,10 +11937,10 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 test c_tests\binfast\ttime 
-before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 9, min 44, sec 16
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 12, min 44, sec 16
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 9, min 44, sec 16
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 17, min 44, sec 16
+before TZ is set: tz: 'PacificStandardTime+8', year: 2025, month 1, day 14, hour 10, min 42, sec 54
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2025, month 1, day 14, hour 13, min 42, sec 54
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2025, month 1, day 14, hour 10, min 42, sec 54
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2025, month 1, day 14, hour 18, min 42, sec 54
 test c_tests\binfast\tm 
 tm has completed with great success
 test c_tests\binfast\glob 
@@ -12714,42 +12460,14 @@ type uint128_t size 19, sum 339950059921992234495148655666698125312, magnitude 3
 type uint128_t size 20, sum 339950059921992234495148655666698125312, magnitude 339950059921992234495148655666698125312 min, 196 max 170141183460469231731687303715884105728
 array operations test completed with great success
 test c_tests\binfast\pis 
-startingOffset1k: 0, startingOffset: 0, countGenerated1k 1, countGenerated 1024
-startInChunks: 0, limitInChunks 32
-percent complete: 3.125000
-percent complete: 6.250000
-percent complete: 9.375000
-percent complete: 12.500000
-percent complete: 15.625000
-percent complete: 18.750000
-percent complete: 21.875000
+startingOffset128: 0, startingOffset: 0, countGenerated128 1, countGenerated 128
+startInChunks: 0, limitInChunks 4
 percent complete: 25.000000
-percent complete: 28.125000
-percent complete: 31.250000
-percent complete: 34.375000
-percent complete: 37.500000
-percent complete: 40.625000
-percent complete: 43.750000
-percent complete: 46.875000
 percent complete: 50.000000
-percent complete: 53.125000
-percent complete: 56.250000
-percent complete: 59.375000
-percent complete: 62.500000
-percent complete: 65.625000
-percent complete: 68.750000
-percent complete: 71.875000
 percent complete: 75.000000
-percent complete: 78.125000
-percent complete: 81.250000
-percent complete: 84.375000
-percent complete: 87.500000
-percent complete: 90.625000
-percent complete: 93.750000
-percent complete: 96.875000
 percent complete: 100.000000
 results are valid
-final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b54709179216d5d98979fb1bd1310ba698dfb5ac2ffd72dbd01adfb7b8e1afed6a267e96ba7c9045f12c7f9924a19947b3916cf70801f2e2858efc16636920d871574e69a458fea3f4933d7e0d95748f728eb658718bcd5882154aee7b54a41dc25a59b59c30d5392af26013c5d1b023286085f0ca417918b8db38ef8e79dcb0603a180e6c9e0e8bb01e8a3ed71577c1bd314b2778af2fda55605c60e65525f3aa55ab945748986263e8144055ca396a2aab10b6b4cc5c341141e8cea15486af7c72e993b3ee1411636fbc2a2ba9c55d741831f6ce5c3e169b87931eafd6ba336c24cf5c7a325381289586773b8f48986b4bb9afc4bfe81b6628219361d809ccfb21a991487cac605dec8032ef845d5de98575b1dc262302eb651b8823893e81d396acc50f6d6ff383f442392e0b4482a484200469c8f04a9e1f9b5e21c66842f6e96c9a670c9c61abd388f06a51a0d2d8542f68960fa728ab5133a36eef0b6c137a3be4ba3bf0507efb2a98a1f1651d39af017666ca593e82430e888cee8619456f9fb47d84a5c33b8b5ebee06f75d885c12073401a449f56c16aa64ed3aa62363f77061bfedf72429b023d37d0d724d00a1248db0fead349f1c09b075372c980991b7b
+final: 243f6a8885a308d313198a2e03707344a4093822299f31d0082efa98ec4e6c89452821e638d01377be5466cf34e90c6cc0ac29b7c97c50dd3f84d5b5b5470917
 test c_tests\binfast\sleeptm 
 clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
@@ -12849,7 +12567,7 @@ lade vied
 lead vied
 test c_tests\binfast\ba 
 parsing input file tp.bas
-163 ms for 1 iterations
+87 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -12876,7 +12594,7 @@ parsing input file tp.bas
 created assembler file: tp.asm, use registers: yes, expression optimization: yes
 test c_tests\clangbinfast\ba 
 parsing input file tp.bas
-152 ms for 1 iterations
+83 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file tp.bas
@@ -12906,7 +12624,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin0\ttt 
-serial runtime:   16.1598ms
+serial runtime:   7.8867ms
 moves:            6493
 iterations:       1
 test rust_tests\bin0\fileops 
@@ -12979,7 +12697,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin1\ttt 
-serial runtime:   4.206ms
+serial runtime:   2.4995ms
 moves:            6493
 iterations:       1
 test rust_tests\bin1\fileops 
@@ -13052,7 +12770,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin2\ttt 
-serial runtime:   2.987ms
+serial runtime:   1.6638ms
 moves:            6493
 iterations:       1
 test rust_tests\bin2\fileops 
@@ -13125,7 +12843,7 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 test rust_tests\bin3\ttt 
-serial runtime:   2.4632ms
+serial runtime:   1.3099ms
 moves:            6493
 iterations:       1
 test rust_tests\bin3\fileops 
@@ -13200,16 +12918,16 @@ test ntvcm
 moves: 6493
 iterations: 1
 test ntvdm 
-0.1 seconds
+0.0 seconds
 moves: 6493
 iterations: 1
 test rvos 
 starting...
 6493 moves
-117.911003 milliseconds
+66.475006 milliseconds
 test armos 
 starting
-92845 microseconds (-6)
+52606 microseconds (-6)
 1 iterations
 6493 moves
-Tue 01/14/2025  9:44:33.71 
+Tue 01/14/2025 10:43:06.03 
