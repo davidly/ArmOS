@@ -143,6 +143,14 @@ template <class T> T do_abs( T x )
                 result = C_##ftype##dim[ i ][ j ] > result ? C_##ftype##dim[ i ][ j ] : result; \
         return result; \
     } \
+    _perhaps_inline ftype sqrt_sum_##ftype##dim() \
+    { \
+        ftype result = 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+                result += (ftype) sqrt( (double) do_abs( C_##ftype##dim[ i ][ j ] ) ); \
+        return result; \
+    } \
     ftype run_##ftype##dim() \
     { \
         fillA_##ftype##dim(); \
@@ -158,8 +166,10 @@ template <class T> T do_abs( T x )
         ftype fmodsum = fmod_nonsense_##ftype##dim(); \
         ftype dotsum = dotsum_nonsense_##ftype##dim(); \
         ftype nonsense_sum = sum_##ftype##dim(); \
-        printf( "%s dim %d: sum %lf, magnitude %lf, min, %lf max %lf, fmodsum %.3lf, dotsum %.1lf\n", \
-                #ftype, dim, (double) sum, (double) magnitude, (double) min_##ftype##dim(), (double) max_##ftype##dim(), (double) fmodsum, (double) dotsum ); \
+        ftype sqrtsum = sqrt_sum_##ftype##dim(); \
+        printf( "%s dim %d: sum %lf, magnitude %lf, min, %lf max %lf, fmodsum %.3lf, dotsum %.1lf, sqrtsum %.1lf\n", \
+                #ftype, dim, (double) sum, (double) magnitude, (double) min_##ftype##dim(), (double) max_##ftype##dim(), \
+                (double) fmodsum, (double) dotsum, (double) sqrtsum ); \
         if ( sum != nonsense_sum ) \
         { \
             printf( "nonsense differs: %lf\n", (double) nonsense_sum ); \
@@ -249,7 +259,7 @@ declare_matrix_tests( uint128_t );
     printf( "matrix %s 20: " format "\n", #type, run_##type##20() );
 
 #define run_this_test( type, format ) \
-    printf( "matrix %s 4: " format "\n", #type, run_##type##4() );
+    run_##type##5();
 
 int main( int argc, char * argv[] )
 {
@@ -269,7 +279,7 @@ int main( int argc, char * argv[] )
         run_tests( int64_t, "%lld");
         run_tests( uint64_t, "%llu");
 #else    
-        run_this_test( float, "%f" );    
+        run_this_test( int8_t, "%d" );    
 #endif    
     }
 
