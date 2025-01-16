@@ -111,6 +111,31 @@ template <class T> T do_abs( T x )
                     } \
         } \
     } \
+    _perhaps_inline ftype math_nonsense_##ftype##dim() /* force more instructions to be generated with this nonsense */ \
+    { \
+        ftype D[ dim ][ dim ]; \
+        ftype E[ dim ][ dim ]; \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+            { \
+                D[ i ][ j ] = C_##ftype##dim[ i ][ j ]; \
+                E[ i ][ j ] = (ftype) ( i + j * 10 ); \
+            } \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+                E[ i ][ j ] *= (ftype) 1.6; \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+                D[ i ][ j ] *= (ftype) ( ( (ftype) 1.6 ) + ( E[ i ][ j ] / (ftype) 1.1 ) ); \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+                D[ i ][ j ] /= (ftype) 1.07; \
+        ftype result = (ftype) 0; \
+        for ( int i = 0; i < dim; i++ ) \
+            for ( int j = 0; j < dim; j++ ) \
+                result += (ftype) ( D[ i ][ j ] ); \
+        return result; /* resuls vary on Arm hardware for different compilers and optimization levels due to rounding. */ \
+    } \
     _perhaps_inline ftype sum_##ftype##dim() \
     { \
         ftype result = (ftype) 0; \
@@ -163,11 +188,12 @@ template <class T> T do_abs( T x )
         ftype sum = sum_##ftype##dim(); \
         ftype magnitude = magnitude_##ftype##dim(); \
         div_nonsense_##ftype##dim(); \
+        ftype mathnonsense = math_nonsense_##ftype##dim(); \
         ftype fmodsum = fmod_nonsense_##ftype##dim(); \
         ftype dotsum = dotsum_nonsense_##ftype##dim(); \
         ftype nonsense_sum = sum_##ftype##dim(); \
         ftype sqrtsum = sqrt_sum_##ftype##dim(); \
-        printf( "%s dim %d: sum %lf, magnitude %lf, min, %lf max %lf, fmodsum %.3lf, dotsum %.1lf, sqrtsum %.1lf\n", \
+        printf( "%s dim %d: sum %.1lf, mag %.1lf, min, %.1lf max %.1lf, fmodsum %.3lf, dotsum %.1lf, sqrtsum %.1lf\n", \
                 #ftype, dim, (double) sum, (double) magnitude, (double) min_##ftype##dim(), (double) max_##ftype##dim(), \
                 (double) fmodsum, (double) dotsum, (double) sqrtsum ); \
         if ( sum != nonsense_sum ) \
@@ -258,8 +284,8 @@ declare_matrix_tests( uint128_t );
     printf( "matrix %s 19: " format "\n", #type, run_##type##19() ); \
     printf( "matrix %s 20: " format "\n", #type, run_##type##20() );
 
-#define run_this_test( type, format ) \
-    run_##type##5();
+#define run_this_test( type ) \
+    run_##type##4();
 
 int main( int argc, char * argv[] )
 {
@@ -279,7 +305,7 @@ int main( int argc, char * argv[] )
         run_tests( int64_t, "%lld");
         run_tests( uint64_t, "%llu");
 #else    
-        run_this_test( int8_t, "%d" );    
+        run_this_test( uint8_t );
 #endif    
     }
 

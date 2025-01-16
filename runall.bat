@@ -1,10 +1,10 @@
 @echo off
 setlocal
 
-if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armoscl -h:160 bin\armos -h:100 )
+rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armoscl -h:160 bin\armos -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
-rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)
+if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)
 
 set outputfile=test_armos.txt
 echo %date% %time% >%outputfile%
@@ -25,21 +25,41 @@ echo test ntvao
 echo test ntvao >>%outputfile%
 %_runcmd% bin\ntvao -c ttt1.hex >>%outputfile%
 
+echo test ntvaocl
+echo test ntvaocl >>%outputfile%
+%_runcmd% bin\ntvaocl -c ttt1.hex >>%outputfile%
+
 echo test ntvcm
 echo test ntvcm >>%outputfile%
 %_runcmd% bin\ntvcm tttcpm.com >>%outputfile%
+
+echo test ntvcmcl
+echo test ntvcmcl >>%outputfile%
+%_runcmd% bin\ntvcmcl tttcpm.com >>%outputfile%
 
 echo test ntvdm
 echo test ntvdm >>%outputfile%
 %_runcmd% bin\ntvdm tttmasm.exe 1 >>%outputfile%
 
+echo test ntvdmcl
+echo test ntvdmcl >>%outputfile%
+%_runcmd% bin\ntvdmcl tttmasm.exe 1 >>%outputfile%
+
 echo test rvos
 echo test rvos >>%outputfile%
 %_runcmd% bin\rvos ttt.elf 1 >>%outputfile%
 
+echo test rvoscl
+echo test rvoscl >>%outputfile%
+%_runcmd% bin\rvoscl ttt.elf 1 >>%outputfile%
+
 echo test armos
 echo test armos >>%outputfile%
-%_runcmd% bin\armos ttt_arm64 1 >>%outputfile%
+%_runcmd% bin\armos ttt_armu 1 >>%outputfile%
+
+echo test armoscl
+echo test armoscl >>%outputfile%
+%_runcmd% bin\armoscl ttt_armu 1 >>%outputfile%
 
 echo %date% %time% >>%outputfile%
 diff baseline_%outputfile% %outputfile%

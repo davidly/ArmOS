@@ -1793,8 +1793,6 @@ void Arm64::trace_state()
             uint64_t d = opbits( 0, 5 );
             uint64_t imm6 = opbits( 10, 6 );
             uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
-            if ( !xregs && ( 0 != ( imm6 & 0x20 ) ) ) // can't shift with 6 bits for 32-bit values
-                unhandled();
             bool eor = ( 2 == opbits( 29, 2 ) ); // or eon
 
             if ( ( 0 == imm6 ) && ( 31 == n ) && ( 0 == shift ) && ( 0 == N ) )
@@ -4963,31 +4961,25 @@ uint64_t Arm64::run( void )
                 bool preIndex = ( 3 == variant );
                 bool signedOffset = ( 2 == variant );
                 uint64_t address = regs[ n ];
+                if ( preIndex )
+                    address += imm7;
+                uint64_t effectiveAddress = address + ( signedOffset ? imm7 : 0 );
 
                 if ( 0 == opbit( 22 ) ) // bit 22 is 0 for stp
                 {
-                    if ( preIndex )
-                        address += imm7;
-
                     uint64_t t1val = val_reg_or_zr( t1 );
                     uint64_t t2val = val_reg_or_zr( t2 );
 
                     if ( xregs )
                     {
-                        setui64( address + ( signedOffset ? imm7 : 0 ), t1val );
-                        setui64( address + 8 + ( signedOffset ? imm7 : 0 ), t2val );
+                        setui64( effectiveAddress, t1val );
+                        setui64( effectiveAddress + 8, t2val );
                     }
                     else
                     {
-                        setui32( address + ( signedOffset ? imm7 : 0 ), (uint32_t) t1val );
-                        setui32( address + 4 + ( signedOffset ? imm7 : 0 ), (uint32_t) t2val );
+                        setui32( effectiveAddress, (uint32_t) t1val );
+                        setui32( effectiveAddress + 4, (uint32_t) t2val );
                     }
-
-                    if ( postIndex )
-                        address += imm7;
-
-                    if ( preIndex || postIndex )
-                        regs[ n ] = address;
                 }
                 else // 1 means ldp
                 {
@@ -4995,39 +4987,36 @@ uint64_t Arm64::run( void )
                     // LDP <Xt1>, <Xt2>, [<Xn|SP>, #<imm>]!
                     // LDP <Xt1>, <Xt2>, [<Xn|SP>{, #<imm>}]
 
-                    if ( preIndex )
-                        address += imm7;
-
                     if ( xregs )
                     {
                         if ( 31 != t1 )
-                            regs[ t1 ] = getui64( address + ( signedOffset ? imm7 : 0 ) );
+                            regs[ t1 ] = getui64( effectiveAddress );
                         if ( 31 != t2 )
-                            regs[ t2 ] = getui64( address + 8 + ( signedOffset ? imm7 : 0 ) );
+                            regs[ t2 ] = getui64( effectiveAddress + 8 );
                     }
                     else
                     {
                         bool se = ( 0 != ( hi8 & 0x40 ) );
                         if ( 31 != t1 )
                         {
-                            regs[ t1 ] = getui32( address + ( signedOffset ? imm7 : 0 ) );
+                            regs[ t1 ] = getui32( effectiveAddress );
                             if ( se )
                                 regs[ t1 ] = sign_extend( regs[ t1 ], 31 );
                         }
                         if ( 31 != t2 )
                         {
-                            regs[ t2 ] = getui32( address + 4 + ( signedOffset ? imm7 : 0 ) );
+                            regs[ t2 ] = getui32( effectiveAddress + 4 );
                             if ( se )
                                 regs[ t2 ] = sign_extend( regs[ t2 ], 31 );
                         }
                     }
-
-                    if ( postIndex )
-                        address += imm7;
-
-                    if ( preIndex || postIndex )
-                        regs[ n ] = address;
                 }
+
+                if ( postIndex )
+                    address += imm7;
+
+                if ( preIndex || postIndex )
+                    regs[ n ] = address;
                 break;
             }
             case 0x32: // ORR <Wd|WSP>, <Wn>, #<imm>
@@ -5057,15 +5046,13 @@ uint64_t Arm64::run( void )
                 uint64_t d = opbits( 0, 5 );
                 uint64_t imm6 = opbits( 10, 6 );
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
-                if ( !xregs && ( 0 != ( imm6 & 0x20 ) ) ) // can't shift with 6 bits for 32-bit values
-                    unhandled();
                 bool eor = ( 2 == opbits( 29, 2 ) );
 
                 if ( 31 == d )
                     break;
 
                 uint64_t nval = val_reg_or_zr( n );
-                if ( ( 0 == imm6 ) && ( 31 == n ) && ( 0 == shift ) && ( 0 == N ) )
+                if ( ( 0 == imm6 ) && ( 31 == n ) && ( 0 == shift ) && ( 0 == N ) ) // mov
                     regs[ d ] = val_reg_or_zr( m );
                 else if ( ( 0 == shift ) && ( 0 == imm6 ) )
                 {
@@ -6987,21 +6974,24 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements; e++ )
                         mcpy( vreg_ptr( d, e * ebytes ), &element, ebytes );
                 }
-                else if ( bit21 && bit15 && 3 == bits14_11 && !bit10 && 0 == bits20_16 )  // CMEQ <Vd>.<T>, <Vn>.<T>, #
+                else if ( bit21 && bit15 && 3 == bits14_11 && !bit10 && 0 == bits20_16 )  // CMEQ <Vd>.<T>, <Vn>.<T>, #0
                 {
                     uint64_t size = opbits( 22, 2 );
                     uint64_t esize = 8ull << size;
                     uint64_t ebytes = esize / 8;
                     uint64_t elements = datasize / esize;
-
-                    uint8_t * pn = vreg_ptr( n, 0 );
-                    uint8_t * pd = vreg_ptr( d, 0 );
+                    vec16_t & dref = vregs[ d ];
+                    vec16_t & nref = vregs[ n ];
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
-                        if ( 0 == memcmp( pn + ( e * ebytes ), &vec_zeroes, ebytes ) )
-                            mcpy( pd + ( e * ebytes ), &vec_ones, ebytes );
+                        if ( 1 == ebytes )
+                            dref.ui8[ e ] = ( 0 == nref.ui8[ e ] ) ? ~0 : 0;
+                        else if ( 2 == ebytes )
+                            dref.ui16[ e ] = ( 0 == nref.ui16[ e ] ) ? ~0 : 0;
+                        else if ( 4 == ebytes )
+                            dref.ui32[ e ] = ( 0 == nref.ui32[ e ] ) ? ~0 : 0;
                         else
-                            mcpy( pd + ( e * ebytes ), &vec_zeroes, ebytes );
+                            dref.ui64[ e ] = ( 0 == nref.ui64[ e ] ) ? ~0 : 0;
                     }
                 }
                 else if ( bit21 && !bit15 && ( 7 == bits14_11 || 6 == bits14_11 ) && bit10 ) // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>  ;  CMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>

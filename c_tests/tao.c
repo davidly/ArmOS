@@ -15,7 +15,7 @@ typedef unsigned __int128 uint128_t;
 typedef __int128 int128_t;
 typedef long double ldouble_t;
 
-template <class T> T __abs( T x )
+template <class T> T do_abs( T x )
 {
     return ( x < 0 ) ? -x : x;
 }
@@ -23,10 +23,10 @@ template <class T> T __abs( T x )
 #define array_operations_test( ftype, dim ) \
     ftype A_##ftype##dim[ dim ]; \
     ftype B_##ftype##dim[ dim ]; \
-    _perhaps_inline void fillA_##ftype##dim( ftype start ) \
+    _perhaps_inline void fillA_##ftype##dim( ftype val ) \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            A_##ftype##dim[ i ] = start + i; \
+            A_##ftype##dim[ i ] = val + i; \
     } \
     _perhaps_inline void fillB_##ftype##dim( ftype val ) \
     { \
@@ -190,14 +190,15 @@ template <class T> T __abs( T x )
     { \
         ftype result = (ftype) 0; \
         for ( int i = 0; i < dim; i++ ) \
-            result += __abs( A_##ftype##dim[ i ] ); \
+            result += do_abs( A_##ftype##dim[ i ] ); \
         return result; \
     } \
     _perhaps_inline ftype min_##ftype##dim() \
     { \
         ftype result = A_##ftype##dim[ 0 ]; \
         for ( int i = 0; i < dim; i++ ) \
-            result = A_##ftype##dim[ i ] < result ? A_##ftype##dim[ i ] : result; \
+            if ( A_##ftype##dim[ i ] < result ) \
+                result = A_##ftype##dim[ i ]; \
         return result; \
     } \
     _perhaps_inline ftype max_##ftype##dim() \
@@ -313,7 +314,6 @@ template <class T> T __abs( T x )
     array_operations_test( type, 19 ); \
     array_operations_test( type, 20 );
 
-
 declare_array_operations_tests( int8_t );
 declare_array_operations_tests( uint8_t );
 declare_array_operations_tests( int16_t );
@@ -352,21 +352,22 @@ declare_array_operations_tests( uint128_t );
 
 int main( int argc, char * argv[] )
 {
-//    for ( int i = 0; i < 400; i++ )
+    int loop_count = ( argc > 1 ) ? atoi( argv[ 1 ] ) : 1;
+    for ( int i = 0; i < loop_count; i++ )
     {
 #if 1
-    run_tests( int8_t );
-    run_tests( uint8_t );
-    run_tests( int16_t );
-    run_tests( uint16_t );
-    run_tests( int32_t );
-    run_tests( uint32_t );
-    run_tests( int64_t );
-    run_tests( uint64_t );
-    run_tests( int128_t );
-    run_tests( uint128_t );
+        run_tests( int8_t );
+        run_tests( uint8_t );
+        run_tests( int16_t );
+        run_tests( uint16_t );
+        run_tests( int32_t );
+        run_tests( uint32_t );
+        run_tests( int64_t );
+        run_tests( uint64_t );
+        run_tests( int128_t );
+        run_tests( uint128_t );
 #else    
-    run_this_test( uint8_t );    
+        run_this_test( uint8_t );    
 #endif    
     }
 
