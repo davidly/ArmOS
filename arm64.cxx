@@ -5623,10 +5623,10 @@ uint64_t Arm64::run( void )
                     elements = datasize / esize;
                     if ( 4 == ebytes )
                         for ( uint64_t e = 0; e < elements; e++ )
-                            vregs[ d ].f[ e ] = ( 0.0 == vregs[ m ].f[ e ] ) ? 0.0f : vregs[ n ].f[ e ] / vregs[ m ].f[ e ];
+                            vregs[ d ].f[ e ] = vregs[ n ].f[ e ] / vregs[ m ].f[ e ];
                     else if ( 8 == ebytes )
                         for ( uint64_t e = 0; e < elements; e++ )
-                            vregs[ d ].d[ e ] = ( 0.0 == vregs[ m ].d[ e ] ) ? 0.0 : vregs[ n ].d[ e ] / vregs[ m ].d[ e ];
+                            vregs[ d ].d[ e ] = vregs[ n ].d[ e ] / vregs[ m ].d[ e ];
                     else
                         unhandled();
                 }
