@@ -2,9 +2,9 @@
 setlocal
 
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armoscl -h:160 bin\armos -h:100 )
-rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
+if "%1" == "" (set _runcmd=armoscl -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
-if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)
+rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)
 
 set outputfile=test_armos.txt
 echo %date% %time% >%outputfile%
@@ -98,7 +98,7 @@ echo test %~1 >>%outputfile%
 exit /b /o
 
 :rustfolder
-set _rustlist=e ttt fileops ato tap real tphi mysort
+set _rustlist=e ttt fileops ato tap real tphi mysort tmm
 ( for %%a in (%_rustlist%) do ( call :rustRun rust_tests\%%f\%%a ) )
 exit /b /o
 

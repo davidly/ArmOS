@@ -3,7 +3,7 @@
     Only physical memory is supported.
     Only Base and SIMD&FP instructions are supported.
     Many instructions (30%?) are not yet implemented.
-    I only implement instructions g++ or Rust compilers emit or use in their runtimes.
+    I only implemented instructions g++, clang, or Rust compilers emit or use in their runtimes.
 
     Written by David Lee in October 2024
 

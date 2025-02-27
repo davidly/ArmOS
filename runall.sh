@@ -44,7 +44,7 @@ do
     done
 done
 
-for arg in e ttt fileops ato tap real tphi mysort;
+for arg in e ttt fileops ato tap real tphi mysort tmm;
 do
     echo $arg
     for opt in 0 1 2 3;
