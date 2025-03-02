@@ -5111,7 +5111,6 @@ uint64_t Arm64::run( void )
                 else // others
                 {
                     uint64_t immr = opbits( 16, 6 );
-                    uint64_t regsize = xregs ? 64 : 32;
                     uint64_t src = val_reg_or_zr( n );
                     uint64_t result = ( 0x33 == hi8 || 0xb3 == hi8 ) ? regs[ d ] : 0;   // restore original bits for BFM
                     uint64_t dpos = 0;
@@ -5126,7 +5125,8 @@ uint64_t Arm64::run( void )
                     else
                     {
                         uint64_t len = imms + 1;
-                        dpos = regsize - immr;
+                        uint64_t reg_size = xregs ? 64 : 32;
+                        dpos = reg_size - immr;
                         uint64_t tmp = get_bits( src, 0, len );
                         result = plaster_bits( result, tmp, dpos, len );
                         dpos += len;
@@ -6080,10 +6080,7 @@ uint64_t Arm64::run( void )
                 else if ( 7 == bits23_21 && 0xd == bits15_10 ) // CMGT D<d>, D<n>, D<m>
                 {
                     uint64_t m = opbits( 16, 5 );
-                    if ( (int64_t) vregs[ n ].ui64[ 0 ] > (int64_t) vregs[ m ].ui64[ 0 ] )
-                        vregs[ d ].ui64[ 0 ] = ~0ull;
-                    else
-                        vregs[ d ].ui64[ 0 ] = 0;
+                    vregs[ d ].ui64[ 0 ] = ( (int64_t) vregs[ n ].ui64[ 0 ] > (int64_t) vregs[ m ].ui64[ 0 ] ) ? ~0 : 0;
                 }
                 else if ( 0x386e == bits23_10 || 0x286e == bits23_10 ) // FCVTZS <V><d>, <V><n>. round towards zero fp to signed integer
                 {
@@ -6156,10 +6153,7 @@ uint64_t Arm64::run( void )
                 else if ( 7 == bits23_21 && 0xd == bits15_10 ) // CMHI D<d>, D<n>, D<m>
                 {
                     uint64_t m = opbits( 16, 5 );
-                    if ( vregs[ n ].ui64[ 0 ] > vregs[ m ].ui64[ 0 ] )
-                        vregs[ d ].ui64[ 0 ] = ~0ull;
-                    else
-                        vregs[ d ].ui64[ 0 ] = 0;
+                    vregs[ d ].ui64[ 0 ] = ( vregs[ n ].ui64[ 0 ] > vregs[ m ].ui64[ 0 ] ) ? ~0 : 0;
                 }
                 else if ( bit21 && 0x432 == bits20_10 ) // FMINNMP <V><d>, <Vn>.<T>    ;    FMAXNMP <V><d>, <Vn>.<T>
                 {
@@ -6207,10 +6201,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( 0x3822 == bits23_10 ) // CMGE
                 {
-                    if ( vregs[ n ].d[ 0 ] >= 0 )
-                        vregs[ d ].ui64[ 0 ] = ~0ull;
-                    else
-                        vregs[ d ].ui64[ 0 ] = 0;
+                    vregs[ d ].ui64[ 0 ] = ( vregs[ n ].d[ 0 ] >= 0.0 ) ? ~0 : 0;
                 }
                 else if ( 0x0876 == ( bits23_10 & 0x2fff ) ) // UCVTF <V><d>, <V><n> 
                 {
@@ -6222,15 +6213,9 @@ uint64_t Arm64::run( void )
                 else if ( 0x2832 == bits23_10 || 0x3832 == bits23_10 ) // FCMGE <V><d>, <V><n>, #0.0
                 {
                     if ( sz )
-                        if ( vregs[ n ].d[ 0 ] >= 0.0 )
-                            vregs[ d ].ui64[ 0 ] = ~0ull;
-                        else
-                            vregs[ d ].ui64[ 0 ] = 0;
+                        vregs[ d ].ui64[ 0 ] = ( vregs[ n ].d[ 0 ] >= 0.0 ) ? ~0 : 0;
                     else
-                        if ( vregs[ n ].f[ 0 ] >= 0.0f )
-                            vregs[ d ].ui32[ 0 ] = ~0u;
-                        else
-                            vregs[ d ].ui32[ 0 ] = 0;
+                        vregs[ d ].ui32[ 0 ] = ( vregs[ n ].f[ 0 ] >= 0.0f ) ? ~0 : 0;
                 }
                 else
                     unhandled();
@@ -7844,7 +7829,7 @@ uint64_t Arm64::run( void )
                 uint64_t op2 = opbits( 12, 9 );
                 uint64_t A = opbit( 11 );
                 uint64_t M = opbit( 10 );
-                if ( bit23 || 0x1f0 != op2  || A || M )
+                if ( bit23 || 0x1f0 != op2 || A || M )
                     unhandled();
 
                 if ( 0 == theop || 2 == theop ) // br, ret
