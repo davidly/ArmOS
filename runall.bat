@@ -1,8 +1,8 @@
 @echo off
 setlocal
 
-rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armoscl -h:160 bin\armos -h:100 )
-if "%1" == "" (set _runcmd=armoscl -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
+if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armosg -h:160 bin\armoscl -h:100 )
+rem if "%1" == "" (set _runcmd=armoscl -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
 rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)
 
@@ -74,12 +74,14 @@ goto :allDone
 echo test c_tests\%~1\an
 echo test c_tests\%~1\an >>%outputfile%
 call :anTest c_tests\%~1
+echo test c_tests\clang%~1\an
 echo test c_tests\clang%~1\an >>%outputfile%
 call :anTest c_tests\clang%~1
 
 echo test c_tests\%~1\ba
 echo test c_tests\%~1\ba >>%outputfile%
 call :baTest c_tests\%~1
+echo test c_tests\clang%~1\ba
 echo test c_tests\clang%~1\ba >>%outputfile%
 call :baTest c_tests\clang%~1
 

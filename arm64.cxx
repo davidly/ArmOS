@@ -124,6 +124,14 @@ static uint32_t count_leading_zeroes32( uint32_t x )
 #endif
 } //count_leading_zeroes32
 
+#ifdef _WIN32
+__declspec(noinline)
+#endif
+void Arm64::unhandled()
+{
+    emulator_hard_termination( *this, "opcode not handled:", op );
+} //unhandled
+
 Arm64::FPRounding Arm64::fp_decode_rm( uint64_t rm )
 {
     if ( 0 == rm )
@@ -410,39 +418,35 @@ __inline_perf uint64_t Arm64::val_reg_or_zr( uint64_t r ) const
     return regs[ r ];
 } //val_reg_or_zr
 
+template < typename T > Arm64::ElementComparisonResult Arm64::compare( T * pl, T * pr )
+{
+    return ( *pl < *pr ) ? ecr_lt : ( *pl == *pr ) ? ecr_eq : ecr_gt;
+} //compare
+
 Arm64::ElementComparisonResult Arm64::compare_vector_elements( uint8_t * pl, uint8_t * pr, uint64_t width, bool unsigned_compare )
 {
-    assert( width >= 1 && width <= 8 );
+    assert( 1 == width || 2 == width || 4 == width || 8 == width );
 
     if ( unsigned_compare )
     {
         if ( 1 == width )
-            return ( *pl < *pr ) ? ecr_lt : ( *pl == *pr ) ? ecr_eq : ecr_gt;
+            return compare( pl, pr );
         if ( 2 == width )
-            return ( * (uint16_t *) pl < * (uint16_t *) pr ) ? ecr_lt : ( * (uint16_t *) pl == * (uint16_t *) pr ) ? ecr_eq : ecr_gt;
+            return compare( (uint16_t *) pl, (uint16_t *) pr );
         if ( 4 == width )
-            return ( * (uint32_t *) pl < * (uint32_t *) pr ) ? ecr_lt : ( * (uint32_t *) pl == * (uint32_t *) pr ) ? ecr_eq : ecr_gt;
-        if ( 8 == width )
-            return ( * (uint64_t *) pl < * (uint64_t *) pr ) ? ecr_lt : ( * (uint64_t *) pl == * (uint64_t *) pr ) ? ecr_eq : ecr_gt;
-        else
-            unhandled();
-    }
-    else
-    {
-        if ( 1 == width )
-            return ( * (int8_t *) pl < * (int8_t *) pr ) ? ecr_lt : ( * (int8_t *) pl == * (int8_t *) pr ) ? ecr_eq : ecr_gt;
-        if ( 2 == width )
-            return ( * (int16_t *) pl < * (int16_t *) pr ) ? ecr_lt : ( * (int16_t *) pl == * (int16_t *) pr ) ? ecr_eq : ecr_gt;
-        if ( 4 == width )
-            return ( * (int32_t *) pl < * (int32_t *) pr ) ? ecr_lt : ( * (int32_t *) pl == * (int32_t *) pr ) ? ecr_eq : ecr_gt;
-        if ( 8 == width )
-            return ( * (int64_t *) pl < * (int64_t *) pr ) ? ecr_lt : ( * (int64_t *) pl == * (int64_t *) pr ) ? ecr_eq : ecr_gt;
-        else
-            unhandled();
+            return compare( (uint32_t *) pl, (uint32_t *) pr );
+
+        return compare( (uint64_t *) pl, (uint64_t *) pr );
     }
 
-    assert( false );
-    return ecr_eq;
+    if ( 1 == width )
+        return compare( (int8_t *) pl, (int8_t *) pr );
+    if ( 2 == width )
+        return compare( (int16_t *) pl, (int16_t *) pr );
+    if ( 4 == width )
+        return compare( (int32_t *) pl, (int32_t *) pr );
+
+    return compare( (int64_t *) pl, (int64_t *) pr );
 } //compare_vector_elements
 
 static const char * get_ld1_vector_T( uint64_t size, uint64_t Q )
@@ -561,7 +565,7 @@ uint64_t Arm64::replicate_bytes( uint64_t val, uint64_t byte_len )
     uint64_t repeat = 8 / byte_len;
     uint64_t result = 0;
     for ( uint64_t x = 0; x < repeat; x++ )
-        result |= ( pattern << ( x * byte_len * 8) );
+        result |= ( pattern << ( x * byte_len * 8 ) );
 
     //tracer.Trace( "replicate bytes val %#llx byte_len %lld. mask %#llx, pattern %#llx, repeat %lld, result %#llx\n", val, byte_len, mask, pattern, repeat, result );
     return result;
@@ -3494,14 +3498,6 @@ void Arm64::trace_vregs()
 
     force_trace_vregs();
 } //trace_vregs
-
-#ifdef _WIN32
-__declspec(noinline)
-#endif
-void Arm64::unhandled()
-{
-    emulator_hard_termination( *this, "opcode not handled:", op );
-} //unhandled
 
 uint64_t Arm64::run( void )
 {
@@ -7908,7 +7904,6 @@ uint64_t Arm64::run( void )
             case 0xf2: // MOVK <Xd>, #<imm>{, LSL #<shift>}       ;  ANDS <Xd>, <Xn>, #<imm> 
             {
                 uint64_t d = opbits( 0, 5 );
-                uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
                 uint64_t bit23 = opbit( 23 ); // 1 for MOVK, 0 for ANDS
                 if ( bit23 )  // MOVK <Xd>, #<imm>{, LSL #<shift>}
                 {
@@ -7922,6 +7917,7 @@ uint64_t Arm64::run( void )
                 else // ANDS <Xd>, <Xn>, #<imm>
                 {
                     uint64_t N_immr_imms = opbits( 10, 13 );
+                    uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
                     uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
                     uint64_t n = opbits( 5, 5 );
                     uint64_t nvalue = val_reg_or_zr( n );
@@ -8063,7 +8059,7 @@ uint64_t Arm64::run( void )
                     else
                         regs[ t ] = getui64( address );
                 }
-                else if ( 4 == opc || 6 == opc ) // LDRSW <Xt>, [<Xn|SP>], #<simm>    ;    LDRSW <Xt>, [<Xn|SP>, #<simm>]!
+                else if ( 4 == opc || 6 == opc ) // LDRSW <Xt>, [<Xn|SP>], #<simm>    ;    LDURSB <Wt>, [<Xn|SP>{, #<simm>}]
                 {
                     if ( 31 == t )
                         break;
@@ -8071,7 +8067,7 @@ uint64_t Arm64::run( void )
                     uint64_t option = opbits( 10, 2 );
                     uint64_t address = 0;
 
-                    if ( 0 == option ) // LDURSB <Wt>, [<Xn|SP>{, #<simm>}]    ;    LDURSB <Xt>, [<Xn|SP>{, #<simm>}]
+                    if ( 0 == option ) // LDURSB <Wt>, [<Xn|SP>{, #<simm>}]
                         address = regs[ n ] + imm9;
                     else if ( 1 == option )
                         address = regs[ n ];

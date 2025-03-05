@@ -163,6 +163,7 @@ struct Arm64
     uint64_t extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift, bool fullm = true );
     uint64_t val_reg_or_zr( uint64_t r ) const;
     const char * render_flags() const;
+    template < typename T > ElementComparisonResult compare( T * pl, T * pr );
     ElementComparisonResult compare_vector_elements( uint8_t * pl, uint8_t * pr, uint64_t width, bool unsigned_compare );
     uint8_t * vreg_ptr( uint64_t reg, uint64_t offset ) { return offset + (uint8_t *) & ( vregs[ reg ] ); }
     void zero_vreg( uint64_t reg ) { vregs[ reg ] = vec_zeroes; }
