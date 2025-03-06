@@ -2034,7 +2034,7 @@ void Arm64::trace_state()
                               // NEG <Vd>.<T>, <Vn>.<T> ; EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index>            ;    FCVTZU <Vd>.<T>, <Vn>.<T>
                               // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>           ;    USUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                               // UADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>           ;    USUBL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
-                              // FSQRT <Vd>.<T>, <Vn>.<T>
+                              // FSQRT <Vd>.<T>, <Vn>.<T>             ;    UMLSL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
         {
             uint64_t Q = opbit( 30 );
             uint64_t m = opbits( 16, 5 );
@@ -2078,6 +2078,11 @@ void Arm64::trace_state()
             {
                 const char * pTA = ( 0 == size ) ? "8h" : ( 1 == size ) ? "4s" : ( 2 == size ) ? "2d" : "reserved";
                 tracer.Trace( "umlal%s v%llu.%s, v%llu.%s, v%llu.%s\n", Q ? "2" : "", d, pTA, n, pT, m, pT );
+            }
+            else if ( bit21 && 0x28 == bits15_10 ) // UMLSL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+            {
+                const char * pTA = ( 0 == size ) ? "8h" : ( 1 == size ) ? "4s" : ( 2 == size ) ? "2d" : "reserved";
+                tracer.Trace( "umlsl%s v%llu.%s, v%llu.%s, v%llu.%s\n", Q ? "2" : "", d, pTA, n, pT, m, pT );
             }
             else if ( !bit23 && bit21 && 0 == bits20_17 && 0x76 == bits16_10 ) // UCVTF <Vd>.<T>, <Vn>.<T>
             {
@@ -4637,15 +4642,9 @@ uint64_t Arm64::run( void )
                 else if ( 3 == bits11_10 && 6 == bits23_21 && 0 == bits15_12 ) // SDIV <Xd>, <Xn>, <Xm>
                 {
                     if ( xregs )
-                    {
-                        if ( 0 != regs[ m ] )
-                            regs[ d ] = ( 0 == mval ) ? 0 : ( (int64_t) nval / (int64_t) mval );
-                    }
+                        regs[ d ] = ( 0 == mval ) ? 0 : ( (int64_t) nval / (int64_t) mval );
                     else
-                    {
-                        if ( 0 != ( (uint32_t) mval ) )
-                            regs[ d ] = ( ( 0 == mval ) ? 0 : ( (int32_t) ( (uint32_t) nval ) / (int32_t) ( (uint32_t) mval ) ) );
-                    }
+                        regs[ d ] = ( ( 0 == mval ) ? 0 : ( (int32_t) ( (uint32_t) nval ) / (int32_t) ( (uint32_t) mval ) ) );
                 }
                 else if ( 1 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // lsrv
                 {
@@ -5410,7 +5409,7 @@ uint64_t Arm64::run( void )
                                   // NEG <Vd>.<T>, <Vn>.<T> ; EXT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>, #<index>            ;    FCVTZU <Vd>.<T>, <Vn>.<T>
                                   // UMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>           ;    USUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                                   // UADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>           ;    USUBL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
-                                  // FSQRT <Vd>.<T>, <Vn>.<T>
+                                  // FSQRT <Vd>.<T>, <Vn>.<T>             ;    UMLSL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t m = opbits( 16, 5 );
@@ -5519,6 +5518,24 @@ uint64_t Arm64::run( void )
                                 target.ui32[ e ] += ( (uint32_t) vregs[ n ].ui16[ e + ( Q ? 4 : 0 ) ] * (uint32_t) vregs[ m ].ui16[ e + ( Q ? 4 : 0 ) ] );
                             else if ( 4 == ebytes )
                                 target.ui64[ e ] += ( (uint64_t) vregs[ n ].ui32[ e + ( Q ? 2 : 0 ) ] * (uint64_t) vregs[ m ].ui32[ e + ( Q ? 2 : 0 ) ] );
+                            else
+                                unhandled();
+                        }
+                        vregs[ d ] = target;
+                    }
+                    else if ( 0x28 == bits15_10 ) // UMLSL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                    {
+                        datasize = 64;
+                        elements = datasize / esize;
+                        vec16_t target = vregs[ d ];
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 1 == ebytes )
+                                target.ui16[ e ] -= ( (uint16_t) vregs[ n ].ui8[ e + ( Q ? 8 : 0 ) ] * (uint16_t) vregs[ m ].ui8[ e + ( Q ? 8 : 0 ) ] );
+                            else if ( 2 == ebytes )
+                                target.ui32[ e ] -= ( (uint32_t) vregs[ n ].ui16[ e + ( Q ? 4 : 0 ) ] * (uint32_t) vregs[ m ].ui16[ e + ( Q ? 4 : 0 ) ] );
+                            else if ( 4 == ebytes )
+                                target.ui64[ e ] -= ( (uint64_t) vregs[ n ].ui32[ e + ( Q ? 2 : 0 ) ] * (uint64_t) vregs[ m ].ui32[ e + ( Q ? 2 : 0 ) ] );
                             else
                                 unhandled();
                         }
