@@ -198,11 +198,20 @@ double Arm64::round_double( double d, FPRounding rounding )
 
 int32_t Arm64::double_to_fixed_int32( double d, uint64_t fracbits, FPRounding rounding )
 {
+    if ( d >= INT32_MAX )
+        return INT32_MAX;
+
+    if ( d <= INT32_MIN )
+        return INT32_MIN;
+
     return (int32_t) round_double( d * ( 1ull << fracbits ), rounding );
 } //double_to_fixed_int32
 
 uint32_t Arm64::double_to_fixed_uint32( double d, uint64_t fracbits, FPRounding rounding )
 {
+    if ( d >= UINT32_MAX )
+        return UINT32_MAX;
+
     double val = round_double( d * ( 1ull << fracbits ), rounding );
     if ( val < 0.0 )
         val = 0.0;
@@ -211,11 +220,20 @@ uint32_t Arm64::double_to_fixed_uint32( double d, uint64_t fracbits, FPRounding 
 
 int64_t Arm64::double_to_fixed_int64( double d, uint64_t fracbits, FPRounding rounding )
 {
+    if ( d >= (double) INT64_MAX )
+        return INT64_MAX;
+
+    if ( d <= (double) INT64_MIN )
+        return INT64_MIN;
+
     return (int64_t) round_double( d * ( 1ull << fracbits ), rounding );
 } //double_to_fixed_int64
 
 uint64_t Arm64::double_to_fixed_uint64( double d, uint64_t fracbits, FPRounding rounding )
 {
+    if ( d >= (double) UINT64_MAX )
+        return UINT64_MAX;
+
     double val = round_double( d * ( 1ull << fracbits ), rounding );
     if ( val < 0.0 )
         val = 0.0;
@@ -465,6 +483,20 @@ static const char * get_ld1_vector_T( uint64_t size, uint64_t Q )
 
     return "UNKNOWN";
 } //get_ld1_vector_T
+
+static const char * get_saddlp_vector_T( uint64_t size, uint64_t Q )
+{
+    if ( 0 == size )
+        return Q ? "8h" : "4h";
+
+    if ( 1 == size )
+        return Q ? "4h" : "2s";
+
+    if ( 2 == size )
+        return Q ? "2d" : "1d";
+
+    return "UNKNOWN";
+} //get_saddlp_vector_T
 
 static const char * get_vector_T( uint64_t imm5, uint64_t Q )
 {
@@ -2353,7 +2385,8 @@ void Arm64::trace_state()
                               // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                               // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                               // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ABS <Vd>.<T>, <Vn>.<T>            ;   SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
-                              // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>
+                              // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>           ;   SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                              // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; SADDLP <Vd>.<Ta>, <Vn>.<Tb>     ;   SADDLV <V><d>, <Vn>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
@@ -2370,7 +2403,38 @@ void Arm64::trace_state()
             uint64_t bits14_10 = opbits( 10, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit23 && bit21 && 0 == bits20_16 && 0x3e == bits15_10 ) // FABS <Vd>.<T>, <Vn>.<T>
+            if ( bit21 && 0x10 == bits20_16 && 0x0e == bits15_10 ) //SADDLV <V><d>, <Vn>.<T>
+            {
+                uint64_t size = opbits( 22, 2 );
+                const char * pT = get_ld1_vector_T( size, Q );
+                char v = ( 0 == size ) ? 'h' : ( 1 == size ) ? 's' : ( 2 == size ) ? 'd' : '?';
+                tracer.Trace( "saddlv %c%llu, v%llu.%s\n", v, d, n, pT );
+            }
+            else if ( bit21 && 0 == bits20_16 && 0x0a == bits15_10 ) // SADDLP <Vd>.<Ta>, <Vn>.<Tb>
+            {
+                uint64_t size = opbits( 22, 2 );
+                uint64_t m = opbits( 16, 5 );
+                const char * pTA = get_saddlp_vector_T( size, Q );
+                const char * pTB = get_ld1_vector_T( size, Q );
+                tracer.Trace( "saddlp v%llu.%s, v%llu.%s, v%llu.%s\n", d, pTA, n, pTB, m, pTB );
+            }
+            else if ( bit21 && 0 == bits15_10 ) // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+            {
+                uint64_t size = opbits( 22, 2 );
+                uint64_t m = opbits( 16, 5 );
+                const char * pTA = ( 0 == size ) ? "8h" : ( 1 == size ) ? "4s" : ( 2 == size ) ? "2d" : "unknown";
+                const char * pTB = get_ld1_vector_T( size, Q );
+                tracer.Trace( "saddl%s v%llu.%s, v%llu.%s, v%llu.%s\n", Q ? "2" : "", d, pTA, n, pTB, m, pTB );
+            }
+            else if ( bit21 && 0x20 == bits15_10 ) // SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+            {
+                uint64_t size = opbits( 22, 2 );
+                uint64_t m = opbits( 16, 5 );
+                const char * pTA = ( 0 == size ) ? "8h" : ( 1 == size ) ? "4s" : ( 2 == size ) ? "2d" : "unknown";
+                const char * pTB = get_ld1_vector_T( size, Q );
+                tracer.Trace( "smlal%s v%llu.%s, v%llu.%s, v%llu.%s\n", Q ? "2" : "", d, pTA, n, pTB, m, pTB );
+            }
+            else if ( bit23 && bit21 && 0 == bits20_16 && 0x3e == bits15_10 ) // FABS <Vd>.<T>, <Vn>.<T>
             {
                 uint64_t sz = opbit( 22 );
                 const char * pT = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
@@ -3765,20 +3829,22 @@ uint64_t Arm64::run( void )
 
                 if ( 0 == ftype ) // float
                 {
-                    float product = vregs[ n ].f[ 0 ] * vregs[ m ].f[ 0 ];
+                    // do math using doubles to match the behavior of arm64 hardware (test app t2.c validates this)
+
+                    double product = (double) vregs[ n ].f[ 0 ] * (double) vregs[ m ].f[ 0 ];
                     if ( subtract )
                     {
                         if ( negate )
-                            vregs[ d ].f[ 0 ] = product - vregs[ a ].f[ 0 ];
+                            vregs[ d ].f[ 0 ] = (float) ( product - (double) vregs[ a ].f[ 0 ] );
                         else
-                            vregs[ d ].f[ 0 ] = vregs[ a ].f[ 0 ] - product;
+                            vregs[ d ].f[ 0 ] = (float) ( (double) vregs[ a ].f[ 0 ] - product );
                     }
                     else
                     {
                         if ( negate )
-                            vregs[ d ].f[ 0 ] = -product - vregs[ a ].f[ 0 ];
+                            vregs[ d ].f[ 0 ] = (float) ( -product - (double) vregs[ a ].f[ 0 ] );
                         else
-                            vregs[ d ].f[ 0 ] = product + vregs[ a ].f[ 0 ];
+                            vregs[ d ].f[ 0 ] = (float) ( product + (double) vregs[ a ].f[ 0 ] );
                     }
                     memset( vreg_ptr( d, 4 ), 0, 12 );
                 }
@@ -4310,9 +4376,9 @@ uint64_t Arm64::run( void )
                         }
                         else if ( 4 == ebytes )
                         {
-                            float element2 = vregs[ m ].f[ index ];
+                            double element2 = (double) vregs[ m ].f[ index ];
                             for ( uint64_t e = 0; e < elements; e++ )
-                                target.f[ e ] += element2 * vn.f[ e ];
+                                target.f[ e ] = (float) ( (double) target.f[ e ] + ( element2 * (double) vn.f[ e ] ) );
                         }
                         else
                             unhandled() ;
@@ -6256,7 +6322,8 @@ uint64_t Arm64::run( void )
                                   // FMINNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;    FMAXNM <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; FCVTN{2} <Vd>.<Tb>, <Vn>.<Ta>  ;    FCVTZS <Vd>.<T>, <Vn>.<T>
                                   // ORN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>    ;    FCVTL{2} <Vd>.<Ta>, <Vn>.<Tb>     ;   SSHL <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ; SADDW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                                   // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ABS <Vd>.<T>, <Vn>.<T>            ;   SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
-                                  // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>
+                                  // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>           ;   SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                                  // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; SADDLP <Vd>.<Ta>, <Vn>.<Tb>     ;   SADDLV <V><d>, <Vn>.<T>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -6276,7 +6343,102 @@ uint64_t Arm64::run( void )
 
                 if ( bit21 )
                 {
-                    if ( bit23 && 0 == bits20_16 && 0x3e == bits15_10 ) // FABS <Vd>.<T>, <Vn>.<T>
+                    if ( 0x10 == bits20_16 && 0x0e == bits15_10 ) //SADDLV <V><d>, <Vn>.<T>
+                    {
+                        uint64_t size = opbits( 22, 2 );
+                        uint64_t esize = 8ull << size;
+                        uint64_t ebytes = esize / 8;
+                        datasize = 64 << Q;
+                        uint64_t elements = datasize / esize;
+                        vec16_t target = { 0 };
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 1 == ebytes )
+                                target.ui16[ 0 ] += (int16_t) sign_extend( vregs[ n ].ui8[ e ], 7 );
+                            else if ( 2 == ebytes )
+                                target.ui32[ 0 ] += (int32_t) sign_extend( vregs[ n ].ui16[ e ], 15 );
+                            else if ( 4 == ebytes )
+                                target.ui64[ 0 ] += (int64_t) sign_extend( vregs[ n ].ui32[ e ], 31 );
+                            else
+                                unhandled();
+                        }
+                        vregs[ d ] = target;
+                    }
+                    else if ( 0 == bits20_16 && 0x0a == bits15_10 ) // SADDLP <Vd>.<Ta>, <Vn>.<Tb>
+                    {
+                        uint64_t size = opbits( 22, 2 );
+                        uint64_t esize = 8ull << size;
+                        uint64_t ebytes = esize / 8;
+                        datasize = 64 << Q;
+                        uint64_t elements = datasize / ( 2 * esize );
+                        vec16_t target = { 0 };
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 1 == ebytes )
+                                target.ui16[ e ] = ( (int16_t) sign_extend( vregs[ n ].ui8[ e ], 7 ) +
+                                                     (int16_t) sign_extend( vregs[ n ].ui8[ e + 1 ], 7 ) );
+                            else if ( 2 == ebytes )
+                                target.ui32[ e ] = ( (int32_t) sign_extend( vregs[ n ].ui16[ e ], 15 ) +
+                                                     (int32_t) sign_extend( vregs[ n ].ui16[ e + 1 ], 15 ) );
+                            else if ( 4 == ebytes )
+                                target.ui64[ e ] = ( (int64_t) sign_extend( vregs[ n ].ui32[ e ], 31 ) +
+                                                     (int64_t) sign_extend( vregs[ n ].ui32[ e + 1 ], 31 ) );
+                            else
+                                unhandled();
+                        }
+                        vregs[ d ] = target;
+                    }
+                    else if ( 0 == bits15_10 ) // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                    {
+                        uint64_t size = opbits( 22, 2 );
+                        uint64_t m = opbits( 16, 5 );
+                        uint64_t esize = 8ull << size;
+                        uint64_t ebytes = esize / 8;
+                        datasize = 64;
+                        uint64_t elements = datasize / esize;
+                        vec16_t target = { 0 };
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 1 == ebytes )
+                                target.ui16[ e ] = ( (int16_t) sign_extend( vregs[ n ].ui8[ ( Q ? 8 : 0 ) + e ], 7 ) +
+                                                     (int16_t) sign_extend( vregs[ m ].ui8[ ( Q ? 8 : 0 ) + e ], 7 ) );
+                            else if ( 2 == ebytes )
+                                target.ui32[ e ] = ( (int32_t) sign_extend( vregs[ n ].ui16[ ( Q ? 4 : 0 ) + e ], 15 ) +
+                                                     (int32_t) sign_extend( vregs[ m ].ui16[ ( Q ? 4 : 0 ) + e ], 15 ) );
+                            else if ( 4 == ebytes )
+                                target.ui64[ e ] = ( (int64_t) sign_extend( vregs[ n ].ui32[ ( Q ? 2 : 0 ) + e ], 31 ) +
+                                                     (int64_t) sign_extend( vregs[ m ].ui32[ ( Q ? 2 : 0 ) + e ], 31 ) );
+                            else
+                                unhandled();
+                        }
+                        vregs[ d ] = target;
+                    }
+                    else if ( 0x20 == bits15_10 ) // SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
+                    {
+                        uint64_t size = opbits( 22, 2 );
+                        uint64_t m = opbits( 16, 5 );
+                        uint64_t esize = 8ull << size;
+                        uint64_t ebytes = esize / 8;
+                        datasize = 64;
+                        uint64_t elements = datasize / esize;
+                        vec16_t target = vregs[ d ];
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 1 == ebytes )
+                                target.ui16[ e ] += ( (int16_t) sign_extend( vregs[ n ].ui8[ ( Q ? 8 : 0 ) + e ], 7 ) *
+                                                      (int16_t) sign_extend( vregs[ m ].ui8[ ( Q ? 8 : 0 ) + e ], 7 ) );
+                            else if ( 2 == ebytes )
+                                target.ui32[ e ] += ( (int32_t) sign_extend( vregs[ n ].ui16[ ( Q ? 4 : 0 ) + e ], 15 ) *
+                                                      (int32_t) sign_extend( vregs[ m ].ui16[ ( Q ? 4 : 0 ) + e ], 15 ) );
+                            else if ( 4 == ebytes )
+                                target.ui64[ e ] += ( (int64_t) sign_extend( vregs[ n ].ui32[ ( Q ? 2 : 0 ) + e ], 31 ) *
+                                                      (int64_t) sign_extend( vregs[ m ].ui32[ ( Q ? 2 : 0 ) + e ], 31 ) );
+                            else
+                                unhandled();
+                        }
+                        vregs[ d ] = target;
+                    }
+                    else if ( bit23 && 0 == bits20_16 && 0x3e == bits15_10 ) // FABS <Vd>.<T>, <Vn>.<T>
                     {
                         uint64_t sz = opbit( 22 );
                         uint64_t esize = 32ull << sz;
@@ -6777,7 +6939,7 @@ uint64_t Arm64::run( void )
                             if ( 8 == ebytes )
                                 target.d[ e ] = ( vn.d[ e ] * vm.d[ e ] ) + vd.d[ e ];
                             else if ( 4 == ebytes )
-                                target.f[ e ] = ( vn.f[ e ] * vm.f[ e ] ) + vd.f[ e ];
+                                target.f[ e ] = (float) ( ( (double) vn.f[ e ] * (double) vm.f[ e ] ) + (double) vd.f[ e ] );
                             else
                                 unhandled();
                         }
@@ -7581,6 +7743,7 @@ uint64_t Arm64::run( void )
                         vregs[ d ].d[ 0 ] = vregs[ n ].d[ 0 ] + vregs[ m ].d[ 0 ];
                     else
                         unhandled();
+                    trace_vregs();
                 }
                 else if ( 0x1e == hi8 && ( 0xe == ( 0x3f & bits18_10 ) ) && bit21 ) // fsub v, v, v
                 {

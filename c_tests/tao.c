@@ -244,6 +244,16 @@ template <class T> T do_abs( T x )
             result = A_##ftype##dim[ i ] > result ? A_##ftype##dim[ i ] : result; \
         return result; \
     } \
+    _perhaps_inline void inc_C_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            C_##ftype##dim[ i ]++; \
+    } \
+    _perhaps_inline void dec_C_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            C_##ftype##dim[ i ]--; \
+    } \
     _perhaps_inline void add_mul_ABC_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
@@ -257,12 +267,22 @@ template <class T> T do_abs( T x )
     _perhaps_inline void add_mul_div2_ABC_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            C_##ftype##dim[ i ] += ( B_##ftype##dim[ i ] / 2 ) * A_##ftype##dim[ i ]; \
+            C_##ftype##dim[ i ] += ( B_##ftype##dim[ i ] / 4 ) * A_##ftype##dim[ i ]; \
     } \
     _perhaps_inline void sub_mul_div2_ABC_##ftype##dim() \
     { \
         for ( int i = 0; i < dim; i++ ) \
-            C_##ftype##dim[ i ] -= ( B_##ftype##dim[ i ] / 2 ) * A_##ftype##dim[ i ]; \
+            C_##ftype##dim[ i ] -= ( B_##ftype##dim[ i ] / 4 ) * A_##ftype##dim[ i ]; \
+    } \
+    _perhaps_inline void add_mul_div2b_ABC_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            C_##ftype##dim[ i ] += ( B_##ftype##dim[ i ] * 4 ) * A_##ftype##dim[ i ]; \
+    } \
+    _perhaps_inline void sub_mul_div2b_ABC_##ftype##dim() \
+    { \
+        for ( int i = 0; i < dim; i++ ) \
+            C_##ftype##dim[ i ] -= ( B_##ftype##dim[ i ] * 4 ) * A_##ftype##dim[ i ]; \
     } \
     _perhaps_inline void add_div_ABC_##ftype##dim() \
     { \
@@ -374,17 +394,30 @@ template <class T> T do_abs( T x )
             printf( "ERROR! after mul div2 sumC %.01f, sumD %.01f\n", (double) sumC, (double) sumD ); \
             exit( 1 ); \
         } \
-        /*printf( "before add_div: " ); print_array_C_##ftype##dim();*/ \
-        add_div_ABC_##ftype##dim(); \
-        /*printf( "before sub_div: " ); print_array_C_##ftype##dim();*/ \
-        sub_div_ABC_##ftype##dim(); \
-        /*printf( "final: " ); print_array_C_##ftype##dim();*/ \
+        add_mul_div2b_ABC_##ftype##dim(); \
+        sub_mul_div2b_ABC_##ftype##dim(); \
         sumC = sum_C_##ftype##dim(); \
         sumD = sum_D_##ftype##dim(); \
-        /*printf( "after div sumC %.01f, sumD %.01f, type %s, dim %u\n", (double) sumC, (double) sumD, #ftype, dim );*/ \
+        if ( sumC != sumD ) \
+        { \
+            printf( "ERROR! after mul div2b sumC %.01f, sumD %.01f\n", (double) sumC, (double) sumD ); \
+            exit( 1 ); \
+        } \
+        add_div_ABC_##ftype##dim(); \
+        sub_div_ABC_##ftype##dim(); \
+        sumC = sum_C_##ftype##dim(); \
+        sumD = sum_D_##ftype##dim(); \
         if ( sumC != sumD ) \
         { \
             printf( "ERROR! after div sumC %.01f, sumD %.01f, type %s, dim %u\n", (double) sumC, (double) sumD, #ftype, dim ); \
+            exit( 1 ); \
+        } \
+        inc_C_##ftype##dim(); \
+        dec_C_##ftype##dim(); \
+        sumC = sum_C_##ftype##dim(); \
+        if ( sumC != sumD ) \
+        { \
+            printf( "ERROR! after sqrt/sqr sumC %.01f, sumD %.01f, type %s, dim %u\n", (double) sumC, (double) sumD, #ftype, dim ); \
             exit( 1 ); \
         } \
         return sum; \
