@@ -9,6 +9,9 @@ typedef unsigned __int128 uint128_t;
 typedef __int128 int128_t;
 typedef long double ldouble_t;
 
+//#define _perhaps_inline __attribute__((noinline))
+#define _perhaps_inline
+
 #define _countof( X ) ( sizeof( X ) / sizeof( X[0] ) )
 
 template <class T> T do_abs( T x )
@@ -16,12 +19,12 @@ template <class T> T do_abs( T x )
     return ( x < 0 ) ? -x : x;
 }
 
-template <class T> T do_sum( T array[], size_t size )
+template <class T> _perhaps_inline T do_sum( T array[], size_t size )
 {
     T sum = 0;
     for ( int i = 0; i < size; i++ )
     {
-        /*printf( "in do_sum, element %d %.12g\n", i, (double) array[ i ] );*/
+        //printf( "in do_sum, element %d %.12g\n", i, (double) array[ i ] );
         sum += array[ i ];
     }
     /*printf( "sum in do_sym: %.12g\n", (double) sum );*/
@@ -48,33 +51,41 @@ template <class T, class U, size_t size> T tst( T t, U u )
         x = (T) ( (double) x * 3.2 );
         u += ( rand() % ( i + 2000 ) ) / 3;
         a[ i ] = ( x * (T) u ) + ( x + (T) u );
+        //printf( "bottom of loop, a[%d] is %.12g, u %.12g, x %.12g\n", i, (double) a[ i ], (double) u, (double) x );
     }
 
     //syscall( 0x2002, 1 );        
     for ( int i = 0; i < _countof( a ); i++ )
     {
-        b[ i ] = a[ i ] * (T) 2.2;
-        c[ i ] = a[ i ] * (T) 4.4;
-        /*printf( "c[%d] = %.12g, a = %.12g\n", i, (double) c[i], (double) a[i] );*/
+        T absolute = do_abs( a[ i ] );
+        b[ i ] = (U)( absolute * (T) 2.2 );
+        c[ i ] = absolute * (T) 4.4;
+        //printf( "b[%d] = %.12g, a = %.12g\n", i, (double) b[i], (double) a[i] );
     }
-
-#if 0
-    for ( int i = 0; i < _countof( a ); i++ )
-    {
-        printf( "a[%d] = %.2lf\n", i, a[i] );
-        printf( "c[%d] = %.15g\n", i, c[i] );
-    }
-#endif     
-
+    
     T sumA = do_sum( a, _countof( a ) );
-    T sumB = do_sum( b, _countof( b ) );
+    //syscall( 0x2002, 1 );        
+    U sumB = do_sum( b, _countof( b ) );
     T sumC = do_sum( c, _countof( c ) );
     
     x = sumA / 128;
-
+    
     // beyond 12 digits of precision, results will vary across compilers, compiler optimization flags, hardware, and emulators since
     // doubles only have 12 digits of precision and the loop above will cause more to be used.
-    printf( "types %s + %s, size %d, sumA %.12g, sumB %.12g, sumC %.12g\n", typeid(T).name(), typeid(U).name(), size, (double) sumA, (double) sumB, (double) sumC );
+    
+    printf( "types %s + %s, size %d, sumA %.12g, sumB %.12g, sumC %.12g\n", typeid(T).name(), typeid(U).name(), 
+            size, (double) sumA, (double) sumB, (double) sumC );
+    
+    //syscall( 0x2002, 0 );        
+#if 0
+    for ( int i = 0; i < _countof( a ); i++ )
+    {
+        //printf( "a[%d] = %.12g %d\n", i, (double) a[i], (int) a[i] );
+        printf( "b[%d] = %.12g %d\n", i, (double) b[i], (int) b[i] );
+        //printf( "c[%d] = %.12g %d\n", i, (double) c[i], (int) c[i] );
+    }
+#endif     
+        
     return x;
 }
 
@@ -94,7 +105,7 @@ template <class T, class U, size_t size> T tst( T t, U u )
   tst<ftype,ldouble_t,dim>( 0, 0 ); 
 
 #define run_tests_one( ftype, dim ) \
-  tst<ftype,int8_t,dim>( 0, 0 );
+  tst<ftype,int32_t,dim>( 0, 0 );
 
 #define run_dimension( dim ) \
   run_tests( int8_t, dim ); \
@@ -112,7 +123,7 @@ template <class T, class U, size_t size> T tst( T t, U u )
   run_tests( ldouble_t, dim );
 
 #define run_dimension_one( dim ) \
-  run_tests_one( float, dim );
+  run_tests_one( int32_t, dim );
 
 int main( int argc, char * argv[], char * env[] )
 {
@@ -136,7 +147,8 @@ int main( int argc, char * argv[], char * env[] )
     run_dimension( 33 );    
     run_dimension( 128 );
 #else    
-    run_dimension_one( 128 );
+    run_tests_one( int8_t, 15 );
+    //run_dimension( 5 );
 #endif
 
     printf( "test types completed with great success\n" );
