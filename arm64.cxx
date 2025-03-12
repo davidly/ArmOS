@@ -2084,6 +2084,7 @@ void Arm64::trace_state()
                               // FSQRT <Vd>.<T>, <Vn>.<T>             ;    UMLSL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; NOT <Vd>.<T>, <Vn>.<T>
                               // UADDLP <Vd>.<Ta>, <Vn>.<Tb>          ;    UADALP <Vd>.<Ta>, <Vn>.<Tb>          ;    CMLE <Vd>.<T>, <Vn>.<T>, #0
                               // UQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>        ;    FCMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                              // CMGE <Vd>.<T>, <Vn>.<T>, #0
         {
             uint64_t Q = opbit( 30 );
             uint64_t m = opbits( 16, 5 );
@@ -2103,7 +2104,9 @@ void Arm64::trace_state()
             uint64_t bits16_10 = opbits( 10, 7 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( 1 == bits23_21 && 0 == bits20_16 && 0x16 == bits15_10 ) // NOT <Vd>.<T>, <Vn>.<T>. AKA MVN
+            if ( bit21 && 0 == bits20_17 && 0x22 == bits16_10 ) // CMGE <Vd>.<T>, <Vn>.<T>, #0
+                tracer.Trace( "cmge v%llu.%s, v%llu.%s, #0\n", d, pT, n, pT );
+            else if ( 1 == bits23_21 && 0 == bits20_16 && 0x16 == bits15_10 ) // NOT <Vd>.<T>, <Vn>.<T>. AKA MVN
             {
                 pT = Q ? "16b" : "8b";
                 tracer.Trace( "not v%llu.%s, v%llu.%s # aka mvn\n", d, pT, n, pT );
@@ -2442,7 +2445,8 @@ void Arm64::trace_state()
                               // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ABS <Vd>.<T>, <Vn>.<T>            ;   SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                               // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>           ;   SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                               // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; SADDLP <Vd>.<Ta>, <Vn>.<Tb>     ;   SADDLV <V><d>, <Vn>.<T>        ;    SADALP <Vd>.<Ta>, <Vn>.<Tb>
-                              // SQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>       ;    CMGT <Vd>.<T>, <Vn>.<T>, #0
+                              // SQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>       ;    CMGT <Vd>.<T>, <Vn>.<T>, #0       ;   CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                              // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
@@ -2459,7 +2463,21 @@ void Arm64::trace_state()
             uint64_t bits14_10 = opbits( 10, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit21 &&  0 == bits20_16 && 0x22 == bits15_10 ) // CMGT <Vd>.<T>, <Vn>.<T>, #0
+            if ( bit21 && 0x3d == bits15_10 ) // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                uint64_t m = opbits( 16, 5 );
+                uint64_t sz = opbit( 22 );
+                const char * pT = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
+                tracer.Trace( "fmin v%llu.%s, v%llu.%s, %llu.%s\n", d, pT, n, pT, m, pT );
+            }
+            else if ( bit21 && 0x23 == bits15_10 ) // CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                uint64_t size = opbits( 22, 2 );
+                uint64_t m = opbits( 16, 5 );
+                const char * pT = get_ld1_vector_T( size, Q );
+                tracer.Trace( "cmtst v%llu.%s, v%llu.%s, #0\n", d, pT, n, pT, m, pT );
+            }
+            else if ( bit21 && 0 == bits20_16 && 0x22 == bits15_10 ) // CMGT <Vd>.<T>, <Vn>.<T>, #0
             {
                 uint64_t size = opbits( 22, 2 );
                 const char * pT = get_ld1_vector_T( size, Q );
@@ -5586,6 +5604,7 @@ uint64_t Arm64::run( void )
                                   // FSQRT <Vd>.<T>, <Vn>.<T>             ;    UMLSL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; NOT <Vd>.<T>, <Vn>.<T>
                                   // UADDLP <Vd>.<Ta>, <Vn>.<Tb>          ;    UADALP <Vd>.<Ta>, <Vn>.<Tb>          ;    CMLE <Vd>.<T>, <Vn>.<T>, #0
                                   // UQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>        ;    FCMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                                  // CMGE <Vd>.<T>, <Vn>.<T>, #0
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t m = opbits( 16, 5 );
@@ -5612,7 +5631,25 @@ uint64_t Arm64::run( void )
 
                 if ( bit21 )
                 {
-                    if ( 1 == bits23_21 && 0 == bits20_16 && 0x16 == bits15_10 ) // NOT <Vd>.<T>, <Vn>.<T>. AKA MVN
+                    if ( 0 == bits20_17 && 0x22 == bits16_10 ) // CMGE <Vd>.<T>, <Vn>.<T>, #0
+                    {
+                        vec16_t target = { 0 };
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 1 == ebytes )
+                                target.ui8[ e ] = ( (int8_t) vregs[ n ].ui8[ e ] >= 0 ) ? ~0 : 0;
+                            else if ( 2 == ebytes )
+                                target.ui16[ e ] = ( (int16_t) vregs[ n ].ui16[ e ] >= 0 ) ? ~0 : 0;
+                            else if ( 4 == ebytes )
+                                target.ui32[ e ] = ( (int32_t) vregs[ n ].ui32[ e ] >= 0 ) ? ~0 : 0;
+                            else if ( 8 == ebytes )
+                                target.ui64[ e ] = ( (int64_t) vregs[ n ].ui64[ e ] >= 0 ) ? ~0 : 0;
+                            else
+                                unhandled();
+                        }
+                        vregs[ d ] = target;
+                    }
+                    else if ( 1 == bits23_21 && 0 == bits20_16 && 0x16 == bits15_10 ) // NOT <Vd>.<T>, <Vn>.<T>. AKA MVN
                     {
                         vregs[ d ].ui64[ 0 ] = ~ vregs[ n ].ui64[ 0 ];
                         if ( Q )
@@ -6577,7 +6614,8 @@ uint64_t Arm64::run( void )
                                   // CMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    ABS <Vd>.<T>, <Vn>.<T>            ;   SSUBW{2} <Vd>.<Ta>, <Vn>.<Ta>, <Vm>.<Tb>
                                   // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>           ;   SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                                   // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; SADDLP <Vd>.<Ta>, <Vn>.<Tb>     ;   SADDLV <V><d>, <Vn>.<T>        ;    SADALP <Vd>.<Ta>, <Vn>.<Tb>
-                                  // SQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>       ;    CMGT <Vd>.<T>, <Vn>.<T>, #0
+                                  // SQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>       ;    CMGT <Vd>.<T>, <Vn>.<T>, #0       ;   CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                                  // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -6597,7 +6635,80 @@ uint64_t Arm64::run( void )
 
                 if ( bit21 )
                 {
-                    if ( bit21 && 0 == bits20_16 && 0x22 == bits15_10 ) // CMGT <Vd>.<T>, <Vn>.<T>, #0
+                    if ( 0x3d == bits15_10 ) // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                    {
+                        uint64_t m = opbits( 16, 5 );
+                        uint64_t sz = opbit( 22 );
+                        uint64_t esize = 32ull << sz;
+                        uint64_t ebytes = esize / 8;
+                        uint64_t elements = datasize / esize;
+                        bool fpcr_ah = get_bit( fpcr, 1 );
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 4 == ebytes )
+                            {
+                                float result = 0;
+                                float nval = vregs[ n ].f[ e ];
+                                float mval = vregs[ m ].f[ e ];
+                                bool n_nan = isnan( nval );
+                                bool m_nan = isnan( mval );
+
+                                if ( n_nan || m_nan )
+                                {
+                                    if ( fpcr_ah )
+                                        result = mval;
+                                    else
+                                        result = NAN;
+                                }
+                                else
+                                    result = get_min( nval, mval );
+                                vregs[ d ].f[ e ] = result;
+                            }
+                            else if ( 8 == ebytes )
+                            {
+                                double result = 0;
+                                double nval = vregs[ n ].d[ e ];
+                                double mval = vregs[ m ].d[ e ];
+                                bool n_nan = isnan( nval );
+                                bool m_nan = isnan( mval );
+
+                                if ( n_nan || m_nan )
+                                {
+                                    if ( fpcr_ah )
+                                        result = mval;
+                                    else
+                                        result = NAN;
+                                }
+                                else
+                                    result = get_min( nval, mval );
+                                vregs[ d ].d[ e ] = result;
+                            }
+                            else
+                                unhandled();
+                        }
+                    }
+                    else if ( 0x23 == bits15_10 ) // CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                    {
+                        uint64_t size = opbits( 22, 2 );
+                        uint64_t m = opbits( 16, 5 );
+                        uint64_t esize = 8ull << size;
+                        uint64_t ebytes = esize / 8;
+                        uint64_t elements = datasize / esize;
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 1 == ebytes )
+                                vregs[ d ].ui8[ e ] = ( vregs[ n ].ui8[ e ] & vregs[ m ].ui8[ e ] ) ? 0xff : 0;
+                            else if ( 2 == ebytes )
+                                vregs[ d ].ui16[ e ] = ( vregs[ n ].ui16[ e ] & vregs[ m ].ui16[ e ] ) ? 0xffff : 0;
+                            else if ( 4 == ebytes )
+                                vregs[ d ].ui32[ e ] = ( vregs[ n ].ui32[ e ] & vregs[ m ].ui32[ e ] ) ? 0xffffffff : 0;
+                            else if ( 8 == ebytes )
+                                vregs[ d ].ui64[ e ] = ( vregs[ n ].ui64[ e ] & vregs[ m ].ui64[ e ] ) ? ~0 : 0;
+                            else
+                                unhandled();
+                        }
+                    }
+                    else if ( bit21 && 0 == bits20_16 && 0x22 == bits15_10 ) // CMGT <Vd>.<T>, <Vn>.<T>, #0
                     {
                         uint64_t size = opbits( 22, 2 );
                         uint64_t esize = 8ull << size;
