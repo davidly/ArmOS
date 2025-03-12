@@ -2317,6 +2317,7 @@ void Arm64::trace_state()
         }
         case 0x5e: // SCVTF <V><d>, <V><n>    ;    ADDP D<d>, <Vn>.2D    ;    DUP <V><d>, <Vn>.<T>[<index>]    ;    FCVTZS <V><d>, <V><n>
                    // CMGT D<d>, D<n>, D<m>   ;    CMGT D<d>, D<n>, #0   ;    ADD D<d>, D<n>, D<m>             ;    FCMLT <V><d>, <V><n>, #0.0
+                   // CMEQ D<d>, D<n>, #0
         {
             uint64_t bits23_10 = opbits( 10, 14 );
             uint64_t bit23 = opbit( 23 );
@@ -2327,7 +2328,9 @@ void Arm64::trace_state()
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
 
-            if ( bit23 && bit21 && 0 == bits20_16 && 0x3a == bits15_10 ) // FCMLT <V><d>, <V><n>, #0.0
+            if ( 7 == bits23_21 && 0 == bits20_16 && 0x26 == bits15_10 ) // CMEQ D<d>, D<n>, #0
+                tracer.Trace( "cmeq d%llu, d%llu, #0\n", d, n );
+            else if ( bit23 && bit21 && 0 == bits20_16 && 0x3a == bits15_10 ) // FCMLT <V><d>, <V><n>, #0.0
             {
                 uint64_t sz = opbit( 22 );
                 char width = sz ? 'd' : 's';
@@ -2373,9 +2376,10 @@ void Arm64::trace_state()
                 unhandled();
             break;
         }
-        case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>    ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
+        case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>            ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
                    // FCMGE <V><d>, <V><n>, #0.0           ;    FMINNMP <V><d>, <Vn>.<T>    ;    FMAXNMP <V><d>, <Vn>.<T>
-                   // CMHI D<d>, D<n>, D<m>                ;    FCVTZU <V><d>, <V><n>
+                   // CMHI D<d>, D<n>, D<m>                ;    FCVTZU <V><d>, <V><n>       ;    FCMGT <V><d>, <V><n>, <V><m>
+                   // FCMGE <V><d>, <V><n>, <V><m>         ;    CMLE D<d>, D<n>, #0
         {
             uint64_t bits23_10 = opbits( 10, 14 );
             uint64_t bits23_21 = opbits( 21, 3 );
@@ -2388,7 +2392,19 @@ void Arm64::trace_state()
             uint64_t bit21 = opbit( 21 );
             uint64_t opcode = opbits( 10, 6 );
 
-            if ( bit23 && bit21 && 0x6e == bits20_10 ) // FCVTZU <V><d>, <V><n>
+            if ( !bit23 && bit21 && 0x39 == bits15_10 ) // FCMGE <V><d>, <V><n>, <V><m>
+            {
+                char width = sz ? 'd' : 's';
+                uint64_t m = opbits( 16, 5 );
+                tracer.Trace( "fcmge %c%llu, %c%llu, %c%llu\n", width, d, width, n, width, m );
+            }
+            else if ( bit23 && bit21 && 0x39 == bits15_10 ) // FCMGT <V><d>, <V><n>, <V><m>
+            {
+                char width = sz ? 'd' : 's';
+                uint64_t m = opbits( 16, 5 );
+                tracer.Trace( "fcmgt %c%llu, %c%llu, %c%llu\n", width, d, width, n, width, m );
+            }
+            else if ( bit23 && bit21 && 0x6e == bits20_10 ) // FCVTZU <V><d>, <V><n>
             {
                 char width = sz ? 'd' : 's';
                 tracer.Trace( "fcvtzu %c%llu, %c%llu\n", width, d, width, n );
@@ -6430,6 +6446,7 @@ uint64_t Arm64::run( void )
             }
             case 0x5e: // SCVTF <V><d>, <V><n>    ;    ADDP D<d>, <Vn>.2D    ;    DUP <V><d>, <Vn>.<T>[<index>]    ;    FCVTZS <V><d>, <V><n>
                        // CMGT D<d>, D<n>, D<m>   ;    CMGT D<d>, D<n>, #0   ;    ADD D<d>, D<n>, D<m>             ;    FCMLT <V><d>, <V><n>, #0.0
+                       // CMEQ D<d>, D<n>, #0
             {
                 uint64_t bits23_10 = opbits( 10, 14 );
                 uint64_t bit23 = opbit( 23 );
@@ -6440,7 +6457,11 @@ uint64_t Arm64::run( void )
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
 
-                if ( bit23 && bit21 && 0 == bits20_16 && 0x3a == bits15_10 ) // FCMLT <V><d>, <V><n>, #0.0
+                if ( 7 == bits23_21 && 0 == bits20_16 && 0x26 == bits15_10 ) // CMEQ D<d>, D<n>, #0
+                {
+                    vregs[ d ].ui64[ 0 ] = ( 0 == vregs[ n ].ui64[ 0 ] ) ? ~0 : 0;
+                }
+                else if ( bit23 && bit21 && 0 == bits20_16 && 0x3a == bits15_10 ) // FCMLT <V><d>, <V><n>, #0.0
                 {
                     uint64_t sz = opbit( 22 );
                     if ( sz )
@@ -6505,9 +6526,10 @@ uint64_t Arm64::run( void )
                     unhandled();
                 break;
             }
-            case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>    ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
+            case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>            ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
                        // FCMGE <V><d>, <V><n>, #0.0           ;    FMINNMP <V><d>, <Vn>.<T>    ;    FMAXNMP <V><d>, <Vn>.<T>
-                       // CMHI D<d>, D<n>, D<m>                ;    FCVTZU <V><d>, <V><n>
+                       // CMHI D<d>, D<n>, D<m>                ;    FCVTZU <V><d>, <V><n>       ;    FCMGT <V><d>, <V><n>, <V><m>
+                       // FCMGE <V><d>, <V><n>, <V><m>         ;    CMLE D<d>, D<n>, #0
             {
                 uint64_t bits23_10 = opbits( 10, 14 );
                 uint64_t bits23_21 = opbits( 21, 3 );
@@ -6520,7 +6542,27 @@ uint64_t Arm64::run( void )
                 uint64_t bit21 = opbit( 21 );
                 uint64_t opcode = opbits( 10, 6 );
 
-                if ( bit23 && bit21 && 0x6e == bits20_10 ) // FCVTZU <V><d>, <V><n>
+                if ( 0x3826 == bits23_10 ) // CMLE
+                {
+                    vregs[ d ].ui64[ 0 ] = ( vregs[ n ].d[ 0 ] <= 0.0 ) ? ~0 : 0;
+                }
+                else if ( !bit23 && bit21 && 0x39 == bits15_10 ) // FCMGE <V><d>, <V><n>, <V><m>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    if ( sz )
+                        vregs[ d ].ui64[ 0 ] = ( vregs[ n ].d[ 0 ] >= vregs[ m ].d[ 0 ] ) ? ~0 : 0;
+                    else                                            
+                        vregs[ d ].ui32[ 0 ] = ( vregs[ n ].f[ 0 ] >= vregs[ m ].f[ 0 ] ) ? 0xffffffff : 0;
+                }
+                else if ( bit23 && bit21 && 0x39 == bits15_10 ) // FCMGT <V><d>, <V><n>, <V><m>
+                {
+                    uint64_t m = opbits( 16, 5 );
+                    if ( sz )
+                        vregs[ d ].ui64[ 0 ] = ( vregs[ n ].d[ 0 ] > vregs[ m ].d[ 0 ] ) ? ~0 : 0;
+                    else
+                        vregs[ d ].ui32[ 0 ] = ( vregs[ n ].f[ 0 ] > vregs[ m ].f[ 0 ] ) ? 0xffffffff : 0;
+                }
+                else if ( bit23 && bit21 && 0x6e == bits20_10 ) // FCVTZU <V><d>, <V><n>
                 {
                     if ( sz )
                         vregs[ d ].ui64[ 0 ] = double_to_fixed_uint64( vregs[ n ].d[ 0 ], 0, FPRounding_ZERO );
