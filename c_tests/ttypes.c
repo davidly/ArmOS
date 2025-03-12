@@ -2,21 +2,104 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
+#include <float.h>
 #include <cmath>
 #include <typeinfo>
+#include <type_traits>
 
 typedef unsigned __int128 uint128_t;
 typedef __int128 int128_t;
 typedef long double ldouble_t;
+
+static const int128_t UINT128_MAX = uint128_t( int128_t( -1L ) );
+static const int128_t INT128_MAX = UINT128_MAX >> 1;
+static const int128_t INT128_MIN = -INT128_MAX - 1;
 
 //#define _perhaps_inline __attribute__((noinline))
 #define _perhaps_inline
 
 #define _countof( X ) ( sizeof( X ) / sizeof( X[0] ) )
 
+bool IS_FP( float x ) { return true; }    
+bool IS_FP( double x ) { return true; }    
+bool IS_FP( ldouble_t x ) { return true; }    
+bool IS_FP( int8_t x ) { return false; }
+bool IS_FP( uint8_t x ) { return false; }
+bool IS_FP( int16_t x ) { return false; }
+bool IS_FP( uint16_t x ) { return false; }
+bool IS_FP( int32_t x ) { return false; }
+bool IS_FP( uint32_t x ) { return false; }
+bool IS_FP( int64_t x ) { return false; }
+bool IS_FP( uint64_t x ) { return false; }
+bool IS_FP( int128_t x ) { return false; }
+bool IS_FP( uint128_t x ) { return false; }
+
 template <class T> T do_abs( T x )
 {
     return ( x < 0 ) ? -x : x;
+}
+
+template <class T, class U> T do_cast( U x )
+{
+    size_t cbU = sizeof( U );
+    size_t cbT = sizeof( T );
+    bool signedU = std::is_signed<T>();
+    bool signedT = std::is_signed<U>();
+    T result = 0;
+
+    if ( IS_FP( result ) )
+    {
+        if ( 4 == cbT )
+            result = (T) ( ( x < FLT_MIN ) ? FLT_MIN : ( x > FLT_MAX ) ? FLT_MAX : x );
+        else if ( 8 == cbT )
+            result = (T) ( ( x < DBL_MIN ) ? DBL_MIN : ( x > DBL_MAX ) ? DBL_MAX : x );
+        else if ( 16 == cbT || 12 == cbT || 10 == cbT )
+            result = (T) ( ( x < LDBL_MIN ) ? LDBL_MIN : ( x > LDBL_MAX ) ? LDBL_MAX : x );
+        else
+            printf( "unknown floating point type\n" );
+    }
+    else
+    {
+        if ( 1 == cbT )
+        {
+            if ( signedT )
+                result = (T) ( ( x < INT8_MIN ) ? INT8_MIN : ( x > INT8_MAX ) ? INT8_MAX : x );
+            else
+                result = (T) ( ( x < 0 ) ? 0 : ( x > UINT8_MAX ) ? UINT8_MAX : x );
+        }
+        else if ( 2 == cbT )
+        {
+            if ( signedT )
+                result = (T) ( ( x < INT16_MIN ) ? INT16_MIN : ( x > INT16_MAX ) ? INT16_MAX : x );
+            else
+                result = (T) ( ( x < 0 ) ? 0 : ( x > UINT16_MAX ) ? UINT16_MAX : x );
+        }
+        else if ( 4 == cbT )
+        {
+            if ( signedT )
+                result = (T) ( ( x < INT32_MIN ) ? INT32_MIN : ( x > INT32_MAX ) ? INT32_MAX : x );
+            else
+                result = (T) ( ( x < 0 ) ? 0 : ( x > UINT32_MAX ) ? UINT32_MAX : x );
+        }
+        else if ( 8 == cbT )
+        {
+            if ( signedT )
+                result = (T) ( ( x < INT64_MIN ) ? INT64_MIN : ( x > INT64_MAX ) ? INT64_MAX : x );
+            else
+                result = (T) ( ( x < 0 ) ? 0 : ( x > UINT64_MAX ) ? UINT64_MAX : x );
+        }
+        else if ( 16 == cbT )
+        {
+            if ( signedT )
+                result = (T) ( ( x < INT128_MIN ) ? INT128_MIN : ( x > INT128_MAX ) ? INT128_MAX : x );
+            else
+                result = (T) ( ( x < 0 ) ? 0 : ( x > UINT128_MAX ) ? UINT128_MAX : x );
+        }
+        else
+            printf( "unknown integer type\n" );
+    }
+    return result;
 }
 
 template <class T> _perhaps_inline T do_sum( T array[], size_t size )
@@ -31,7 +114,65 @@ template <class T> _perhaps_inline T do_sum( T array[], size_t size )
     return sum;
 }
 
-template <class T, class U, size_t size> T tst( T t, U u )
+template <class T, class U, size_t size> T tstCasts( T t, U u )
+{
+    T a[ size ] = { 0 };
+    U b[ _countof( a ) ] = { 0 };
+    T c[ _countof( a ) ] = { 0 };
+    T x = t;
+
+    srand( 0 );
+
+    for ( int i = 0; i < _countof( a ); i++ )
+    {
+        x = x + do_cast<T,size_t>( ( rand() % ( i + 1000 ) ) / 2 );
+        x = -x;
+        x = do_cast<T,int128_t>( (int128_t) x & 0x33303330333033 );
+        x = do_abs( x );
+        x = do_cast<T,double>( sqrt( (double) x ) );
+        x += do_cast<T,float>( 1.02f );
+        x = do_cast<T,double>( (double) x * 3.2f );
+        u += do_cast<U,size_t>( ( rand() % ( i + 2000 ) ) / 3 );
+        a[ i ] = ( x * do_cast<T,U>( u ) ) + ( x + do_cast<T,U>( u ) );
+        //printf( "bottom of loop, a[%d] is %.12g, u %.12g, x %.12g\n", i, (double) a[ i ], (double) u, (double) x );
+    }
+
+    //syscall( 0x2002, 1 );        
+    for ( int i = 0; i < _countof( a ); i++ )
+    {
+        T absolute = do_abs( a[ i ] );
+        b[ i ] = do_cast<U,T>( absolute * (T) 2.2 );
+        c[ i ] = absolute * (T) 4.4;
+        //printf( "b[%d] = %.12g, a = %.12g\n", i, (double) b[i], (double) a[i] );
+    }
+    
+    T sumA = do_sum( a, _countof( a ) );
+    //syscall( 0x2002, 1 );        
+    U sumB = do_sum( b, _countof( b ) );
+    T sumC = do_sum( c, _countof( c ) );
+    
+    x = sumA / 128;
+    
+    // beyond 12 digits of precision, results will vary across compilers, compiler optimization flags, hardware, and emulators since
+    // doubles only have 12 digits of precision and the loop above will cause more to be used.
+    
+    printf( "cast:     types %s + %s, size %d, sumA %.12g, sumB %.12g, sumC %.12g\n", typeid(T).name(), typeid(U).name(), 
+            size, (double) sumA, (double) sumB, (double) sumC );
+    
+    //syscall( 0x2002, 0 );        
+#if 0
+    for ( int i = 0; i < _countof( a ); i++ )
+    {
+        printf( "a[%d] = %.12g %d\n", i, (double) a[i], (int) a[i] );
+        printf( "b[%d] = %.12g %d\n", i, (double) b[i], (int) b[i] );
+        //printf( "c[%d] = %.12g %d\n", i, (double) c[i], (int) c[i] );
+    }
+#endif     
+        
+    return x;
+}
+
+template <class T, class U, size_t size> T tstOverflows( T t, U u )
 {
     T a[ size ] = { 0 };
     U b[ _countof( a ) ] = { 0 };
@@ -73,7 +214,7 @@ template <class T, class U, size_t size> T tst( T t, U u )
     // beyond 12 digits of precision, results will vary across compilers, compiler optimization flags, hardware, and emulators since
     // doubles only have 12 digits of precision and the loop above will cause more to be used.
     
-    printf( "types %s + %s, size %d, sumA %.12g, sumB %.12g, sumC %.12g\n", typeid(T).name(), typeid(U).name(), 
+    printf( "overflow: types %s + %s, size %d, sumA %.12g, sumB %.12g, sumC %.12g\n", typeid(T).name(), typeid(U).name(), 
             size, (double) sumA, (double) sumB, (double) sumC );
     
     //syscall( 0x2002, 0 );        
@@ -87,6 +228,14 @@ template <class T, class U, size_t size> T tst( T t, U u )
 #endif     
         
     return x;
+}
+
+template <class T, class U, size_t size> T tst( T t, U u )
+{
+    T result = 0;
+    result += tstCasts<T,U,size>( t, u );
+    result += tstOverflows<T,U,size>( t, u );
+    return result;
 }
 
 #define run_tests( ftype, dim ) \
@@ -105,7 +254,7 @@ template <class T, class U, size_t size> T tst( T t, U u )
   tst<ftype,ldouble_t,dim>( 0, 0 ); 
 
 #define run_tests_one( ftype, dim ) \
-  tst<ftype,int32_t,dim>( 0, 0 );
+  tst<ftype,float,dim>( 0, 0 );
 
 #define run_dimension( dim ) \
   run_tests( int8_t, dim ); \
@@ -123,15 +272,17 @@ template <class T, class U, size_t size> T tst( T t, U u )
   run_tests( ldouble_t, dim );
 
 #define run_dimension_one( dim ) \
-  run_tests_one( int32_t, dim );
+  run_tests_one( int64_t, dim );
 
 int main( int argc, char * argv[], char * env[] )
 {
+#if 0    
     printf( "types: i8 %s, ui8 %s, i16 %s, ui16 %s, i32 %s, ui32 %s, i64 %s, ui64 %s, i128 %s, ui128 %s, f %s, d %s, ld %s\n",
             typeid(int8_t).name(), typeid(uint8_t).name(), typeid(int16_t).name(), typeid(uint16_t).name(),
             typeid(int32_t).name(), typeid(uint32_t).name(), typeid(int64_t).name(), typeid(uint64_t).name(),
             typeid(int128_t).name(), typeid(uint128_t).name(), 
             typeid(float).name(), typeid(double).name(), typeid(ldouble_t).name() );
+#endif            
 
 #if 1
     run_dimension( 2 );    
@@ -147,8 +298,7 @@ int main( int argc, char * argv[], char * env[] )
     run_dimension( 33 );    
     run_dimension( 128 );
 #else    
-    run_tests_one( int8_t, 15 );
-    //run_dimension( 5 );
+    tst<float,uint128_t,2>( 0, 0 );
 #endif
 
     printf( "test types completed with great success\n" );
