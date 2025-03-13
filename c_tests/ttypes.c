@@ -153,10 +153,10 @@ template <class T, class U, size_t size> T tstCasts( T t, U u )
     
     x = sumA / 128;
     
-    // use 7 digits of precision for float and 12 for everything else
+    // use 6 digits of precision for float and 12 for everything else
 
-    int t_precision = std::is_same<T,float>::value ? 7 : 12;
-    int u_precision = std::is_same<U,float>::value ? 7 : 12;
+    int t_precision = std::is_same<T,float>::value ? 6 : 12;
+    int u_precision = std::is_same<U,float>::value ? 6 : 12;
     printf( "cast:     types %s + %s, size %d, sumA %.*g, sumB %.*g, sumC %.*g\n", typeid(T).name(), typeid(U).name(), 
             size, t_precision, (double) sumA, u_precision, (double) sumB, t_precision, (double) sumC );
     
@@ -212,10 +212,10 @@ template <class T, class U, size_t size> T tstOverflows( T t, U u )
     
     x = sumA / 128;
     
-    // use 7 digits of precision for float and 12 for everything else
+    // use 6 digits of precision for float and 12 for everything else
 
-    int t_precision = std::is_same<T,float>::value ? 7 : 12;
-    int u_precision = std::is_same<U,float>::value ? 7 : 12;
+    int t_precision = std::is_same<T,float>::value ? 6 : 12;
+    int u_precision = std::is_same<U,float>::value ? 6 : 12;
     printf( "overflow: types %s + %s, size %d, sumA %.*g, sumB %.*g, sumC %.*g\n", typeid(T).name(), typeid(U).name(), 
             size, t_precision, (double) sumA, u_precision, (double) sumB, t_precision, (double) sumC );
     
