@@ -153,11 +153,12 @@ template <class T, class U, size_t size> T tstCasts( T t, U u )
     
     x = sumA / 128;
     
-    // beyond 12 digits of precision, results will vary across compilers, compiler optimization flags, hardware, and emulators since
-    // doubles only have 12 digits of precision and the loop above will cause more to be used.
-    
-    printf( "cast:     types %s + %s, size %d, sumA %.12g, sumB %.12g, sumC %.12g\n", typeid(T).name(), typeid(U).name(), 
-            size, (double) sumA, (double) sumB, (double) sumC );
+    // use 7 digits of precision for float and 12 for everything else
+
+    int t_precision = std::is_same<T,float>::value ? 7 : 12;
+    int u_precision = std::is_same<U,float>::value ? 7 : 12;
+    printf( "cast:     types %s + %s, size %d, sumA %.*g, sumB %.*g, sumC %.*g\n", typeid(T).name(), typeid(U).name(), 
+            size, t_precision, (double) sumA, u_precision, (double) sumB, t_precision, (double) sumC );
     
     //syscall( 0x2002, 0 );        
 #if 0
@@ -170,7 +171,7 @@ template <class T, class U, size_t size> T tstCasts( T t, U u )
 #endif     
         
     return x;
-}
+} //tstCasts
 
 template <class T, class U, size_t size> T tstOverflows( T t, U u )
 {
@@ -211,11 +212,12 @@ template <class T, class U, size_t size> T tstOverflows( T t, U u )
     
     x = sumA / 128;
     
-    // beyond 12 digits of precision, results will vary across compilers, compiler optimization flags, hardware, and emulators since
-    // doubles only have 12 digits of precision and the loop above will cause more to be used.
-    
-    printf( "overflow: types %s + %s, size %d, sumA %.12g, sumB %.12g, sumC %.12g\n", typeid(T).name(), typeid(U).name(), 
-            size, (double) sumA, (double) sumB, (double) sumC );
+    // use 7 digits of precision for float and 12 for everything else
+
+    int t_precision = std::is_same<T,float>::value ? 7 : 12;
+    int u_precision = std::is_same<U,float>::value ? 7 : 12;
+    printf( "overflow: types %s + %s, size %d, sumA %.*g, sumB %.*g, sumC %.*g\n", typeid(T).name(), typeid(U).name(), 
+            size, t_precision, (double) sumA, u_precision, (double) sumB, t_precision, (double) sumC );
     
     //syscall( 0x2002, 0 );        
 #if 0
@@ -228,7 +230,7 @@ template <class T, class U, size_t size> T tstOverflows( T t, U u )
 #endif     
         
     return x;
-}
+} //tstOverflows
 
 template <class T, class U, size_t size> T tst( T t, U u )
 {
