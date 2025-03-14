@@ -6546,7 +6546,7 @@ uint64_t Arm64::run( void )
 
                 if ( 0x3826 == bits23_10 ) // CMLE D<d>, D<n>, #0
                 {
-                    vregs[ d ].ui64[ 0 ] = ( ( (int64_t) vregs[ n ].d[ 0 ] ) <= 0 ) ? ~0 : 0;
+                    vregs[ d ].ui64[ 0 ] = ( ( (int64_t) vregs[ n ].ui64[ 0 ] ) <= 0 ) ? ~0 : 0;
                 }
                 else if ( !bit23 && bit21 && 0x39 == bits15_10 ) // FCMGE <V><d>, <V><n>, <V><m>
                 {
