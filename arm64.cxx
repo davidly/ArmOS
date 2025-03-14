@@ -2379,7 +2379,7 @@ void Arm64::trace_state()
         case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>            ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
                    // FCMGE <V><d>, <V><n>, #0.0           ;    FMINNMP <V><d>, <Vn>.<T>    ;    FMAXNMP <V><d>, <Vn>.<T>
                    // CMHI D<d>, D<n>, D<m>                ;    FCVTZU <V><d>, <V><n>       ;    FCMGT <V><d>, <V><n>, <V><m>
-                   // FCMGE <V><d>, <V><n>, <V><m>         ;    CMLE D<d>, D<n>, #0
+                   // FCMGE <V><d>, <V><n>, <V><m>         ;    CMLE D<d>, D<n>, #0         ;    CMGE D<d>, D<n>, #0
         {
             uint64_t bits23_10 = opbits( 10, 14 );
             uint64_t bits23_21 = opbits( 21, 3 );
@@ -2429,8 +2429,10 @@ void Arm64::trace_state()
                 char width = sz ? 'd' : 's';
                 tracer.Trace( "faddp %c%llu, v%llu.2%c\n", width, d, n, width );
             }
-            else if ( 0x3822 == bits23_10 )
+            else if ( 0x3822 == bits23_10 ) // CMGE D<d>, D<n>, #0
                 tracer.Trace( "cmge d%llu, d%llu, #0\n", d, n );
+            else if ( 0x3826 == bits23_10 ) // CMLE D<d>, D<n>, #0
+                tracer.Trace( "cmle d%llu, d%llu, #0\n", d, n );
             else if ( 0x0876 == ( bits23_10 & 0x2fff ) )
             {
                 char width = sz ? 'd' : 's';
@@ -6529,7 +6531,7 @@ uint64_t Arm64::run( void )
             case 0x7e: // CMGE    ;    UCVTF <V><d>, <V><n>    ;    UCVTF <Hd>, <Hn>            ;    FADDP <V><d>, <Vn>.<T>    ;    FABD <V><d>, <V><n>, <V><m>
                        // FCMGE <V><d>, <V><n>, #0.0           ;    FMINNMP <V><d>, <Vn>.<T>    ;    FMAXNMP <V><d>, <Vn>.<T>
                        // CMHI D<d>, D<n>, D<m>                ;    FCVTZU <V><d>, <V><n>       ;    FCMGT <V><d>, <V><n>, <V><m>
-                       // FCMGE <V><d>, <V><n>, <V><m>         ;    CMLE D<d>, D<n>, #0
+                       // FCMGE <V><d>, <V><n>, <V><m>         ;    CMLE D<d>, D<n>, #0         ;    CMGE D<d>, D<n>, #0
             {
                 uint64_t bits23_10 = opbits( 10, 14 );
                 uint64_t bits23_21 = opbits( 21, 3 );
@@ -6542,9 +6544,9 @@ uint64_t Arm64::run( void )
                 uint64_t bit21 = opbit( 21 );
                 uint64_t opcode = opbits( 10, 6 );
 
-                if ( 0x3826 == bits23_10 ) // CMLE
+                if ( 0x3826 == bits23_10 ) // CMLE D<d>, D<n>, #0
                 {
-                    vregs[ d ].ui64[ 0 ] = ( vregs[ n ].d[ 0 ] <= 0.0 ) ? ~0 : 0;
+                    vregs[ d ].ui64[ 0 ] = ( ( (int64_t) vregs[ n ].d[ 0 ] ) <= 0 ) ? ~0 : 0;
                 }
                 else if ( !bit23 && bit21 && 0x39 == bits15_10 ) // FCMGE <V><d>, <V><n>, <V><m>
                 {
@@ -6618,7 +6620,7 @@ uint64_t Arm64::run( void )
                     }
                     trace_vregs();
                 }
-                else if ( 0x3822 == bits23_10 ) // CMGE
+                else if ( 0x3822 == bits23_10 ) // CMGE D<d>, D<n>, #0
                 {
                     vregs[ d ].ui64[ 0 ] = ( ( (int64_t) vregs[ n ].ui64[ 0 ] >= 0 ) ) ? ~0 : 0;
                 }
