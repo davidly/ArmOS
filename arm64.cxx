@@ -6620,7 +6620,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( 0x3822 == bits23_10 ) // CMGE
                 {
-                    vregs[ d ].ui64[ 0 ] = ( vregs[ n ].d[ 0 ] >= 0.0 ) ? ~0 : 0;
+                    vregs[ d ].ui64[ 0 ] = ( ( (int64_t) vregs[ n ].ui64[ 0 ] >= 0 ) ) ? ~0 : 0;
                 }
                 else if ( 0x0876 == ( bits23_10 & 0x2fff ) ) // UCVTF <V><d>, <V><n> 
                 {
@@ -7889,12 +7889,22 @@ uint64_t Arm64::run( void )
                 }
                 else if ( 0x1e == hi8 && bit21 && ( 0x12 == bits15_10 || 0x1a == bits15_10 ) ) // FMAX <Dd>, <Dn>, <Dm>    ;    FMAXNM <Dd>, <Dn>, <Dm>
                 {
-                    // nan behavior is ignored for both instructions
                     uint64_t m = opbits( 16, 5 );
+                    bool isFMAX = ( 0x12 == bits15_10 );
+                    bool fpcr_ah = get_bit( fpcr, 1 );
+                    bool useSecond = isFMAX && fpcr_ah;
                     if ( 0 == ftype )
-                        vregs[ d ].f[ 0 ] = get_max( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
+                    {
+                        float nval = vregs[ n ].f[ 0 ];
+                        float mval = vregs[ m ].f[ 0 ];
+                        vregs[ d ].f[ 0 ] = ( isnan( nval ) || isnan( mval ) ) ? useSecond ? mval : NAN : get_max( nval, mval );
+                    }
                     else if ( 1 == ftype )
-                        vregs[ d ].d[ 0 ] = get_max( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
+                    {
+                        double nval = vregs[ n ].d[ 0 ];
+                        double mval = vregs[ m ].d[ 0 ];
+                        vregs[ d ].d[ 0 ] = ( isnan( nval ) || isnan( mval ) ) ? useSecond ? mval : NAN : get_max( nval, mval );
+                    }
                     else
                         unhandled();
                 }
@@ -7902,10 +7912,21 @@ uint64_t Arm64::run( void )
                 {
                     // nan behavior is ignored for both instructions
                     uint64_t m = opbits( 16, 5 );
+                    bool isFMIN = ( 0x16 == bits15_10 );
+                    bool fpcr_ah = get_bit( fpcr, 1 );
+                    bool useSecond = isFMIN && fpcr_ah;
                     if ( 0 == ftype )
-                        vregs[ d ].f[ 0 ] = get_min( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
+                    {
+                        float nval = vregs[ n ].f[ 0 ];
+                        float mval = vregs[ m ].f[ 0 ];
+                        vregs[ d ].f[ 0 ] = ( isnan( nval ) || isnan( mval ) ) ? useSecond ? mval : NAN : get_min( nval, mval );
+                    }
                     else if ( 1 == ftype )
-                        vregs[ d ].d[ 0 ] = get_min( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
+                    {
+                        double nval = vregs[ n ].d[ 0 ];
+                        double mval = vregs[ m ].d[ 0 ];
+                        vregs[ d ].d[ 0 ] = ( isnan( nval ) || isnan( mval ) ) ? useSecond ? mval : NAN : get_min( nval, mval );
+                    }
                     else
                         unhandled();
                 }

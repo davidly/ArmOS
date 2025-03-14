@@ -1750,6 +1750,10 @@ void emulator_invoke_svc( CPUClass & cpu )
         case emulator_sys_trace_instructions:
         {
             tracer.Trace( "  syscall command trace_instructions %d\n", cpu.regs[ REG_ARG0 ] );
+#ifndef _WIN32
+            uint64_t v = cpu.regs[ REG_ARG0 ];
+            syscall( 0x2002, 0 != v );
+#endif
             cpu.regs[ REG_RESULT ] = cpu.trace_instructions( 0 != cpu.regs[ REG_ARG0 ] );
             break;
         }

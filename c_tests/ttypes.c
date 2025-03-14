@@ -40,6 +40,27 @@ template <class T> T do_abs( T x )
     return ( x < 0 ) ? -x : x;
 }
 
+const char * maptype( const char * p )
+{
+    switch( *p )
+    {
+        case 'a' : return "int8";
+        case 'h' : return "uint8";
+        case 's' : return "int16";
+        case 't' : return "uint16";
+        case 'i' : return "int32";
+        case 'j' : return "uint32";
+        case 'l' : return "int64";
+        case 'm' : return "uint64";
+        case 'n' : return "int128";
+        case 'o' : return "uint128";
+        case 'f' : return "float";
+        case 'd' : return "double";
+        case 'e' : return "ldouble";
+    }
+    return "unknown";
+} //maptype
+
 template <class T, class U> T do_cast( U x )
 {
     size_t cbU = sizeof( U );
@@ -114,6 +135,24 @@ template <class T> _perhaps_inline T do_sum( T array[], size_t size )
     return sum;
 }
 
+template <class T> void printBytes( const char * msg, T * p, size_t size )
+{
+    printf( "%s\n", msg );
+    uint8_t * pb = (uint8_t *) p;
+    size_t cb = sizeof( T );
+    for ( size_t i = 0; i < size; i++ )
+    {
+        printf( "    element %zd: ", i );
+        size_t j = cb;
+        do
+        {
+            j--;
+            printf( "%02x", pb[ j + ( i * cb ) ] );
+        } while ( j != 0 );
+        printf( "\n" );
+    }
+}
+
 template <class T, class U, size_t size> T tstCasts( T t, U u )
 {
     T a[ size ] = { 0 };
@@ -135,15 +174,20 @@ template <class T, class U, size_t size> T tstCasts( T t, U u )
         u += do_cast<U,size_t>( ( rand() % ( i + 2000 ) ) / 3 );
         a[ i ] = ( x * do_cast<T,U>( u ) ) + ( x + do_cast<T,U>( u ) );
         //printf( "bottom of loop, a[%d] is %.12g, u %.12g, x %.12g\n", i, (double) a[ i ], (double) u, (double) x );
+        //printBytes( "array a:", a, size );
     }
 
     //syscall( 0x2002, 1 );        
     for ( int i = 0; i < _countof( a ); i++ )
     {
+        //if ( 16 == sizeof( U ) && 16 == sizeof( T ) )
+        //    syscall( 0x2002, 1 );        
+
         T absolute = do_abs( a[ i ] );
+
         b[ i ] = do_cast<U,T>( absolute * (T) 2.2 );
         c[ i ] = absolute * (T) 4.4;
-        //printf( "b[%d] = %.12g, a = %.12g\n", i, (double) b[i], (double) a[i] );
+        //printf( "b[%d] = %.12g, a = %.12g, absolute = %.12g\n", i, (double) b[i], (double) a[i], (double) absolute );
     }
     
     T sumA = do_sum( a, _countof( a ) );
@@ -157,7 +201,8 @@ template <class T, class U, size_t size> T tstCasts( T t, U u )
 
     int t_precision = std::is_same<T,float>::value ? 6 : 12;
     int u_precision = std::is_same<U,float>::value ? 6 : 12;
-    printf( "cast:     types %s + %s, size %d, sumA %.*g, sumB %.*g, sumC %.*g\n", typeid(T).name(), typeid(U).name(), 
+    printf( "cast:     types %7s + %7s, size %d, sumA %.*g, sumB %.*g, sumC %.*g\n", 
+            maptype( typeid(T).name() ), maptype( typeid(U).name() ), 
             size, t_precision, (double) sumA, u_precision, (double) sumB, t_precision, (double) sumC );
     
     //syscall( 0x2002, 0 );        
@@ -216,7 +261,8 @@ template <class T, class U, size_t size> T tstOverflows( T t, U u )
 
     int t_precision = std::is_same<T,float>::value ? 6 : 12;
     int u_precision = std::is_same<U,float>::value ? 6 : 12;
-    printf( "overflow: types %s + %s, size %d, sumA %.*g, sumB %.*g, sumC %.*g\n", typeid(T).name(), typeid(U).name(), 
+    printf( "overflow: types %7s + %7s, size %d, sumA %.*g, sumB %.*g, sumC %.*g\n", 
+            maptype( typeid(T).name() ), maptype( typeid(U).name() ), 
             size, t_precision, (double) sumA, u_precision, (double) sumB, t_precision, (double) sumC );
     
     //syscall( 0x2002, 0 );        
@@ -255,6 +301,15 @@ template <class T, class U, size_t size> T tst( T t, U u )
   tst<ftype,double,dim>( 0, 0 ); \
   tst<ftype,ldouble_t,dim>( 0, 0 ); 
 
+#define run_testsz( ftype, dim ) \
+  tst<ftype,int16_t,dim>( 0, 0 ); \
+  tst<ftype,uint16_t,dim>( 0, 0 ); \
+  tst<ftype,int32_t,dim>( 0, 0 ); \
+  tst<ftype,uint32_t,dim>( 0, 0 ); \
+  tst<ftype,int64_t,dim>( 0, 0 ); \
+  tst<ftype,uint64_t,dim>( 0, 0 ); \
+  tst<ftype,int128_t,dim>( 0, 0 );
+
 #define run_tests_one( ftype, dim ) \
   tst<ftype,float,dim>( 0, 0 );
 
@@ -272,6 +327,10 @@ template <class T, class U, size_t size> T tst( T t, U u )
   run_tests( float, dim ); \
   run_tests( double, dim ); \
   run_tests( ldouble_t, dim );
+
+  #define run_dimensionz( dim ) \
+  run_testsz( uint64_t, dim ); \
+  run_testsz( int128_t, dim );
 
 #define run_dimension_one( dim ) \
   run_tests_one( int64_t, dim );
@@ -300,7 +359,9 @@ int main( int argc, char * argv[], char * env[] )
     run_dimension( 33 );    
     run_dimension( 128 );
 #else    
-    tst<float,uint128_t,2>( 0, 0 );
+    run_dimensionz( 3 );    
+    //tst<int128_t,uint64_t,3>( 0, 0 );
+    //tst<int128_t,int128_t,3>( 0, 0 );
 #endif
 
     printf( "test types completed with great success\n" );
