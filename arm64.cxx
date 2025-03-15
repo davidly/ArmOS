@@ -8462,30 +8462,32 @@ uint64_t Arm64::run( void )
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t cond = opbits( 12, 4 );
-                    double result = 0.0;
 
-                    double nval, mval;
-                    if ( 0 == ftype )
+                    if ( check_conditional( cond ) )
                     {
-                        nval = vregs[ n ].f[ 0 ];
-                        mval = vregs[ m ].f[ 0 ];
+                        double result = 0.0;
+                        double nval, mval;
+                        if ( 0 == ftype )
+                        {
+                            nval = vregs[ n ].f[ 0 ];
+                            mval = vregs[ m ].f[ 0 ];
+                        }
+                        else 
+                        {
+                            nval = vregs[ n ].d[ 0 ];
+                            mval = vregs[ m ].d[ 0 ];
+                        }
+    
+                        if ( isinf( nval ) && isinf( mval ) )
+                            result = 0.0;
+                        else if ( isnan( nval ) || isnan( mval ) )
+                            result = MY_NAN;
+                        else
+                            result = do_fsub( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
+    
+                        set_flags_from_double( result );
                     }
-                    else 
-                    {
-                        nval = vregs[ n ].d[ 0 ];
-                        mval = vregs[ m ].d[ 0 ];
-                    }
-
-                    if ( isinf( nval ) && isinf( mval ) )
-                        result = 0.0;
-                    else if ( isnan( nval ) || isnan( mval ) )
-                        result = MY_NAN;
                     else
-                        result = do_fsub( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
-
-                    set_flags_from_double( result );
-
-                    if ( ! check_conditional( cond ) )
                     {
                         uint64_t nzcv = opbits( 0, 4 );
                         set_flags_from_nzcv( nzcv );
