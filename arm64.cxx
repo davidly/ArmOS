@@ -785,7 +785,7 @@ void Arm64::trace_state()
         strcat( symbol_offset_str, "\n            " );
     }
 
-    //tracer.TraceBinaryData( getmem( 0x5aa8e0 ), 256, 4 );
+    //tracer.TraceBinaryData( getmem( 0x2cb97f0 + 16 ), 16, 4 );
 
     tracer.Trace( "pc %8llx %s%s op %08llx %s ==> ", pc, symbol_name, symbol_offset_str, op, render_flags() );
 
@@ -3604,6 +3604,79 @@ uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount 
     return val;
 } //shift_reg32
 
+double do_fsub( double a, double b )
+{
+    bool ainf = isinf( a );
+    bool binf = isinf( b );
+
+    if ( ainf && binf )
+        return NAN; // msft C will return -nan if this check isn't here
+
+    return a - b;
+} //do_fsub
+
+double do_fmul( double a, double b )
+{
+    bool ainf = isinf( a );
+    bool binf = isinf( b );
+    bool azero = ( 0.0 == a );
+    bool bzero = ( 0.0 == b );
+
+    if ( ( ainf && bzero ) || ( azero && binf ) )
+        return NAN;
+
+    if ( ainf && binf )
+    {
+        if ( signbit( a ) == signbit( b ) )
+            return INFINITY;
+        return -INFINITY;
+    }
+
+    if ( ainf )
+        return a; // may be negative infinity
+
+    if ( binf )
+        return b; // may be negative infinity
+
+    if ( isnan( a ) || isnan( b ) )
+        return NAN;
+
+    if ( azero || bzero )
+        return 0.0;
+
+    return a * b;
+} //do_fmul
+
+double do_fdiv( double a, double b )
+{
+    bool ainf = isinf( a );
+    bool binf = isinf( b );
+    bool azero = ( 0.0 == a );
+    bool bzero = ( 0.0 == b );
+
+    if ( ( ainf && binf ) || ( azero && bzero ) )
+        return NAN;
+
+    if ( ainf )
+        return a; // may be negative infinity
+
+    if ( binf )
+    {
+        if ( signbit( a ) == signbit( b ) )
+            return 0.0;
+        else
+            return -0.0;
+    }
+
+    if ( isnan( a ) || isnan( b ) )
+        return NAN;
+
+    if ( azero || binf )
+        return 0.0;
+
+    return a / b;
+} //do_fdiv
+
 bool Arm64::check_conditional( uint64_t cond ) const
 {
     assert( cond <= 15 );
@@ -3784,9 +3857,9 @@ uint64_t Arm64::run( void )
                     for ( uint64_t e = 0; e < elements; e++ )
                     {
                         if ( 4 == ebytes )
-                            target.f[ e ] += nvec.f[ e ] * mfloat;
+                            target.f[ e ] += (float) do_fmul( nvec.f[ e ], mfloat );
                         else if ( 8 == ebytes )
-                            target.d[ e ] += nvec.d[ e ] * mdouble;
+                            target.d[ e ] += do_fmul( nvec.d[ e ], mdouble );
                     }
 
                     vregs[ d ] = target;
@@ -4666,13 +4739,13 @@ uint64_t Arm64::run( void )
                         {
                             double mval = vregs[ m ].d[ index ];
                             for ( uint64_t e = 0; e < elements; e++ )
-                                vd.d[ e ] = vn.d[ e ] * mval;
+                                vd.d[ e ] = do_fmul( vn.d[ e ], mval );
                         }
                         else if ( 4 == ebytes )
                         {
                             float mval = vregs[ m ].f[ index ];
                             for ( uint64_t e = 0; e < elements; e++ )
-                                vd.f[ e ] = vn.f[ e ] * mval;
+                                vd.f[ e ] = (float) do_fmul( vn.f[ e ], mval );
                         }
                         else
                             unhandled();
@@ -5998,10 +6071,10 @@ uint64_t Arm64::run( void )
                         elements = datasize / esize;
                         if ( 4 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
-                                vregs[ d ].f[ e ] = vregs[ n ].f[ e ] / vregs[ m ].f[ e ];
+                                vregs[ d ].f[ e ] = (float) do_fdiv( vregs[ n ].f[ e ], vregs[ m ].f[ e ] );
                         else if ( 8 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
-                                vregs[ d ].d[ e ] = vregs[ n ].d[ e ] / vregs[ m ].d[ e ];
+                                vregs[ d ].d[ e ] = do_fdiv( vregs[ n ].d[ e ], vregs[ m ].d[ e ] );
                         else
                             unhandled();
                     }
@@ -6255,10 +6328,10 @@ uint64_t Arm64::run( void )
     
                         if ( 4 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
-                                target.f[ e ] = vn.f[ e ] * vm.f[ e ];
+                                target.f[ e ] = (float) do_fmul( vn.f[ e ], vm.f[ e ] );
                         else if ( 8 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
-                                target.d[ e ] = vn.d[ e ] * vm.d[ e ];
+                                target.d[ e ] = do_fmul( vn.d[ e ], vm.d[ e ] );
                         else
                             unhandled();
     
@@ -7286,10 +7359,10 @@ uint64_t Arm64::run( void )
     
                         if ( 4 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
-                                vregs[ d ].f[ e ] = vregs[ n ].f[ e ] - vregs[ m ].f[ e ];
+                                vregs[ d ].f[ e ] = (float) do_fsub( vregs[ n ].f[ e ], vregs[ m ].f[ e ] );
                         else if ( 8 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
-                                vregs[ d ].d[ e ] = vregs[ n ].d[ e ] - vregs[ m ].d[ e ];
+                                vregs[ d ].d[ e ] = do_fsub( vregs[ n ].d[ e ], vregs[ m ].d[ e ] );
                         else
                             unhandled();
                     }
@@ -8180,12 +8253,12 @@ uint64_t Arm64::run( void )
                     uint64_t m = opbits( 16, 5 );
                     if ( 0 == ftype ) // single-precision
                     {
-                        vregs[ d ].f[ 0 ] = vregs[ n ].f[ 0 ] * vregs[ m ].f[ 0 ];
+                        vregs[ d ].f[ 0 ] = (float) do_fmul( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
                         memset( vreg_ptr( d, 4 ), 0, 12 );
                     }
                     else if ( 1 == ftype ) // double-precision
                     {
-                        vregs[ d ].d[ 0 ] = vregs[ n ].d[ 0 ] * vregs[ m ].d[ 0 ];
+                        vregs[ d ].d[ 0 ] = do_fmul( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
                         memset( vreg_ptr( d, 8 ), 0, 8 );
                     }
                     else
@@ -8280,9 +8353,9 @@ uint64_t Arm64::run( void )
                 {
                     uint64_t m = opbits( 16, 5 );
                     if ( 0 == ftype ) // single-precision
-                        vregs[ d ].f[ 0 ] = vregs[ n ].f[ 0 ] / vregs[ m ].f[ 0 ];
+                        vregs[ d ].f[ 0 ] = (float) do_fdiv( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
                     else if ( 1 == ftype ) // double-precision
-                        vregs[ d ].d[ 0 ] = vregs[ n ].d[ 0 ] / vregs[ m ].d[ 0 ];
+                        vregs[ d ].d[ 0 ] = do_fdiv( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
                     else
                         unhandled();
                     trace_vregs();
@@ -8302,9 +8375,9 @@ uint64_t Arm64::run( void )
                 {
                     uint64_t m = opbits( 16, 5 );
                     if ( 0 == ftype ) // single-precision
-                        vregs[ d ].f[ 0 ] = vregs[ n ].f[ 0 ] - vregs[ m ].f[ 0 ];
+                        vregs[ d ].f[ 0 ] = (float) do_fsub( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
                     else if ( 1 == ftype ) // double-precision
-                        vregs[ d ].d[ 0 ] = vregs[ n ].d[ 0 ] - vregs[ m ].d[ 0 ];
+                        vregs[ d ].d[ 0 ] = do_fsub( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
                     else
                         unhandled();
                 }
