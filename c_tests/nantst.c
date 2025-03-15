@@ -14,7 +14,9 @@ const char * tf( bool f )
 
 void show_num( double d )
 {
-    printf( "    value: %lf, isnan %s, isinf %s\n", (double) d, tf( isnan( d ) ), tf( isinf( d ) ) );
+    printf( "    value: %lf = %#llx, isnan %s, isinf %s, iszero %s, signbit %s\n", * (uint64_t *) &d,
+            (double) d, tf( isnan( d ) ), tf( isinf( d ) ),
+            tf( 0.0 == d ),  tf( signbit( d ) ) );
 } //show_num
 
 template <class T> T do_math( T a, T b )
@@ -25,7 +27,6 @@ template <class T> T do_math( T a, T b )
 
     T r = a * b;
     show_num( r );
-
     r = a / b;
     show_num( r );
 
@@ -45,6 +46,15 @@ int main( int argc, char * argv[] )
 {
     double d;
 
+    d = NAN;
+    printf( "NAN: %#llx\n", * (uint64_t *) &d );
+    d = -NAN;
+    printf( "-NAN: %#llx\n", * (uint64_t *) &d );
+    d = INFINITY;
+    printf( "INFINITY: %#llx\n", * (uint64_t *) &d );
+    d = -INFINITY;
+    printf( "-INFINITY: %#llx\n", * (uint64_t *) &d );
+
     printf( "testing with invalid double:\n" );
     uint64_t x = 0x7ff8000000000000;
     memcpy( &d, &x, 8 );
@@ -61,6 +71,7 @@ int main( int argc, char * argv[] )
     printf( "testing with INFINITY:\n" );
     d = INFINITY;
     do_math( d, 0.0 );
+    
     do_math( 3.0, d );
     do_math( d, d );
 

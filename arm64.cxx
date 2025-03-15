@@ -3082,8 +3082,8 @@ void Arm64::trace_state()
                 uint64_t opc = opbits( 3, 2 );
                 bool is_fcmpe = ( ( 3 == ftype && 2 == opc ) || ( 3 == ftype && 3 == opc ) || ( 0 == ftype && 2 == opc ) || ( 0 == ftype && 0 == m && 3 == opc ) ||
                                   ( 1 == ftype && 2 == opc ) || ( 1 == ftype && 0 == m && 3 == opc ) );
-                if ( 3 == opc && 0 == m )
-                    tracer.Trace( "%s %c%llu, 0.0\n", is_fcmpe ? "fcmpe" : "fcmp", get_fcvt_precision( ftype ), n );
+                if ( ( 1 == opc || 3 == opc ) && 0 == m )
+                    tracer.Trace( "%s %c%llu, #0.0\n", is_fcmpe ? "fcmpe" : "fcmp", get_fcvt_precision( ftype ), n );
                 else
                     tracer.Trace( "%s %c%llu, %c%llu\n", is_fcmpe ? "fcmpe" : "fcmp", get_fcvt_precision( ftype ), n, get_fcvt_precision( ftype ), m );
             }
@@ -8360,6 +8360,7 @@ uint64_t Arm64::run( void )
                     }
                     else
                         unhandled();
+                    trace_vregs();
                 }
                 else if ( 0x1e == hi8 && ( 6 == ( 0x3f & bits18_10 ) ) && bit21 ) // fdiv v, v, v
                 {
@@ -8463,12 +8464,24 @@ uint64_t Arm64::run( void )
                     uint64_t cond = opbits( 12, 4 );
                     double result = 0.0;
 
+                    double nval, mval;
                     if ( 0 == ftype )
-                        result = vregs[ n ].f[ 0 ] - vregs[ m ].f[ 0 ];
-                    else if ( 1 == ftype )
-                        result = vregs[ n ].d[ 0 ] - vregs[ m ].d[ 0 ];
+                    {
+                        nval = vregs[ n ].f[ 0 ];
+                        mval = vregs[ m ].f[ 0 ];
+                    }
+                    else 
+                    {
+                        nval = vregs[ n ].d[ 0 ];
+                        mval = vregs[ m ].d[ 0 ];
+                    }
+
+                    if ( isinf( nval ) && isinf( mval ) )
+                        result = 0.0;
+                    else if ( isnan( nval ) || isnan( mval ) )
+                        result = MY_NAN;
                     else
-                        unhandled();
+                        result = do_fsub( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
 
                     set_flags_from_double( result );
 
