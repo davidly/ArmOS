@@ -184,7 +184,6 @@ template <class T, class U, size_t size> T tstCasts( T t, U u )
         //    syscall( 0x2002, 1 );        
 
         T absolute = do_abs( a[ i ] );
-
         b[ i ] = do_cast<U,T>( absolute * (T) 2.2 );
         c[ i ] = absolute * (T) 4.4;
         //printf( "b[%d] = %.12g, a = %.12g, absolute = %.12g\n", i, (double) b[i], (double) a[i], (double) absolute );
@@ -245,7 +244,10 @@ template <class T, class U, size_t size> T tstOverflows( T t, U u )
     for ( int i = 0; i < _countof( a ); i++ )
     {
         T absolute = do_abs( a[ i ] );
-        b[ i ] = (U)( absolute * (T) 2.2 );
+        // overflow with b[] results in many differences across compilers and platforms
+        // so always do_cast to avoid implementation-specific differences in C++ compilers
+        //b[ i ] = (U)( absolute * (T) 2.2 );
+        b[ i ] = do_cast<U,T>( absolute * (T) 2.2 );
         c[ i ] = absolute * (T) 4.4;
         //printf( "b[%d] = %.12g, a = %.12g\n", i, (double) b[i], (double) a[i] );
     }
