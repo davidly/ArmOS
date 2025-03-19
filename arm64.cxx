@@ -3616,19 +3616,62 @@ uint32_t Arm64::shift_reg32( uint64_t reg, uint64_t shift_type, uint64_t amount 
     return val;
 } //shift_reg32
 
+double set_double_sign( double d, bool sign )
+{
+    uint64_t val = sign ? ( ( * (uint64_t *) &d ) | 0x8000000000000000 ) : ( ( * (uint64_t *) &d ) & 0x7fffffffffffffff );
+    return * (double *) &val;
+} //set_double_sign
+
 double do_fsub( double a, double b )
 {
     bool ainf = isinf( a );
     bool binf = isinf( b );
 
     if ( ainf && binf )
+    {
+        if ( signbit( a ) != signbit( b ) )
+            return a;
         return MY_NAN; // msft C will return -nan if this check isn't here
+    }
 
     return a - b;
 } //do_fsub
 
+double do_fadd( double a, double b )
+{
+    bool ainf = isinf( a );
+    bool binf = isinf( b );
+
+    if ( ainf && binf )
+    {
+        if ( signbit( a ) == signbit( b ) )
+            return a;
+        return MY_NAN; // msft C will return -nan if this check isn't here
+    }
+
+    if ( isnan( a ) )
+        return a;
+
+    if ( isnan( b ) )
+        return b;
+
+    if ( ainf )
+        return a;
+
+    if ( binf )
+        return b;
+
+    return a + b;
+} //do_fadd
+
 double do_fmul( double a, double b )
 {
+    if ( isnan( a ) )
+        return a;
+
+    if ( isnan( b ) )
+        return b;
+
     bool ainf = isinf( a );
     bool binf = isinf( b );
     bool azero = ( 0.0 == a );
@@ -3638,29 +3681,25 @@ double do_fmul( double a, double b )
         return MY_NAN;
 
     if ( ainf && binf )
-    {
-        if ( signbit( a ) == signbit( b ) )
-            return INFINITY;
-        return -INFINITY;
-    }
+        set_double_sign( INFINITY, ( signbit( a ) != signbit( b ) ) );
 
-    if ( ainf )
-        return a; // may be negative infinity
-
-    if ( binf )
-        return b; // may be negative infinity
-
-    if ( isnan( a ) || isnan( b ) )
-        return MY_NAN;
+    if ( ainf || binf )
+        return set_double_sign( INFINITY, signbit( a ) ^ signbit( b ) );
 
     if ( azero || bzero )
-        return 0.0;
+        return set_double_sign( 0.0, signbit( a ) ^ signbit( b ) );
 
     return a * b;
 } //do_fmul
 
 double do_fdiv( double a, double b )
 {
+    if ( isnan( a ) )
+        return a;
+
+    if ( isnan( b ) )
+        return b;
+
     bool ainf = isinf( a );
     bool binf = isinf( b );
     bool azero = ( 0.0 == a );
@@ -3670,18 +3709,10 @@ double do_fdiv( double a, double b )
         return MY_NAN;
 
     if ( ainf )
-        return a; // may be negative infinity
+        return set_double_sign( INFINITY, signbit( a ) ^ signbit( b ) );
 
     if ( binf )
-    {
-        if ( signbit( a ) == signbit( b ) )
-            return 0.0;
-        else
-            return -0.0;
-    }
-
-    if ( isnan( a ) || isnan( b ) )
-        return MY_NAN;
+        return set_double_sign( 0.0, signbit( a ) != signbit( b ) );
 
     if ( azero || binf )
         return 0.0;
@@ -6229,18 +6260,18 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements / 2; e++ )
                         {
                             if ( 8 == ebytes )
-                                target.d[ e ] = vregs[ n ].d[ 2 * e ] + vregs[ n ].d[ 2 * e + 1 ];
+                                target.d[ e ] = do_fadd( vregs[ n ].d[ 2 * e ], vregs[ n ].d[ 2 * e + 1 ] );
                             else if ( 4 == ebytes )
-                                target.f[ e ] = vregs[ n ].f[ 2 * e ] + vregs[ n ].f[ 2 * e + 1 ];
+                                target.f[ e ] = (float) do_fadd( vregs[ n ].f[ 2 * e ], vregs[ n ].f[ 2 * e + 1 ] );
                             else
                                 unhandled();
                         }
                         for ( uint64_t e = 0; e < elements / 2; e++ )
                         {
                             if ( 8 == ebytes )
-                                target.d[ ( elements / 2 ) + e ] = vregs[ m ].d[ 2 * e ] + vregs[ m ].d[ 2 * e + 1 ];
+                                target.d[ ( elements / 2 ) + e ] = do_fadd( vregs[ m ].d[ 2 * e ], vregs[ m ].d[ 2 * e + 1 ] );
                             else if ( 4 == ebytes )
-                                target.f[ ( elements / 2 ) + e ] = vregs[ m ].f[ 2 * e ] + vregs[ m ].f[ 2 * e + 1 ];
+                                target.f[ ( elements / 2 ) + e ] = (float) do_fadd( vregs[ m ].f[ 2 * e ], vregs[ m ].f[ 2 * e + 1 ] );
                             else
                                 unhandled();
                         }
@@ -6693,13 +6724,13 @@ uint64_t Arm64::run( void )
                 {
                     if ( sz )
                     {
-                        double result = vregs[ n ].d[ 0 ] + vregs[ n ].d[ 1 ];
+                        double result = do_fadd( vregs[ n ].d[ 0 ], vregs[ n ].d[ 1 ] );
                         vregs[ d ].d[ 0 ] = result;
                         vregs[ d ].ui64[ 1 ] = 0;
                     }
                     else
                     {
-                        float result = vregs[ n ].f[ 0 ] + vregs[ n ].f[ 1 ];
+                        float result = (float) do_fadd( vregs[ n ].f[ 0 ], vregs[ n ].f[ 1 ] );
                         zero_vreg( d );
                         vregs[ d ].f[ 0 ] = result;
                     }
@@ -7517,9 +7548,9 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             if ( 8 == ebytes )
-                                target.d[ e ] = vn.d[ e ] + vm.d[ e ];
+                                target.d[ e ] = do_fadd( vn.d[ e ], vm.d[ e ] );
                             else if ( 4 == ebytes )
-                                target.f[ e ] = vn.f[ e ] + vm.f[ e ];
+                                target.f[ e ] = (float) do_fadd( vn.f[ e ], vm.f[ e ] );
                             else
                                 unhandled();
                         }
@@ -8377,9 +8408,9 @@ uint64_t Arm64::run( void )
                 {
                     uint64_t m = opbits( 16, 5 );
                     if ( 0 == ftype ) // single-precision
-                        vregs[ d ].f[ 0 ] = vregs[ n ].f[ 0 ] + vregs[ m ].f[ 0 ];
+                        vregs[ d ].f[ 0 ] = (float) do_fadd( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
                     else if ( 1 == ftype ) // double-precision
-                        vregs[ d ].d[ 0 ] = vregs[ n ].d[ 0 ] + vregs[ m ].d[ 0 ];
+                        vregs[ d ].d[ 0 ] = do_fadd( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
                     else
                         unhandled();
                     trace_vregs();
