@@ -3634,6 +3634,12 @@ double do_fsub( double a, double b )
         return MY_NAN; // msft C will return -nan if this check isn't here
     }
 
+    if ( isnan( a ) )
+        return a;
+
+    if ( isnan( b ) )
+        return b;
+
     return a - b;
 } //do_fsub
 
