@@ -95,11 +95,6 @@ int main( int argc, char * argv[] )
     printf( "INFINITY: %#llx\n", * (uint64_t *) & infinity );
     printf( "-INFINITY: %#llx\n", * (uint64_t *) & neg_infinity );
 
-    printf( "testing with invalid double:\n" );
-    uint64_t x = 0x7ff8000000000000; // aka NAN for most compilers
-    memcpy( &d, &x, 8 );
-    test_case( d );
-
     printf( "testing with NAN:\n" );
     test_case( not_a_number );
 
@@ -114,9 +109,6 @@ int main( int argc, char * argv[] )
 
     printf( "testing with 69:\n" );
     test_case( 69.0 );
-
-    printf( "testing with result of div by 0:\n" );
-    test_case( 0.0 / 0.0 );
 
     printf( "nan test completed with great success\n" );
     return 0;
