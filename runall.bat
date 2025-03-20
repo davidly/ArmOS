@@ -1,10 +1,11 @@
 @echo off
 setlocal
 
-if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armosg -h:160 bin\armoscl -h:100 )
-rem if "%1" == "" (set _runcmd=armoscl -h:100) else (set _runcmd=armos -h:160 bin\armoscl -h:100 )
-rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=armos -h:160 bin\armos -h:100 )
-rem if "%1" == "" (set _runcmd=armos -h:100) else (set _runcmd=rvos -m:160 ..\rvos\linux\armos -h:100)
+if "%1" == "" (set _runcmd=armos -h:100 )
+if "%1" == "nested" (set _runcmd=armosg -h:160 bin\armoscl -h:100 )
+if "%1" == "rvos" (set _runcmd=..\rvos\rvos -h:160 ..\rvos\linux\armos -h:100 )
+if "%1" == "armosg" (set _runcmd=armosg -h:160 bin\armoscl -h:100 )
+if "%1" == "armoscl" (set _runcmd=armoscl -h:100 )
 
 set outputfile=test_armos.txt
 echo %date% %time% >%outputfile%

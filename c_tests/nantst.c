@@ -67,13 +67,21 @@ double test_case( double d )
 {
     double r = 0.0;
     r += do_math( d, 0.0 );
+    r += do_math( 0.0, d );
     r += do_math( d, neg_zero );
+    r += do_math( neg_zero, d );
     r += do_math( 3.0, d );
+    r += do_math( d, 3.0 );
     r += do_math( -3.0, d );
+    r += do_math( d, -3.0 );
     r += do_math( d, not_a_number );
+    r += do_math( not_a_number, d );
     r += do_math( d, neg_not_a_number );
+    r += do_math( neg_not_a_number, d );
     r += do_math( d, infinity );
+    r += do_math( infinity, d );
     r += do_math( d, neg_infinity );
+    r += do_math( neg_infinity, d );
     r += do_math( d, d );
     return r;
 } //test_case
