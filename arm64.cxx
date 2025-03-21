@@ -3624,10 +3624,7 @@ double set_double_sign( double d, bool sign )
 
 double do_fsub( double a, double b )
 {
-    bool ainf = isinf( a );
-    bool binf = isinf( b );
-
-    if ( ainf && binf )
+    if ( isinf( a ) && isinf( b ) )
     {
         if ( signbit( a ) != signbit( b ) )
             return a;
@@ -3940,7 +3937,7 @@ uint64_t Arm64::run( void )
                 uint64_t t = opbits( 0, 5 );
                 uint64_t S = opbit( 12 );
                 uint64_t Q = opbit( 30 );
-                uint64_t L = opbit( 22 );
+                uint64_t L = opbit( 22 ); // load vs. store
                 uint64_t index = 0;
                 uint64_t replicate = ( 6 == opcode );
                 uint64_t scale = get_bits( opcode, 1, 2 );
@@ -4062,22 +4059,22 @@ uint64_t Arm64::run( void )
 
                 if ( 0 == ftype ) // float
                 {
-                    // do math using doubles to match the behavior of arm64 hardware (test app t2.c validates this)
+                    // do math using doubles to match the behavior of arm64 hardware (test app ttypes.c validates this)
 
                     double product = (double) vregs[ n ].f[ 0 ] * (double) vregs[ m ].f[ 0 ];
                     if ( subtract )
                     {
                         if ( negate )
-                            vregs[ d ].f[ 0 ] = (float) ( product - (double) vregs[ a ].f[ 0 ] );
+                            vregs[ d ].f[ 0 ] = (float) do_fsub( product, vregs[ a ].f[ 0 ] );
                         else
-                            vregs[ d ].f[ 0 ] = (float) ( (double) vregs[ a ].f[ 0 ] - product );
+                            vregs[ d ].f[ 0 ] = (float) do_fsub( vregs[ a ].f[ 0 ], product );
                     }
                     else
                     {
                         if ( negate )
-                            vregs[ d ].f[ 0 ] = (float) ( -product - (double) vregs[ a ].f[ 0 ] );
+                            vregs[ d ].f[ 0 ] = (float) do_fsub( -product, vregs[ a ].f[ 0 ] );
                         else
-                            vregs[ d ].f[ 0 ] = (float) ( product + (double) vregs[ a ].f[ 0 ] );
+                            vregs[ d ].f[ 0 ] = (float) do_fadd( product, vregs[ a ].f[ 0 ] );
                     }
                     memset( vreg_ptr( d, 4 ), 0, 12 );
                 }
@@ -4087,16 +4084,16 @@ uint64_t Arm64::run( void )
                     if ( subtract )
                     {
                         if ( negate )
-                            vregs[ d ].d[ 0 ] = product - vregs[ a ].d[ 0 ];
+                            vregs[ d ].d[ 0 ] = do_fsub( product, vregs[ a ].d[ 0 ] );
                         else
-                            vregs[ d ].d[ 0 ] = vregs[ a ].d[ 0 ] - product;
+                            vregs[ d ].d[ 0 ] = do_fsub( vregs[ a ].d[ 0 ], product );
                     }
                     else
                     {
                         if ( negate )
-                            vregs[ d ].d[ 0 ] = -product - vregs[ a ].d[ 0 ];
+                            vregs[ d ].d[ 0 ] = do_fsub( -product, vregs[ a ].d[ 0 ] );
                         else
-                            vregs[ d ].d[ 0 ] = product + vregs[ a ].d[ 0 ];
+                            vregs[ d ].d[ 0 ] = do_fadd( product, vregs[ a ].d[ 0 ] );
                     }
                     memset( vreg_ptr( d, 8 ), 0, 8 );
                 }
@@ -4638,13 +4635,13 @@ uint64_t Arm64::run( void )
                         {
                             double element2 = vregs[ m ].d[ index ];
                             for ( uint64_t e = 0; e < elements; e++ )
-                                target.d[ e ] += element2 * vn.d[ e ];
+                                target.d[ e ] = do_fadd( target.d[ e ], do_fmul( element2, vn.d[ e ] ) );
                         }
                         else if ( 4 == ebytes )
                         {
                             double element2 = (double) vregs[ m ].f[ index ];
                             for ( uint64_t e = 0; e < elements; e++ )
-                                target.f[ e ] = (float) ( (double) target.f[ e ] + ( element2 * (double) vn.f[ e ] ) );
+                                target.f[ e ] = (float) do_fadd( target.f[ e ], do_fmul( element2, vn.f[ e ] ) );
                         }
                         else
                             unhandled() ;
@@ -5684,7 +5681,7 @@ uint64_t Arm64::run( void )
                         regs[ t ] = duration_cast<nanoseconds>( d ).count();
                     }
                     else if ( ( 3 == op0 ) && ( 14 == n ) && ( 3 == op1 ) && ( 0 == m ) && ( 0 == op2 ) ) // cntfrq_el0 counter-timer frequency register
-                        regs[ t ] = 1000000000; // nanoseconds = billions of a second
+                        regs[ t ] = 1000000000; // nanoseconds = billionths of a second
                     else if ( ( 3 == op0 ) && ( 0 == n ) && ( 3 == op1 ) && ( 0 == m ) && ( 7 == op2 ) ) // DCZID_EL0. data cache block size for dc zva instruction
                         regs[ t ] = 4; // doesn't matter becasuse there is no caching in the emulator
                     else if ( ( 3 == op0 ) && ( 0 == n ) && ( 0 == op1 ) && ( 0 == m ) && ( 0 == op2 ) ) // mrs x, midr_el1
@@ -7425,10 +7422,10 @@ uint64_t Arm64::run( void )
 
                         if ( 4 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
-                                vregs[ d ].f[ e ] -= vregs[ n ].f[ e ] * vregs[ m ].f[ e ];
+                                vregs[ d ].f[ e ] = (float) do_fsub( vregs[ d ].f[ e ], do_fmul( vregs[ n ].f[ e ], vregs[ m ].f[ e ] ) );
                         else if ( 8 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
-                                vregs[ d ].d[ e ] -= vregs[ n ].d[ e ] * vregs[ m ].d[ e ];
+                                vregs[ d ].d[ e ] = do_fsub( vregs[ d ].d[ e ], do_fmul( vregs[ n ].d[ e ], vregs[ m ].d[ e ] ) );
                         else
                             unhandled();
                     }
@@ -7577,9 +7574,9 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             if ( 8 == ebytes )
-                                target.d[ e ] = ( vn.d[ e ] * vm.d[ e ] ) + vd.d[ e ];
+                                target.d[ e ] = do_fadd( do_fmul( vn.d[ e ], vm.d[ e ] ), vd.d[ e ] );
                             else if ( 4 == ebytes )
-                                target.f[ e ] = (float) ( ( (double) vn.f[ e ] * (double) vm.f[ e ] ) + (double) vd.f[ e ] );
+                                target.f[ e ] = (float) do_fadd( do_fmul( vn.f[ e ], vm.f[ e ] ), (double) vd.f[ e ] );
                             else
                                 unhandled();
                         }
@@ -8073,9 +8070,9 @@ uint64_t Arm64::run( void )
                         //tracer.Trace( "condition holds, so doing compare\n" );
                         double result = 0.0;
                         if ( 0 == ftype )
-                            result = (double) ( vregs[ n ].f[ 0 ] - vregs[ m ].f[ 0 ] );
+                            result = do_fsub( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
                         else if ( 1 == ftype )
-                            result = vregs[ n ].d[ 0 ] - vregs[ m ].d[ 0 ];
+                            result = do_fsub( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
                         else
                             unhandled();
 
