@@ -1,8 +1,15 @@
 #!/bin/bash
 
 _armoscmd="armos"
-if [ "$1" != "" ]; then
+
+if [ "$1" = "nested" ]; then
     _armoscmd="armos -h:200 bin/armos"
+elif [ "$1" = "armoscl" ]; then
+    _armoscmd="armoscl -h:200"
+elif [ "$1" = "rvos" ]; then
+    _armoscmd="../rvos/rvos -h:200 ../rvos/bin/armos -h:100"
+elif [ "$1" = "rvoscl" ]; then
+    _armoscmd="../rvos/rvoscl -h:200 ../rvos/bin/armos -h:100"
 fi    
 
 outputfile="linux_test.txt"
