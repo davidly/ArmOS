@@ -2476,7 +2476,7 @@ void Arm64::trace_state()
                               // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>           ;   SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                               // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; SADDLP <Vd>.<Ta>, <Vn>.<Tb>     ;   SADDLV <V><d>, <Vn>.<T>        ;    SADALP <Vd>.<Ta>, <Vn>.<Tb>
                               // SQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>       ;    CMGT <Vd>.<T>, <Vn>.<T>, #0       ;   CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                              // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                              // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
@@ -2493,7 +2493,14 @@ void Arm64::trace_state()
             uint64_t bits14_10 = opbits( 10, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit21 && 0x3d == bits15_10 ) // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            if ( !bit23 && bit21 && 0x39 == bits15_10 ) // FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            {
+                uint64_t m = opbits( 16, 5 );
+                uint64_t sz = opbit( 22 );
+                const char * pT = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
+                tracer.Trace( "fcmeq v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
+            }
+            else if ( bit21 && 0x3d == bits15_10 ) // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t sz = opbit( 22 );
@@ -6778,7 +6785,7 @@ uint64_t Arm64::run( void )
                                   // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>           ;   SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                                   // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; SADDLP <Vd>.<Ta>, <Vn>.<Tb>     ;   SADDLV <V><d>, <Vn>.<T>        ;    SADALP <Vd>.<Ta>, <Vn>.<Tb>
                                   // SQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>       ;    CMGT <Vd>.<T>, <Vn>.<T>, #0       ;   CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                                  // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                                  // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -6798,7 +6805,26 @@ uint64_t Arm64::run( void )
 
                 if ( bit21 )
                 {
-                    if ( 0x3d == bits15_10 ) // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                    if ( !bit23 && 0x39 == bits15_10 ) // FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                    {
+                        uint64_t m = opbits( 16, 5 );
+                        uint64_t sz = opbit( 22 );
+                        uint64_t esize = 32 << sz;
+                        uint64_t ebytes = esize / 8;
+                        uint64_t elements = datasize / esize;
+                        vec16_t target = { 0 };
+                        for ( uint64_t e = 0; e < elements; e++ )
+                        {
+                            if ( 4 == ebytes )
+                                target.ui32[ e ] = ( vregs[ n ].f[ e ] == vregs[ m ].f[ e ] ) ? ~0 : 0;
+                            else if ( 8 == ebytes )
+                                target.ui64[ e ] = ( vregs[ n ].d[ e ] == vregs[ m ].d[ e ] ) ? ~0 : 0;
+                            else
+                                unhandled();
+                        }
+                        vregs[ d ] = target;
+                    }
+                    else if ( 0x3d == bits15_10 ) // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                     {
                         uint64_t m = opbits( 16, 5 );
                         uint64_t sz = opbit( 22 );
