@@ -16,3 +16,6 @@ do
         $_gnubuild
     fi
 done
+
+echo "Waiting for all processes to complete..."
+wait
