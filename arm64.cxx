@@ -8380,7 +8380,16 @@ uint64_t Arm64::run( void )
                     else if ( 0 == ftype && ( ( 0 == opc ) || ( 2 == opc ) ) )
                     {
                         if ( isinf( vregs[ n ].f[ 0 ] ) && isinf( vregs[ m ].f[ 0 ] ) )
-                            result = 0.0;
+                        {
+                            bool signn = signbit( vregs[ n ].f[ 0 ] );
+                            bool signm = signbit( vregs[ m ].f[ 0 ] );
+                            if ( signn && !signm )
+                                result = -1.0;
+                            else if ( !signn && signm )
+                                result = 1.0;
+                            else
+                                result = 0.0;
+                        }
                         else if ( isnan( vregs[ n ].f[ 0 ] ) || isnan( vregs[ m ].f[ 0 ] ) )
                             result = MY_NAN;
                         else
@@ -8391,7 +8400,16 @@ uint64_t Arm64::run( void )
                     else if ( 1 == ftype && ( ( 0 == opc ) || ( 2 == opc ) ) )
                     {
                         if ( isinf( vregs[ n ].d[ 0 ] ) && isinf( vregs[ m ].d[ 0 ] ) )
-                            result = 0.0;
+                        {
+                            bool signn = signbit( vregs[ n ].d[ 0 ] );
+                            bool signm = signbit( vregs[ m ].d[ 0 ] );
+                            if ( signn && !signm )
+                                result = -1.0;
+                            else if ( !signn && signm )
+                                result = 1.0;
+                            else
+                                result = 0.0;
+                        }
                         else if ( isnan( vregs[ n ].d[ 0 ] ) || isnan( vregs[ m ].d[ 0 ] ) )
                             result = MY_NAN;
                         else

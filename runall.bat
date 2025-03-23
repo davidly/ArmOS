@@ -7,6 +7,9 @@ if "%1" == "rvos" (set _runcmd=..\rvos\rvos -h:160 ..\rvos\linux\armos -h:100 )
 if "%1" == "armosg" (set _runcmd=armosg -h:160 bin\armoscl -h:100 )
 if "%1" == "armoscl" (set _runcmd=armoscl -h:100 )
 
+set _testfolder=.\
+rem set _testfolder=pi5\
+
 set outputfile=test_armos.txt
 echo %date% %time% >%outputfile%
 
@@ -91,13 +94,13 @@ exit /b 0
 :appRun
 echo test %~1
 echo test %~1 >>%outputfile%
-%_runcmd% %~1 >>%outputfile%
+%_runcmd% %_testfolder%%~1 >>%outputfile%
 exit /b /o
 
 :rustRun
 echo test %~1
 echo test %~1 >>%outputfile%
-%_runcmd% %~1 >>%outputfile%
+%_runcmd% %_testfolder%%~1 >>%outputfile%
 exit /b /o
 
 :rustfolder
