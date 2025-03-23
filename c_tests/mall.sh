@@ -10,7 +10,7 @@ do
         mkdir bin"$optflag" 2>/dev/null
         mkdir clangbin"$optflag" 2>/dev/null
 
-        _clangbuild="clang-18 -x c++ "$arg".c -o clangbin"$optflag"/"$arg" -O"$optflag" -static -fsigned-char -Wno-format -Wno-format-security -std=c++14 -lm -lstdc++"
+        _clangbuild="clang-18 -x c++ "$arg".c -o clangbin"$optflag"/"$arg" -O"$optflag" -static -Wno-implicit-const-int-float-conversion -fsigned-char -Wno-format -Wno-format-security -std=c++14 -lm -lstdc++"
         _gnubuild="g++ "$arg".c -o bin"$optflag"/"$arg" -O"$optflag" -static -fsigned-char -Wno-format -Wno-format-security"
 
         if [ "$optflag" != "fast" ]; then
