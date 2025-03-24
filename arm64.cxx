@@ -3730,6 +3730,54 @@ double do_fdiv( double a, double b )
     return a / b;
 } //do_fdiv
 
+double do_fmin( double a, double b )
+{
+    if ( ( 0.0 == a ) && ( 0.0 == b ) )
+    {
+        if ( signbit( a ) )
+            return a;
+        return b;
+    }
+
+    bool anan = isnan( a );
+    bool bnan = isnan( b );
+
+    if ( anan && bnan )
+        return a;         // not clearly documented, but this is what hardware does
+
+    if ( anan )
+        return b;
+
+    if ( bnan )
+        return a;
+
+    return get_min( a, b );
+} //do_fmin
+
+double do_fmax( double a, double b )
+{
+    if ( ( 0.0 == a ) && ( 0.0 == b ) )
+    {
+        if ( signbit( a ) )
+            return b;
+        return a;
+    }
+
+    bool anan = isnan( a );
+    bool bnan = isnan( b );
+
+    if ( anan && bnan ) 
+        return a;         // not clearly documented, but this is what hardware does
+
+    if ( anan )
+        return b;
+
+    if ( bnan )
+        return a;
+
+    return get_max( a, b );
+} //do_fmax
+
 bool Arm64::check_conditional( uint64_t cond ) const
 {
     assert( cond <= 15 );
@@ -6111,7 +6159,7 @@ uint64_t Arm64::run( void )
 
                         float result = vregs[ n ].f[ 0 ];
                         for ( uint64_t e = 1; e < elements; e++ )
-                            result = ( 5 == bits23_21 ) ? get_min( result, vregs[ n ].f[ e ] ) : get_max( result, vregs[ n ].f[ e ] );
+                            result = ( 5 == bits23_21 ) ? (float) do_fmin( result, vregs[ n ].f[ e ] ) : (float) do_fmax( result, vregs[ n ].f[ e ] );
 
                         zero_vreg( d );
                         vregs[ d ].f[ 0 ] = result;
@@ -6708,9 +6756,9 @@ uint64_t Arm64::run( void )
                     uint64_t ebytes = esize / 8;
 
                     if ( 4 == ebytes )
-                        vregs[ d ].f[ 0 ] = bit23 ? get_min( vregs[ n ].f[ 0 ], vregs[ n ].f[ 1 ] ) : get_max( vregs[ n ].f[ 0 ], vregs[ n ].f[ 1 ] );
+                        vregs[ d ].f[ 0 ] = bit23 ? (float) do_fmin( vregs[ n ].f[ 0 ], vregs[ n ].f[ 1 ] ) : (float) do_fmax( vregs[ n ].f[ 0 ], vregs[ n ].f[ 1 ] );
                     else if ( 8 == ebytes )
-                        vregs[ d ].d[ 0 ] = bit23 ? get_min( vregs[ n ].d[ 0 ], vregs[ n ].d[ 1 ] ) : get_max( vregs[ n ].d[ 0 ], vregs[ n ].d[ 1 ] );
+                        vregs[ d ].d[ 0 ] = bit23 ? do_fmin( vregs[ n ].d[ 0 ], vregs[ n ].d[ 1 ] ) : do_fmax( vregs[ n ].d[ 0 ], vregs[ n ].d[ 1 ] );
                     else
                         unhandled();
                 }
@@ -6850,7 +6898,7 @@ uint64_t Arm64::run( void )
                                         result = MY_NAN;
                                 }
                                 else
-                                    result = get_min( nval, mval );
+                                    result = (float) do_fmin( nval, mval );
                                 vregs[ d ].f[ e ] = result;
                             }
                             else if ( 8 == ebytes )
@@ -6869,7 +6917,7 @@ uint64_t Arm64::run( void )
                                         result = MY_NAN;
                                 }
                                 else
-                                    result = get_min( nval, mval );
+                                    result = do_fmin( nval, mval );
                                 vregs[ d ].d[ e ] = result;
                             }
                             else
@@ -7315,12 +7363,13 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             if ( 4 == ebytes )
-                                vregs[ d ].f[ e ] = bit23 ? get_min( vregs[ n ].f[ e ], vregs[ m ].f[ e ] ) : get_max( vregs[ n ].f[ e ], vregs[ m ].f[ e ] );
+                                vregs[ d ].f[ e ] = bit23 ? (float) do_fmin( vregs[ n ].f[ e ], vregs[ m ].f[ e ] ) : (float) do_fmax( vregs[ n ].f[ e ], vregs[ m ].f[ e ] );
                             else if ( 8 == ebytes )
-                                vregs[ d ].d[ e ] = bit23 ? get_min( vregs[ n ].d[ e ], vregs[ m ].d[ e ] ) : get_max( vregs[ n ].d[ e ], vregs[ m ].d[ e ] );
+                                vregs[ d ].d[ e ] = bit23 ? do_fmin( vregs[ n ].d[ e ], vregs[ m ].d[ e ] ) : do_fmax( vregs[ n ].d[ e ], vregs[ m ].d[ e ] );
                             else
                                 unhandled();
                         }
+                        trace_vregs();
                     }
                     else if ( ( 0x11 == bits20_16 || 0x10 == bits20_16 ) && 0x2a == bits15_10 ) // SMINV <V><d>, <Vn>.<T>         ;    SMAXV <V><d>, <Vn>.<T>
                     {
@@ -8040,42 +8089,65 @@ uint64_t Arm64::run( void )
                     bool isFMAX = ( 0x12 == bits15_10 );
                     bool fpcr_ah = get_bit( fpcr, 1 );
                     bool useSecond = isFMAX && fpcr_ah;
+                    double nval = 0.0, mval = 0.0, result = 0.0;
+
                     if ( 0 == ftype )
                     {
-                        float nval = vregs[ n ].f[ 0 ];
-                        float mval = vregs[ m ].f[ 0 ];
-                        vregs[ d ].f[ 0 ] = ( isnan( nval ) || isnan( mval ) ) ? useSecond ? mval : MY_NAN : get_max( nval, mval );
+                        nval = vregs[ n ].f[ 0 ];
+                        mval = vregs[ m ].f[ 0 ];
                     }
                     else if ( 1 == ftype )
                     {
-                        double nval = vregs[ n ].d[ 0 ];
-                        double mval = vregs[ m ].d[ 0 ];
-                        vregs[ d ].d[ 0 ] = ( isnan( nval ) || isnan( mval ) ) ? useSecond ? mval : MY_NAN : get_max( nval, mval );
+                        nval = vregs[ n ].d[ 0 ];
+                        mval = vregs[ m ].d[ 0 ];
                     }
                     else
                         unhandled();
+
+                    if ( useSecond && ( ( 0.0 == nval && 0.0 == mval ) || isnan( nval ) || isnan( mval ) ) )
+                        result = mval;
+                    else
+                        result = do_fmax( nval, mval );
+
+                    if ( 0 == ftype )
+                        vregs[ d ].f[ 0 ] = (float) result;
+                    else
+                        vregs[ d ].d[ 0 ] = result;
+
+                    trace_vregs();
                 }
                 else if ( 0x1e == hi8 && bit21 && ( 0x16 == bits15_10 || 0x1e == bits15_10 ) ) // FMIN <Dd>, <Dn>, <Dm>    ;    FMINNM <Dd>, <Dn>, <Dm>
                 {
-                    // nan behavior is ignored for both instructions
                     uint64_t m = opbits( 16, 5 );
                     bool isFMIN = ( 0x16 == bits15_10 );
                     bool fpcr_ah = get_bit( fpcr, 1 );
                     bool useSecond = isFMIN && fpcr_ah;
+                    double nval = 0.0, mval = 0.0, result = 0.0;
+
                     if ( 0 == ftype )
                     {
-                        float nval = vregs[ n ].f[ 0 ];
-                        float mval = vregs[ m ].f[ 0 ];
-                        vregs[ d ].f[ 0 ] = ( isnan( nval ) || isnan( mval ) ) ? useSecond ? mval : MY_NAN : get_min( nval, mval );
+                        nval = vregs[ n ].f[ 0 ];
+                        mval = vregs[ m ].f[ 0 ];
                     }
                     else if ( 1 == ftype )
                     {
-                        double nval = vregs[ n ].d[ 0 ];
-                        double mval = vregs[ m ].d[ 0 ];
-                        vregs[ d ].d[ 0 ] = ( isnan( nval ) || isnan( mval ) ) ? useSecond ? mval : MY_NAN : get_min( nval, mval );
+                        nval = vregs[ n ].d[ 0 ];
+                        mval = vregs[ m ].d[ 0 ];
                     }
                     else
                         unhandled();
+
+                    if ( useSecond && ( ( 0.0 == nval && 0.0 == mval ) || isnan( nval ) || isnan( mval ) ) )
+                        result = mval;
+                    else
+                        result = do_fmin( nval, mval );
+
+                    if ( 0 == ftype )
+                        vregs[ d ].f[ 0 ] = (float) result;
+                    else
+                        vregs[ d ].d[ 0 ] = result;
+
+                    trace_vregs();
                 }
                 else if ( 0x1e == hi8 && 4 == bits21_19 && 0x150 == bits18_10 ) // FRINTM <Dd>, <Dn>
                 {
