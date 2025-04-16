@@ -4116,7 +4116,7 @@ uint64_t Arm64::run( void )
                 {
                     // do math using doubles to match the behavior of arm64 hardware (test app ttypes.c validates this)
 
-                    double product = (double) vregs[ n ].f[ 0 ] * (double) vregs[ m ].f[ 0 ];
+                    double product = do_fmul( vregs[ n ].f[ 0 ], vregs[ m ].f[ 0 ] );
                     if ( subtract )
                     {
                         if ( negate )
@@ -4135,7 +4135,7 @@ uint64_t Arm64::run( void )
                 }
                 else if ( 1 == ftype ) // double
                 {
-                    double product = vregs[ n ].d[ 0 ] * vregs[ m ].d[ 0 ];
+                    double product = do_fmul( vregs[ n ].d[ 0 ], vregs[ m ].d[ 0 ] );
                     if ( subtract )
                     {
                         if ( negate )

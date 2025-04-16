@@ -95,6 +95,8 @@ double _perhaps_inline do_math( double a, double b )
     printf( "    minmax:" );
     minmax( a, b );
 
+    // I also tested with fabs(), fmod, negation: they used no additional instructions and found no new bugs
+
     return r;
 }
 
