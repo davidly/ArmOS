@@ -269,7 +269,7 @@ static uint64_t gen_bitmask( uint64_t n )
 static uint64_t get_elem_bits( uint64_t val, uint64_t c, uint64_t container_size )
 {
     uint64_t mask = gen_bitmask( container_size );
-    return ( val & ( mask << ( c * 8 ) ) );
+    return ( val & ( mask << ( c * container_size ) ) );
 } //get_elem_bits
 
 static uint64_t get_bits( uint64_t x, uint64_t lowbit, uint64_t len )
@@ -1479,18 +1479,23 @@ void Arm64::trace_state()
             }
             break;
         }
-        case 0x5a: // REV <Wd>, <Wn>    ;    CSINV <Wd>, <Wn>, <Wm>, <cond>    ;    RBIT <Wd>, <Wn>    ;    CLZ <Wd>, <Wn>    ;    CSNEG <Wd>, <Wn>, <Wm>, <cond>    ;    SBC <Wd>, <Wn>, <Wm>
-        case 0xda: // REV <Xd>, <Xn>    ;    CSINV <Xd>, <Xn>, <Xm>, <cond>    ;    RBIT <Xd>, <Xn>    ;    CLZ <Xd>, <Xn>    ;    CSNEG <Xd>, <Xn>, <Xm>, <cond>    ;    SBC <Xd>, <Xn>, <Xm>
+        case 0x5a: // REV <Wd>, <Wn>  ;  CSINV <Wd>, <Wn>, <Wm>, <cond>  ;  RBIT <Wd>, <Wn>  ;  CLZ <Wd>, <Wn>  ;  CSNEG <Wd>, <Wn>, <Wm>, <cond>  ;  SBC <Wd>, <Wn>, <Wm> ; REV16 <Wd>, <Wn>
+        case 0xda: // REV <Xd>, <Xn>  ;  CSINV <Xd>, <Xn>, <Xm>, <cond>  ;  RBIT <Xd>, <Xn>  ;  CLZ <Xd>, <Xn>  ;  CSNEG <Xd>, <Xn>, <Xm>, <cond>  ;  SBC <Xd>, <Xn>, <Xm> ; REV16 <Xd>, <Xn> ; REV32 <Xd>, <Xn>
         {
             uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
             uint64_t bits23_21 = opbits( 21, 3 );
+            uint64_t bits23_10 = opbits( 10, 14 );
             uint64_t bits15_10 = opbits( 10, 6 );
             uint64_t bit11 = opbit( 11 );
             uint64_t bit10 = opbit( 10 );
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
 
-            if ( 4 == bits23_21 ) // csinv + csneg
+            if ( 0xda == hi8 && 0x3002 == bits23_10 ) // rev32
+                tracer.Trace( "rev32 %s, %s\n", reg_or_zr( d, true ), reg_or_zr2( n, true ) );
+            else if ( 0x3001 == bits23_10 ) // rev16
+                tracer.Trace( "rev16 %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ) );
+            else if ( 4 == bits23_21 ) // csinv + csneg
             {
                 if ( bit11 )
                     unhandled();
@@ -2096,7 +2101,7 @@ void Arm64::trace_state()
                               // FSQRT <Vd>.<T>, <Vn>.<T>             ;    UMLSL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; NOT <Vd>.<T>, <Vn>.<T>
                               // UADDLP <Vd>.<Ta>, <Vn>.<Tb>          ;    UADALP <Vd>.<Ta>, <Vn>.<Tb>          ;    CMLE <Vd>.<T>, <Vn>.<T>, #0
                               // UQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>        ;    FCMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                              // CMGE <Vd>.<T>, <Vn>.<T>, #0
+                              // CMGE <Vd>.<T>, <Vn>.<T>, #0          ;    REV32 <Vd>.<T>, <Vn>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t m = opbits( 16, 5 );
@@ -2116,7 +2121,13 @@ void Arm64::trace_state()
             uint64_t bits16_10 = opbits( 10, 7 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( bit21 && 0 == bits20_17 && 0x22 == bits16_10 ) // CMGE <Vd>.<T>, <Vn>.<T>, #0
+            if ( bit21 && 0 == bits20_16 && 2 == bits15_10 ) // REV32 <Vd>.<T>, <Vn>.<T>
+            {
+                if ( size > 1 )
+                    unhandled();
+                tracer.Trace( "rev32 v%llu.%s, v%llu.%s\n", d, pT, n, pT );
+            }
+            else if ( bit21 && 0 == bits20_17 && 0x22 == bits16_10 ) // CMGE <Vd>.<T>, <Vn>.<T>, #0
                 tracer.Trace( "cmge v%llu.%s, v%llu.%s, #0\n", d, pT, n, pT );
             else if ( 1 == bits23_21 && 0 == bits20_16 && 0x16 == bits15_10 ) // NOT <Vd>.<T>, <Vn>.<T>. AKA MVN
             {
@@ -2476,7 +2487,7 @@ void Arm64::trace_state()
                               // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>           ;   SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                               // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; SADDLP <Vd>.<Ta>, <Vn>.<Tb>     ;   SADDLV <V><d>, <Vn>.<T>        ;    SADALP <Vd>.<Ta>, <Vn>.<Tb>
                               // SQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>       ;    CMGT <Vd>.<T>, <Vn>.<T>, #0       ;   CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                              // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                              // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;  REV16 <Vd>.<T>, <Vn>.<T>
         {
             uint64_t Q = opbit( 30 );
             uint64_t imm5 = opbits( 16, 5 );
@@ -2493,7 +2504,15 @@ void Arm64::trace_state()
             uint64_t bits14_10 = opbits( 10, 5 );
             uint64_t bits15_10 = opbits( 10, 6 );
 
-            if ( !bit23 && bit21 && 0x39 == bits15_10 ) // FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            if ( bit21 && 0 == bits20_16 && 6 == bits15_10 ) // REV16 <Vd>.<T>, <Vn>.<T>
+            {
+                uint64_t size = opbits( 22, 2 );
+                if ( 0 != size )
+                    unhandled();
+                const char * pT = Q ? "16b" : "8b";
+                tracer.Trace( "rev16 v%llu.%s, v%llu.%s\n", d, pT, n, pT );
+            }
+            else if ( !bit23 && bit21 && 0x39 == bits15_10 ) // FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t sz = opbit( 22 );
@@ -4858,8 +4877,8 @@ uint64_t Arm64::run( void )
                 trace_vregs();
                 break;
             }
-            case 0x5a: // REV <Wd>, <Wn>    ;    CSINV <Wd>, <Wn>, <Wm>, <cond>    ;    RBIT <Wd>, <Wn>    ;    CLZ <Wd>, <Wn>    ;    CSNEG <Wd>, <Wn>, <Wm>, <cond>    ;    SBC <Wd>, <Wn>, <Wm>
-            case 0xda: // REV <Xd>, <Xn>    ;    CSINV <Xd>, <Xn>, <Xm>, <cond>    ;    RBIT <Xd>, <Xn>    ;    CLZ <Xd>, <Xn>    ;    CSNEG <Xd>, <Xn>, <Xm>, <cond>    ;    SBC <Xd>, <Xn>, <Xm>
+            case 0x5a: // REV <Wd>, <Wn>  ;  CSINV <Wd>, <Wn>, <Wm>, <cond>  ;  RBIT <Wd>, <Wn>  ;  CLZ <Wd>, <Wn>  ;  CSNEG <Wd>, <Wn>, <Wm>, <cond>  ;  SBC <Wd>, <Wn>, <Wm> ; REV16 <Wd>, <Wn>
+            case 0xda: // REV <Xd>, <Xn>  ;  CSINV <Xd>, <Xn>, <Xm>, <cond>  ;  RBIT <Xd>, <Xn>  ;  CLZ <Xd>, <Xn>  ;  CSNEG <Xd>, <Xn>, <Xm>, <cond>  ;  SBC <Xd>, <Xn>, <Xm> ; REV16 <Xd>, <Xn>
             {
                 uint64_t xregs = ( 0 != ( 0x80 & hi8 ) );
                 uint64_t opc = opbits( 10, 2 ); // 2 or 3 for container size
@@ -4867,6 +4886,7 @@ uint64_t Arm64::run( void )
                 uint64_t container_size = ( 8ull << opc );
                 uint64_t containers = data_size / container_size;
                 uint64_t bits23_21 = opbits( 21, 3 );
+                uint64_t bits23_10 = opbits( 10, 14 );
                 uint64_t bits15_10 = opbits( 10, 6 );
                 uint64_t bit11 = opbit( 11 );
                 uint64_t bit10 = opbit( 10 );
@@ -4875,7 +4895,15 @@ uint64_t Arm64::run( void )
                 uint64_t result = 0;
                 uint64_t nval = val_reg_or_zr( n );
 
-                if ( 4 == bits23_21 ) // csinv / csneg
+                if ( 0x3001 == bits23_10 ) // rev16
+                {
+                    for ( uint64_t c = 0; c < containers; c++ )
+                    {
+                        uint64_t container = get_elem_bits( nval, c, container_size );
+                        result |= flip_endian16( (uint16_t) get_elem_bits( container, c, container_size ) );
+                    }
+                }
+                else if ( 4 == bits23_21 ) // csinv / csneg
                 {
                     if ( bit11 )
                         unhandled();
@@ -4910,7 +4938,10 @@ uint64_t Arm64::run( void )
                         for ( uint64_t c = 0; c < containers; c++ )
                         {
                             uint64_t container = get_elem_bits( nval, c, container_size );
-                            result |= get_elem_bits( reverse_bytes( container, 8 ), c, container_size );
+                            if ( 32 == container_size )
+                                result |= get_elem_bits( flip_endian32( (uint32_t) container ), c, container_size );
+                            else
+                                result |= get_elem_bits( flip_endian64( container ), c, container_size );
                         }
                     }
                     else if ( 4 == bits15_10 ) // clz
@@ -5796,7 +5827,7 @@ uint64_t Arm64::run( void )
                                   // FSQRT <Vd>.<T>, <Vn>.<T>             ;    UMLSL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; NOT <Vd>.<T>, <Vn>.<T>
                                   // UADDLP <Vd>.<Ta>, <Vn>.<Tb>          ;    UADALP <Vd>.<Ta>, <Vn>.<Tb>          ;    CMLE <Vd>.<T>, <Vn>.<T>, #0
                                   // UQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>        ;    FCMGT <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMGE <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                                  // CMGE <Vd>.<T>, <Vn>.<T>, #0
+                                  // CMGE <Vd>.<T>, <Vn>.<T>, #0          ;    REV32 <Vd>.<T>, <Vn>.<T>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t m = opbits( 16, 5 );
@@ -5823,7 +5854,18 @@ uint64_t Arm64::run( void )
 
                 if ( bit21 )
                 {
-                    if ( 0 == bits20_17 && 0x22 == bits16_10 ) // CMGE <Vd>.<T>, <Vn>.<T>, #0
+                    if ( 0 == bits20_16 && 2 == bits15_10 ) // REV32 <Vd>.<T>, <Vn>.<T>
+                    {
+                        if ( size > 1 )
+                            unhandled();
+                        uint64_t csize = 32;
+                        uint64_t containers = datasize / csize;
+                        vec16_t target = { 0 };
+                        for ( uint64_t c = 0; c < containers; c++ )
+                            target.ui32[ c ] = flip_endian32( vregs[ n ].ui32[ c ] );
+                        vregs[ d ] = target;
+                    }
+                    else if ( 0 == bits20_17 && 0x22 == bits16_10 ) // CMGE <Vd>.<T>, <Vn>.<T>, #0
                     {
                         vec16_t target = { 0 };
                         for ( uint64_t e = 0; e < elements; e++ )
@@ -6833,7 +6875,7 @@ uint64_t Arm64::run( void )
                                   // FCMLT <Vd>.<T>, <Vn>.<T>, #0.0      ;    FABS <Vd>.<T>, <Vn>.<T>           ;   SMLAL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb>
                                   // SADDL{2} <Vd>.<Ta>, <Vn>.<Tb>, <Vm>.<Tb> ; SADDLP <Vd>.<Ta>, <Vn>.<Tb>     ;   SADDLV <V><d>, <Vn>.<T>        ;    SADALP <Vd>.<Ta>, <Vn>.<Tb>
                                   // SQXTN{2} <Vd>.<Tb>, <Vn>.<Ta>       ;    CMGT <Vd>.<T>, <Vn>.<T>, #0       ;   CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
-                                  // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                                  // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>   ;    FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T> ;  REV16 <Vd>.<T>, <Vn>.<T>
             {
                 uint64_t Q = opbit( 30 );
                 uint64_t imm5 = opbits( 16, 5 );
@@ -6853,7 +6895,20 @@ uint64_t Arm64::run( void )
 
                 if ( bit21 )
                 {
-                    if ( !bit23 && 0x39 == bits15_10 ) // FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+                    if ( 0 == bits20_16 && 6 == bits15_10 ) // REV16 <Vd>.<T>, <Vn>.<T>
+                    {
+                        uint64_t size = opbits( 22, 2 );
+                        if ( 0 != size )
+                            unhandled();
+
+                        uint64_t csize = 16;
+                        uint64_t containers = datasize / csize;
+                        vec16_t target = { 0 };
+                        for ( uint64_t c = 0; c < containers; c++ )
+                            target.ui16[ c ] = flip_endian16( vregs[ n ].ui16[ c ] );
+                        vregs[ d ] = target;
+                    }
+                    else if ( !bit23 && 0x39 == bits15_10 ) // FCMEQ <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
                     {
                         uint64_t m = opbits( 16, 5 );
                         uint64_t sz = opbit( 22 );
