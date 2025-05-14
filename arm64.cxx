@@ -3910,6 +3910,8 @@ uint64_t Arm64::run( void )
                 trace_state();
         }
 
+        cycles++;
+
         switch ( hi8 )
         {
             case 0: // UDF
@@ -9275,7 +9277,6 @@ uint64_t Arm64::run( void )
         }
 
         pc += 4;
-        cycles++;
     } //for
 
     return cycles;
