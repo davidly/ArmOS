@@ -12,7 +12,7 @@ elif [ "$1" = "rvoscl" ]; then
     _armoscmd="../rvos/rvoscl -h:200 ../rvos/bin/armos -h:100"
 fi    
 
-outputfile="linux_test.txt"
+outputfile="runall_test.txt"
 date_time=$(date)
 echo "$date_time" >$outputfile
 
