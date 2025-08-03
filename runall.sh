@@ -4,6 +4,8 @@ _armoscmd="armos"
 
 if [ "$1" = "nested" ]; then
     _armoscmd="armos -h:200 bin/armos"
+elif [ "$1" = "native" ]; then
+    _armoscmd=""
 elif [ "$1" = "armoscl" ]; then
     _armoscmd="armoscl -h:200"
 elif [ "$1" = "rvos" ]; then
