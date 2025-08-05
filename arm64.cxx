@@ -2519,12 +2519,12 @@ void Arm64::trace_state()
                 const char * pT = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
                 tracer.Trace( "fcmeq v%llu.%s, v%llu.%s, v%llu.%s\n", d, pT, n, pT, m, pT );
             }
-            else if ( bit21 && 0x3d == bits15_10 ) // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
+            else if ( bit21 && 0x3d == bits15_10 ) // FMIN <Vd>.<T>, <Vn>.<T>, <Vm>.<T>  ;  FMAX <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
                 uint64_t m = opbits( 16, 5 );
                 uint64_t sz = opbit( 22 );
                 const char * pT = sz ? Q ? "2d" : "reserved" : Q ? "4s" : "2s";
-                tracer.Trace( "fmin v%llu.%s, v%llu.%s, %llu.%s\n", d, pT, n, pT, m, pT );
+                tracer.Trace( "%s v%llu.%s, v%llu.%s, %llu.%s\n", bit23 ? "fmin" : "fmax", d, pT, n, pT, m, pT );
             }
             else if ( bit21 && 0x23 == bits15_10 ) // CMTST <Vd>.<T>, <Vn>.<T>, <Vm>.<T>
             {
@@ -6955,7 +6955,7 @@ uint64_t Arm64::run( void )
                                         result = MY_NAN;
                                 }
                                 else
-                                    result = (float) do_fmin( nval, mval );
+                                    result = (float) ( bit23 ? do_fmin( nval, mval ) : do_fmax( nval, mval ) );
                                 vregs[ d ].f[ e ] = result;
                             }
                             else if ( 8 == ebytes )
@@ -6974,7 +6974,7 @@ uint64_t Arm64::run( void )
                                         result = MY_NAN;
                                 }
                                 else
-                                    result = do_fmin( nval, mval );
+                                    result = bit23 ? do_fmin( nval, mval ) : do_fmax( nval, mval );
                                 vregs[ d ].d[ e ] = result;
                             }
                             else
