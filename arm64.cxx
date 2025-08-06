@@ -8,6 +8,7 @@
     Written by David Lee in October 2024
 
     Useful: https://developer.arm.com/
+            e.g.: https://developer.arm.com/documentation/ddi0596/2020-12/SIMD-FP-Instructions/FMAX--vector---Floating-point-Maximum--vector--
             https://mariokartwii.com/armv8/ch16.html
 */
 
