@@ -8128,7 +8128,7 @@ uint64_t Arm64::run( void )
                     if ( 0 == ftype )
                         vregs[ d ].f[ 0 ] = (float) round_double( vregs[ n ].f[ 0 ], FPRounding_POSINF );
                     else if ( 1 == ftype )
-                        vregs[ d ].d[ 0 ] = round_double( vregs[ n ].d[ 0 ], FPRounding_ZERO );
+                        vregs[ d ].d[ 0 ] = round_double( vregs[ n ].d[ 0 ], FPRounding_POSINF );
                     else
                         unhandled();
                 }
