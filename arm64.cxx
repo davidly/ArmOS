@@ -8243,7 +8243,7 @@ uint64_t Arm64::run( void )
                     if ( 0 == ftype )
                         vregs[ d ].setf( 0, (float) round_double( vregs[ n ].getf( 0 ), FPRounding_POSINF ) );
                     else if ( 1 == ftype )
-                        vregs[ d ].setd( 0, round_double( vregs[ n ].getd( 0 ), FPRounding_ZERO ) );
+                        vregs[ d ].setd( 0, round_double( vregs[ n ].getd( 0 ), FPRounding_POSINF ) );
                     else
                         unhandled();
                 }
