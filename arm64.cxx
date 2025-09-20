@@ -4797,11 +4797,11 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             if ( 1 == ebytes )
-                                target.set8( 0, (uint8_t) ( vregs[ n ].get16( e ) >> shift ) );
+                                target.set8( e, (uint8_t) ( vregs[ n ].get16( e ) >> shift ) );
                             else if ( 2 == ebytes )
-                                target.set16( 0, (uint16_t) ( vregs[ n ].get32( e ) >> shift ) );
+                                target.set16( e, (uint16_t) ( vregs[ n ].get32( e ) >> shift ) );
                             else if ( 4 == ebytes )
-                                target.set32( 0, (uint32_t) ( vregs[ n ].get64( e ) >> shift ) );
+                                target.set32( e, (uint32_t) ( vregs[ n ].get64( e ) >> shift ) );
                             else
                                 unhandled();
                         }
