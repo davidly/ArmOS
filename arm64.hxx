@@ -23,15 +23,45 @@ extern void emulator_hard_termination( Arm64 & cpu, const char *pcerr, uint64_t 
 
 typedef struct vec16_t
 {
-    union
-    {
-        uint64_t ui64[ 2 ];
-        uint32_t ui32[ 4 ];
-        uint16_t ui16[ 8 ];
-        uint8_t ui8[ 16 ];
-        double d[ 2 ];
-        float f[ 4 ];
-    };
+    #ifdef TARGET_BIG_ENDIAN
+        uint16_t get16( uint64_t elem ) { return flip_endian16( ui16[ elem ] ); }
+        void set16( uint64_t elem, uint16_t val ) { ui16[ elem ] = flip_endian16( val ); }
+        uint32_t get32( uint64_t elem ) { return flip_endian32( ui32[ elem ] ); }
+        void set32( uint64_t elem, uint32_t val ) { ui32[ elem ] = flip_endian32( val ); }
+        uint64_t get64( uint64_t elem ) { return flip_endian64( ui64[ elem ] ); }
+        void set64( uint64_t elem, uint64_t val ) { ui64[ elem ] = flip_endian64( val ); }
+        float getf( uint64_t elem ) { uint32_t x = get32( elem ); return * (float *) & x; }
+        void setf( uint64_t elem, float val ) { set32( elem, * (uint32_t *) & val); }
+        double getd( uint64_t elem ) { uint64_t x = get64( elem ); return * (double *) & x; }
+        void setd( uint64_t elem, double val ) { set64( elem, * (uint64_t *) & val); }
+    #else
+        uint16_t get16( uint64_t elem ) { return ui16[ elem ];  }
+        void set16( uint64_t elem, uint16_t val ) { ui16[ elem ] = val; }
+        uint32_t get32( uint64_t elem ) { return ui32[ elem ];  }
+        void set32( uint64_t elem, uint32_t val ) { ui32[ elem ] = val; }
+        uint64_t get64( uint64_t elem ) { return ui64[ elem ];  }
+        void set64( uint64_t elem, uint64_t val ) { ui64[ elem ] = val; }
+        float getf( uint64_t elem ) { return f[ elem ]; }
+        void setf( uint64_t elem, float val ) { f[ elem ] = val; }
+        double getd( uint64_t elem ) { return d[ elem ]; }
+        void setd( uint64_t elem, double val ) { d[ elem ] = val; }
+    #endif
+
+    uint8_t get8( uint64_t elem ) { return ui8[ elem ]; }
+    void set8( uint64_t elem, uint8_t val ) { ui8[ elem ] = val; }
+
+    vec16_t() { ui64[ 0 ] = 0; ui64[ 1 ] = 0; }
+
+    private: // private to force use of the endian-safe member functions
+        union
+        {
+            uint64_t ui64[ 2 ];
+            uint32_t ui32[ 4 ];
+            uint16_t ui16[ 8 ];
+            uint8_t ui8[ 16 ];
+            double d[ 2 ];
+            float f[ 4 ];
+        };
 } vec16_t;
 
 struct Arm64
@@ -113,22 +143,37 @@ struct Arm64
     bool is_address_valid( uint64_t offset ) const
     {
         uint8_t * r = membase + offset;
-        return ( ( r < beyond ) && ( r >= mem ) );  
+        return ( ( r < beyond ) && ( r >= mem ) );
     } //is_address_valid
 
+#ifdef TARGET_BIG_ENDIAN
+    uint64_t getui64( uint64_t o ) { return flip_endian64( * (uint64_t *) getmem( o ) ); }
+    uint32_t getui32( uint64_t o ) { return flip_endian32( * (uint32_t *) getmem( o ) ); }
+    uint16_t getui16( uint64_t o ) { return flip_endian16( * (uint16_t *) getmem( o ) ); }
+    float getfloat( uint64_t o ) { uint32_t x = getui32( o ); return * (float *) & x; }
+    double getdouble( uint64_t o ) { uint64_t x = getui64( o ); return * (double *) & x; }
+
+    void setui64( uint64_t o, uint64_t val ) { * (uint64_t *) getmem( o ) = flip_endian64( val ); }
+    void setui32( uint64_t o, uint32_t val ) { * (uint32_t *) getmem( o ) = flip_endian32( val ); }
+    void setui16( uint64_t o, uint16_t val ) { * (uint16_t *) getmem( o ) = flip_endian16( val ); }
+    void setfloat( uint64_t o, float val ) { uint32_t x = * (uint32_t *) & val; setui32( o, x ); }
+    void setdouble( uint64_t o, double val ) { uint64_t x = * (uint64_t *) & val; setui64( o, x ); }
+#else
     uint64_t getui64( uint64_t o ) { return * (uint64_t *) getmem( o ); }
     uint32_t getui32( uint64_t o ) { return * (uint32_t *) getmem( o ); }
     uint16_t getui16( uint64_t o ) { return * (uint16_t *) getmem( o ); }
-    uint8_t getui8( uint64_t o ) { return * (uint8_t *) getmem( o ); }
     float getfloat( uint64_t o ) { return * (float *) getmem( o ); }
     double getdouble( uint64_t o ) { return * (double *) getmem( o ); }
 
     void setui64( uint64_t o, uint64_t val ) { * (uint64_t *) getmem( o ) = val; }
     void setui32( uint64_t o, uint32_t val ) { * (uint32_t *) getmem( o ) = val; }
     void setui16( uint64_t o, uint16_t val ) { * (uint16_t *) getmem( o ) = val; }
-    void setui8( uint64_t o, uint8_t val ) { * (uint8_t *) getmem( o ) = val; }
     void setfloat( uint64_t o, float val ) { * (float *) getmem( o ) = val; }
     void setdouble( uint64_t o, double val ) { * (double *) getmem( o ) = val; }
+#endif //TARGET_BIG_ENDIAN
+
+    uint8_t getui8( uint64_t o ) { return * (uint8_t *) getmem( o ); }
+    void setui8( uint64_t o, uint8_t val ) { * (uint8_t *) getmem( o ) = val; }
 
     void trace_vregs();
     void force_trace_vregs();
@@ -163,7 +208,7 @@ struct Arm64
     uint64_t extend_reg( uint64_t m, uint64_t extend_type, uint64_t shift, bool fullm = true );
     uint64_t val_reg_or_zr( uint64_t r ) const;
     const char * render_flags() const;
-    template < typename T > ElementComparisonResult compare( T * pl, T * pr );
+    template < typename T > ElementComparisonResult compare( T pl, T pr );
     ElementComparisonResult compare_vector_elements( uint8_t * pl, uint8_t * pr, uint64_t width, bool unsigned_compare );
     uint8_t * vreg_ptr( uint64_t reg, uint64_t offset ) { return offset + (uint8_t *) & ( vregs[ reg ] ); }
     void zero_vreg( uint64_t reg ) { vregs[ reg ] = vec_zeroes; }
