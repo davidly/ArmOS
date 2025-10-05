@@ -36,6 +36,13 @@ do
     done
 done
 
+for arg in e_arm sieve_arm tttu_arm
+do
+    echo $arg
+    echo c_tests/$arg >>$outputfile
+    $_armoscmd c_tests/$arg >>$outputfile
+done
+
 echo test AN
 for opt in 0 1 2 3 fast;
 do

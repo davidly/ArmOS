@@ -30,6 +30,13 @@ set _applist=tcmp t e printint sieve simple tmuldiv tpi ts tarray tbits trw trw2
     ) )
 ) )
 
+set _sapplist=e_arm sieve_arm tttu_arm
+( for %%a in (%_sapplist%) do (
+    echo %%a
+    echo c_tests/%%a>>%outputfile%
+    %_runcmd% c_tests\%%a >>%outputfile%
+) )
+
 echo test AN
 ( for %%f in (%_folderlist%) do (
     echo c_tests/%%f/an david lee>>%outputfile%
