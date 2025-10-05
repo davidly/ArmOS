@@ -25,11 +25,9 @@ do
     done
 done
 
-for arg in sieve_arm e_arm tttu_arm;
-do
-    echo $arg
-    gcc -o $arg $arg.s -march=native -mcpu=native -lpthread -static
-done
+gcc -o e_arm e_arm.s -nostdlib -nostartfiles -nodefaultlibs -march=native -mcpu=native -lpthread -static
+gcc -o sieve_arm sieve_arm.s -nostdlib -nostartfiles -nodefaultlibs -march=native -mcpu=native -lpthread -static
+gcc -o tttu_arm tttu_arm.s -march=native -mcpu=native -lpthread -static
 
 echo "Waiting for all processes to complete..."
 wait
