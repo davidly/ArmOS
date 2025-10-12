@@ -399,71 +399,39 @@ const char * Arm64::render_flags() const
     return ac;
 } //render_flags
 
-static const char * reg_or_sp( uint64_t x, bool xregs )
+static const char * xreg_names[32] =
 {
-    assert( x <= 31 );
-    static char ac[ 10 ];
-    if ( 31 == x )
-        strcpy( ac, "sp" );
-    else
-        snprintf( ac, _countof( ac ), "%c%llu", xregs ? 'x' : 'w', x );
-    return ac;
-} //reg_or_sp
+    "x0",  "x1",   "x2", "x3",  "x4",  "x5",  "x6",  "x7",
+    "x8",  "x9",  "x10", "x11", "x12", "x13", "x14", "x15",
+    "x16", "x17", "x18", "x19", "x20", "x21", "x22", "x23",
+    "x24", "x25", "x26", "x27", "x28", "x29", "x30", "xzr"
+};
 
-static const char * reg_or_sp2( uint64_t x, bool xregs )
+static const char * wreg_names[32] =
 {
-    assert( x <= 31 );
-    static char ac[ 10 ];
-    if ( 31 == x )
-        strcpy( ac, "sp" );
-    else
-        snprintf( ac, _countof( ac ), "%c%llu", xregs ? 'x' : 'w', x );
-    return ac;
-} //reg_or_sp2
+    "w0",  "w1",   "w2", "w3",  "w4",  "w5",  "w6",  "w7",
+    "w8",  "w9",  "w10", "w11", "w12", "w13", "w14", "w15",
+    "w16", "w17", "w18", "w19", "w20", "w21", "w22", "w23",
+    "w24", "w25", "w26", "w27", "w28", "w29", "w30", "wzr"
+};
 
 static const char * reg_or_zr( uint64_t x, bool xregs )
 {
     assert( x <= 31 );
-    static char ac[ 10 ];
-    if ( 31 == x )
-        snprintf( ac, _countof( ac ), "%czr", xregs ? 'x' : 'w' );
-    else
-        snprintf( ac, _countof( ac ), "%c%llu", xregs ? 'x' : 'w', x );
-    return ac;
+    if ( xregs )
+        return xreg_names[ x ];
+
+    return wreg_names[ x ];
 } //reg_or_zr
 
-static const char * reg_or_zr2( uint64_t x, bool xregs )
+static const char * reg_or_sp( uint64_t x, bool xregs )
 {
     assert( x <= 31 );
-    static char ac[ 10 ];
     if ( 31 == x )
-        snprintf( ac, _countof( ac ), "%czr", xregs ? 'x' : 'w' );
-    else
-        snprintf( ac, _countof( ac ), "%c%llu", xregs ? 'x' : 'w', x );
-    return ac;
-} //reg_or_zr2
+        return "sp";
 
-static const char * reg_or_zr3( uint64_t x, bool xregs )
-{
-    assert( x <= 31 );
-    static char ac[ 10 ];
-    if ( 31 == x )
-        snprintf( ac, _countof( ac ), "%czr", xregs ? 'x' : 'w' );
-    else
-        snprintf( ac, _countof( ac ), "%c%llu", xregs ? 'x' : 'w', x );
-    return ac;
-} //reg_or_zr3
-
-static const char * reg_or_zr4( uint64_t x, bool xregs )
-{
-    assert( x <= 31 );
-    static char ac[ 10 ];
-    if ( 31 == x )
-        snprintf( ac, _countof( ac ), "%czr", xregs ? 'x' : 'w' );
-    else
-        snprintf( ac, _countof( ac ), "%c%llu", xregs ? 'x' : 'w', x );
-    return ac;
-} //reg_or_zr4
+    return reg_or_zr( x, xregs );
+} //reg_or_sp
 
 __inline_perf uint64_t Arm64::val_reg_or_zr( uint64_t r ) const
 {
@@ -1516,25 +1484,25 @@ void Arm64::trace_state()
             uint64_t d = opbits( 0, 5 );
 
             if ( 0xda == hi8 && 0x3002 == bits23_10 ) // rev32
-                tracer.Trace( "rev32 %s, %s\n", reg_or_zr( d, true ), reg_or_zr2( n, true ) );
+                tracer.Trace( "rev32 %s, %s\n", reg_or_zr( d, true ), reg_or_zr( n, true ) );
             else if ( 0x3001 == bits23_10 ) // rev16
-                tracer.Trace( "rev16 %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ) );
+                tracer.Trace( "rev16 %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ) );
             else if ( 4 == bits23_21 ) // csinv + csneg
             {
                 if ( bit11 )
                     unhandled();
                 uint64_t m = opbits( 16, 5 );
                 uint64_t cond = opbits( 12, 4 );
-                tracer.Trace( "%s %s, %s, %s, %s\n", bit10 ? "csneg" : "csinv", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ),  reg_or_zr3( m, xregs ), get_cond( cond ) );
+                tracer.Trace( "%s %s, %s, %s, %s\n", bit10 ? "csneg" : "csinv", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ),  reg_or_zr( m, xregs ), get_cond( cond ) );
             }
             else if ( 6 == bits23_21 )
             {
                 if ( 0 == bits15_10 ) // rbit
-                    tracer.Trace( "rbit %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ) );
+                    tracer.Trace( "rbit %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ) );
                 else if ( 2 == bits15_10 || 3 == bits15_10 ) // rev
-                    tracer.Trace( "rev %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ) );
+                    tracer.Trace( "rev %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ) );
                 else if ( 4 == bits15_10 ) // clz
-                    tracer.Trace( "clz %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ) );
+                    tracer.Trace( "clz %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ) );
                 else
                     unhandled();
             }
@@ -1543,7 +1511,7 @@ void Arm64::trace_state()
                 if ( 0 == bits15_10 ) // sbc
                 {
                     uint64_t m = opbits( 16, 5 );
-                    tracer.Trace( "sbc %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                    tracer.Trace( "sbc %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
                 }
                 else
                     unhandled();
@@ -1616,13 +1584,13 @@ void Arm64::trace_state()
             {
                 uint64_t d = opbits( 0, 5 );
                 uint64_t m = opbits( 16, 5 );
-                tracer.Trace( "sbcs %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "sbcs %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             }
             else if ( ( 0x3a == hi8 || 0xba == hi8 ) && 0 == bits23_21 && 0 == bits15_10 ) // ADCS <Xd>, <Xn>, <Xm>
             {
                 uint64_t d = opbits( 0, 5 );
                 uint64_t m = opbits( 16, 5 );
-                tracer.Trace( "adcs %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "adcs %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             }
             else
                 unhandled();
@@ -1667,7 +1635,7 @@ void Arm64::trace_state()
                 uint64_t imm3 = opbits( 10, 3 );
                 tracer.Trace( "%s%s, %s, %s, %s, %s #%llu\n", opname, setflags ? "s" : "",
                               setflags ? reg_or_zr( d, xregs ) : reg_or_sp( d, xregs ),
-                              reg_or_sp2( n, xregs ), reg_or_zr2( m, xregs ),
+                              reg_or_sp( n, xregs ), reg_or_zr( m, xregs ),
                               extend_type( option ), imm3 );
             }
             else // ADD <Xd>, <Xn>, <Xm>{, <shift> #<amount>}
@@ -1676,11 +1644,11 @@ void Arm64::trace_state()
                 uint64_t imm6 = opbits( 10, 6 );
                 if ( issub && ( 31 == d ) )
                     tracer.Trace( "cmp %s, %s { %s #%llu }\n",
-                                  reg_or_zr( n, xregs ), reg_or_zr2( m, xregs ),
+                                  reg_or_zr( n, xregs ), reg_or_zr( m, xregs ),
                                   shift_type( shift ), imm6 );
                 else
                     tracer.Trace( "%s%s %s, %s, %s { %s #%llu }\n", opname, setflags ? "s" : "",
-                                  reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ),
+                                  reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ),
                                   shift_type( shift ), imm6 );
             }
             break;
@@ -1696,7 +1664,7 @@ void Arm64::trace_state()
             uint64_t n = opbits( 5, 5 );
             uint64_t d = opbits( 0, 5 );
             tracer.Trace( "%s %s, %s, #%#llx, lsl #%llu\n", ( 0x91 == hi8 || 0x11 == hi8 ) ? "add" : "sub",
-                          reg_or_sp( d, sf ), reg_or_sp2( n, sf ), imm12, (uint64_t) ( sh ? 12 : 0 ) );
+                          reg_or_sp( d, sf ), reg_or_sp( n, sf ), imm12, (uint64_t) ( sh ? 12 : 0 ) );
             break;
         }
         case 0xd5: // MSR / MRS
@@ -1784,19 +1752,19 @@ void Arm64::trace_state()
             if ( 0x9b == hi8 && 5 == bits23_21 && bit15 ) // UMSUBL <Xd>, <Wn>, <Wm>, <Xa>
                 tracer.Trace( "umsubl x%llu, w%llu, w%llu, x%llu\n", d, n, m, a );
             else if ( 1 == bits23_21 && bit15 ) // smsubl
-                tracer.Trace( "mmsubl %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), reg_or_zr4( a, xregs ) );
+                tracer.Trace( "mmsubl %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ), reg_or_zr( a, xregs ) );
             else if ( 5 == bits23_21 && !bit15 )
-                tracer.Trace( "umaddl %s, %s, %s\n", reg_or_zr( d, true ), reg_or_zr2( n, true ), reg_or_zr3( m, true ) );
+                tracer.Trace( "umaddl %s, %s, %s\n", reg_or_zr( d, true ), reg_or_zr( n, true ), reg_or_zr( m, true ) );
             else if ( 1 == bits23_21 && !bit15 )
-                tracer.Trace( "smaddl %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, false ), reg_or_zr3( m, false ), reg_or_zr4( a, xregs ) );
+                tracer.Trace( "smaddl %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, false ), reg_or_zr( m, false ), reg_or_zr( a, xregs ) );
             else if ( 0 == bits23_21 && !bit15 )
-                tracer.Trace( "madd %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), reg_or_zr4( a, xregs ) );
+                tracer.Trace( "madd %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ), reg_or_zr( a, xregs ) );
             else if ( 0 == bits23_21 && bit15 )
-                tracer.Trace( "msub %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), reg_or_zr4( a, xregs ) );
+                tracer.Trace( "msub %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ), reg_or_zr( a, xregs ) );
             else if ( 6 == bits23_21 && !bit15 && 31 == a )
-                tracer.Trace( "umulh %s, %s, %s\n", reg_or_zr( d, true ), reg_or_zr2( n, true ), reg_or_zr3( m, true ) );
+                tracer.Trace( "umulh %s, %s, %s\n", reg_or_zr( d, true ), reg_or_zr( n, true ), reg_or_zr( m, true ) );
             else if ( 2 == bits23_21 && !bit15 && 31 == a )
-                tracer.Trace( "smulh %s, %s, %s\n", reg_or_zr( d, true ), reg_or_zr2( n, true ), reg_or_zr3( m, true ) );
+                tracer.Trace( "smulh %s, %s, %s\n", reg_or_zr( d, true ), reg_or_zr( n, true ), reg_or_zr( m, true ) );
             else
                 unhandled();
             break;
@@ -1851,11 +1819,11 @@ void Arm64::trace_state()
                     unhandled();
 
                 if ( signedOffset )
-                    tracer.Trace( "stp %s, %s, [%s, #%lld] //so\n", reg_or_zr( t1, xregs ), reg_or_zr2( t2, xregs ), reg_or_sp( n, true ), imm7 );
+                    tracer.Trace( "stp %s, %s, [%s, #%lld] //so\n", reg_or_zr( t1, xregs ), reg_or_zr( t2, xregs ), reg_or_sp( n, true ), imm7 );
                 else if ( preIndex )
-                    tracer.Trace( "stp %s, %s, [%s, #%lld]! //pr\n", reg_or_zr( t1, xregs ), reg_or_zr2( t2, xregs ), reg_or_sp( n, true ), imm7 );
+                    tracer.Trace( "stp %s, %s, [%s, #%lld]! //pr\n", reg_or_zr( t1, xregs ), reg_or_zr( t2, xregs ), reg_or_sp( n, true ), imm7 );
                 else if ( postIndex )
-                    tracer.Trace( "stp %s, %s, [%s] #%lld //po\n", reg_or_zr( t1, xregs ), reg_or_zr2( t2, xregs ), reg_or_sp( n, true ), imm7 );
+                    tracer.Trace( "stp %s, %s, [%s] #%lld //po\n", reg_or_zr( t1, xregs ), reg_or_zr( t2, xregs ), reg_or_sp( n, true ), imm7 );
                 else
                     unhandled();
             }
@@ -1863,11 +1831,11 @@ void Arm64::trace_state()
             {
                 bool se = ( 0 != ( hi8 & 0x40 ) );
                 if ( signedOffset )
-                    tracer.Trace( "ldp%s %s, %s, [%s, #%lld] //so\n", se ? "sw" : "", reg_or_zr( t1, xregs ), reg_or_zr2( t2, xregs ), reg_or_sp( n, true ), imm7 );
+                    tracer.Trace( "ldp%s %s, %s, [%s, #%lld] //so\n", se ? "sw" : "", reg_or_zr( t1, xregs ), reg_or_zr( t2, xregs ), reg_or_sp( n, true ), imm7 );
                 else if ( preIndex )
-                    tracer.Trace( "ldp%s %s, %s, [%s, #%lld]! //pr\n", se ? "sw" : "", reg_or_zr( t1, xregs ), reg_or_zr2( t2, xregs ), reg_or_sp( n, true ), imm7 );
+                    tracer.Trace( "ldp%s %s, %s, [%s, #%lld]! //pr\n", se ? "sw" : "", reg_or_zr( t1, xregs ), reg_or_zr( t2, xregs ), reg_or_sp( n, true ), imm7 );
                 else if ( postIndex )
-                    tracer.Trace( "ldp%s %s, %s, [%s] #%lld //po\n", se ? "sw" : "", reg_or_zr( t1, xregs ), reg_or_zr2( t2, xregs ), reg_or_sp( n, true ), imm7 );
+                    tracer.Trace( "ldp%s %s, %s, [%s] #%lld //po\n", se ? "sw" : "", reg_or_zr( t1, xregs ), reg_or_zr( t2, xregs ), reg_or_sp( n, true ), imm7 );
                 else
                     unhandled();
             }
@@ -1888,11 +1856,11 @@ void Arm64::trace_state()
             bool eor = ( 2 == opbits( 29, 2 ) ); // or eon
 
             if ( ( 0 == imm6 ) && ( 31 == n ) && ( 0 == shift ) && ( 0 == N ) )
-                tracer.Trace( "mov %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( m, xregs ) );
+                tracer.Trace( "mov %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( m, xregs ) );
             else if ( ( 0 == shift ) && ( 0 == imm6 ) )
-                tracer.Trace( "%s %s, %s, %s\n", eor ? ( N ? "eon" : "eor" ) : ( !N ) ? "orr" : "orn", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "%s %s, %s, %s\n", eor ? ( N ? "eon" : "eor" ) : ( !N ) ? "orr" : "orn", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             else
-                tracer.Trace( "%s %s, %s, %s, %s #%llu\n", eor ? ( N ? "eon" : "eor" ) : ( !N ) ? "orr" : "orn", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), shift_type( shift ), imm6 );
+                tracer.Trace( "%s %s, %s, %s, %s #%llu\n", eor ? ( N ? "eon" : "eor" ) : ( !N ) ? "orr" : "orn", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ), shift_type( shift ), imm6 );
             break;
         }
         case 0x32: // ORR <Wd|WSP>, <Wn>, #<imm>
@@ -1921,13 +1889,13 @@ void Arm64::trace_state()
             if ( bit23 && ( 0x13 == ( 0x7f & hi8 ) ) )
             {
                 uint64_t m = opbits( 16, 5 );
-                tracer.Trace( "extr %s, %s, %s, #%llu\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), imms );
+                tracer.Trace( "extr %s, %s, %s, #%llu\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ), imms );
             }
             else
             {
                 uint64_t immr = opbits( 16, 6 );
                 const char * ins = ( 0x13 == hi8 || 0x93 == hi8 ) ? "sbfm" : ( 0x33 == hi8 || 0xb3 == hi8) ? "bfm" : "ubfm";
-                tracer.Trace( "%s %s, %s, #%llu, #%llu\n", ins, reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), immr, imms );
+                tracer.Trace( "%s %s, %s, #%llu, #%llu\n", ins, reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), immr, imms );
             }
             break;
         }
@@ -1945,7 +1913,7 @@ void Arm64::trace_state()
             bool set_flags = ( 0x60 == ( hi8 & 0x60 ) );
             bool xregs = ( 0 != ( hi8 & 0x80 ) );
             tracer.Trace( "%s%s %s, %s, %s, %s, #%llu\n", N ? "bic" : "and", set_flags ? "s" : "",
-                          reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), shift_type( shift ), imm6 );
+                          reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ), shift_type( shift ), imm6 );
             break;
         }
         case 0x10: case 0x30: case 0x50: case 0x70: // ADR <Xd>, <label>
@@ -2034,27 +2002,27 @@ void Arm64::trace_state()
             if ( 0 == bits11_10 && 4 == bits23_21 ) // CSEL
             {
                 uint64_t cond = opbits( 12, 4 );
-                tracer.Trace( "csel %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), get_cond( cond ) );
+                tracer.Trace( "csel %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ), get_cond( cond ) );
             }
             else if ( 1 == bits11_10 && 4 == bits23_21 ) // CSINC <Xd>, XZR, XZR, <cond>
             {
                 uint64_t cond = opbits( 12, 4 );
-                tracer.Trace( "csinc %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ), get_cond( cond ) );
+                tracer.Trace( "csinc %s, %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ), get_cond( cond ) );
             }
             else if ( 2 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // ASRV <Xd>, <Xn>, <Xm>
-                tracer.Trace( "asrv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "asrv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             else if ( 2 == bits11_10 && 6 == bits23_21 && 0 == bits15_12 ) // UDIV <Xd>, <Xn>, <Xm>
-                tracer.Trace( "udiv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "udiv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             else if ( 3 == bits11_10 && 6 == bits23_21 && 0 == bits15_12 ) // SDIV <Xd>, <Xn>, <Xm>
-                tracer.Trace( "sdiv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "sdiv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             else if ( 1 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // lsrv
-                tracer.Trace( "lsrv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "lsrv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             else if ( 0 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // lslv
-                tracer.Trace( "lslv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "lslv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             else if ( 0 == bits11_10 && 0 == bits23_21 && 0 == bits15_12 && 0 == bits11_10 ) // addc
-                tracer.Trace( "addc %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "addc %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             else if ( 3 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // RORV <Xd>, <Xn>, <Xm>
-                tracer.Trace( "rorv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), reg_or_zr3( m, xregs ) );
+                tracer.Trace( "rorv %s, %s, %s\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), reg_or_zr( m, xregs ) );
             else
                 unhandled();
             break;
@@ -2078,7 +2046,7 @@ void Arm64::trace_state()
                 uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
-                tracer.Trace( "eor %s, %s, #%#llx\n", reg_or_sp( d, xregs ), reg_or_sp2( n, xregs ), op2 );
+                tracer.Trace( "eor %s, %s, #%#llx\n", reg_or_sp( d, xregs ), reg_or_sp( n, xregs ), op2 );
             }
             break;
         }
@@ -3326,7 +3294,7 @@ void Arm64::trace_state()
                 if ( bit23 )
                     tracer.Trace( "stlr %s, [%s]\n", reg_or_zr( t, bit30 ), reg_or_sp( n, bit30 ) );
                 else
-                    tracer.Trace( "%s %s, %s, [ %s ]\n", ( 1 == oO ) ? "stlxr" : "stxr", reg_or_zr( s, false ), reg_or_zr2( t, ( 0xc8 == hi8 ) ), reg_or_sp( n, true ) );
+                    tracer.Trace( "%s %s, %s, [ %s ]\n", ( 1 == oO ) ? "stlxr" : "stxr", reg_or_zr( s, false ), reg_or_zr( t, ( 0xc8 == hi8 ) ), reg_or_sp( n, true ) );
             }
             else if ( 2 == L ) // ldxr and ldaxr
             {
@@ -3380,7 +3348,7 @@ void Arm64::trace_state()
                 uint64_t op2 = decode_logical_immediate( N_immr_imms, xregs ? 64 : 32 );
                 uint64_t n = opbits( 5, 5 );
                 uint64_t d = opbits( 0, 5 );
-                tracer.Trace( "ands %s, %s, #%#llx\n", reg_or_zr( d, xregs ), reg_or_zr2( n, xregs ), op2 );
+                tracer.Trace( "ands %s, %s, #%#llx\n", reg_or_zr( d, xregs ), reg_or_zr( n, xregs ), op2 );
             }
             break;
         }
@@ -3455,7 +3423,7 @@ void Arm64::trace_state()
                 uint64_t m = opbits( 16, 5 );
                 uint64_t shift = opbit( 12 );
                 uint64_t option = opbits( 13, 3 );
-                tracer.Trace( "ldr%s %s, [%s, %s, %s #%llu]\n", suffix, reg_or_zr( t, xregs ), reg_or_sp( n, true ), reg_or_zr2( m, true ),
+                tracer.Trace( "ldr%s %s, [%s, %s, %s #%llu]\n", suffix, reg_or_zr( t, xregs ), reg_or_sp( n, true ), reg_or_zr( m, true ),
                               extend_type( option ), ( 0 == shift ) ? 0ull : xregs ? 3ull : 2ull );
             }
             else if ( 4 == opc || 6 == opc ) // LDRSW <Xt>, [<Xn|SP>], #<simm>    ;    LDRSW <Xt>, [<Xn|SP>, #<simm>]!
@@ -3496,17 +3464,17 @@ void Arm64::trace_state()
                 bool tIsX = ( 5 == opc );
 
                 if ( 0xb8 == hi8 )
-                    tracer.Trace( "ldrsw %s, [%s, %s, %s, %llu]\n", reg_or_zr( t, true ), reg_or_sp( n, true ), reg_or_zr2( m, option & 1 ), extend_type( option ), shift ? 2 : 0 );
+                    tracer.Trace( "ldrsw %s, [%s, %s, %s, %llu]\n", reg_or_zr( t, true ), reg_or_sp( n, true ), reg_or_zr( m, option & 1 ), extend_type( option ), shift ? 2 : 0 );
                 else if ( 0x38 == hi8 )
                 {
                     if ( 3 == option )
                         tracer.Trace( "ldrsb %s, [%s, x%llu {, LSL %lluu}]\n", reg_or_zr( t, tIsX ), reg_or_sp( n, true ), m, shift );
                     else
-                        tracer.Trace( "ldrsb %s, [%s, %s, %s {#%llu}]\n", reg_or_zr( t, tIsX ), reg_or_sp( n, true ), reg_or_zr2( m, mIsX ), extend_type( option ), shift );
+                        tracer.Trace( "ldrsb %s, [%s, %s, %s {#%llu}]\n", reg_or_zr( t, tIsX ), reg_or_sp( n, true ), reg_or_zr( m, mIsX ), extend_type( option ), shift );
                 }
                 else if ( 0x78 == hi8 )
                     tracer.Trace( "ldrsh %s, [%s, %s {, %s #%llu}]\n", reg_or_zr( t, tIsX ), reg_or_sp( n, true ),
-                                  reg_or_zr2( m, mIsX ), extend_type( option ), shift );
+                                  reg_or_zr( m, mIsX ), extend_type( option ), shift );
                 else
                     unhandled();
             }

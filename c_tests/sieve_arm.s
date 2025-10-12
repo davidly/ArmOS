@@ -26,7 +26,7 @@
 //           printf("%d primes.\n",count);           /*primes found in 10th pass */
 //           return 0;
 //           }
-
+//
 // k x20
 // flags x21
 // size x22

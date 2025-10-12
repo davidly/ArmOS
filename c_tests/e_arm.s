@@ -87,7 +87,7 @@ _start:
 
   _inner:
     udiv     x1, x24, x25
-    msub     x0, x1, x25, x24             // x0 = x24 - ( x1 / x25 )
+    msub     x0, x1, x25, x24             // x0 = x24 - ( x1 * x25 )
     strh     w0, [x21], #-2               // post-decrement x21 after the store
     ldrh     w0, [x21]
     madd     x24, x0, x26, x1             // x24 = ( x0 * x26 ) + x1
