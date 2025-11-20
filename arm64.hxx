@@ -50,7 +50,8 @@ typedef struct vec16_t
     uint8_t get8( uint64_t elem ) { return ui8[ elem ]; }
     void set8( uint64_t elem, uint8_t val ) { ui8[ elem ] = val; }
 
-    vec16_t() { ui64[ 0 ] = 0; ui64[ 1 ] = 0; }
+    vec16_t() { zero(); }
+    void zero() { ui64[ 0 ] = 0; ui64[ 1 ] = 0; }
 
     private: // private to force use of the endian-safe member functions
         union

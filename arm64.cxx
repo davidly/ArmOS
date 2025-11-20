@@ -3,11 +3,12 @@
     Only physical memory is supported.
     Only Base and SIMD&FP instructions are supported.
     Many instructions (30%?) are not yet implemented.
-    I only implemented instructions g++, clang, or Rust compilers emit or use in their runtimes.
+    I only implemented instructions g++, clang, or Rust compilers emit or use in their runtimes for a handful of test apps.
 
     Written by David Lee in October 2024
 
     Useful: https://developer.arm.com/
+            https://developer.arm.com/documentation/111182/2025-09_ASL1/SIMD-FP-Instructions/MVNI--Move-inverted-immediate--vector--?lang=en
             https://mariokartwii.com/armv8/ch16.html
 */
 
@@ -276,10 +277,10 @@ static uint64_t get_bit( uint64_t x, uint64_t bit_number )
 
 static uint64_t gen_bitmask( uint64_t n )
 {
-  if ( 0 == n )
-      return 0;
+    if ( 0 == n )
+        return 0;
 
-  return ( ~0ull ) >> ( 64ull - n );
+    return ( ~0ull ) >> ( 64ull - n );
 } //gen_bitmask
 
 static uint64_t get_elem_bits( uint64_t val, uint64_t c, uint64_t container_size )
@@ -1122,13 +1123,13 @@ void Arm64::trace_state()
             break;
         }
         case 0x0f: case 0x2f: case 0x4f: case 0x6f: case 0x7f:
-            // BIC <Vd>.<T>, #<imm8>{, LSL #<amount>}    ;    MOVI <Vd>.<T>, #<imm8>{, LSL #0}    ;    MVNI <Vd>.<T>, #<imm8>, MSL #<amount>
-            // USHR <Vd>.<T>, <Vn>.<T>, #<shift>         ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]
+            // BIC <Vd>.<T>, #<imm8>{, LSL #<amount>}    ;    MOVI <Vd>.<T>, #<imm8>{, LSL #0}    ;          MVNI <Vd>.<T>, #<imm8>, MSL #<amount>
+            // USHR <Vd>.<T>, <Vn>.<T>, #<shift>         ;    FMUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>]  ; MVNI <Vd>.<T>, #<imm8>{, LSL #<amount>}
             // FMOV <Vd>.<T>, #<imm>                     ;    FMOV <Vd>.<T>, #<imm>               ;    FMOV <Vd>.2D, #<imm>
             // USHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>   ;    SHRN{2} <Vd>.<Tb>, <Vn>.<Ta>, #<shift>  ;   SSHLL{2} <Vd>.<Ta>, <Vn>.<Tb>, #<shift>
             // FMLA <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ;  SSHR <Vd>.<T>, <Vn>.<T>, #<shift>   ;    SHL <Vd>.<T>, <Vn>.<T>, #<shift>
             // MUL <Vd>.<T>, <Vn>.<T>, <Vm>.<Ts>[<index>] ;   URSRA <Vd>.<T>, <Vn>.<T>, #<shift>  ;    USRA <Vd>.<T>, <Vn>.<T>, #<shift>
-            // ORR <Vd>.<T>, #<imm8>{, LSL #<amount>}    ;    MOVI <Vd>.<T>, #<imm8>, MSL #<amount>
+            // ORR <Vd>.<T>, #<imm8>{, LSL #<amount>}    ;    MOVI <Vd>.<T>, #<imm8>, MSL #<amount>  ; 
         {
             uint64_t cmode = opbits( 12, 4 );
             uint64_t abc = opbits( 16, 3 );
@@ -1172,7 +1173,7 @@ void Arm64::trace_state()
                         unhandled();
                 }
                 else if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 &&
-                     ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xf ) ) ) ) // mvni
+                     ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xe ) ) ) ) // mvni
                 {
                     if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
                     {
@@ -1186,7 +1187,7 @@ void Arm64::trace_state()
                         const char * pT = Q ? "4S" : "2S";
                         tracer.Trace( "mvni v%llu.%s, #%#llx, lsl #%llu\n", d, pT, val, amount );
                     }
-                    else if ( 0xc == ( cmode & 0xf ) ) // 32-bit shifting ones
+                    else if ( 0xc == ( cmode & 0xe ) ) // 32-bit shifting ones
                     {
                         imm = adv_simd_expand_imm( 1, cmode, val );
                         uint64_t amount = get_bit( cmode, 0 ) ? 16 : 8;
@@ -4384,7 +4385,7 @@ uint64_t Arm64::run( void )
 
                     }
                     else if ( ( 0x2f == hi8 || 0x6f == hi8 ) && !bit11 && bit10 && // MOVI <Vd>.<T>, #<imm8>{, LSL #0}    ;    MVNI <Vd>.<T>, #<imm8>, MSL #<amount>
-                              ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xf ) ) ) ) // mvni
+                              ( ( 8 == ( cmode & 0xd ) ) || ( 0 == ( cmode & 9 ) ) || ( 0xc == ( cmode & 0xe ) ) ) ) // mvni
                     {
                         if ( 8 == ( cmode & 0xd ) ) // 16-bit shifted immediate
                         {
@@ -4402,7 +4403,7 @@ uint64_t Arm64::run( void )
                             for ( uint64_t o = 0; o < ( Q ? 4 : 2 ); o++ )
                                 vregs[ d ].set32( o, invval );
                         }
-                        else if ( 0xc == ( cmode & 0xf ) ) // 32-bit shifting ones
+                        else if ( 0xc == ( cmode & 0xe ) ) // 32-bit shifting ones
                         {
                             uint64_t invimm = (uint64_t) ~imm;
                             vregs[ d ].set64( 0, invimm );
