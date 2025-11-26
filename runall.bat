@@ -8,6 +8,7 @@ if "%1" == "pi5cl" (set _runcmd=armos -h:160 pi5\bin\armoscl -h:100 )
 if "%1" == "rvos" (set _runcmd=..\rvos\rvos -h:160 ..\rvos\linux\armos -h:100 )
 if "%1" == "m68" (set _runcmd=..\m68\m68 -h:160 ..\m68\armos\armos -h:100 )
 if "%1" == "sparcos" (set _runcmd=..\sparcos\sparcos -h:160 ..\sparcos\bin\armos-sparc.elf -h:100 )
+if "%1" == "x64os" (set _runcmd=..\x64os\x64os -h:160 ..\x64os\bin\armos -h:100 )
 if "%1" == "armosg" (set _runcmd=armosg -h:160 bin\armoscl -h:100 )
 if "%1" == "armoscl" (set _runcmd=armoscl -h:100 )
 

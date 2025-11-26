@@ -482,7 +482,7 @@ declare_array_operations_tests( uint128_t );
     run_##type##20();
 
 #define run_this_test( type ) \
-    run_##type##13();
+    run_##type##16();
 
 int main( int argc, char * argv[] )
 {
