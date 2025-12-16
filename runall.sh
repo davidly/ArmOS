@@ -73,6 +73,13 @@ do
     $_armoscmd c_tests/clangbin$opt/ff . ff.c >>$outputfile
 done
 
+echo test tgets
+for optflag in 0 1 2 3 fast;
+do
+    echo test c_tests/bin$optflag/tgets >>$outputfile
+    $_armoscmd c_tests/bin$optflag/tgets <c_tests/tgets.txt >>$outputfile
+done    
+
 for arg in e ttt fileops ato tap real tphi mysort tmm;
 do
     echo $arg
@@ -82,6 +89,7 @@ do
         $_armoscmd rust_tests/bin$opt/$arg >>$outputfile
     done
 done
+
 
 date_time=$(date)
 echo "$date_time" >>$outputfile
