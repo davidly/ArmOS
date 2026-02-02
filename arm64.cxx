@@ -12,6 +12,8 @@
             https://mariokartwii.com/armv8/ch16.html
 */
 
+#define NOMINMAX // otherwise windows.h overrides things like std::numeric_limits<T>::max()
+
 #include <stdint.h>
 #include <memory.h>
 #include <stdio.h>
@@ -204,6 +206,9 @@ static const char * get_rmode_text( uint64_t rmode )
 
 double Arm64::round_double( double d, FPRounding rounding )
 {
+    if ( isnan( d ) || isinf( d ) )
+        return d;
+
     if ( FPRounding_NEGINF == rounding )
         return floor( d );
     if ( FPRounding_POSINF == rounding )
@@ -225,49 +230,26 @@ double Arm64::round_double( double d, FPRounding rounding )
     return d; // keep the compiler happy
 } //round_double
 
-int32_t Arm64::double_to_fixed_int32( double d, uint64_t fracbits, FPRounding rounding )
+// note that fjcvtzs (when implemented) should return AMD64's INDEFINITE for nan and overflow cases
+
+template <typename T> T Arm64::round_int_from_double( double d, uint64_t fracbits, FPRounding rounding )
 {
-    if ( d >= INT32_MAX )
-        return INT32_MAX;
+    static_assert(std::is_integral<T>::value, "Type must be an integral type.");
 
-    if ( d <= INT32_MIN )
-        return INT32_MIN;
+    d *= ( 1ull << fracbits );
+    d = round_double( d, rounding );
 
-    return (int32_t) round_double( d * ( 1ull << fracbits ), rounding );
-} //double_to_fixed_int32
+    if ( isnan( d ) )
+        return 0; // somewhat odd, but Arm64 does this
 
-uint32_t Arm64::double_to_fixed_uint32( double d, uint64_t fracbits, FPRounding rounding )
-{
-    if ( d >= UINT32_MAX )
-        return UINT32_MAX;
+    if ( d > (double) std::numeric_limits<T>::max() )
+        return std::numeric_limits<T>::max();
 
-    double val = round_double( d * ( 1ull << fracbits ), rounding );
-    if ( val < 0.0 )
-        val = 0.0;
-    return (uint32_t) val;
-} //double_to_fixed_uint32
+    if ( d < (double) std::numeric_limits<T>::min() )
+        return std::numeric_limits<T>::min();
 
-int64_t Arm64::double_to_fixed_int64( double d, uint64_t fracbits, FPRounding rounding )
-{
-    if ( d >= (double) INT64_MAX )
-        return INT64_MAX;
-
-    if ( d <= (double) INT64_MIN )
-        return INT64_MIN;
-
-    return (int64_t) round_double( d * ( 1ull << fracbits ), rounding );
-} //double_to_fixed_int64
-
-uint64_t Arm64::double_to_fixed_uint64( double d, uint64_t fracbits, FPRounding rounding )
-{
-    if ( d >= (double) UINT64_MAX )
-        return UINT64_MAX;
-
-    double val = round_double( d * ( 1ull << fracbits ), rounding );
-    if ( val < 0.0 )
-        val = 0.0;
-    return (uint64_t) val;
-} //double_to_fixed_uint64
+    return (T) d;
+} //round_int_from_double
 
 static uint64_t get_bit( uint64_t x, uint64_t bit_number )
 {
@@ -6154,9 +6136,9 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             if ( 4 == ebytes )
-                                target.set32( e, double_to_fixed_uint32( (double) vregs[ n ].getf( e ), 0, FPRounding_ZERO ) );
+                                target.set32( e, round_int_from_double<uint32_t>( vregs[ n ].getf( e ), 0, FPRounding_ZERO ) );
                             else if ( 8 == ebytes )
-                                target.set64( e, double_to_fixed_uint64( vregs[ n ].getd( e ), 0, FPRounding_ZERO ) );
+                                target.set64( e, round_int_from_double<uint64_t>( vregs[ n ].getd( e ), 0, FPRounding_ZERO ) );
                         }
                         vregs[ d ] = target;
                     }
@@ -6749,13 +6731,13 @@ uint64_t Arm64::run( void )
                     uint64_t sz = opbit( 22 );
                     if ( sz )
                     {
-                        int64_t nval = double_to_fixed_int64( vregs[ n ].getd( 0 ), 0, FPRounding_ZERO );
+                        int64_t nval = round_int_from_double<int64_t>( vregs[ n ].getd( 0 ), 0, FPRounding_ZERO );
                         zero_vreg( d );
                         vregs[ d ].set64( 0, nval );
                     }
                     else
                     {
-                        int32_t nval = double_to_fixed_int32( (double) vregs[ n ].getf( 0 ), 0, FPRounding_ZERO );
+                        int32_t nval = round_int_from_double<int32_t>( (double) vregs[ n ].getf( 0 ), 0, FPRounding_ZERO );
                         zero_vreg( d );
                         vregs[ d ].set32( 0, nval );
                     }
@@ -6840,9 +6822,9 @@ uint64_t Arm64::run( void )
                 else if ( bit23 && bit21 && 0x6e == bits20_10 ) // FCVTZU <V><d>, <V><n>
                 {
                     if ( sz )
-                        vregs[ d ].set64( 0, double_to_fixed_uint64( vregs[ n ].getd( 0 ), 0, FPRounding_ZERO ) );
+                        vregs[ d ].set64( 0, round_int_from_double<uint64_t>( vregs[ n ].getd( 0 ), 0, FPRounding_ZERO ) );
                     else
-                        vregs[ d ].set32( 0, double_to_fixed_uint32( vregs[ n ].getf( 0 ), 0, FPRounding_ZERO ) );
+                        vregs[ d ].set32( 0, round_int_from_double<uint32_t>( vregs[ n ].getf( 0 ), 0, FPRounding_ZERO ) );
                 }
                 else if ( 7 == bits23_21 && 0xd == bits15_10 ) // CMHI D<d>, D<n>, D<m>
                 {
@@ -7451,9 +7433,9 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             if ( 4 == ebytes )
-                                target.set32( e, double_to_fixed_int32( (double) vregs[ n ].getf( e ), 0, FPRounding_ZERO ) );
+                                target.set32( e, round_int_from_double<int32_t>( (double) vregs[ n ].getf( e ), 0, FPRounding_ZERO ) );
                             else if ( 8 == ebytes )
-                                target.set64( e, double_to_fixed_int64( vregs[ n ].getd( e ), 0, FPRounding_ZERO ) );
+                                target.set64( e, round_int_from_double<int64_t>( vregs[ n ].getd( e ), 0, FPRounding_ZERO ) );
                             else
                                 unhandled();
                         }
@@ -8345,35 +8327,35 @@ uint64_t Arm64::run( void )
                     uint64_t result = 0;
 
                     if ( sf )
-                        result = double_to_fixed_int64( src, fracbits, FPRounding_ZERO );
+                        result = round_int_from_double<int64_t>( src, fracbits, FPRounding_ZERO );
                     else
-                        result = (uint32_t) double_to_fixed_int32( src, fracbits, FPRounding_ZERO );
+                        result = (uint32_t) round_int_from_double<int32_t>( src, fracbits, FPRounding_ZERO ); // 0-extend
 
                     regs[ d ] = result;
                 }
                 else if ( 6 == bits21_19 && 0x40 == bits18_10 ) // FCVTMU <Xd>, <Dn>
                 {
                     if ( !sf && 0 == ftype )
-                        regs[ d ] = double_to_fixed_uint32( (double) vregs[ n ].getf( 0 ), 0, FPRounding_NEGINF );
+                        regs[ d ] = round_int_from_double<uint32_t>( (double) vregs[ n ].getf( 0 ), 0, FPRounding_NEGINF );
                     else if ( sf && 0 == ftype )
-                        regs[ d ] = double_to_fixed_uint64( (double) vregs[ n ].getf( 0 ), 0, FPRounding_NEGINF );
+                        regs[ d ] = round_int_from_double<uint64_t>( (double) vregs[ n ].getf( 0 ), 0, FPRounding_NEGINF );
                     else if ( !sf && 1 == ftype )
-                        regs[ d ] = double_to_fixed_uint32( vregs[ n ].getd( 0 ), 0, FPRounding_NEGINF );
+                        regs[ d ] = round_int_from_double<uint32_t>( vregs[ n ].getd( 0 ), 0, FPRounding_NEGINF );
                     else if ( sf && 1 == ftype )
-                        regs[ d ] = double_to_fixed_uint64( vregs[ n ].getd( 0 ), 0, FPRounding_NEGINF );
+                        regs[ d ] = round_int_from_double<uint64_t>( vregs[ n ].getd( 0 ), 0, FPRounding_NEGINF );
                     else
                         unhandled();
                 }
                 else if ( 4 == bits21_19 && 0x100 == bits18_10 ) // FCVTAS <Xd>, <Dn>
                 {
                     if ( !sf && 0 == ftype )
-                        regs[ d ] = (uint32_t) (int32_t) round( vregs[ n ].getf( 0 ) );
+                        regs[ d ] = (uint32_t) round_int_from_double<int32_t>( vregs[ n ].getf( 0 ), 0, FPRounding_TIEEVEN );
                     else if ( sf && 0 == ftype )
-                        regs[ d ] = (uint64_t) (int64_t) (int32_t) round( vregs[ n ].getf( 0 ) );
+                        regs[ d ] = (uint64_t) (int64_t) round_int_from_double<int32_t>( vregs[ n ].getf( 0 ), 0, FPRounding_TIEEVEN );
                     else if ( !sf && 1 == ftype )
-                        regs[ d ] = (uint32_t) (int32_t) round( vregs[ n ].getd( 0 ) );
+                        regs[ d ] = (uint32_t) round_int_from_double<int32_t>( vregs[ n ].getd( 0 ), 0, FPRounding_TIEEVEN );
                     else if ( sf && 1 == ftype )
-                        regs[ d ] = (uint64_t) (int64_t) (int32_t) round( vregs[ n ].getd( 0 ) );
+                        regs[ d ] = (uint64_t) (int64_t) round_int_from_double<int32_t>( vregs[ n ].getd( 0 ), 0, FPRounding_TIEEVEN );
                     else
                         unhandled();
                 }
@@ -8513,19 +8495,9 @@ uint64_t Arm64::run( void )
                         uint64_t fracbits = 64 - scale;
 
                         if ( sf )
-                        {
-                            if ( src > (double) UINT64_MAX )
-                                result = UINT64_MAX;
-                            else
-                                result = double_to_fixed_uint64( src, fracbits, FPRounding_ZERO );
-                        }
+                            result = round_int_from_double<uint64_t>( src, fracbits, FPRounding_ZERO );
                         else
-                        {
-                            if ( src > (double) UINT32_MAX )
-                                result = UINT32_MAX;
-                            else
-                                result = double_to_fixed_uint32( src, fracbits, FPRounding_ZERO );
-                        }
+                            result = round_int_from_double<uint32_t>( src, fracbits, FPRounding_ZERO );
                     }
                     regs[ d ] = result;
                 }
@@ -8746,16 +8718,16 @@ uint64_t Arm64::run( void )
                     if ( 0 == ftype )
                     {
                         if ( sf )
-                            regs[ d ] = double_to_fixed_int64( (double) vregs[ n ].getf( 0 ), 0, FPRounding_ZERO );
+                            regs[ d ] = round_int_from_double<int64_t>( (double) vregs[ n ].getf( 0 ), 0, FPRounding_ZERO );
                         else
-                            regs[ d ] = (uint32_t) double_to_fixed_int32( (double) vregs[ n ].getf( 0 ), 0, FPRounding_ZERO );
+                            regs[ d ] = (uint32_t) round_int_from_double<int32_t>( (double) vregs[ n ].getf( 0 ), 0, FPRounding_ZERO );
                     }
                     else if ( 1 == ftype )
                     {
                         if ( sf )
-                            regs[ d ] = double_to_fixed_int64( vregs[ n ].getd( 0 ), 0, FPRounding_ZERO );
+                            regs[ d ] = round_int_from_double<int64_t>( vregs[ n ].getd( 0 ), 0, FPRounding_ZERO );
                         else
-                            regs[ d ] = (uint32_t) double_to_fixed_int32( vregs[ n ].getd( 0 ), 0, FPRounding_ZERO );
+                            regs[ d ] = (uint32_t) round_int_from_double<int32_t>( vregs[ n ].getd( 0 ), 0, FPRounding_ZERO );
                     }
                     else
                         unhandled();
