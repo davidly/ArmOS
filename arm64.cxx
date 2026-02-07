@@ -116,24 +116,6 @@ static __inline_perf void mcpy( void * d, const void * s, const size_t c ) // me
     }
 } //mcpy
 
-static uint64_t count_bits( uint64_t x )
-{
-#ifdef _M_AMD64
-        return __popcnt64( x ); // less portable, but faster. Not on Q9650 CPU and other older Intel CPUs. use code below instead if needed.
-#elif defined( __aarch64__ )
-        return std::bitset<64>( x ).count();
-#else
-    uint64_t count = 0;
-    while ( 0 != x )
-    {
-        if ( x & 1 )
-            count++;
-        x >>= 1;
-    }
-    return count;
-#endif
-} //count_bits
-
 static uint32_t count_leading_zeroes32( uint32_t x )
 {
 #ifdef _WIN32 // if targeting older CPUs you may need to rebuild with the manual code below
@@ -4510,7 +4492,7 @@ uint64_t Arm64::run( void )
                         uint64_t n = opbits( 5, 5 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
-                        assert( 1 == count_bits( ebytes ) );
+                        assert( 1 == bit_count( ebytes ) );
                         uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
                         uint64_t datasize = 64ull << Q;
                         uint64_t elements = datasize / esize;
@@ -4535,7 +4517,7 @@ uint64_t Arm64::run( void )
                         uint64_t n = opbits( 5, 5 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
-                        assert( 1 == count_bits( ebytes ) );
+                        assert( 1 == bit_count( ebytes ) );
                         uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
                         uint64_t datasize = 64ull << Q;
                         uint64_t elements = datasize / esize;
@@ -4619,7 +4601,7 @@ uint64_t Arm64::run( void )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
-                        assert( 1 == count_bits( ebytes ) );
+                        assert( 1 == bit_count( ebytes ) );
                         uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                         uint64_t datasize = 64ull << Q;
                         uint64_t elements = datasize / esize;
@@ -4643,7 +4625,7 @@ uint64_t Arm64::run( void )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh );
                         uint64_t ebytes = esize / 8;
-                        assert( 1 == count_bits( ebytes ) );
+                        assert( 1 == bit_count( ebytes ) );
                         uint64_t datasize = 64ull << Q;
                         uint64_t elements = datasize / esize;
                         uint64_t shift = ( esize * 2 ) - ( ( immh << 3 ) | immb );
@@ -4704,7 +4686,7 @@ uint64_t Arm64::run( void )
                         uint64_t immb = opbits( 16, 3 );
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t ebytes = esize / 8;
-                        assert( 1 == count_bits( ebytes ) );
+                        assert( 1 == bit_count( ebytes ) );
                         uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
                         uint64_t datasize = 64;
                         uint64_t elements = datasize / esize;
@@ -4732,7 +4714,7 @@ uint64_t Arm64::run( void )
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t ebytes = esize / 8;
                         assert( ebytes <= 4 );
-                        assert( 1 == count_bits( ebytes ) );
+                        assert( 1 == bit_count( ebytes ) );
                         uint64_t datasize = 64;
                         uint64_t part = Q;
                         uint64_t elements = datasize / esize;
@@ -4766,7 +4748,7 @@ uint64_t Arm64::run( void )
                         uint64_t esize = 8ull << highest_set_bit_nz( immh & 0x7 );
                         uint64_t ebytes = esize / 8;
                         assert( ebytes <= 4 );
-                        assert( 1 == count_bits( ebytes ) );
+                        assert( 1 == bit_count( ebytes ) );
                         uint64_t datasize = 64;
                         uint64_t elements = datasize / esize;
                         uint64_t shift = ( ( immh << 3 ) | immb ) - esize;
@@ -4794,7 +4776,7 @@ uint64_t Arm64::run( void )
                         if ( 0x7f == hi8 )
                             esize = 8ull << 3;
                         uint64_t ebytes = esize / 8;
-                        assert( 1 == count_bits( ebytes ) );
+                        assert( 1 == bit_count( ebytes ) );
                         uint64_t datasize = 64ull << Q;
                         if ( 0x7f == hi8 )
                             datasize = esize;
@@ -7921,7 +7903,7 @@ uint64_t Arm64::run( void )
                         uint64_t elements = ( 0 == Q ) ? 1 : 2;
                         uint64_t bitcount = 0;
                         for ( uint64_t x = 0; x < elements; x++ )
-                            bitcount += count_bits( vregs[ n ].get64( x ) );
+                            bitcount += bit_count( vregs[ n ].get64( x ) );
                         vregs[ d ].set64( 0, bitcount );
                         vregs[ d ].set64( 1, 0 );
                     }
