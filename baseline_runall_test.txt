@@ -1,4 +1,4 @@
-Wed 01/28/2026  7:45:05.05 
+Sat 02/07/2026  9:28:01.86 
 c_tests/bin0/tcmp
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -12590,55 +12590,55 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 15
 c_tests/clangbin0/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 15
 c_tests/bin1/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 15
 c_tests/clangbin1/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 15
 c_tests/bin2/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 15
 c_tests/clangbin2/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 15
 c_tests/bin3/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 15
 c_tests/clangbin3/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 15
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 15
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 15
 c_tests/binfast/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 16
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 16
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 16
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 16
 c_tests/clangbinfast/ttime
-before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 1, day 28, hour 10, min 45, sec 19
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 45, sec 19
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 1, day 28, hour 15, min 45, sec 19
+before TZ is set: tz: 'PacificStandardTime+8', year: 2026, month 2, day 7, hour 9, min 28, sec 16
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 2, day 7, hour 12, min 28, sec 16
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 28, sec 16
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 2, day 7, hour 17, min 28, sec 16
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/clangbin0/tm
@@ -13104,8 +13104,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/clangbin0/tf
@@ -13133,8 +13133,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/bin1/tf
@@ -13162,8 +13162,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/clangbin1/tf
@@ -13191,8 +13191,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/bin2/tf
@@ -13220,8 +13220,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/clangbin2/tf
@@ -13249,8 +13249,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/bin3/tf
@@ -13278,8 +13278,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/clangbin3/tf
@@ -13307,8 +13307,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/binfast/tf
@@ -13336,8 +13336,8 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/clangbinfast/tf
@@ -13365,60 +13365,60 @@ log10f of 300: 2.477121
 pi has mantissa: 0.785398, exponent 2
 floor of 1.1: 1.000000 == 1
 ceil of 1.1: 2.000000 == 2
-floor of -1.8: -2.000000 == 4294967294
-ceil of -1.8: -1.000000 == 4294967295
+floor of -1.8: -2.000000 == -2
+ceil of -1.8: -1.000000 == -1
 l,le,l,le,l,le,l,le,l,le,l,le,l,le,l,le,g,ge,g,ge,g,ge,
 test tf completed with great success
 c_tests/bin0/ttt
 starting...
 done
 64930 moves
-21.670000 milliseconds
+22.254999 milliseconds
 c_tests/clangbin0/ttt
 starting...
 done
 64930 moves
-24.452999 milliseconds
+24.709999 milliseconds
 c_tests/bin1/ttt
 starting...
 done
 64930 moves
-14.159000 milliseconds
+14.082000 milliseconds
 c_tests/clangbin1/ttt
 starting...
 done
 64930 moves
-15.246000 milliseconds
+15.501000 milliseconds
 c_tests/bin2/ttt
 starting...
 done
 64930 moves
-14.212000 milliseconds
+14.456000 milliseconds
 c_tests/clangbin2/ttt
 starting...
 done
 64930 moves
-15.329000 milliseconds
+15.549000 milliseconds
 c_tests/bin3/ttt
 starting...
 done
 64930 moves
-11.662000 milliseconds
+11.908000 milliseconds
 c_tests/clangbin3/ttt
 starting...
 done
 64930 moves
-11.634000 milliseconds
+12.049000 milliseconds
 c_tests/binfast/ttt
 starting...
 done
 64930 moves
-11.546000 milliseconds
+11.854000 milliseconds
 c_tests/clangbinfast/ttt
 starting...
 done
 64930 moves
-11.679001 milliseconds
+11.585001 milliseconds
 c_tests/bin0/td
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -71486,7 +71486,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 14
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbin0/fopentst
@@ -71506,7 +71506,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 14
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/bin1/fopentst
@@ -71526,7 +71526,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 14
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbin1/fopentst
@@ -71546,7 +71546,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 15
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/bin2/fopentst
@@ -71566,7 +71566,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 15
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbin2/fopentst
@@ -71586,7 +71586,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 15
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/bin3/fopentst
@@ -71606,7 +71606,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 15
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbin3/fopentst
@@ -71626,7 +71626,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 15
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/binfast/fopentst
@@ -71646,7 +71646,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 15
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbinfast/fopentst
@@ -71666,7 +71666,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 1, day 28, hour 7, min 46, sec 15
+tz: 'PST+8', year: 2026, month 2, day 7, hour 9, min 29, sec 9
 len in pfl: 0
 exiting fopentst with great success
 c_tests/bin0/termiosf
@@ -72426,7 +72426,7 @@ c_tests/sieve_arm
 1899 primes.
 c_tests/tttu_arm
 starting
-923 microseconds (-6)
+964 microseconds (-6)
 1 iterations
 6493 moves
 c_tests/bin0/an david lee
@@ -72871,7 +72871,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-289 ms for 1 iterations
+309 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -72920,7 +72920,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-80 ms for 1 iterations
+85 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -72969,7 +72969,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-77 ms for 1 iterations
+81 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -73018,7 +73018,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-82 ms for 1 iterations
+86 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -73067,7 +73067,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-83 ms for 1 iterations
+86 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -73261,19 +73261,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   7.3788ms
+serial runtime:   7.5672ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   2.3316ms
+serial runtime:   2.4448ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   1.6174ms
+serial runtime:   1.5953ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   1.2066ms
+serial runtime:   1.2393ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -73560,4 +73560,4 @@ sum f32: 465880
 sum u32: 465880
 sum u16: 7128
 exiting matrix multiply testing with great success
-Wed 01/28/2026  7:46:33.45 
+Sat 02/07/2026  9:29:27.43 
