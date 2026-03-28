@@ -2187,6 +2187,7 @@ static const SyscalltoRV X32ToRiscV[] = // per https://gpages.juszkiewicz.com.pl
     { 140, emulator_sys__llseek },
     { 141, emulator_sys_getdents },
     { 142, emulator_sys__newselect },
+    { 146, SYS_writev },
     { 148, SYS_fdatasync },
     { 162, SYS_nanosleep },
     { 163, SYS_mremap },
