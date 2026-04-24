@@ -1,4 +1,4 @@
-Fri 03/27/2026 12:36:36.37 
+Fri 04/24/2026  9:03:08.82 
 c_tests/bin0/tcmp
 uint8_t:
   lt 1 le 1 eq 0 ge 0 gt 0
@@ -12590,55 +12590,55 @@ result of read at offset 512: 512
 result of read at offset 0: 512
 fileops has completed with great success
 c_tests/bin0/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/clangbin0/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/bin1/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/clangbin1/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/bin2/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/clangbin2/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/bin3/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/clangbin3/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/binfast/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/clangbinfast/ttime
-before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 3, day 27, hour 14, min 36, sec 54
-west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 36, sec 54
-TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 3, day 27, hour 19, min 36, sec 54
+before TZ is set: tz: 'PacificDaylightTime+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+east coast time: set tz 'TZ=EST+5' tz: 'EST+5', year: 2026, month 4, day 24, hour 11, min 3, sec 26
+west coast time: set tz 'TZ=PST+8' tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 3, sec 26
+TZ=<blank>: set tz 'TZ=' tz: '', year: 2026, month 4, day 24, hour 16, min 3, sec 26
 c_tests/bin0/tm
 tm has completed with great success
 c_tests/clangbin0/tm
@@ -13373,52 +13373,52 @@ c_tests/bin0/ttt
 starting...
 done
 64930 moves
-49.150002 milliseconds
+49.143002 milliseconds
 c_tests/clangbin0/ttt
 starting...
 done
 64930 moves
-57.865002 milliseconds
+57.726002 milliseconds
 c_tests/bin1/ttt
 starting...
 done
 64930 moves
-28.888000 milliseconds
+28.628000 milliseconds
 c_tests/clangbin1/ttt
 starting...
 done
 64930 moves
-29.534000 milliseconds
+29.325001 milliseconds
 c_tests/bin2/ttt
 starting...
 done
 64930 moves
-29.584000 milliseconds
+28.815001 milliseconds
 c_tests/clangbin2/ttt
 starting...
 done
 64930 moves
-29.642000 milliseconds
+29.399000 milliseconds
 c_tests/bin3/ttt
 starting...
 done
 64930 moves
-23.155001 milliseconds
+22.497999 milliseconds
 c_tests/clangbin3/ttt
 starting...
 done
 64930 moves
-22.989000 milliseconds
+22.878000 milliseconds
 c_tests/binfast/ttt
 starting...
 done
 64930 moves
-22.315001 milliseconds
+22.558001 milliseconds
 c_tests/clangbinfast/ttt
 starting...
 done
 64930 moves
-23.276001 milliseconds
+22.937000 milliseconds
 c_tests/bin0/td
 sprintf double 3.14159265358979311600
 double from printf: 3.14159265358979311600
@@ -71249,7 +71249,6 @@ clk_tck / number of linux ticks per second: 100
 sleepy time ended with great success
 c_tests/bin3/sleeptm
 clk_tck / number of linux ticks per second: 100
-getrusage user time in ms: 1000, system time 0
 sleepy time ended with great success
 c_tests/clangbin3/sleeptm
 clk_tck / number of linux ticks per second: 100
@@ -71487,7 +71486,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 0
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 31
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbin0/fopentst
@@ -71507,7 +71506,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 0
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 31
 len in pfl: 0
 exiting fopentst with great success
 c_tests/bin1/fopentst
@@ -71527,7 +71526,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 0
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 31
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbin1/fopentst
@@ -71547,7 +71546,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 0
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 31
 len in pfl: 0
 exiting fopentst with great success
 c_tests/bin2/fopentst
@@ -71567,7 +71566,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 0
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 31
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbin2/fopentst
@@ -71587,7 +71586,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 0
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 32
 len in pfl: 0
 exiting fopentst with great success
 c_tests/bin3/fopentst
@@ -71607,7 +71606,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 0
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 32
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbin3/fopentst
@@ -71627,7 +71626,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 1
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 32
 len in pfl: 0
 exiting fopentst with great success
 c_tests/binfast/fopentst
@@ -71647,7 +71646,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 1
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 32
 len in pfl: 0
 exiting fopentst with great success
 c_tests/clangbinfast/fopentst
@@ -71667,7 +71666,7 @@ len in pfl: 70
 length of file before initial close: 70
 length from stat: 70
 length from fstat: 70
-tz: 'PST+8', year: 2026, month 3, day 27, hour 11, min 38, sec 1
+tz: 'PST+8', year: 2026, month 4, day 24, hour 8, min 4, sec 32
 len in pfl: 0
 exiting fopentst with great success
 c_tests/bin0/termiosf
@@ -72420,6 +72419,136 @@ tcsetattr
 TIOCGWINSZ 0x5413
 c_cc elements: 0x20
 termiosf completed with great success
+c_tests/bin0/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68b9ac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x499705  "/Users/david/OneDrive/armos/c_tests/bin0/taux"
+0   AT_NULL            terminator       0x0
+c_tests/clangbin0/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68bbac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49b70a  "/Users/david/OneDrive/armos/c_tests/clangbin0/taux"
+0   AT_NULL            terminator       0x0
+c_tests/bin1/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68baac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49a705  "/Users/david/OneDrive/armos/c_tests/bin1/taux"
+0   AT_NULL            terminator       0x0
+c_tests/clangbin1/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68bbac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49b70a  "/Users/david/OneDrive/armos/c_tests/clangbin1/taux"
+0   AT_NULL            terminator       0x0
+c_tests/bin2/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68baac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49a705  "/Users/david/OneDrive/armos/c_tests/bin2/taux"
+0   AT_NULL            terminator       0x0
+c_tests/clangbin2/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68bbac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49b70a  "/Users/david/OneDrive/armos/c_tests/clangbin2/taux"
+0   AT_NULL            terminator       0x0
+c_tests/bin3/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68baac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49a705  "/Users/david/OneDrive/armos/c_tests/bin3/taux"
+0   AT_NULL            terminator       0x0
+c_tests/clangbin3/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68bbac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49b70a  "/Users/david/OneDrive/armos/c_tests/clangbin3/taux"
+0   AT_NULL            terminator       0x0
+c_tests/binfast/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68baac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49a708  "/Users/david/OneDrive/armos/c_tests/binfast/taux"
+0   AT_NULL            terminator       0x0
+c_tests/clangbinfast/taux
+ID  NAME               DATATYPE         VALUE
+--  ----               --------         -----
+25  AT_RANDOM          16-byte address  0x68bbac0  08070605040302010807060504030201
+6   AT_PAGESZ          integer          0x1000  (4096)
+16  AT_HWCAP           bitmask          0xa01
+26  AT_HWCAP2          bitmask          0x0
+11  AT_UID             uid_t            0x2061696c  (543254892)
+12  AT_EUID            uid_t            0x696a6559  (1768580441)
+13  AT_GID             gid_t            0x65616863  (1700882531)
+14  AT_EGID            gid_t            0x6e696873  (1852401779)
+31  AT_EXECFN          string address   0x49b70d  "/Users/david/OneDrive/armos/c_tests/clangbinfast/taux"
+0   AT_NULL            terminator       0x0
 c_tests/e_arm
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 done
@@ -72427,7 +72556,7 @@ c_tests/sieve_arm
 1899 primes.
 c_tests/tttu_arm
 starting
-1707 microseconds (-6)
+1693 microseconds (-6)
 1 iterations
 6493 moves
 c_tests/bin0/an david lee
@@ -72872,7 +73001,7 @@ lade vied
 lead vied
 c_tests/bin0/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-671 ms for 1 iterations
+673 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -72921,7 +73050,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin1/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-165 ms for 1 iterations
+166 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -72970,7 +73099,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin2/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-163 ms for 1 iterations
+160 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -73019,7 +73148,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/bin3/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-171 ms for 1 iterations
+170 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -73068,7 +73197,7 @@ parsing input file c_tests/tp.bas
 created assembler file: c_tests/tp.asm, use registers: yes, expression optimization: yes
 c_tests/binfast/ba c_tests/tp.bas
 parsing input file c_tests/tp.bas
-170 ms for 1 iterations
+171 ms for 1 iterations
 final move count 6493
 exiting the basic interpreter
 parsing input file c_tests/tp.bas
@@ -73262,19 +73391,19 @@ testing finding e
 271828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563073813232862794349076323382988075319
 exiting finding e with great success
 rust_tests/bin0/ttt
-serial runtime:   16.591ms
+serial runtime:   16.6961ms
 moves:            6493
 iterations:       1
 rust_tests/bin1/ttt
-serial runtime:   4.1715ms
+serial runtime:   4.1438ms
 moves:            6493
 iterations:       1
 rust_tests/bin2/ttt
-serial runtime:   3.0227ms
+serial runtime:   3.0136ms
 moves:            6493
 iterations:       1
 rust_tests/bin3/ttt
-serial runtime:   2.4484ms
+serial runtime:   2.4343ms
 moves:            6493
 iterations:       1
 rust_tests/bin0/fileops
@@ -73561,4 +73690,4 @@ sum f32: 465880
 sum u32: 465880
 sum u16: 7128
 exiting matrix multiply testing with great success
-Fri 03/27/2026 12:38:26.30 
+Fri 04/24/2026  9:04:57.21 
