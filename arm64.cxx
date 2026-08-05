@@ -253,20 +253,6 @@ static uint64_t get_bit( uint64_t x, uint64_t bit_number )
     return ( ( x >> bit_number ) & 1 );
 } //get_bit
 
-static uint64_t gen_bitmask( uint64_t n )
-{
-    if ( 0 == n )
-        return 0;
-
-    return ( ~0ull ) >> ( 64ull - n );
-} //gen_bitmask
-
-static uint64_t get_elem_bits( uint64_t val, uint64_t c, uint64_t container_size )
-{
-    uint64_t mask = gen_bitmask( container_size );
-    return ( val & ( mask << ( c * container_size ) ) );
-} //get_elem_bits
-
 static uint64_t get_bits( uint64_t x, uint64_t lowbit, uint64_t len )
 {
     uint64_t val = ( x >> lowbit );
@@ -4903,9 +4889,9 @@ uint64_t Arm64::run( void )
 
                 if ( 0x3001 == bits23_10 ) // rev16
                 {
-                    // get_elem_bits() masks a container out in-place; it doesn't shift it down to bit
-                    // 0. Casting straight to uint16_t (as this used to do) then truncates away every
-                    // container except c==0, so only the lowest 16 bits of the result were ever correct
+                    // extract each container by shifting it down to bit 0, not by masking it out
+                    // in place and casting straight to uint16_t (as this used to do), which
+                    // truncated away every container except c==0
                     for ( uint64_t c = 0; c < containers; c++ )
                     {
                         uint16_t chunk = (uint16_t) ( nval >> ( c * container_size ) );
@@ -9325,7 +9311,7 @@ uint64_t Arm64::run( void )
                                               // correct read-modify-write and old-value-to-Rt semantics
                 {
                     uint64_t s = opbits( 16, 5 );
-                    uint64_t op = opbits( 12, 4 ); // o3:opc together select the operation
+                    uint64_t atomicop = opbits( 12, 4 ); // o3:opc together select the operation
                     uint64_t address = regs[ n ];
                     uint64_t sval = val_reg_or_zr( s );
                     uint64_t oldval = 0;
@@ -9336,15 +9322,15 @@ uint64_t Arm64::run( void )
                     else                       oldval = getui64( address );
 
                     uint64_t newval = oldval;
-                    if ( 0 == op )      newval = oldval + sval;   // LDADD
-                    else if ( 1 == op ) newval = oldval & ~sval;  // LDCLR
-                    else if ( 2 == op ) newval = oldval ^ sval;   // LDEOR
-                    else if ( 3 == op ) newval = oldval | sval;   // LDSET
-                    else if ( op <= 7 ) // LDSMAX(4) LDSMIN(5) LDUMAX(6) LDUMIN(7)
+                    if ( 0 == atomicop )      newval = oldval + sval;   // LDADD
+                    else if ( 1 == atomicop ) newval = oldval & ~sval;  // LDCLR
+                    else if ( 2 == atomicop ) newval = oldval ^ sval;   // LDEOR
+                    else if ( 3 == atomicop ) newval = oldval | sval;   // LDSET
+                    else if ( atomicop <= 7 ) // LDSMAX(4) LDSMIN(5) LDUMAX(6) LDUMIN(7)
                     {
-                        if ( 6 == op )
+                        if ( 6 == atomicop )
                             newval = ( oldval > sval ) ? oldval : sval;
-                        else if ( 7 == op )
+                        else if ( 7 == atomicop )
                             newval = ( oldval < sval ) ? oldval : sval;
                         else
                         {
@@ -9354,11 +9340,11 @@ uint64_t Arm64::run( void )
                             else if ( 0xb8 == hi8 ) { signedold = sign_extend( oldval, 31 ); signeds = sign_extend( sval, 31 ); }
                             else                    { signedold = (int64_t) oldval;         signeds = (int64_t) sval; }
 
-                            newval = ( 4 == op ) ? ( ( signedold > signeds ) ? oldval : sval )
-                                                  : ( ( signedold < signeds ) ? oldval : sval );
+                            newval = ( 4 == atomicop ) ? ( ( signedold > signeds ) ? oldval : sval )
+                                                        : ( ( signedold < signeds ) ? oldval : sval );
                         }
                     }
-                    else if ( 8 == op ) // SWP
+                    else if ( 8 == atomicop ) // SWP
                         newval = sval;
                     else
                         unhandled();
