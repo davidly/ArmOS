@@ -195,8 +195,12 @@ double Arm64::round_double( double d, FPRounding rounding )
         return floor( d );
     if ( FPRounding_POSINF == rounding )
         return ceil( d );
-    if ( FPRounding_TIEEVEN == rounding || FPRounding_TIEAWAY == rounding )
+    // round() breaks exact .5 ties away from zero (2.5 -> 3.0), which is genuinely TIEAWAY's
+    // job but wrong for TIEEVEN (2.5 -> 2.0, banker's rounding); they aren't the same operation
+    if ( FPRounding_TIEAWAY == rounding )
         return round( d );
+    if ( FPRounding_TIEEVEN == rounding )
+        return nearbyint( d ); // relies on the default (untouched) FE_TONEAREST FP environment
     if ( FPRounding_ODD == rounding )
     {
         double rounded = d;
@@ -206,7 +210,10 @@ double Arm64::round_double( double d, FPRounding rounding )
         return rounded;
     }
     if ( FPRounding_ZERO == rounding )
-        return (double) (int64_t) d;
+        // truncate in the floating-point domain rather than round-tripping through int64_t:
+        // for |d| >= 2^63 the (int64_t) cast is undefined behavior (x86 yields the "integer
+        // indefinite" INT64_MIN), which flips the sign and breaks the caller's saturation logic
+        return trunc( d );
 
     unhandled();
     return d; // keep the compiler happy
@@ -218,13 +225,20 @@ template <typename T> T Arm64::round_int_from_double( double d, uint64_t fracbit
 {
     static_assert(std::is_integral<T>::value, "Type must be an integral type.");
 
-    d *= ( 1ull << fracbits );
+    // scale by 2^fracbits via ldexp rather than (1ull << fracbits): fracbits can legitimately
+    // be 64 (a fixed-point conversion with scale==0), and shifting a 64-bit value by a full
+    // 64 bits is undefined behavior
+    d = ldexp( d, (int) fracbits );
     d = round_double( d, rounding );
 
     if ( isnan( d ) )
         return 0; // somewhat odd, but Arm64 does this
 
-    if ( d > (double) std::numeric_limits<T>::max() )
+    // for int64_t/uint64_t, max() isn't exactly representable as a double and (double) max()
+    // rounds up, so a d exactly equal to that rounded value is out of range but wouldn't be
+    // caught by a strict >; casting it to T below would then be undefined behavior. >= closes
+    // that gap and is a no-op for types (e.g. 32-bit) where max() is exactly representable
+    if ( d >= (double) std::numeric_limits<T>::max() )
         return std::numeric_limits<T>::max();
 
     if ( d < (double) std::numeric_limits<T>::min() )
@@ -318,6 +332,29 @@ static uint32_t sign_extend32( uint32_t x, uint32_t high_bit )
     const int32_t m = ( (uint32_t) 1 ) << high_bit;
     return ( x ^ m ) - m;
 } //sign_extend32
+
+// Arm64 vector shift instructions (SSHL/USHL) take their shift amount from a register: positive
+// shifts left, negative shifts right by the magnitude. A magnitude >= the element's own bit width
+// is architecturally defined (result saturates to 0, or to the replicated sign bit for an
+// arithmetic right shift) but is undefined behavior in C++ if handed to the shift operator
+// directly, so it must be special-cased rather than just applying "<< shift" or ">> -shift".
+static uint64_t vector_shift_unsigned( uint64_t val, int64_t shift, uint64_t width_bits )
+{
+    if ( shift >= (int64_t) width_bits || shift <= - (int64_t) width_bits )
+        return 0;
+    return ( shift >= 0 ) ? ( val << shift ) : ( val >> ( -shift ) );
+} //vector_shift_unsigned
+
+static int64_t vector_shift_signed( int64_t val, int64_t shift, uint64_t width_bits )
+{
+    if ( shift >= (int64_t) width_bits )
+        return 0;
+    if ( shift <= - (int64_t) width_bits )
+        return ( val < 0 ) ? -1 : 0;
+    if ( shift >= 0 )
+        return (int64_t) ( ( (uint64_t) val ) << shift ); // left-shifting a negative value is itself UB pre-C++20; shift the bit pattern as unsigned instead
+    return val >> ( -shift ); // arithmetic (sign-extending) right shift
+} //vector_shift_signed
 
 static uint64_t plaster_bits( uint64_t val, uint64_t bits, uint64_t low_position, uint64_t len )
 {
@@ -653,6 +690,11 @@ static inline uint64_t ror( uint64_t elt, uint64_t size )
 
 static inline uint64_t ror_n( uint64_t elt, uint64_t size, uint64_t amount )
 {
+    // amount == 0 must be special-cased: elt << size is undefined behavior in C++ when size is
+    // elt's full bit width (currently harmless here since it happens to OR elt with itself on
+    // typical x86 codegen, but that's an accident of the shift-count masking, not something to rely on)
+    if ( 0 == amount )
+        return elt;
     return ( ( elt >> amount ) | ( elt << ( size - amount ) ) );
 } //ror_n
 
@@ -1508,7 +1550,8 @@ void Arm64::trace_state()
             uint64_t imm19 = opbits( 5, 19 );
             uint64_t t = opbits( 0, 5 );
             bool xregs = ( 0 != opbit( 30 ) );
-            tracer.Trace( "ldr %s, =%#llx\n", reg_or_zr( t, xregs ), pc + ( imm19 << 2 ) );
+            int64_t offset = sign_extend( imm19, 18 ) << 2;
+            tracer.Trace( "ldr %s, =%#llx\n", reg_or_zr( t, xregs ), pc + offset );
             break;
         }
         case 0x3a: // CCMN <Wn>, #<imm>, #<nzcv>, <cond>  ;    CCMN <Wn>, <Wm>, #<nzcv>, <cond>       ;    ADCS <Wd>, <Wn>, <Wm>
@@ -4507,8 +4550,8 @@ uint64_t Arm64::run( void )
                                 dref.set16( e, dref.get16( e ) + ( nref.get16( e ) >> shift ) );
                             else if ( 4 == ebytes )
                                 dref.set32( e, dref.get32( e ) + ( nref.get32( e ) >> shift ) );
-                            else
-                                dref.set64( e, dref.get64( e ) + ( nref.get64( e ) >> shift ) );
+                            else // shift can legitimately equal esize (64) here, which is UB for a raw ">>"
+                                dref.set64( e, dref.get64( e ) + vector_shift_unsigned( nref.get64( e ), - (int64_t) shift, 64 ) );
                         }
                     }
                     else if ( ( 0x0f == hi8 || 0x4f == hi8 ) && !bit23 && 0 != immh && 1 == bits15_12 && !bit11 && bit10 ) // SSRA <Vd>.<T>, <Vn>.<T>, #<shift>
@@ -4532,8 +4575,8 @@ uint64_t Arm64::run( void )
                                 dref.set16( e, dref.get16( e ) + ( ( (int16_t) nref.get16( e ) ) >> shift ) );
                             else if ( 4 == ebytes )
                                 dref.set32( e, dref.get32( e ) + ( ( (int32_t) nref.get32( e ) ) >> shift ) );
-                            else
-                                dref.set64( e, dref.get64( e ) + ( ( (int64_t) nref.get64( e ) ) >> shift ) );
+                            else // shift can legitimately equal esize (64) here, which is UB for a raw ">>"
+                                dref.set64( e, dref.get64( e ) + (uint64_t) vector_shift_signed( (int64_t) nref.get64( e ), - (int64_t) shift, 64 ) );
                         }
                     }
                     else if ( ( ( 1 == bits23_22 || 2 == bits23_22 ) && !bit10 ) &&
@@ -4640,9 +4683,9 @@ uint64_t Arm64::run( void )
                         else if ( 4 == ebytes )
                             for ( uint64_t e = 0; e < elements; e++ )
                                 target.set32( e, ( (int32_t) vregs[ n ].get32( e ) ) >> shift );
-                        else if ( 8 == ebytes )
+                        else if ( 8 == ebytes ) // shift can legitimately equal esize (64) here, which is UB for a raw ">>"
                             for ( uint64_t e = 0; e < elements; e++ )
-                                target.set64( e, ( (int64_t) vregs[ n ].get64( e ) ) >> shift );
+                                target.set64( e, (uint64_t) vector_shift_signed( (int64_t) vregs[ n ].get64( e ), - (int64_t) shift, 64 ) );
 
                         vregs[ d ] = target;
                     }
@@ -4794,8 +4837,8 @@ uint64_t Arm64::run( void )
                                 target.set16( e, vregs[ n ].get16( e ) >> shift );
                             else if ( 4 == ebytes )
                                 target.set32( e, vregs[ n ].get32( e ) >> shift );
-                            else if ( 8 == ebytes )
-                                target.set64( e, vregs[ n ].get64( e ) >> shift );
+                            else if ( 8 == ebytes ) // shift can legitimately equal esize (64) here, which is UB for a raw ">>"
+                                target.set64( e, vector_shift_unsigned( vregs[ n ].get64( e ), - (int64_t) shift, 64 ) );
                         }
 
                         vregs[ d ] = target;
@@ -4860,10 +4903,13 @@ uint64_t Arm64::run( void )
 
                 if ( 0x3001 == bits23_10 ) // rev16
                 {
+                    // get_elem_bits() masks a container out in-place; it doesn't shift it down to bit
+                    // 0. Casting straight to uint16_t (as this used to do) then truncates away every
+                    // container except c==0, so only the lowest 16 bits of the result were ever correct
                     for ( uint64_t c = 0; c < containers; c++ )
                     {
-                        uint64_t container = get_elem_bits( nval, c, container_size );
-                        result |= flip_endian16( (uint16_t) get_elem_bits( container, c, container_size ) );
+                        uint16_t chunk = (uint16_t) ( nval >> ( c * container_size ) );
+                        result |= ( (uint64_t) flip_endian16( chunk ) ) << ( c * container_size );
                     }
                 }
                 else if ( 4 == bits23_21 ) // csinv / csneg
@@ -4898,13 +4944,14 @@ uint64_t Arm64::run( void )
                     }
                     else if ( 2 == bits15_10 || 3 == bits15_10 ) // rev
                     {
+                        // same shift-then-truncate fix as rev16 above, for the same reason
                         for ( uint64_t c = 0; c < containers; c++ )
                         {
-                            uint64_t container = get_elem_bits( nval, c, container_size );
+                            uint64_t shifted = nval >> ( c * container_size );
                             if ( 32 == container_size )
-                                result |= get_elem_bits( flip_endian32( (uint32_t) container ), c, container_size );
+                                result |= ( (uint64_t) flip_endian32( (uint32_t) shifted ) ) << ( c * container_size );
                             else
-                                result |= get_elem_bits( flip_endian64( container ), c, container_size );
+                                result |= flip_endian64( shifted ) << ( c * container_size );
                         }
                     }
                     else if ( 4 == bits15_10 ) // clz
@@ -5019,10 +5066,13 @@ uint64_t Arm64::run( void )
                 }
                 else if ( 3 == bits11_10 && 6 == bits23_21 && 0 == bits15_12 ) // SDIV <Xd>, <Xn>, <Xm>
                 {
+                    // dividing INT_MIN by -1 is real, defined, non-trapping arm64 behavior (silently
+                    // wraps back to INT_MIN) but is undefined behavior in C++ and traps with SIGFPE via
+                    // x86's idiv, so it's special-cased here using well-defined unsigned negation instead
                     if ( xregs )
-                        regs[ d ] = ( 0 == mval ) ? 0 : ( (int64_t) nval / (int64_t) mval );
+                        regs[ d ] = ( 0 == mval ) ? 0 : ( ( -1 == (int64_t) mval ) ? ( 0 - nval ) : (uint64_t) ( (int64_t) nval / (int64_t) mval ) );
                     else
-                        regs[ d ] = ( ( 0 == mval ) ? 0 : ( (int32_t) ( (uint32_t) nval ) / (int32_t) ( (uint32_t) mval ) ) );
+                        regs[ d ] = ( ( 0 == mval ) ? 0 : ( ( -1 == (int32_t) (uint32_t) mval ) ? ( 0 - (uint32_t) nval ) : (uint32_t) ( (int32_t) ( (uint32_t) nval ) / (int32_t) ( (uint32_t) mval ) ) ) );
                 }
                 else if ( 1 == bits11_10 && 6 == bits23_21 && 2 == bits15_12 ) // lsrv
                 {
@@ -5089,7 +5139,8 @@ uint64_t Arm64::run( void )
                 uint64_t imm19 = opbits( 5, 19 );
                 uint64_t t = opbits( 0, 5 );
                 bool xregs = ( 0 != opbit( 30 ) );
-                uint64_t address = pc + ( imm19 << 2 );
+                int64_t offset = sign_extend( imm19, 18 ) << 2; // imm19 is a signed byte-offset/4; a backward literal reference needs this to be negative
+                uint64_t address = pc + offset;
                 if ( 31 == t )
                     break;
                 if ( xregs )
@@ -5468,17 +5519,21 @@ uint64_t Arm64::run( void )
                 {
                     uint64_t m = opbits( 16, 5 );
 
+                    // imms == 0 must be special-cased: shifting a 64/32-bit value left by a full
+                    // 64/32 bits is undefined behavior in C++ (unlike the well-defined arm64 semantics),
+                    // and in practice becomes a no-op shift on x86, corrupting the result with garbage
+                    // from the other source register instead of just returning it unchanged
                     if ( xregs )
                     {
                         uint64_t nval = val_reg_or_zr( n );
                         uint64_t mval = val_reg_or_zr( m );
-                        regs[ d ] = ( mval >> imms ) | ( nval << ( 64 - imms ) );
+                        regs[ d ] = ( 0 == imms ) ? mval : ( ( mval >> imms ) | ( nval << ( 64 - imms ) ) );
                     }
                     else
                     {
                         uint32_t nval = (uint32_t) val_reg_or_zr( n );
                         uint32_t mval = (uint32_t) val_reg_or_zr( m );
-                        regs[ d ] = ( mval >> imms ) | ( nval << ( 32 - imms ) );
+                        regs[ d ] = ( 0 == imms ) ? mval : ( ( mval >> imms ) | ( nval << ( 32 - imms ) ) );
                     }
                 }
                 else // others
@@ -6351,42 +6406,22 @@ uint64_t Arm64::run( void )
                             if ( 1 == ebytes )
                             {
                                 int8_t shift = vecm.get8( e );
-                                uint8_t a = vecn.get8( e );
-                                if ( shift < 0 )
-                                    a >>= -shift;
-                                else
-                                    a <<= shift;
-                                target.set8( e, a );
+                                target.set8( e, (uint8_t) vector_shift_unsigned( vecn.get8( e ), shift, 8 ) );
                             }
                             else if ( 2 == ebytes )
                             {
                                 int8_t shift = (uint8_t) vecm.get16( e );
-                                uint16_t a = vecn.get16( e );
-                                if ( shift < 0 )
-                                    a >>= -shift;
-                                else
-                                    a <<= shift;
-                                target.set16( e, a );
+                                target.set16( e, (uint16_t) vector_shift_unsigned( vecn.get16( e ), shift, 16 ) );
                             }
                             else if ( 4 == ebytes )
                             {
                                 int8_t shift = (uint8_t) vecm.get32( e );
-                                uint32_t a = vecn.get32( e );
-                                if ( shift < 0 )
-                                    a >>= -shift;
-                                else
-                                    a <<= shift;
-                                target.set32( e, a );
+                                target.set32( e, (uint32_t) vector_shift_unsigned( vecn.get32( e ), shift, 32 ) );
                             }
                             else if ( 8 == ebytes )
                             {
                                 int8_t shift = (uint8_t) vecm.get64( e );
-                                uint64_t a = vecn.get64( e );
-                                if ( shift < 0 )
-                                    a >>= -shift;
-                                else
-                                    a <<= shift;
-                                target.set64( e, a );
+                                target.set64( e, vector_shift_unsigned( vecn.get64( e ), shift, 64 ) );
                             }
                         }
                         vregs[ d ] = target;
@@ -7346,34 +7381,22 @@ uint64_t Arm64::run( void )
                             if ( 1 == ebytes )
                             {
                                 int8_t shift = (int8_t) vregs[ m ].get8( e );
-                                if ( shift >= 0 )
-                                    target.set8( e, vregs[ n ].get8( e ) << shift );
-                                else
-                                    target.set8( e, ( (int8_t) vregs[ n ].get8( e ) ) >> ( -shift ) );
+                                target.set8( e, (uint8_t) vector_shift_signed( (int8_t) vregs[ n ].get8( e ), shift, 8 ) );
                             }
                             else if ( 2 == ebytes )
                             {
                                 int8_t shift = (int8_t) ( 0xff & vregs[ m ].get16( e ) );
-                                if ( shift >= 0 )
-                                    target.set16( e, vregs[ n ].get16( e ) << shift );
-                                else
-                                    target.set16( e, ( (int16_t) vregs[ n ].get16( e ) ) >> ( -shift ) );
+                                target.set16( e, (uint16_t) vector_shift_signed( (int16_t) vregs[ n ].get16( e ), shift, 16 ) );
                             }
                             else if ( 4 == ebytes )
                             {
                                 int8_t shift = (int8_t) ( 0xff & vregs[ m ].get32( e ) );
-                                if ( shift >= 0 )
-                                    target.set32( e, vregs[ n ].get32( e ) << shift );
-                                else
-                                    target.set32( e, ( (int32_t) vregs[ n ].get32( e ) ) >> ( -shift ) );
+                                target.set32( e, (uint32_t) vector_shift_signed( (int32_t) vregs[ n ].get32( e ), shift, 32 ) );
                             }
                             else if ( 8 == ebytes )
                             {
                                 int8_t shift = (int8_t) ( 0xff & vregs[ m ].get64( e ) );
-                                if ( shift >= 0 )
-                                    target.set64( e, vregs[ n ].get64( e ) << shift );
-                                else
-                                    target.set64( e, ( (int64_t) vregs[ n ].get64( e ) ) >> ( -shift ) );
+                                target.set64( e, (uint64_t) vector_shift_signed( (int64_t) vregs[ n ].get64( e ), shift, 64 ) );
                             }
                         }
 
@@ -8051,26 +8074,29 @@ uint64_t Arm64::run( void )
                     }
                     else if ( 0x4e == hi8 && 0 == bits23_21 && !bit15 && 3 == bits14_11 && bit10 ) // INS <Vd>.<Ts>[<index>], <R><n>
                     {
+                        // Rn==31 means the zero register here (as DUP correctly handles just above), not SP --
+                        // raw regs[n] would wrongly insert the actual stack pointer for e.g. "ins v0.s[0], wzr"
                         uint64_t index = 0;
+                        uint64_t nval = val_reg_or_zr( n );
                         if ( imm5 & 1 )
                         {
                             index = get_bits( imm5, 1, 4 );
-                            vregs[ d ].set8( index, (uint8_t) regs[ n ] );
+                            vregs[ d ].set8( index, (uint8_t) nval );
                         }
                         else if ( imm5 & 2 )
                         {
                             index = get_bits( imm5, 2, 3 );
-                            vregs[ d ].set16( index, (uint16_t) regs[ n ] );
+                            vregs[ d ].set16( index, (uint16_t) nval );
                         }
                         else if ( imm5 & 4 )
                         {
                             index = get_bits( imm5, 3, 2 );
-                            vregs[ d ].set32( index, (uint32_t) regs[ n ] );
+                            vregs[ d ].set32( index, (uint32_t) nval );
                         }
                         else if ( imm5 & 8 )
                         {
                             index = get_bit( imm5, 4 );
-                            vregs[ d ].set64( index, (uint64_t) regs[ n ] );
+                            vregs[ d ].set64( index, nval );
                         }
                         else
                             unhandled();
@@ -8216,6 +8242,8 @@ uint64_t Arm64::run( void )
 
                     if ( useSecond && ( ( 0.0 == nval && 0.0 == mval ) || isnan( nval ) || isnan( mval ) ) )
                         result = mval;
+                    else if ( isFMAX && !fpcr_ah && ( isnan( nval ) || isnan( mval ) ) )
+                        result = MY_NAN; // plain FMAX (the default, AH=0) propagates NaN, unlike FMAXNM
                     else
                         result = do_fmax( nval, mval );
 
@@ -8249,6 +8277,8 @@ uint64_t Arm64::run( void )
 
                     if ( useSecond && ( ( 0.0 == nval && 0.0 == mval ) || isnan( nval ) || isnan( mval ) ) )
                         result = mval;
+                    else if ( isFMIN && !fpcr_ah && ( isnan( nval ) || isnan( mval ) ) )
+                        result = MY_NAN; // plain FMIN (the default, AH=0) propagates NaN, unlike FMINNM
                     else
                         result = do_fmin( nval, mval );
 
@@ -8330,14 +8360,16 @@ uint64_t Arm64::run( void )
                 }
                 else if ( 4 == bits21_19 && 0x100 == bits18_10 ) // FCVTAS <Xd>, <Dn>
                 {
+                    // "A" is ties-away, not ties-even, and the sf (64-bit dest) cases must
+                    // saturate against the int64_t range, not int32_t's before sign-extending
                     if ( !sf && 0 == ftype )
-                        regs[ d ] = (uint32_t) round_int_from_double<int32_t>( vregs[ n ].getf( 0 ), 0, FPRounding_TIEEVEN );
+                        regs[ d ] = (uint32_t) round_int_from_double<int32_t>( vregs[ n ].getf( 0 ), 0, FPRounding_TIEAWAY );
                     else if ( sf && 0 == ftype )
-                        regs[ d ] = (uint64_t) (int64_t) round_int_from_double<int32_t>( vregs[ n ].getf( 0 ), 0, FPRounding_TIEEVEN );
+                        regs[ d ] = round_int_from_double<int64_t>( vregs[ n ].getf( 0 ), 0, FPRounding_TIEAWAY );
                     else if ( !sf && 1 == ftype )
-                        regs[ d ] = (uint32_t) round_int_from_double<int32_t>( vregs[ n ].getd( 0 ), 0, FPRounding_TIEEVEN );
+                        regs[ d ] = (uint32_t) round_int_from_double<int32_t>( vregs[ n ].getd( 0 ), 0, FPRounding_TIEAWAY );
                     else if ( sf && 1 == ftype )
-                        regs[ d ] = (uint64_t) (int64_t) round_int_from_double<int32_t>( vregs[ n ].getd( 0 ), 0, FPRounding_TIEEVEN );
+                        regs[ d ] = round_int_from_double<int64_t>( vregs[ n ].getd( 0 ), 0, FPRounding_TIEAWAY );
                     else
                         unhandled();
                 }
@@ -8749,7 +8781,7 @@ uint64_t Arm64::run( void )
                         set_flags_from_nzcv( nzcv );
                     }
                 }
-                else if ( bit21 && ( 0xc0 == ( 0x1c0 & bits18_10 ) ) && 0 == rmode ) // UCVTF <Hd>, <Wn>, #<fbits>
+                else if ( bit21 && 0xc0 == bits18_10 && 0 == rmode ) // UCVTF <Hd>, <Wn>   (plain, no fbits)
                 {
                     uint64_t val = val_reg_or_zr( n );
                     if ( 0 == sf )
@@ -8761,6 +8793,40 @@ uint64_t Arm64::run( void )
                         vregs[ d ].setf( 0, (float) val );
                     else if ( 1 == ftype )
                         vregs[ d ].setd( 0, (double) val );
+                    else
+                        unhandled();
+                }
+                else if ( !bit21 && 0xc0 == ( 0x1c0 & bits18_10 ) && 0 == rmode ) // UCVTF <Hd>, <Wn>, #<fbits>
+                {
+                    uint64_t scale = opbits( 10, 6 );
+                    uint64_t fbits = 64 - scale;
+                    uint64_t val = val_reg_or_zr( n );
+                    if ( 0 == sf )
+                        val = (uint32_t) val;
+
+                    zero_vreg( d );
+
+                    if ( 0 == ftype )
+                        vregs[ d ].setf( 0, (float) ldexp( (double) val, - (int) fbits ) );
+                    else if ( 1 == ftype )
+                        vregs[ d ].setd( 0, ldexp( (double) val, - (int) fbits ) );
+                    else
+                        unhandled();
+                }
+                else if ( !bit21 && 0x80 == ( 0x1c0 & bits18_10 ) && 0 == rmode ) // SCVTF <Hd>, <Wn>, #<fbits>
+                {
+                    uint64_t scale = opbits( 10, 6 );
+                    uint64_t fbits = 64 - scale;
+                    int64_t val = (int64_t) val_reg_or_zr( n );
+                    if ( 0 == sf )
+                        val = sign_extend( (uint32_t) val, 31 );
+
+                    zero_vreg( d );
+
+                    if ( 0 == ftype )
+                        vregs[ d ].setf( 0, (float) ldexp( (double) val, - (int) fbits ) );
+                    else if ( 1 == ftype )
+                        vregs[ d ].setd( 0, ldexp( (double) val, - (int) fbits ) );
                     else
                         unhandled();
                 }
@@ -9058,6 +9124,12 @@ uint64_t Arm64::run( void )
                 uint64_t n = opbits( 5, 5 );
                 uint64_t t = opbits( 0, 5 );
 
+                // for the register-offset forms below (odd opc, i.e. bit21 set), bits 11:10 must
+                // be "10" -- LSE atomic memory operations (LDADD, SWP, CAS, etc, unimplemented)
+                // share this exact size+class encoding space but use "00" there instead, and were
+                // it not for this check, they'd silently be misdecoded and mis-executed as LDR/STR
+                uint64_t bits11_10 = opbits( 10, 2 );
+
                 if ( 0 == opc ) // str (immediate) post-index and pre-index
                 {
                     uint64_t unsigned_imm9 = opbits( 12, 9 );
@@ -9091,7 +9163,7 @@ uint64_t Arm64::run( void )
                     if ( 1 == option ) // post index
                         regs[ n ] += extended_imm9;
                 }
-                else if ( 1 == opc ) // str (register) STR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
+                else if ( 1 == opc && 2 == bits11_10 ) // str (register) STR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t shift = opbit( 12 );
@@ -9143,7 +9215,7 @@ uint64_t Arm64::run( void )
                     if ( 1 == option ) // post index
                         regs[ n ] += extended_imm9;
                 }
-                else if ( 3 == opc ) // ldr (register) LDR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
+                else if ( 3 == opc && 2 == bits11_10 ) // ldr (register) LDR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
                 {
                     uint64_t m = opbits( 16, 5 );
                     uint64_t shift = opbit( 12 );
@@ -9200,7 +9272,7 @@ uint64_t Arm64::run( void )
                     if ( 1 == option ) // post index
                         regs[ n ] += imm9;
                 }
-                else if ( 5 == opc  || 7 == opc ) // hi8 = 0x78
+                else if ( ( 5 == opc  || 7 == opc ) && 2 == bits11_10 ) // hi8 = 0x78
                                                   //     (opc == 7)                  LDRSH <Wt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
                                                   //     (opc == 5)                  LDRSH <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> {<amount>}}]
                                                   // hi8 = 0x38
@@ -9247,6 +9319,61 @@ uint64_t Arm64::run( void )
                     }
                     else
                         unhandled();
+                }
+                else if ( 1 == ( 1 & opc ) ) // LSE atomic memory op: size(hi8) A(23) R(22) 1(21) Rs(20:16) o3:opc(15:12) 00(11:10) Rn(9:5) Rt(4:0).
+                                              // this is a single-threaded emulator, so there's no real atomicity to provide -- just the
+                                              // correct read-modify-write and old-value-to-Rt semantics
+                {
+                    uint64_t s = opbits( 16, 5 );
+                    uint64_t op = opbits( 12, 4 ); // o3:opc together select the operation
+                    uint64_t address = regs[ n ];
+                    uint64_t sval = val_reg_or_zr( s );
+                    uint64_t oldval = 0;
+
+                    if ( 0x38 == hi8 )      { oldval = getui8( address );  sval = (uint8_t) sval; }
+                    else if ( 0x78 == hi8 ) { oldval = getui16( address ); sval = (uint16_t) sval; }
+                    else if ( 0xb8 == hi8 ) { oldval = getui32( address ); sval = (uint32_t) sval; }
+                    else                       oldval = getui64( address );
+
+                    uint64_t newval = oldval;
+                    if ( 0 == op )      newval = oldval + sval;   // LDADD
+                    else if ( 1 == op ) newval = oldval & ~sval;  // LDCLR
+                    else if ( 2 == op ) newval = oldval ^ sval;   // LDEOR
+                    else if ( 3 == op ) newval = oldval | sval;   // LDSET
+                    else if ( op <= 7 ) // LDSMAX(4) LDSMIN(5) LDUMAX(6) LDUMIN(7)
+                    {
+                        if ( 6 == op )
+                            newval = ( oldval > sval ) ? oldval : sval;
+                        else if ( 7 == op )
+                            newval = ( oldval < sval ) ? oldval : sval;
+                        else
+                        {
+                            int64_t signedold, signeds;
+                            if ( 0x38 == hi8 )      { signedold = sign_extend( oldval, 7 );  signeds = sign_extend( sval, 7 ); }
+                            else if ( 0x78 == hi8 ) { signedold = sign_extend( oldval, 15 ); signeds = sign_extend( sval, 15 ); }
+                            else if ( 0xb8 == hi8 ) { signedold = sign_extend( oldval, 31 ); signeds = sign_extend( sval, 31 ); }
+                            else                    { signedold = (int64_t) oldval;         signeds = (int64_t) sval; }
+
+                            newval = ( 4 == op ) ? ( ( signedold > signeds ) ? oldval : sval )
+                                                  : ( ( signedold < signeds ) ? oldval : sval );
+                        }
+                    }
+                    else if ( 8 == op ) // SWP
+                        newval = sval;
+                    else
+                        unhandled();
+
+                    if ( 0x38 == hi8 )
+                        setui8( address, (uint8_t) newval );
+                    else if ( 0x78 == hi8 )
+                        setui16( address, (uint16_t) newval );
+                    else if ( 0xb8 == hi8 )
+                        setui32( address, (uint32_t) newval );
+                    else
+                        setui64( address, newval );
+
+                    if ( 31 != t )
+                        regs[ t ] = oldval; // already zero-extended to the instruction's size
                 }
                 break;
             }
