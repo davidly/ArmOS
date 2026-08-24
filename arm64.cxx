@@ -2989,6 +2989,11 @@ void Arm64::trace_state()
                 char type = ( 0 == ftype ) ? 's' : ( 1 == ftype ) ? 'd' : ( 3 == ftype ) ? 'h' : '?';
                 tracer.Trace( "frinta %c%llu, %c%llu\n", type, d, type, n );
             }
+            else if ( 0x1e == hi8 && 4 == bits21_19 && 0x1f0 == bits18_10 ) // FRINTI <Dd>, <Dn>
+            {
+                char type = ( 0 == ftype ) ? 's' : ( 1 == ftype ) ? 'd' : ( 3 == ftype ) ? 'h' : '?';
+                tracer.Trace( "frinti %c%llu, %c%llu\n", type, d, type, n );
+            }
             else if ( ( 0x180 == ( bits18_10 & 0x1bf ) ) && ( bit21 ) && ( 0 == ( rmode & 2 ) ) ) // fmov reg, vreg  OR mov vreg, reg
             {
                 uint64_t opcode = opbits( 16, 3 );
@@ -8365,6 +8370,17 @@ uint64_t Arm64::run( void )
                         vregs[ d ].setf( 0, (float) round_double( (double) vregs[ n ].getf( 0 ), FPRounding_TIEAWAY ) );
                     else if ( 1 == ftype )
                         vregs[ d ].setd( 0, round_double( vregs[ n ].getd( 0 ), FPRounding_TIEAWAY ) );
+                    else
+                        unhandled();
+                    trace_vregs();
+                }
+                else if ( 0x1e == hi8 && 4 == bits21_19 && 0x1f0 == bits18_10 ) // FRINTI <Dd>, <Dn>
+                {
+                    FPRounding rounding = fp_decode_rmode( get_bits( fpcr, 22, 2 ) );
+                    if ( 0 == ftype )
+                        vregs[ d ].setf( 0, (float) round_double( (double) vregs[ n ].getf( 0 ), rounding ) );
+                    else if ( 1 == ftype )
+                        vregs[ d ].setd( 0, round_double( vregs[ n ].getd( 0 ), rounding ) );
                     else
                         unhandled();
                     trace_vregs();
