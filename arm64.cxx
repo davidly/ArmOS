@@ -101,19 +101,17 @@ static __inline_perf void mcpy( void * d, const void * s, const size_t c ) // me
 {
     assert( 1 == c || 2 == c || 4 == c || 8 == c || 16 == c );
 
-    // I tried various permutations and this was fastest for msft c++, clang, and g++. loops fail with the latter two
+    // Keep each copy size constant so the compiler can inline the unaligned-safe copy.
     if ( 1 == c )
-        * ( (uint8_t *) d ) = * ( (uint8_t *) s );
+        armos_memcpy( d, s, 1 );
     else if ( 2 == c )
-        * ( (uint16_t *) d ) = * ( (uint16_t *) s );
+        armos_memcpy( d, s, 2 );
     else if ( 4 == c )
-        * ( (uint32_t *) d ) = * ( (uint32_t *) s );
+        armos_memcpy( d, s, 4 );
+    else if ( 8 == c )
+        armos_memcpy( d, s, 8 );
     else
-    {
-        * ( (uint64_t *) d ) = * ( (uint64_t *) s );
-        if ( 16 == c )
-            * ( (uint64_t *) d + 1 ) = * ( (uint64_t *) s + 1 );
-    }
+        armos_memcpy( d, s, 16 );
 } //mcpy
 
 static uint32_t count_leading_zeroes32( uint32_t x )
@@ -1088,7 +1086,7 @@ void Arm64::trace_state()
             bool signedOffset = ( ( 0xd == ( hi8 & 0xf ) ) && !bit23 );
 
             uint64_t scale = 2 + opc;
-            int64_t offset = sign_extend( imm7, 6 ) << scale;
+            int64_t offset = sign_extend( imm7, 6 ) * ( 1ll << scale );
 
             if ( L )
             {
@@ -1536,7 +1534,7 @@ void Arm64::trace_state()
             uint64_t imm19 = opbits( 5, 19 );
             uint64_t t = opbits( 0, 5 );
             bool xregs = ( 0 != opbit( 30 ) );
-            int64_t offset = sign_extend( imm19, 18 ) << 2;
+            int64_t offset = sign_extend( imm19, 18 ) * 4;
             tracer.Trace( "ldr %s, =%#llx\n", reg_or_zr( t, xregs ), pc + offset );
             break;
         }
@@ -1798,7 +1796,7 @@ void Arm64::trace_state()
             uint64_t t1 = opbits( 0, 5 );
             uint64_t t2 = opbits( 10, 5 );
             uint64_t n = opbits( 5, 5 );
-            int64_t imm7 = sign_extend( opbits( 15, 7 ), 6 ) << ( xregs ? 3 : 2 );
+            int64_t imm7 = sign_extend( opbits( 15, 7 ), 6 ) * ( xregs ? 8 : 4 );
             uint64_t variant = opbits( 23, 2 );
             if ( 0 == variant )
                 unhandled();
@@ -1925,8 +1923,7 @@ void Arm64::trace_state()
             int64_t imm = ( ( op >> 3 ) & 0x1ffffc );  // 19 bits with bottom two bits 0 at the bottom
             imm |= opbits( 29, 2 );               // two low bits
             imm = sign_extend( imm, 20 );
-            imm <<= 12;
-            imm += ( pc & ( ~0xfff ) );
+            imm = (int64_t) ( ( (uint64_t) imm << 12 ) + ( pc & ( ~0xfff ) ) );
             tracer.Trace( "adrp x%llu, %#llx\n", d, imm );
             break;
         }
@@ -3938,7 +3935,7 @@ uint64_t Arm64::run( void )
                     uint64_t L = opbit( 21 );
                     uint64_t M = opbit( 20 );
                     uint64_t H = opbit( 11 );
-                    uint64_t Q = opbit( 20 );
+                    uint64_t Q = opbit( 30 );
                     uint64_t Rmhi = M;
                     if ( 0 == sz )
                         Rmhi = ( H << 1 ) | L;
@@ -4293,7 +4290,7 @@ uint64_t Arm64::run( void )
                 bool signedOffset = ( ( 0xd == ( hi8 & 0xf ) ) && !bit23 );
 
                 uint64_t scale = 2 + opc;
-                int64_t offset = sign_extend( imm7, 6 ) << scale;
+                int64_t offset = sign_extend( imm7, 6 ) * ( 1ll << scale );
                 uint64_t address = regs[ n ];
                 uint64_t byte_len = 4ull << opc;
 
@@ -4730,11 +4727,11 @@ uint64_t Arm64::run( void )
                         for ( uint64_t e = 0; e < elements; e++ )
                         {
                             if ( 1 == ebytes )
-                                target.set16( e, sign_extend16( vregs[ n ].get8( e + ( Q ? 8 : 0 ) ), 7 ) << shift );
+                                target.set16( e, (uint16_t) sign_extend16( vregs[ n ].get8( e + ( Q ? 8 : 0 ) ), 7 ) << shift );
                             else if ( 2 == ebytes )
-                                target.set32( e, sign_extend32( vregs[ n ].get16( e + ( Q ? 4 : 0 ) ), 15 ) << shift );
+                                target.set32( e, (uint32_t) sign_extend32( vregs[ n ].get16( e + ( Q ? 4 : 0 ) ), 15 ) << shift );
                             else if ( 4 == ebytes )
-                                target.set64( e, sign_extend( vregs[ n ].get32( e + ( Q ? 2 : 0 ) ), 31 ) << shift );
+                                target.set64( e, (uint64_t) sign_extend( vregs[ n ].get32( e + ( Q ? 2 : 0 ) ), 31 ) << shift );
                             else
                                 unhandled();
                         }
@@ -5130,7 +5127,7 @@ uint64_t Arm64::run( void )
                 uint64_t imm19 = opbits( 5, 19 );
                 uint64_t t = opbits( 0, 5 );
                 bool xregs = ( 0 != opbit( 30 ) );
-                int64_t offset = sign_extend( imm19, 18 ) << 2; // imm19 is a signed byte-offset/4; a backward literal reference needs this to be negative
+                int64_t offset = sign_extend( imm19, 18 ) * 4; // imm19 is a signed byte-offset/4; a backward literal reference needs this to be negative
                 uint64_t address = pc + offset;
                 if ( 31 == t )
                     break;
@@ -5172,19 +5169,22 @@ uint64_t Arm64::run( void )
                         else
                             unhandled();
 
-                        if ( 0 == ( hi8 & 0x40 ) ) // ccmn negative
-                        {
-                            if ( xregs )
-                                op2 = - (int64_t) op2;
-                            else
-                                op2 = (uint32_t) ( - (int32_t) (uint32_t) op2 );
-                        }
-
                         uint64_t op1 = val_reg_or_zr( n );
+                        bool is_ccmp = ( 0 != ( hi8 & 0x40 ) );
                         if ( xregs )
-                            sub64( op1, op2, true );
+                        {
+                            if ( is_ccmp )
+                                sub64( op1, op2, true );
+                            else
+                                add_with_carry64( op1, op2, false, true );
+                        }
                         else
-                            sub32( (uint32_t) op1, (uint32_t) op2, true );
+                        {
+                            if ( is_ccmp )
+                                sub32( (uint32_t) op1, (uint32_t) op2, true );
+                            else
+                                add_with_carry32( (uint32_t) op1, (uint32_t) op2, false, true );
+                        }
                     }
                     else
                         set_flags_from_nzcv( nzcv );
@@ -5367,7 +5367,7 @@ uint64_t Arm64::run( void )
                 uint64_t t1 = opbits( 0, 5 );
                 uint64_t t2 = opbits( 10, 5 );
                 uint64_t n = opbits( 5, 5 );
-                int64_t imm7 = sign_extend( opbits( 15, 7 ), 6 ) << ( xregs ? 3 : 2 );
+                int64_t imm7 = sign_extend( opbits( 15, 7 ), 6 ) * ( xregs ? 8 : 4 );
                 uint64_t variant = opbits( 23, 2 );
                 if ( 0 == variant )
                     unhandled();
@@ -5617,8 +5617,7 @@ uint64_t Arm64::run( void )
                 imm = sign_extend( imm, 20 );
                 if ( get_bit( hi8, 7 ) ) // adrp
                 {
-                    imm <<= 12;
-                    imm += ( pc & ( ~0xfff ) );
+                    imm = (int64_t) ( ( (uint64_t) imm << 12 ) + ( pc & ( ~0xfff ) ) );
                 }
                 else // adr
                     imm += pc;
@@ -9205,14 +9204,17 @@ uint64_t Arm64::run( void )
                     else
                         unhandled();
 
-                    if ( 0x38 == hi8 )
-                        regs[ t ] = getui8( address );
-                    else if ( 0x78 == hi8 )
-                        regs[ t ] = getui16( address );
-                    else if ( 0xb8 == hi8 )
-                        regs[ t ] = getui32( address );
-                    else
-                        regs[ t ] = getui64( address );
+                    if ( 31 != t )
+                    {
+                        if ( 0x38 == hi8 )
+                            regs[ t ] = getui8( address );
+                        else if ( 0x78 == hi8 )
+                            regs[ t ] = getui16( address );
+                        else if ( 0xb8 == hi8 )
+                            regs[ t ] = getui32( address );
+                        else
+                            regs[ t ] = getui64( address );
+                    }
 
                     if ( 1 == option ) // post index
                         regs[ n ] += extended_imm9;
@@ -9229,14 +9231,17 @@ uint64_t Arm64::run( void )
                     int64_t offset = extend_reg( m, option, shift );
                     address += offset;
 
-                    if ( 0x38 == hi8 )
-                        regs[ t ] = getui8( address );
-                    else if ( 0x78 == hi8 )
-                        regs[ t ] = getui16( address );
-                    else if ( 0xb8 == hi8 )
-                        regs[ t ] = getui32( address );
-                    else
-                        regs[ t ] = getui64( address );
+                    if ( 31 != t )
+                    {
+                        if ( 0x38 == hi8 )
+                            regs[ t ] = getui8( address );
+                        else if ( 0x78 == hi8 )
+                            regs[ t ] = getui16( address );
+                        else if ( 0xb8 == hi8 )
+                            regs[ t ] = getui32( address );
+                        else
+                            regs[ t ] = getui64( address );
+                    }
                 }
                 else if ( 4 == opc || 6 == opc ) // LDRSW <Xt>, [<Xn|SP>], #<simm>    ;    LDURSB <Wt>, [<Xn|SP>{, #<simm>}]
                 {
