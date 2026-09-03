@@ -16,11 +16,6 @@
 
 struct Arm64;
 
-static inline void armos_memcpy( void * destination, const void * source, size_t bytes )
-{
-    memcpy( destination, source, bytes );
-}
-
 // callbacks when instructions are executed
 
 extern void emulator_invoke_svc( Arm64 & cpu );                                               // called when the svc instruction is executed
@@ -154,29 +149,29 @@ struct Arm64
     } //is_address_valid
 
 #ifdef TARGET_BIG_ENDIAN
-    uint64_t getui64( uint64_t o ) { uint64_t x; armos_memcpy( &x, getmem( o ), sizeof( x ) ); return flip_endian64( x ); }
-    uint32_t getui32( uint64_t o ) { uint32_t x; armos_memcpy( &x, getmem( o ), sizeof( x ) ); return flip_endian32( x ); }
-    uint16_t getui16( uint64_t o ) { uint16_t x; armos_memcpy( &x, getmem( o ), sizeof( x ) ); return flip_endian16( x ); }
-    float getfloat( uint64_t o ) { uint32_t x = getui32( o ); float f; armos_memcpy( &f, &x, sizeof( f ) ); return f; }
-    double getdouble( uint64_t o ) { uint64_t x = getui64( o ); double d; armos_memcpy( &d, &x, sizeof( d ) ); return d; }
+    uint64_t getui64( uint64_t o ) { uint64_t x; memcpy( &x, getmem( o ), sizeof( x ) ); return flip_endian64( x ); }
+    uint32_t getui32( uint64_t o ) { uint32_t x; memcpy( &x, getmem( o ), sizeof( x ) ); return flip_endian32( x ); }
+    uint16_t getui16( uint64_t o ) { uint16_t x; memcpy( &x, getmem( o ), sizeof( x ) ); return flip_endian16( x ); }
+    float getfloat( uint64_t o ) { uint32_t x = getui32( o ); float f; memcpy( &f, &x, sizeof( f ) ); return f; }
+    double getdouble( uint64_t o ) { uint64_t x = getui64( o ); double d; memcpy( &d, &x, sizeof( d ) ); return d; }
 
-    void setui64( uint64_t o, uint64_t val ) { val = flip_endian64( val ); armos_memcpy( getmem( o ), &val, sizeof( val ) ); }
-    void setui32( uint64_t o, uint32_t val ) { val = flip_endian32( val ); armos_memcpy( getmem( o ), &val, sizeof( val ) ); }
-    void setui16( uint64_t o, uint16_t val ) { val = flip_endian16( val ); armos_memcpy( getmem( o ), &val, sizeof( val ) ); }
-    void setfloat( uint64_t o, float val ) { uint32_t x; armos_memcpy( &x, &val, sizeof( x ) ); setui32( o, x ); }
-    void setdouble( uint64_t o, double val ) { uint64_t x; armos_memcpy( &x, &val, sizeof( x ) ); setui64( o, x ); }
+    void setui64( uint64_t o, uint64_t val ) { val = flip_endian64( val ); memcpy( getmem( o ), &val, sizeof( val ) ); }
+    void setui32( uint64_t o, uint32_t val ) { val = flip_endian32( val ); memcpy( getmem( o ), &val, sizeof( val ) ); }
+    void setui16( uint64_t o, uint16_t val ) { val = flip_endian16( val ); memcpy( getmem( o ), &val, sizeof( val ) ); }
+    void setfloat( uint64_t o, float val ) { uint32_t x; memcpy( &x, &val, sizeof( x ) ); setui32( o, x ); }
+    void setdouble( uint64_t o, double val ) { uint64_t x; memcpy( &x, &val, sizeof( x ) ); setui64( o, x ); }
 #else
-    uint64_t getui64( uint64_t o ) { uint64_t x; armos_memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
-    uint32_t getui32( uint64_t o ) { uint32_t x; armos_memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
-    uint16_t getui16( uint64_t o ) { uint16_t x; armos_memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
-    float getfloat( uint64_t o ) { float x; armos_memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
-    double getdouble( uint64_t o ) { double x; armos_memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
+    uint64_t getui64( uint64_t o ) { uint64_t x; memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
+    uint32_t getui32( uint64_t o ) { uint32_t x; memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
+    uint16_t getui16( uint64_t o ) { uint16_t x; memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
+    float getfloat( uint64_t o ) { float x; memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
+    double getdouble( uint64_t o ) { double x; memcpy( &x, getmem( o ), sizeof( x ) ); return x; }
 
-    void setui64( uint64_t o, uint64_t val ) { armos_memcpy( getmem( o ), &val, sizeof( val ) ); }
-    void setui32( uint64_t o, uint32_t val ) { armos_memcpy( getmem( o ), &val, sizeof( val ) ); }
-    void setui16( uint64_t o, uint16_t val ) { armos_memcpy( getmem( o ), &val, sizeof( val ) ); }
-    void setfloat( uint64_t o, float val ) { armos_memcpy( getmem( o ), &val, sizeof( val ) ); }
-    void setdouble( uint64_t o, double val ) { armos_memcpy( getmem( o ), &val, sizeof( val ) ); }
+    void setui64( uint64_t o, uint64_t val ) { memcpy( getmem( o ), &val, sizeof( val ) ); }
+    void setui32( uint64_t o, uint32_t val ) { memcpy( getmem( o ), &val, sizeof( val ) ); }
+    void setui16( uint64_t o, uint16_t val ) { memcpy( getmem( o ), &val, sizeof( val ) ); }
+    void setfloat( uint64_t o, float val ) { memcpy( getmem( o ), &val, sizeof( val ) ); }
+    void setdouble( uint64_t o, double val ) { memcpy( getmem( o ), &val, sizeof( val ) ); }
 #endif //TARGET_BIG_ENDIAN
 
     uint8_t getui8( uint64_t o ) { return * (uint8_t *) getmem( o ); }

@@ -101,17 +101,7 @@ static __inline_perf void mcpy( void * d, const void * s, const size_t c ) // me
 {
     assert( 1 == c || 2 == c || 4 == c || 8 == c || 16 == c );
 
-    // Keep each copy size constant so the compiler can inline the unaligned-safe copy.
-    if ( 1 == c )
-        armos_memcpy( d, s, 1 );
-    else if ( 2 == c )
-        armos_memcpy( d, s, 2 );
-    else if ( 4 == c )
-        armos_memcpy( d, s, 4 );
-    else if ( 8 == c )
-        armos_memcpy( d, s, 8 );
-    else
-        armos_memcpy( d, s, 16 );
+    memcpy( d, s, c );
 } //mcpy
 
 static uint32_t count_leading_zeroes32( uint32_t x )
